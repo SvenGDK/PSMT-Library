@@ -1,0 +1,18 @@
+﻿<Window x:Class="BINCUEConverter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:psmt_lib"
+             mc:Ignorable="d" 
+             Height="200" Width="425" Background="#FF252525" ResizeMode="CanMinimize" Title="BIN/CUE to ISO Converter">
+    <Grid>
+        <TextBox x:Name="SelectedCueOrBinTextBox" HorizontalAlignment="Left" Margin="8,34,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="Select a .bin or .cue file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Button x:Name="BrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="313,33,0,0" VerticalAlignment="Top" Width="75"/>
+        <CheckBox x:Name="IsForPSXCheckBox" Content="Convert for PS1" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" Margin="233,57,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBlock x:Name="ConvertStatusTextBlock" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Foreground="White" FontSize="12" Width="378" Height="60"/>
+
+    </Grid>
+</Window>

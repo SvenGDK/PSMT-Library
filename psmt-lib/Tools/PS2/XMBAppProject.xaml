@@ -1,0 +1,31 @@
+﻿<Window x:Class="XMBAppProject"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:psmt_lib"
+             mc:Ignorable="d" 
+             Height="265" Width="750" Background="#FF252525" ResizeMode="CanMinimize" Title="New Homebrew Project">
+    <Grid>
+        <TextBox x:Name="ProjectNameTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="Project Name :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectDirectoryTextBox" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,57,0,0" Text="Save project at :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectELFFileTextBox" HorizontalAlignment="Left" Margin="10,128,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,104,0,0" Text="Select the homebrew ELF File :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectTitleTextBox" HorizontalAlignment="Left" Margin="384,34,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="384,10,0,0" Text="XMB Application Title :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectSubTitleTextBox" HorizontalAlignment="Left" Margin="384,81,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="384,57,0,0" Text="XMB Application Sub-Title (optional) :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectUninstallMsgTextBox" HorizontalAlignment="Left" Margin="384,128,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="384,104,0,0" Text="Uninstall Message (optional) :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ProjectIconPathTextBox" HorizontalAlignment="Left" Margin="384,175,0,0" VerticalAlignment="Top" Width="250"/>
+        <TextBlock HorizontalAlignment="Left" Margin="384,151,0,0" Text="Custom Icon (optional) :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Button x:Name="BrowseProjectPathButton" Content="Browse" HorizontalAlignment="Left" Margin="265,80,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="BrowseELFButton" Content="Browse" HorizontalAlignment="Left" Margin="265,127,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="BrowseIconButton" Content="Browse" HorizontalAlignment="Left" Margin="639,174,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="AdvancedSettingsButton" Content="Add or edit ressources" HorizontalAlignment="Left" Margin="384,198,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="SaveProjectButton" Content="Save Project" HorizontalAlignment="Left" Margin="554,198,0,0" VerticalAlignment="Top" Width="80"/>
+
+    </Grid>
+</Window>

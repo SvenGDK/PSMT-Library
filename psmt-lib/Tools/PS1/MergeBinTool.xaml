@@ -1,0 +1,23 @@
+﻿<Window x:Class="MergeBinTool"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:psmt_lib"
+             mc:Ignorable="d" Title="MergeBIN Tool" Height="325" Width="540" Background="#FF252525" ResizeMode="CanMinimize">
+    <Grid>
+        <ListView x:Name="CUEsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Width="500" Height="200" Margin="10,58,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="CUE File"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock x:Name="LockedTextBlock" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="Selected game .cue files :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBlock x:Name="LockedTextBlock_Copy" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select the .cue files of games that have multiple .bin (Track x) files :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Button x:Name="BrowseCUEFilesButton" Content="Browse" HorizontalAlignment="Left" Margin="435,10,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="MergeSelectedButton" Content="Merge selected" HorizontalAlignment="Left" Margin="410,263,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="MergeAllButton" Content="Merge all" HorizontalAlignment="Left" Margin="305,263,0,0" VerticalAlignment="Top" Width="100"/>
+
+    </Grid>
+</Window>
