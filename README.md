@@ -1,6 +1,48 @@
 # PS Multi Tools .NET Library
 The PS Multi Tools .NET Library contains various tools and downloads for almost any Playstation console or handheld. </br>
 
+## General:
+- FTP Browser
+- PARAM.SFO Editor
+- Downloader
+
+## PS1
+- Merge BIN files
+
+## PS2
+- Convert BIN/CUE to ISO
+- PSX DVR XMB Games and Homebrew Installer
+
+## PS3
+- Core_OS Tools
+- Fix Tar Tool
+- PS3 ISO Tools
+- PKG Extractor
+- PUP Unpacker
+- RCO Dumper
+- SELF Reader
+
+## PS4
+- PKG Sender (currently not working)
+- Payload Sender
+- Show PSN Store Infos
+- Decrypted PUP Unpacker
+- USB Writer
+
+## PS5
+- Mast1c0re Payload & ISO Sender
+
+## PSP
+- ISO to CSO Converter
+- CSO Decompressor
+- PBP to ISO / ISO to PBP Converter
+- PBP Packer/Unpacker
+
+## PSVita
+- PKG Extractor
+- PSVIMAGE Tools (currently not working)
+- RCO Data Table Extractor
+
 ## Developer Notes
 - Can be used on a .NET Framework 4.8.1 project
 - Add a reference to "psmt-lib.dll", "HtmlAgilityPack.dll", NuGet Package "Newtonsoft.Json", "PARAM.SFO.dll and "PS4_Tools.dll"
