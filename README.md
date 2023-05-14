@@ -49,3 +49,50 @@ The PS Multi Tools .NET Library contains various tools and downloads for almost 
 - For WPF windows: Add the namespace ```xmlns:psmt_lib="clr-namespace:psmt_lib;assembly=psmt-lib>"``` to your window xaml
 - Adding a menu: ```<psmt_lib:PSMENUNAME Height="20" VerticalAlignment="Top"></psmt_lib:PSMENUNAME>```
 - Open a tool (SFO Editor for ex.):</br>```Imports psmt_lib```<br/>```Dim NewSFOEditor As New SFOEditor()```<br/>```NewSFOEditor.Show()```
+
+## PSMT Library currently uses the following utilities/libraries from other developers
+| Tool / Library | Created by | Repository |
+| --- | --- | --- |
+| `bchunk` | extramaster | https://github.com/extramaster/bchunk
+| `binmerge` | putnam | https://github.com/putnam/binmerge
+| `CEX2DEX` |  | 
+| `costool` | naehrwert | 
+| `dd` | John Newbigin | http://www.chrysocome.net/dd
+| `dev_flash` | HSReina | 
+| `DiscUtils` | DiscUtils | https://github.com/DiscUtils/DiscUtils
+| `discore` |  | 
+| `DotNetZip` |  | https://www.nuget.org/packages/DotNetZip/
+| `elf2pbp` | loser | https://github.com/PSP-Archive/elf2pbp
+| `esrpatch` |  | 
+| `esrunpatch` |  | 
+| `ffplay` | FFmpeg | https://github.com/FFmpeg/FFmpeg
+| `fix_tar` | KaKaRoTo & cfwprpht | 
+| `fwpkg` | evilsperm | https://github.com/evilsperm/fwtool
+| `hdl_dump` |  | https://github.com/ps2homebrew/hdl-dump
+| `hexdump` | di-mgt | https://www.di-mgt.com.au/hexdump-for-windows.html
+| `HtmlAgilityPack` | ZZZ Projects | https://html-agility-pack.net/
+| `IsoPbpConverter` | LMAN | 
+| `klicencebruteforce` | MAGiC333X | 
+| `make_fself` |  | 
+| `maxcso` | unknownbrackets | https://github.com/unknownbrackets/maxcso
+| `mCiso` | sindastra | https://github.com/sindastra/psp-mciso
+| `Newtonsoft.Json` | Newtonsoft | https://www.newtonsoft.com/json
+| `nQuant` | matt wrock | https://www.nuget.org/packages/nQuant
+| `PARAM.SFO Library` | xXxTheDarkprogramerxXx | https://github.com/xXxTheDarkprogramerxXx/PS4_Tools
+| `pbppacker` |  | 
+| `pfsshell & pfsfuse` |  | https://github.com/ps2homebrew/pfsshell
+| `pkg2zip` | lusid1 | https://github.com/lusid1/pkg2zip
+| `ps3iso-utils` | bucanero | https://github.com/bucanero/ps3iso-utils
+| `PS4_Tools Library` | xXxTheDarkprogramerxXx | https://github.com/xXxTheDarkprogramerxXx/PS4_Tools
+| `PSN_get_pkg_info` | windsurfer1122 | https://github.com/windsurfer1122/PSN_get_pkg_info
+| `psvpfstools` | motoharu-gosuto | https://github.com/motoharu-gosuto/psvpfstools
+| `psxtract` | Hykem | https://github.com/mrlucas84/psxtract
+| `pup_unpacker` | Zer0xFF | https://github.com/Zer0xFF/ps4-pup-unpacker
+| `pupunpack` |  | 
+| `rcomage` | ZiNgA BuRgA | 
+| `readself` | Team fail0verflow | https://github.com/daryl317/fail0verflow-PS3-tools/tree/master
+| `SCEDoormat_NoME` | krHACKen | 
+| `scetool` | naehrwert | https://github.com/naehrwert/scetool
+| `sfo` | hippie68 | https://github.com/hippie68/sfo
+| `sngre` | cfwprophet | https://github.com/cfwprpht/Simply_Vita_RCO_Extractor
+| `strings` | Mark Russinovich | https://learn.microsoft.com/en-us/sysinternals/downloads/strings
