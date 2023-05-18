@@ -48,7 +48,7 @@ Public Class PS2Menu
     Private Sub DownloadCheatDevice_Click(sender As Object, e As RoutedEventArgs) Handles DownloadCheatDevice.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/CheatDevicePS2-v1.7.5.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/CheatDevicePS2-v1.7.5.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -57,7 +57,7 @@ Public Class PS2Menu
     Private Sub DownloadFSCK_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFSCK.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/FSCK-tool-c7679407.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/FSCK-tool-c7679407.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -66,7 +66,7 @@ Public Class PS2Menu
     Private Sub DownloadGSM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGSM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/gsm037.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/gsm037.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -75,7 +75,7 @@ Public Class PS2Menu
     Private Sub DownloadHDDChecker_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHDDChecker.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/HDDChecker-c7679407.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/HDDChecker-c7679407.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -84,7 +84,7 @@ Public Class PS2Menu
     Private Sub DownloadHDLGameInstaller_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHDLGameInstaller.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/HDLGameInstaller-6e8d52aa.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/HDLGameInstaller-6e8d52aa.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -93,7 +93,7 @@ Public Class PS2Menu
     Private Sub DownloadKELFBinder_Click(sender As Object, e As RoutedEventArgs) Handles DownloadKELFBinder.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/KELFBinder.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/KELFBinder.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -102,7 +102,7 @@ Public Class PS2Menu
     Private Sub DownloadMCF_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMCF.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/MFU-Packed.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/MFU-Packed.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -111,7 +111,7 @@ Public Class PS2Menu
     Private Sub DownloadMechaPwn_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMechaPwn.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/MechaPwn_pck_3.0rc4.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/MechaPwn_pck_3.0rc4.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -120,7 +120,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderLangs_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderLangs.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-LANGUAGES-AND-FONTS-v1.1.0.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-LANGUAGES-AND-FONTS-v1.1.0.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -129,7 +129,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderLatestLangs_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderLatestLangs.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-LANGS-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-LANGS-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -138,7 +138,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderLatestNormal_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderLatestNormal.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -147,7 +147,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderLatestVariants_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderLatestVariants.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-VARIANTS-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-VARIANTS-v1.2.0-Beta-1987-1c5bc79.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -156,7 +156,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderNormal_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderNormal.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-v1.1.0.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-v1.1.0.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -165,7 +165,7 @@ Public Class PS2Menu
     Private Sub DownloadOpenPS2LoaderVariants_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOpenPS2LoaderVariants.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPNPS2LD-VARIANTS-v1.1.0.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPNPS2LD-VARIANTS-v1.1.0.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -174,7 +174,7 @@ Public Class PS2Menu
     Private Sub DownloadOPLLauncher_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOPLLauncher.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPL-Launcher-latest.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPL-Launcher-latest.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -183,7 +183,7 @@ Public Class PS2Menu
     Private Sub DownloadOPLLauncherELF_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOPLLauncherELF.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPL-Launcher.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPL-Launcher.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -192,7 +192,7 @@ Public Class PS2Menu
     Private Sub DownloadOPLLauncherKELF_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOPLLauncherKELF.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/OPL-Launcher.kelf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/OPL-Launcher.kelf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -201,7 +201,7 @@ Public Class PS2Menu
     Private Sub DownloadPS2BBL_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS2BBL.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/PS2BBL.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/PS2BBL.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -210,7 +210,7 @@ Public Class PS2Menu
     Private Sub DownloadPS2Ident_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS2Ident.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/PS2Ident-9032110d-PS2TOOL.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/PS2Ident-9032110d-PS2TOOL.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -219,7 +219,7 @@ Public Class PS2Menu
     Private Sub DownloadSMS_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSMS.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/SMS.Version.2.9.Rev.4.elf.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/SMS.Version.2.9.Rev.4.elf.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -228,7 +228,7 @@ Public Class PS2Menu
     Private Sub DownloadVTSPS2HBDL_Click(sender As Object, e As RoutedEventArgs) Handles DownloadVTSPS2HBDL.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/VTSPS2-HBDL.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/VTSPS2-HBDL.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -237,7 +237,7 @@ Public Class PS2Menu
     Private Sub DownloadwLaunchELF_Click(sender As Object, e As RoutedEventArgs) Handles DownloadwLaunchELF.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/hb/wLaunchELF-073dd41.ELF") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/hb/wLaunchELF-073dd41.ELF") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -250,7 +250,7 @@ Public Class PS2Menu
     Private Sub DownloadDaedalusX64_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDaedalusX64.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/daedalusps2.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/daedalusps2.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -259,7 +259,7 @@ Public Class PS2Menu
     Private Sub DownloadFCEUmm_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFCEUmm.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/fceu-packed.v0.3.3.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/fceu-packed.v0.3.3.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -268,7 +268,7 @@ Public Class PS2Menu
     Private Sub DownloadFCEUmmCDVD_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFCEUmmCDVD.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/fceu-packed.v0.3.3.cdvdsupport.elf") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/fceu-packed.v0.3.3.cdvdsupport.elf") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -277,7 +277,7 @@ Public Class PS2Menu
     Private Sub DownloadGBANTSC_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGBANTSC.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/GBA_PS2_(v1.45.5_rev3)_NTSC.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/GBA_PS2_(v1.45.5_rev3)_NTSC.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -286,7 +286,7 @@ Public Class PS2Menu
     Private Sub DownloadGBAPAL_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGBAPAL.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/GBA_PS2_(v1.45.5_rev3)_PAL.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/GBA_PS2_(v1.45.5_rev3)_PAL.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -295,7 +295,7 @@ Public Class PS2Menu
     Private Sub DownloadRetroArch_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRetroArch.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/RetroArch_elf.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/RetroArch_elf.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -304,7 +304,7 @@ Public Class PS2Menu
     Private Sub DownloadSnesStation_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSnesStation.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/emu/snes_station_emu-v024S-2016-09-06.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/emu/snes_station_emu-v024S-2016-09-06.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -317,7 +317,7 @@ Public Class PS2Menu
     Private Sub DownloadBmp2Icon_Click(sender As Object, e As RoutedEventArgs) Handles DownloadBmp2Icon.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/Bmp2Icon_v0.2.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/Bmp2Icon_v0.2.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -326,7 +326,7 @@ Public Class PS2Menu
     Private Sub DownloadCodeSeek_Click(sender As Object, e As RoutedEventArgs) Handles DownloadCodeSeek.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/codeseek.rar") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/codeseek.rar") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -335,7 +335,7 @@ Public Class PS2Menu
     Private Sub DownloadDiscPatcher_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDiscPatcher.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/DiscPatcher3.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/DiscPatcher3.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -344,7 +344,7 @@ Public Class PS2Menu
     Private Sub DownloadELFExtract_Click(sender As Object, e As RoutedEventArgs) Handles DownloadELFExtract.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/elf_extract_100.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/elf_extract_100.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -353,7 +353,7 @@ Public Class PS2Menu
     Private Sub DownloadESRGUI_Click(sender As Object, e As RoutedEventArgs) Handles DownloadESRGUI.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/ESR_Disc_Patcher_GUI_v0.24a.rar") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/ESR_Disc_Patcher_GUI_v0.24a.rar") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -362,7 +362,7 @@ Public Class PS2Menu
     Private Sub DownloadFAT32GUI_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFAT32GUI.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/guiformat.exe") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/guiformat.exe") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -371,7 +371,7 @@ Public Class PS2Menu
     Private Sub DownloadMastercodeFinder_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMastercodeFinder.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps2/tools/mastercode_finder_211.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps2/tools/mastercode_finder_211.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

@@ -37,7 +37,7 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Hosts" >
-
+                    <MenuItem Header="cthugha.exploit.menu"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="4.50-5.07" >
@@ -56,7 +56,9 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Hosts" >
-
+                    <MenuItem Header="4.50-5.07: cthugha.exploit.menu"/>
+                    <MenuItem Header="5.05: es7in1.site"/>
+                    <MenuItem Header="5.05: wolf2022.ir"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="6.72" >
@@ -75,12 +77,9 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Hosts" >
-
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="7.00-7.02" >
-                <MenuItem Header="Hosts" >
-
+                    <MenuItem Header="cthugha.exploit.menu"/>
+                    <MenuItem Header="es7in1.site"/>
+                    <MenuItem Header="wolf2022.ir"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="7.50-7.55" >
@@ -101,7 +100,8 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Hosts" >
-
+                    <MenuItem Header="cthugha.exploit.menu"/>
+                    <MenuItem Header="es7in1.site"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="9.00" >
@@ -132,7 +132,10 @@
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Hosts" >
-
+                    <MenuItem Header="cthugha.exploit.menu"/>
+                    <MenuItem Header="es7in1.site"/>
+                    <MenuItem Header="kmeps4.site"/>
+                    <MenuItem Header="wolf2022.ir"/>
                 </MenuItem>
             </MenuItem>
         </MenuItem>

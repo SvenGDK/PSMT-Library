@@ -147,7 +147,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="webMAN MOD">
-                <MenuItem Header="Download 1.47.44" x:Name="DownloadWebManMod">
+                <MenuItem Header="Download 1.47.45" x:Name="DownloadWebManMod">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>

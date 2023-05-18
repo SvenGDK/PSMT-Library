@@ -195,58 +195,62 @@ Public Class FTPBrowser
         NewRequest.Method = WebRequestMethods.Ftp.ListDirectoryDetails
         NewRequest.Credentials = New NetworkCredential("anonymous", "")
 
-        Dim RequestResponse As FtpWebResponse = CType(NewRequest.GetResponse(), FtpWebResponse)
-        Dim ResponseStream As Stream = RequestResponse.GetResponseStream()
-        Dim NewStreamReader As New StreamReader(ResponseStream)
+        Try
+            Dim RequestResponse As FtpWebResponse = CType(NewRequest.GetResponse(), FtpWebResponse)
+            Dim ResponseStream As Stream = RequestResponse.GetResponseStream()
+            Dim NewStreamReader As New StreamReader(ResponseStream)
 
-        FTPItemsListView.Items.Clear()
+            FTPItemsListView.Items.Clear()
 
-        For Each Line As String In NewStreamReader.ReadToEnd().Split(New String() {vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
+            For Each Line As String In NewStreamReader.ReadToEnd().Split(New String() {vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
 
-            Dim FileNameRegex As New Regex("^(?:[^ ]+ +){8}(.*)$")
-            Dim RegexMatch As Match = FileNameRegex.Match(Line)
-            Dim FoundFileName As String = RegexMatch.Groups(1).Value
+                Dim FileNameRegex As New Regex("^(?:[^ ]+ +){8}(.*)$")
+                Dim RegexMatch As Match = FileNameRegex.Match(Line)
+                Dim FoundFileName As String = RegexMatch.Groups(1).Value
 
-            Dim NewFTPLVItem As New FTPListViewItem()
+                Dim NewFTPLVItem As New FTPListViewItem()
 
-            If Line.StartsWith("d") Then
-                Dim SplittedValues As String() = Line.Split(" "c)
+                If Line.StartsWith("d") Then
+                    Dim SplittedValues As String() = Line.Split(" "c)
 
-                If String.IsNullOrWhiteSpace(SplittedValues(6)) Then
-                    NewFTPLVItem.FileOrDirName = SplittedValues(9)
-                    NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(7) + " " + SplittedValues(8)
-                Else
-                    NewFTPLVItem.FileOrDirName = SplittedValues(8)
-                    NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(6) + " " + SplittedValues(7)
+                    If String.IsNullOrWhiteSpace(SplittedValues(6)) Then
+                        NewFTPLVItem.FileOrDirName = SplittedValues(9)
+                        NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(7) + " " + SplittedValues(8)
+                    Else
+                        NewFTPLVItem.FileOrDirName = SplittedValues(8)
+                        NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(6) + " " + SplittedValues(7)
+                    End If
+
+                    NewFTPLVItem.FileOrDirSize = FormatNumber(CLng(SplittedValues(4)) / 1048576, 2) + " MB"
+                    NewFTPLVItem.FileOrDirPermissions = SplittedValues(0)
+                    NewFTPLVItem.FileOrDirOwner = SplittedValues(2) + " " + SplittedValues(3)
+                    NewFTPLVItem.FileOrDirType = "Folder"
+                ElseIf Line.StartsWith("-") Then
+                    Dim SplittedValues As String() = Line.Split(" "c)
+
+                    If String.IsNullOrWhiteSpace(SplittedValues(6)) Then
+                        NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(7) + " " + SplittedValues(8)
+                    Else
+                        NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(6) + " " + SplittedValues(7)
+                    End If
+
+                    NewFTPLVItem.FileOrDirName = FoundFileName
+                    NewFTPLVItem.FileOrDirSize = FormatNumber(CLng(SplittedValues(4)) / 1048576, 2) + " MB"
+                    NewFTPLVItem.FileOrDirPermissions = SplittedValues(0)
+                    NewFTPLVItem.FileOrDirOwner = SplittedValues(2) + " " + SplittedValues(3)
+                    NewFTPLVItem.FileOrDirType = "File"
                 End If
 
-                NewFTPLVItem.FileOrDirSize = FormatNumber(CLng(SplittedValues(4)) / 1048576, 2) + " MB"
-                NewFTPLVItem.FileOrDirPermissions = SplittedValues(0)
-                NewFTPLVItem.FileOrDirOwner = SplittedValues(2) + " " + SplittedValues(3)
-                NewFTPLVItem.FileOrDirType = "Folder"
-            ElseIf Line.StartsWith("-") Then
-                Dim SplittedValues As String() = Line.Split(" "c)
-
-                If String.IsNullOrWhiteSpace(SplittedValues(6)) Then
-                    NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(7) + " " + SplittedValues(8)
-                Else
-                    NewFTPLVItem.FileOrDirLastModified = SplittedValues(5) + " " + SplittedValues(6) + " " + SplittedValues(7)
+                If Not NewFTPLVItem.FileOrDirName = "." Then
+                    FTPItemsListView.Items.Add(NewFTPLVItem)
                 End If
+            Next
 
-                NewFTPLVItem.FileOrDirName = FoundFileName
-                NewFTPLVItem.FileOrDirSize = FormatNumber(CLng(SplittedValues(4)) / 1048576, 2) + " MB"
-                NewFTPLVItem.FileOrDirPermissions = SplittedValues(0)
-                NewFTPLVItem.FileOrDirOwner = SplittedValues(2) + " " + SplittedValues(3)
-                NewFTPLVItem.FileOrDirType = "File"
-            End If
-
-            If Not NewFTPLVItem.FileOrDirName = "." Then
-                FTPItemsListView.Items.Add(NewFTPLVItem)
-            End If
-        Next
-
-        NewStreamReader.Close()
-        RequestResponse.Close()
+            NewStreamReader.Close()
+            RequestResponse.Close()
+        Catch ex As WebException
+            FTPStatusTextBlock.Text = CType(ex.Response, FtpWebResponse).StatusDescription + " - Please reconnect"
+        End Try
     End Sub
 
     Public Sub RenameContent(ConsoleIP As String, ConsolePort As String, FileOrDir As String, RenameTo As String)
@@ -273,7 +277,7 @@ Public Class FTPBrowser
     Public Sub NewFTPFolder(ConsoleIP As String, ConsolePort As String, DirName As String)
         Dim NewFTPRequest As FtpWebRequest
         NewFTPRequest = CType(WebRequest.Create("ftp://" + ConsoleIP + ":" + ConsolePort + DirName), FtpWebRequest)
-        NewFTPRequest.Method = WebRequestMethods.Ftp.Rename
+        NewFTPRequest.Method = WebRequestMethods.Ftp.MakeDirectory
         NewFTPRequest.Credentials = New NetworkCredential("anonymous", "")
 
         Dim FTPResponse As FtpWebResponse = CType(NewFTPRequest.GetResponse(), FtpWebResponse)
@@ -422,8 +426,7 @@ Public Class FTPBrowser
                 NewInputDialog.NewValueTextBox.Text = SelectedFTPLVItem.FileOrDirName
 
                 If NewInputDialog.ShowDialog() = True Then
-                    Dim InputDialogResult As String
-                    InputDialogResult = NewInputDialog.NewValueTextBox.Text
+                    Dim InputDialogResult As String = NewInputDialog.NewValueTextBox.Text
 
                     If CurrentPath = "/" Then
                         NewFTPFolder(ConsoleIPTextBox.Text,

@@ -51,9 +51,9 @@ Public Class PKGExtractor
         If MsgBox("Load from the latest database ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Using NewWebClient As New WebClient
                 Dim GamesList As String = Await NewWebClient.DownloadStringTaskAsync(New Uri("https://nopaystation.com/tsv/PSV_GAMES.tsv"))
-                Dim GamesListLines As String() = GamesList.Split(vbCrLf)
+                Dim GamesListLines As String() = GamesList.Split(CChar(vbCrLf))
                 For Each GameLine As String In GamesListLines.Skip(1)
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8).Trim(), SplittedValues(6).Trim())
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2).Trim(),
                         .PackageURL = SplittedValues(3).Trim(),
@@ -72,7 +72,7 @@ Public Class PKGExtractor
             If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Databases\PSV_GAMES.tsv") Then
                 Dim FileReader As String() = File.ReadAllLines(My.Computer.FileSystem.CurrentDirectory + "\Databases\PSV_GAMES.tsv", Text.Encoding.UTF8)
                 For Each GameLine As String In FileReader.Skip(1) 'Skip 1st line in TSV
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8), SplittedValues(6))
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2),
                         .PackageURL = SplittedValues(3),

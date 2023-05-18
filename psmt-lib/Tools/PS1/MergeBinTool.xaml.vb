@@ -24,12 +24,12 @@ Public Class MergeBinTool
         If CUEsListView.SelectedItem IsNot Nothing Then
             Cursor = Windows.Input.Cursors.Wait
 
-            Dim SelectedCUEFile As ListViewItem = CUEsListView.SelectedItem
+            Dim SelectedCUEFile As ListViewItem = CType(CUEsListView.SelectedItem, ListViewItem)
             Dim NewBaseNameTitle As String = Path.GetFileNameWithoutExtension(SelectedCUEFile.Text) + "_merged"
             Dim OutputPath As String = Path.GetDirectoryName(SelectedCUEFile.Text)
 
             If MergeBINs(SelectedCUEFile.Text, NewBaseNameTitle) = True Then
-                If MsgBox("The .bin files have been merged for the selected .cue file." + vbCrLf + "Open the folder ?", MsgBoxStyle.YesNo) Then
+                If MsgBox("The .bin files have been merged for the selected .cue file." + vbCrLf + "Open the folder ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     Process.Start("explorer", OutputPath)
                 End If
             Else
@@ -41,7 +41,6 @@ Public Class MergeBinTool
     End Sub
 
     Private Sub MergeAllButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles MergeAllButton.Click
-
         Dim FailCount As Integer = 0
 
         If Not CUEsListView.Items.Count = 0 Then

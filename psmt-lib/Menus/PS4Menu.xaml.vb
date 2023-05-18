@@ -9,7 +9,7 @@ Public Class PS4Menu
     Private Sub Download405Host_Click(sender As Object, e As RoutedEventArgs) Handles Download405Host.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/PS4-4.05-Kernel-Exploit-master.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/PS4-4.05-Kernel-Exploit-master.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -27,7 +27,7 @@ Public Class PS4Menu
     Private Sub Download505Host_Click(sender As Object, e As RoutedEventArgs) Handles Download505Host.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/PS4-5.05-Kernel-Exploit-master.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/PS4-5.05-Kernel-Exploit-master.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -45,7 +45,7 @@ Public Class PS4Menu
     Private Sub Download672Host_Click(sender As Object, e As RoutedEventArgs) Handles Download672Host.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/ps4jb-6.72-master.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/ps4jb-6.72-master.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -63,7 +63,7 @@ Public Class PS4Menu
     Private Sub Download750Host_Click(sender As Object, e As RoutedEventArgs) Handles Download750Host.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/ps4jb-7.55-2.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/ps4jb-7.55-2.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -72,7 +72,7 @@ Public Class PS4Menu
     Private Sub DownloadMira_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMira.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/mira-7.55.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/mira-7.55.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -81,7 +81,7 @@ Public Class PS4Menu
     Private Sub Download900Exfathax_Click(sender As Object, e As RoutedEventArgs) Handles Download900Exfathax.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/exfathax.img") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/exfathax.img") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -108,7 +108,7 @@ Public Class PS4Menu
     Private Sub Download900Host_Click(sender As Object, e As RoutedEventArgs) Handles Download900Host.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/ex/pOOBs4-main.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/ex/pOOBs4-main.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -121,7 +121,7 @@ Public Class PS4Menu
     Private Sub DownloadApolloST_Click(sender As Object, e As RoutedEventArgs) Handles DownloadApolloST.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/ApolloSaveTool_V1.4.0.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/ApolloSaveTool_V1.4.0.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -130,7 +130,7 @@ Public Class PS4Menu
     Private Sub DownloadApolloSTGithub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadApolloSTGithub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/bucanero/apollo-folderforps4/releases/latest/download/IV0000-APOL00004_00-APOLLO0000140PS4.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/bucanero/apollo-ps4/releases/latest/download/IV0000-APOL00004_00-APOLLO0000140PS4.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -139,7 +139,7 @@ Public Class PS4Menu
     Private Sub DownloadBrew_Click(sender As Object, e As RoutedEventArgs) Handles DownloadBrew.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/Brew_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/Brew_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -148,7 +148,7 @@ Public Class PS4Menu
     Private Sub DownloadFTPClient_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFTPClient.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/FTPC00001_V1.0.8.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/FTPC00001_V1.0.8.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -157,7 +157,7 @@ Public Class PS4Menu
     Private Sub DownloadGoldHENCM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHENCM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/GoldHENCheatsManager_V1.0.3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/GoldHENCheatsManager_V1.0.3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -175,7 +175,7 @@ Public Class PS4Menu
     Private Sub DownloadHamachi_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHamachi.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/LogMeInHamachi_V0.2.3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/LogMeInHamachi_V0.2.3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -184,7 +184,7 @@ Public Class PS4Menu
     Private Sub DownloadHomebrewStore_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHomebrewStore.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/Store-R2.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/Store-R2.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -193,7 +193,7 @@ Public Class PS4Menu
     Private Sub DownloadIconMask_Click(sender As Object, e As RoutedEventArgs) Handles DownloadIconMask.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/IconMask_V1.10.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/IconMask_V1.10.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -202,7 +202,7 @@ Public Class PS4Menu
     Private Sub DownloadItemzflowGM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadItemzflowGM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/ItemzflowGameManager_V1.03.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/ItemzflowGameManager_V1.03.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -211,7 +211,7 @@ Public Class PS4Menu
     Private Sub DownloadNoBDToolkit_Click(sender As Object, e As RoutedEventArgs) Handles DownloadNoBDToolkit.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/NoBDToolkit_V2.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/NoBDToolkit_V2.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -220,7 +220,7 @@ Public Class PS4Menu
     Private Sub DownloadPayloadGuest_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPayloadGuest.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/PayloadGuest_V0.98.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/PayloadGuest_V0.98.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -238,7 +238,7 @@ Public Class PS4Menu
     Private Sub DownloadPKGi_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPKGi.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/PKGi_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/PKGi_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -247,7 +247,7 @@ Public Class PS4Menu
     Private Sub DownloadPS4Player_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS4Player.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/PS4Player_V1.07.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/PS4Player_V1.07.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -256,7 +256,7 @@ Public Class PS4Menu
     Private Sub DownloadPS4ToolSet_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS4ToolSet.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/PS4TOOLSET_V2.0.0.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/PS4TOOLSET_V2.0.0.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -265,7 +265,7 @@ Public Class PS4Menu
     Private Sub DownloadPS4Xplorer_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS4Xplorer.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/PS4-Xplorer2.0_V2.01.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/PS4-Xplorer2.0_V2.01.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -274,7 +274,7 @@ Public Class PS4Menu
     Private Sub DownloadRemotePKGInstaller_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRemotePKGInstaller.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/RemotePKGInstaller_V1.02.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/RemotePKGInstaller_V1.02.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -283,7 +283,7 @@ Public Class PS4Menu
     Private Sub DownloadSMBClient_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSMBClient.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/SMBC00001_V1.10.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/SMBC00001_V1.10.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -292,7 +292,7 @@ Public Class PS4Menu
     Private Sub DownloadWebDAVClient_Click(sender As Object, e As RoutedEventArgs) Handles DownloadWebDAVClient.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/hb/WDVC00001_V1.04.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/hb/WDVC00001_V1.04.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -305,7 +305,7 @@ Public Class PS4Menu
     Private Sub DownloadRecFW505_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecFW505.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/recovery/5.05/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/recovery/5.05/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -314,7 +314,7 @@ Public Class PS4Menu
     Private Sub DownloadRecFW672_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecFW672.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/recovery/6.72/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/recovery/6.72/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -323,7 +323,7 @@ Public Class PS4Menu
     Private Sub DownloadRecFW900_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecFW900.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/recovery/9.00/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/recovery/9.00/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -332,7 +332,7 @@ Public Class PS4Menu
     Private Sub DownloadSysFW505_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSysFW505.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/system/5.05/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/system/5.05/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -341,7 +341,7 @@ Public Class PS4Menu
     Private Sub DownloadSysFW672_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSysFW672.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/system/6.72/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/system/6.72/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -350,7 +350,7 @@ Public Class PS4Menu
     Private Sub DownloadSysFW900_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSysFW900.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/fw/system/9.00/PS4UPDATE.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/system/9.00/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -363,7 +363,7 @@ Public Class PS4Menu
     Private Sub DownloadDiscDumperVTX405_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDiscDumperVTX405.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/other/ps4-dumper-4.05.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/other/ps4-dumper-4.05.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -372,7 +372,7 @@ Public Class PS4Menu
     Private Sub DownloadDiscDumperVTX455_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDiscDumperVTX455.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/other/ps4-dumper-4.55.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/other/ps4-dumper-4.55.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -381,7 +381,7 @@ Public Class PS4Menu
     Private Sub DownloadDiscDumperVTX505_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDiscDumperVTX505.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/other/ps4-dumper-5.05.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/other/ps4-dumper-5.05.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -390,7 +390,7 @@ Public Class PS4Menu
     Private Sub DownloadSaturnFPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSaturnFPKG.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/other/SATURN-FPKG_v1.1.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/other/SATURN-FPKG_v1.1.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -403,7 +403,7 @@ Public Class PS4Menu
     Private Sub DownloadMednafen_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMednafen.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/MEDNAFEN_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/MEDNAFEN_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -412,7 +412,7 @@ Public Class PS4Menu
     Private Sub DownloadmGBA_Click(sender As Object, e As RoutedEventArgs) Handles DownloadmGBA.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/mGBA_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/mGBA_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -421,7 +421,7 @@ Public Class PS4Menu
     Private Sub DownloadPCSXR_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPCSXR.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/PCSX00002_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/PCSX00002_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -430,7 +430,7 @@ Public Class PS4Menu
     Private Sub DownloadRetroArchApp_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRetroArchApp.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/RetroArch_PS4_r4.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/RetroArch_PS4_r4.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -439,7 +439,7 @@ Public Class PS4Menu
     Private Sub DownloadRetroArchCores_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRetroArchCores.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/Cores_Installer_r4.1.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/Cores_Installer_r4.1.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -448,7 +448,7 @@ Public Class PS4Menu
     Private Sub DownloadSnesStation_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSnesStation.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/SNESSTATION_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/SNESSTATION_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -457,7 +457,7 @@ Public Class PS4Menu
     Private Sub DownloadYabause_Click(sender As Object, e As RoutedEventArgs) Handles DownloadYabause.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps4/emu/Yabause_V1.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/emu/Yabause_V1.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

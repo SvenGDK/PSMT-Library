@@ -64,9 +64,9 @@ Public Class PSVMenu
         If LoadLatest = True Then
             Using NewWebClient As New WebClient
                 Dim GamesList As String = Await NewWebClient.DownloadStringTaskAsync(New Uri("https://nopaystation.com/tsv/" + RequestedList))
-                Dim GamesListLines As String() = GamesList.Split(vbCrLf)
+                Dim GamesListLines As String() = GamesList.Split(CChar(vbCrLf))
                 For Each GameLine As String In GamesListLines.Skip(1)
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8).Trim(), SplittedValues(6).Trim())
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2).Trim(),
                         .PackageURL = SplittedValues(3).Trim(),
@@ -85,7 +85,7 @@ Public Class PSVMenu
             If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Databases\" + RequestedList) Then
                 Dim FileReader As String() = File.ReadAllLines(My.Computer.FileSystem.CurrentDirectory + "\Databases\" + RequestedList, Text.Encoding.UTF8)
                 For Each GameLine As String In FileReader.Skip(1) 'Skip 1st line in TSV
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8), SplittedValues(6))
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2),
                         .PackageURL = SplittedValues(3),
@@ -219,7 +219,7 @@ Public Class PSVMenu
     Private Sub InfosMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles InfosMenuItem.Click
         If LView.SelectedItem IsNot Nothing Then
             Dim SelectedPackage As Structures.Package = CType(LView.SelectedItem, Structures.Package)
-            Dim NewPackageInfoWindow As New PackageInfoWindow() With {.ShowActivated = True, .Title = SelectedPackage.PackageName, .CurrentPackage = SelectedPackage, .PackageConsole = "PSV"}
+            Dim NewPackageInfoWindow As New DownloadPackageInfoWindow() With {.ShowActivated = True, .Title = SelectedPackage.PackageName, .CurrentPackage = SelectedPackage, .PackageConsole = "PSV"}
             NewPackageInfoWindow.Show()
         End If
     End Sub

@@ -156,7 +156,7 @@ Public Class XMBGameProject
         If MsgBox("Game Project saved. Close this window ?", MsgBoxStyle.YesNo, "Project saved") = MsgBoxResult.Yes Then
             For Each OpenWin In Windows.Application.Current.Windows()
                 If OpenWin.ToString = "psmt_lib.XMBInstaller" Then
-                    Dim OpenXMBInstaller As XMBInstaller = OpenWin
+                    Dim OpenXMBInstaller As XMBInstaller = CType(OpenWin, XMBInstaller)
                     OpenXMBInstaller.ReloadProjects()
                     Exit For
                 End If
@@ -165,7 +165,7 @@ Public Class XMBGameProject
         Else
             For Each OpenWin In Windows.Application.Current.Windows()
                 If OpenWin.ToString = "psmt_lib.XMBInstaller" Then
-                    Dim OpenXMBInstaller As XMBInstaller = OpenWin
+                    Dim OpenXMBInstaller As XMBInstaller = CType(OpenWin, XMBInstaller)
                     OpenXMBInstaller.ReloadProjects()
                     Exit For
                 End If

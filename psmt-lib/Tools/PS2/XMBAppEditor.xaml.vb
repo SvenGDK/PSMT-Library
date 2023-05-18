@@ -13,7 +13,7 @@ Public Class XMBAppEditor
         'Save selected XMB cover as compressed PNG
         If Cover1Image.Source IsNot Nothing Then
             Dim Quantizer As New WuQuantizer()
-            Dim OriginalBitmap As Bitmap = CType(Image.FromFile(Cover1Image.Tag), Bitmap)
+            Dim OriginalBitmap As Bitmap = CType(Image.FromFile(Cover1Image.Tag.ToString), Bitmap)
             Dim ResizedBitmap As New Bitmap(OriginalBitmap, New Size(74, 108))
 
             If ResizedBitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then

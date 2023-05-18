@@ -31,8 +31,8 @@
                     <TextBox x:Name="SelectedPKGTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select a .pkg file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
                     <Button x:Name="BrowsePKGButton" Content="Browse" HorizontalAlignment="Left" Margin="415,33,0,0" VerticalAlignment="Top" Width="68"/>
-                    <Button x:Name="SendPKGButton" Content="Send" HorizontalAlignment="Right" Margin="0,0,10,48" VerticalAlignment="Bottom" Width="68" Height="20"/>
-                    <ListView x:Name="PKGsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Width="855" HorizontalAlignment="Center" VerticalAlignment="Center" Height="185">
+                    <Button x:Name="SendPKGButton" Content="Send" HorizontalAlignment="Left" Margin="796,248,0,0" VerticalAlignment="Top" Width="68" Height="20"/>
+                    <ListView x:Name="PKGsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Width="854" HorizontalAlignment="Left" VerticalAlignment="Top" Height="185" Margin="10,58,0,0">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="PKG Name" DisplayMemberBinding="{Binding PackageName}" Width="200"/>
@@ -47,7 +47,7 @@
                 <Grid Background="#FF252525">
                     <TextBox HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Text="9292" TextAlignment="Center"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,11,0,0" TextWrapping="Wrap" Text="Use different port :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBox x:Name="LogTextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="754" Height="138"/>
+                    <TextBox x:Name="LogTextBox" HorizontalAlignment="Left" Margin="10,96,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="754" Height="138"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,73,0,0" TextWrapping="Wrap" Text="Connection logs :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
                 </Grid>
             </TabItem>

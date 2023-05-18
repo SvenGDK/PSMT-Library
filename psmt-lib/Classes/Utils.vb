@@ -36,11 +36,11 @@ Public Class Utils
         PlaySound(Nothing, New IntPtr(), PlaySoundFlags.SND_NODEFAULT)
     End Sub
 
-    Public Shared Function IncrementArray(ByRef sourceArray As Byte(), position As Integer) As Boolean
-        If sourceArray(position) = &HFF Then
-            If position <> 0 Then
-                If IncrementArray(sourceArray, position - 1) Then
-                    sourceArray(position) = &H0
+    Public Shared Function IncrementArray(ByRef SourceArray As Byte(), Position As Integer) As Boolean
+        If SourceArray(Position) = &HFF Then
+            If Position <> 0 Then
+                If IncrementArray(SourceArray, Position - 1) Then
+                    SourceArray(Position) = &H0
                     Return True
                 Else
                     Return False
@@ -49,7 +49,7 @@ Public Class Utils
                 Return False
             End If
         Else
-            sourceArray(position) += &H1
+            SourceArray(Position) += CByte(&H1)
             Return True
         End If
     End Function
@@ -74,16 +74,16 @@ Public Class Utils
         Return ascii
     End Function
 
-    Public Shared Function ByteArrayToAscii(ByteArray As Byte(), startPos As Integer, length As Integer, cleanEndOfString As Boolean) As String
-        Dim numArray As Byte() = New Byte(length - 1 + 1 - 1) {}
-        Array.Copy(ByteArray, startPos, numArray, 0, numArray.Length)
-        Return HexStringToAscii(ByteArrayToHexString(numArray), cleanEndOfString)
+    Public Shared Function ByteArrayToAscii(ByteArray As Byte(), StartPos As Integer, Length As Integer, CleanEndOfString As Boolean) As String
+        Dim NumArray As Byte() = New Byte(Length - 1 + 1 - 1) {}
+        Array.Copy(ByteArray, StartPos, numArray, 0, numArray.Length)
+        Return HexStringToAscii(ByteArrayToHexString(numArray), CleanEndOfString)
     End Function
 
     Public Shared Function ByteArrayToHexString(ByteArray As Byte()) As String
-        Dim hexString = ""
-        Dim num As Integer = ByteArray.Length - 1
-        Dim index = 0
+        Dim HexString = ""
+        Dim Num As Integer = ByteArray.Length - 1
+        Dim Index = 0
 
         While index <= num
             hexString += ByteArray(index).ToString("X2")
@@ -93,16 +93,16 @@ Public Class Utils
         Return hexString
     End Function
 
-    Public Shared Function DirSize(sourceDir As String, recurse As Boolean) As Long
-        Dim size As Long = 0
-        Dim fileEntries As String() = Directory.GetFiles(sourceDir)
+    Public Shared Function DirSize(SourceDir As String, Recurse As Boolean) As Long
+        Dim Size As Long = 0
+        Dim FileEntries As String() = Directory.GetFiles(SourceDir)
 
-        For Each fileName As String In fileEntries
-            Interlocked.Add(size, New FileInfo(fileName).Length)
+        For Each FileName As String In FileEntries
+            Interlocked.Add(Size, New FileInfo(FileName).Length)
         Next
 
-        If recurse Then
-            Dim subdirEntries As String() = Directory.GetDirectories(sourceDir)
+        If Recurse Then
+            Dim SubdirEntries As String() = Directory.GetDirectories(SourceDir)
             Parallel.[For](Of Long)(0, subdirEntries.Length, Function() 0, Function(i, [loop], subtotal)
 
                                                                                If (File.GetAttributes(subdirEntries(i)) And FileAttributes.ReparsePoint) <> FileAttributes.ReparsePoint Then
@@ -114,21 +114,21 @@ Public Class Utils
                                                                            End Function, Function(x) Interlocked.Add(size, x))
         End If
 
-        Return size
+        Return Size
     End Function
 
     Public Shared Sub CreateWorkingDirectories()
-        If Not Directory.Exists(".\Downloads") Then
-            With Directory.CreateDirectory(".\Downloads")
-                .CreateSubdirectory(".\exdata")
-                .CreateSubdirectory(".\pkgs")
+        If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then
+            With Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads")
+                .CreateSubdirectory(My.Computer.FileSystem.CurrentDirectory + "\exdata")
+                .CreateSubdirectory(My.Computer.FileSystem.CurrentDirectory + "\pkgs")
             End With
         End If
-        If Not Directory.Exists(".\Extractions") Then
-            Directory.CreateDirectory(".\Extractions")
+        If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Extractions") Then
+            Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Extractions")
         End If
-        If Not Directory.Exists(".\Decryptions") Then
-            Directory.CreateDirectory(".\Decryptions")
+        If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Decryptions") Then
+            Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Decryptions")
         End If
     End Sub
 
@@ -166,7 +166,7 @@ Public Class Utils
         Dim PKGDate As Date
         Date.TryParseExact(TheDate, "yyyy-MM-dd HH:mm:ss", Nothing, DateTimeStyles.None, PKGDate)
 
-        Return New Structures.PackageInfo With {.FileSize = GetFileSize(PKGSizeStr), .FileDate = PKGDate.Date}
+        Return New Structures.PackageInfo With {.FileSize = GetFileSize(PKGSizeStr), .FileDate = CStr(PKGDate.Date)}
     End Function
 
     Public Shared Function GetPKGTitleID(PKGFilePath As String) As String
@@ -178,9 +178,9 @@ Public Class Utils
                     PKGBinaryReader.BaseStream.Position = &H30
                     Dim PKGBytes As Byte() = PKGBinaryReader.ReadBytes(36)
                     PKGBinaryReader.Close()
-                    Dim str3 As String = Encoding.ASCII.GetString(PKGBytes)
-                    If str3.Trim.Replace(ChrW(0), "").Length >= 7 Then
-                        NewStringBuilder.AppendLine(str3.Substring(7, 9))
+                    Dim ASCIIString As String = Encoding.ASCII.GetString(PKGBytes)
+                    If ASCIIString.Trim.Replace(ChrW(0), "").Length >= 7 Then
+                        NewStringBuilder.AppendLine(ASCIIString.Substring(7, 9))
                     Else
                         NewStringBuilder.AppendLine("XXXX#####")
                     End If
@@ -195,18 +195,18 @@ Public Class Utils
         End Try
     End Function
 
-    Public Shared Function BitmapSourceFromByteArray(buffer As Byte()) As BitmapSource
-        Dim bitmap = New BitmapImage()
+    Public Shared Function BitmapSourceFromByteArray(Buffer As Byte()) As BitmapSource
+        Dim NewBitmap As New BitmapImage()
 
-        Using stream = New MemoryStream(buffer)
-            bitmap.BeginInit()
-            bitmap.CacheOption = BitmapCacheOption.OnLoad
-            bitmap.StreamSource = stream
-            bitmap.EndInit()
+        Using NewMemoryStream As New MemoryStream(Buffer)
+            NewBitmap.BeginInit()
+            NewBitmap.CacheOption = BitmapCacheOption.OnLoad
+            NewBitmap.StreamSource = NewMemoryStream
+            NewBitmap.EndInit()
         End Using
 
-        bitmap.Freeze()
-        Return bitmap
+        NewBitmap.Freeze()
+        Return NewBitmap
     End Function
 
     Public Shared Sub ReCreateDirectoryStructure(SourceDirectory As String, TargetDirectory As String, Optional RootDirectory As String = "")
@@ -214,14 +214,13 @@ Public Class Utils
             RootDirectory = SourceDirectory
         End If
         Dim AllFolders() As String = Directory.GetDirectories(SourceDirectory)
-        For Each folder As String In AllFolders
-            Directory.CreateDirectory(folder.Replace(RootDirectory, TargetDirectory))
-            ReCreateDirectoryStructure(folder, TargetDirectory, RootDirectory)
+        For Each Folder As String In AllFolders
+            Directory.CreateDirectory(Folder.Replace(RootDirectory, TargetDirectory))
+            ReCreateDirectoryStructure(Folder, TargetDirectory, RootDirectory)
         Next
     End Sub
 
     Public Shared Function GetBackupFolders(DestinationPath As String) As Structures.BackupFolders
-
         Dim DestinationBackupStructure As New Structures.BackupFolders()
 
         If Directory.Exists(DestinationPath + "GAMES") Then
@@ -238,7 +237,6 @@ Public Class Utils
         End If
 
         Return DestinationBackupStructure
-
     End Function
 
     Public Shared Function IsWindowOpen(WindowName As String) As Boolean
@@ -246,11 +244,9 @@ Public Class Utils
         For Each OpenWin In Windows.Application.Current.Windows()
             If OpenWin.ToString = "psmt_lib." + WindowName Then
                 WinFound = True
-                Return True
                 Exit For
             Else
                 WinFound = False
-                Return False
             End If
         Next
         Return WinFound
@@ -258,22 +254,21 @@ Public Class Utils
 
     Public Shared Function IsURLValid(Url As String) As Boolean
         Try
-            Dim request As HttpWebRequest = CType(WebRequest.Create(Url), HttpWebRequest)
-            Using response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
-                Console.WriteLine(response.StatusCode.ToString)
-                If response.StatusCode = HttpStatusCode.OK Then
+            Dim NewWebRequest As HttpWebRequest = CType(WebRequest.Create(Url), HttpWebRequest)
+            Using WebRequestResponse As HttpWebResponse = CType(NewWebRequest.GetResponse(), HttpWebResponse)
+                If WebRequestResponse.StatusCode = HttpStatusCode.OK Then
                     Return True
-                ElseIf response.StatusCode = HttpStatusCode.Found Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Found Then
                     Return True
-                ElseIf response.StatusCode = HttpStatusCode.NotFound Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.NotFound Then
                     Return False
-                ElseIf response.StatusCode = HttpStatusCode.Unauthorized Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Unauthorized Then
                     Return False
-                ElseIf response.StatusCode = HttpStatusCode.Forbidden Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Forbidden Then
                     Return False
-                ElseIf response.StatusCode = HttpStatusCode.BadGateway Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.BadGateway Then
                     Return False
-                ElseIf response.StatusCode = HttpStatusCode.BadRequest Then
+                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.BadRequest Then
                     Return False
                 End If
                 Return False

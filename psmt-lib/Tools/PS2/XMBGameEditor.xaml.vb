@@ -158,7 +158,7 @@ Public Class XMBGameEditor
 
         'Save selected XMB cover as compressed PNG
         If Cover1Image.Source IsNot Nothing Then
-            Dim Cover1Bitmap As Bitmap = GetResizedBitmap(Cover1Image.Tag, 140, 200)
+            Dim Cover1Bitmap As Bitmap = GetResizedBitmap(Cover1Image.Tag.ToString, 140, 200)
 
             If Cover1Bitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then
                 ConvertTo32bppAndDisposeOriginal(Cover1Bitmap)
@@ -176,7 +176,7 @@ Public Class XMBGameEditor
         End If
 
         If Cover2Image.Source IsNot Nothing Then
-            Dim Cover1Bitmap As Bitmap = GetResizedBitmap(Cover2Image.Tag, 74, 108)
+            Dim Cover1Bitmap As Bitmap = GetResizedBitmap(Cover2Image.Tag.ToString, 74, 108)
 
             If Cover1Bitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then
                 ConvertTo32bppAndDisposeOriginal(Cover1Bitmap)
@@ -194,7 +194,7 @@ Public Class XMBGameEditor
         End If
 
         If BackgroundImage.Source IsNot Nothing Then
-            Dim BackgroundImageBitmap As Bitmap = GetResizedBitmap(BackgroundImage.Tag, 640, 350)
+            Dim BackgroundImageBitmap As Bitmap = GetResizedBitmap(BackgroundImage.Tag.ToString, 640, 350)
 
             If BackgroundImageBitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then
                 ConvertTo32bppAndDisposeOriginal(BackgroundImageBitmap)
@@ -212,7 +212,7 @@ Public Class XMBGameEditor
         End If
 
         If ScreenshotImage1.Source IsNot Nothing Then
-            Dim ScreenshotImageBitmap As Bitmap = GetResizedBitmap(ScreenshotImage1.Tag, 640, 350)
+            Dim ScreenshotImageBitmap As Bitmap = GetResizedBitmap(ScreenshotImage1.Tag.ToString, 640, 350)
 
             If ScreenshotImageBitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then
                 ConvertTo32bppAndDisposeOriginal(ScreenshotImageBitmap)
@@ -229,7 +229,7 @@ Public Class XMBGameEditor
             End Try
         End If
         If ScreenshotImage2.Source IsNot Nothing Then
-            Dim ScreenshotImageBitmap As Bitmap = GetResizedBitmap(ScreenshotImage2.Tag, 640, 350)
+            Dim ScreenshotImageBitmap As Bitmap = GetResizedBitmap(ScreenshotImage2.Tag.ToString, 640, 350)
 
             If ScreenshotImageBitmap.PixelFormat <> Imaging.PixelFormat.Format32bppArgb Then
                 ConvertTo32bppAndDisposeOriginal(ScreenshotImageBitmap)

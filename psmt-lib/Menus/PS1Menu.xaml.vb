@@ -9,7 +9,7 @@ Public Class PS1Menu
     Private Sub DownloadFreePSXBoot_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFreePSXBoot.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps1/freepsxboot-2.1.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps1/freepsxboot-2.1.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -18,7 +18,7 @@ Public Class PS1Menu
     Private Sub DownloadTonyHax_Click(sender As Object, e As RoutedEventArgs) Handles DownloadTonyHax.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps1/tonyhax-v1.4.5.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps1/tonyhax-v1.4.5.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

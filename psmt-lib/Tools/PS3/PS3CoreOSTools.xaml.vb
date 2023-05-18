@@ -144,7 +144,7 @@ Public Class PS3CoreOSTools
 
             Dim ProcessOutput As String = ""
             'Create a file name based on the selected folder
-            Dim NewSplit As String() = SelectedDecFolderForDumpTextBox.Text.Split("\")
+            Dim NewSplit As String() = SelectedDecFolderForDumpTextBox.Text.Split("\"c)
             Dim FolderName As String = NewSplit(NewSplit.Length - 2) + ".hex"
 
             Using Hexdump As New Process()

@@ -43,25 +43,29 @@ Public Class PKGSender
     End Sub
 
     Private Sub BrowsePKGButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowsePKGButton.Click
-        Dim OFD As New OpenFileDialog() With {.Filter = "pkg files (*.pkg)|*.pkg", .CheckFileExists = True, .Multiselect = True}
-        If OFD.ShowDialog() = Forms.DialogResult.OK Then
+        If String.IsNullOrEmpty(PS4IPTextBox.Text) Then
+            MsgBox("Please enter a console IP first.", MsgBoxStyle.Information, "IP required")
+        Else
+            Dim OFD As New OpenFileDialog() With {.Filter = "pkg files (*.pkg)|*.pkg", .CheckFileExists = True, .Multiselect = True}
+            If OFD.ShowDialog() = Forms.DialogResult.OK Then
 
-            If OFD.FileNames.Count > 1 Then
-                For Each SelectedPKG As String In OFD.FileNames
-                    Dim PKGFileName As String = Path.GetFileName(SelectedPKG)
-                    Dim NewPKGListViewItem As New PKGLVItem() With {.PackagePath = SelectedPKG, .PackageName = Path.GetFileNameWithoutExtension(SelectedPKG)}
+                If OFD.FileNames.Count > 1 Then
+                    For Each SelectedPKG As String In OFD.FileNames
+                        Dim PKGFileName As String = Path.GetFileName(SelectedPKG)
+                        Dim NewPKGListViewItem As New PKGLVItem() With {.PackagePath = SelectedPKG, .PackageName = Path.GetFileNameWithoutExtension(SelectedPKG)}
+                        Dim NewInstallData As String = GetJSONForPKG(PKGFileName)
+                        NewPKGListViewItem.InstallData = NewInstallData
+                        PKGsListView.Items.Add(NewPKGListViewItem)
+                    Next
+                Else
+                    Dim PKGFileName As String = Path.GetFileName(OFD.FileName)
+                    Dim NewPKGListViewItem As New PKGLVItem() With {.PackagePath = OFD.FileName, .PackageName = Path.GetFileNameWithoutExtension(OFD.FileName)}
                     Dim NewInstallData As String = GetJSONForPKG(PKGFileName)
                     NewPKGListViewItem.InstallData = NewInstallData
                     PKGsListView.Items.Add(NewPKGListViewItem)
-                Next
-            Else
-                Dim PKGFileName As String = Path.GetFileName(OFD.FileName)
-                Dim NewPKGListViewItem As New PKGLVItem() With {.PackagePath = OFD.FileName, .PackageName = Path.GetFileNameWithoutExtension(OFD.FileName)}
-                Dim NewInstallData As String = GetJSONForPKG(PKGFileName)
-                NewPKGListViewItem.InstallData = NewInstallData
-                PKGsListView.Items.Add(NewPKGListViewItem)
-            End If
+                End If
 
+            End If
         End If
     End Sub
 
@@ -238,40 +242,42 @@ Public Class PKGSender
     End Structure
 
     Private Sub BrowsePayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowsePayloadButton.Click
-        Dim OFD As New OpenFileDialog() With {.Title = "Select a PS4 payload", .Multiselect = True, .Filter = "bin files (*.bin)|*.bin"}
+        If String.IsNullOrEmpty(PS4IPTextBox.Text) Then
+            MsgBox("Please enter a console IP first.", MsgBoxStyle.Information, "IP required")
+        Else
+            Dim OFD As New OpenFileDialog() With {.Title = "Select a PS4 payload", .Multiselect = True, .Filter = "bin files (*.bin)|*.bin"}
+            If OFD.ShowDialog() = Forms.DialogResult.OK Then
+                If OFD.FileNames.Count > 1 Then
+                    If String.IsNullOrEmpty(PS4IPTextBox.Text) Then
+                        MsgBox("Please enter a console IP first.", MsgBoxStyle.Information, "IP required")
+                    Else
+                        For Each SelectedPayload As String In OFD.FileNames
+                            Dim PayloadFileName As String = Path.GetFileName(SelectedPayload)
+                            Dim ConsoleIP As IPAddress = IPAddress.Parse(PS4IPTextBox.Text)
+                            Dim NewPayloadListViewItem As New PayloadLVItem() With {.PayloadPath = SelectedPayload, .PayloadName = Path.GetFileNameWithoutExtension(SelectedPayload), .IPAddress = ConsoleIP}
 
-        If OFD.ShowDialog() = Forms.DialogResult.OK Then
-
-            If OFD.FileNames.Count > 1 Then
-                For Each SelectedPayload As String In OFD.FileNames
-                    Dim PayloadFileName As String = Path.GetFileName(SelectedPayload)
-                    Dim NewPayloadListViewItem As New PayloadLVItem() With {.PayloadPath = SelectedPayload, .PayloadName = Path.GetFileNameWithoutExtension(SelectedPayload)}
+                            PayloadListView.Items.Add(NewPayloadListViewItem)
+                        Next
+                    End If
+                Else
+                    Dim PayloadFileName As String = Path.GetFileName(OFD.FileName)
+                    Dim ConsoleIP As IPAddress = IPAddress.Parse(PS4IPTextBox.Text)
+                    Dim NewPayloadListViewItem As New PayloadLVItem() With {.PayloadPath = OFD.FileName, .PayloadName = Path.GetFileNameWithoutExtension(OFD.FileName), .IPAddress = ConsoleIP}
 
                     PayloadListView.Items.Add(NewPayloadListViewItem)
-                Next
-            Else
-                Dim PayloadFileName As String = Path.GetFileName(OFD.FileName)
-                Dim ConsoleIP As IPAddress = IPAddress.Parse(PS4IPTextBox.Text)
-                Dim NewPayloadListViewItem As New PayloadLVItem() With {.PayloadPath = OFD.FileName, .PayloadName = Path.GetFileNameWithoutExtension(OFD.FileName), .IPAddress = ConsoleIP}
-
-                PayloadListView.Items.Add(NewPayloadListViewItem)
+                End If
             End If
-
         End If
-
     End Sub
 
     Private Sub SendPayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles SendPayloadButton.Click
-
         If PayloadListView.SelectedItem IsNot Nothing Then
             Dim SelectedPayload As PayloadLVItem = CType(PayloadListView.SelectedItem, PayloadLVItem)
             SenderWorker.RunWorkerAsync(SelectedPayload)
         End If
-
     End Sub
 
     Private Sub SenderWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles SenderWorker.DoWork
-
         Dim SelectedPayload As PayloadLVItem = CType(e.Argument, PayloadLVItem)
 
         'Send the selected payload
@@ -279,13 +285,11 @@ Public Class PKGSender
             SenderSocket.Connect(SelectedPayload.IPAddress, 9020)
             SenderSocket.SendFile(SelectedPayload.PayloadPath)
         End Using
-
     End Sub
 
     Private Sub SenderWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles SenderWorker.RunWorkerCompleted
         MsgBox("Payload sent.")
     End Sub
-
 
 #End Region
 

@@ -406,7 +406,7 @@ Public Class XMBInstaller
 
     Private Sub HDL_DumpWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles HDL_DumpWorker.DoWork
         Dim HDLWorker As BackgroundWorker = TryCast(sender, BackgroundWorker)
-        Dim HDLArgs As HDL_Dump_Args = e.Argument
+        Dim HDLArgs As HDL_Dump_Args = CType(e.Argument, HDL_Dump_Args)
 
         If HDLArgs.Command = "inject_dvd" Then
             Using HDLDump As New Process()
@@ -438,7 +438,7 @@ Public Class XMBInstaller
 
     Private Sub HDL_DumpWorker_ProgressChanged(sender As Object, e As ProgressChangedEventArgs) Handles HDL_DumpWorker.ProgressChanged
         If StatusTextBlock.Dispatcher.CheckAccess() = False Then
-            StatusTextBlock.Dispatcher.BeginInvoke(Sub() StatusTextBlock.Text = e.UserState)
+            StatusTextBlock.Dispatcher.BeginInvoke(Sub() StatusTextBlock.Text = CStr(e.UserState))
         Else
             StatusTextBlock.Text = CStr(e.UserState)
         End If
@@ -831,7 +831,7 @@ Public Class XMBInstaller
     End Sub
 
     Private Sub ConnectButton_Click(sender As Object, e As RoutedEventArgs) Handles ConnectButton.Click
-        If ConnectButton.Content = "Connect" Then
+        If ConnectButton.Content.ToString = "Connect" Then
             Try
                 Using WNBDClient As New Process()
                     If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\Ceph\bin\wnbd-client.exe") Then

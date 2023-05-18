@@ -25,9 +25,13 @@ Public Class PUPExtractor
     Public Sub OutputHandler(sender As Object, e As DataReceivedEventArgs)
         If Not String.IsNullOrEmpty(e.Data) Then
             If LogTextBox.Dispatcher.CheckAccess() = False Then
-                LogTextBox.Dispatcher.BeginInvoke(Sub() LogTextBox.AppendText(vbCrLf + e.Data))
+                LogTextBox.Dispatcher.BeginInvoke(Sub()
+                                                      LogTextBox.AppendText(vbCrLf + e.Data)
+                                                      LogTextBox.ScrollToEnd()
+                                                  End Sub)
             Else
                 LogTextBox.AppendText(vbCrLf + e.Data)
+                LogTextBox.ScrollToEnd()
             End If
         End If
     End Sub

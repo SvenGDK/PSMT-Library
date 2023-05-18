@@ -140,9 +140,9 @@ Public Class PS3PKGExtractor
 
                     Dim division As Double = uiEncryptedFileLenght / AESKey.Length
                     Dim pieces As ULong = Convert.ToUInt64(Math.Floor(division))
-                    Dim Modi As ULong = Convert.ToUInt64(uiEncryptedFileLenght) / Convert.ToUInt64(AESKey.Length)
+                    Dim Modi As ULong = CULng(Convert.ToUInt64(uiEncryptedFileLenght) / Convert.ToUInt64(AESKey.Length))
                     If Modi > 0 Then
-                        pieces += 1
+                        pieces += CULng(1)
                     End If
 
                     If File.Exists(Args.PKGFileName & ".DEC") Then
@@ -158,16 +158,16 @@ Public Class PS3PKGExtractor
                     Dim filepieces As ULong = Convert.ToUInt64(Math.Floor(filedivision))
                     Dim filemod As ULong = Convert.ToUInt64(uiEncryptedFileLenght) Mod Convert.ToUInt64(AESKey.Length * Multiplicator)
                     If filemod > 0 Then
-                        filepieces += 1
+                        filepieces += CULng(1)
                     End If
 
                     DecryptWorker.ReportProgress(0, New Structures.ExtractionWorkerProgress With {.FileCount = CInt(filepieces) - 1, .FileName = ""}) 'Report FileCount
 
-                    For i As ULong = 0 To filepieces - 1
+                    For i As ULong = 0 To CULng(filepieces - 1)
                         'If we have a mod and this is the last piece then...
                         If (filemod > 0) AndAlso (i = (filepieces - 1)) Then
-                            EncryptedData = New Byte(filemod - 1) {}
-                            DecryptedData = New Byte(filemod - 1) {}
+                            EncryptedData = New Byte(CInt(filemod - 1)) {}
+                            DecryptedData = New Byte(CInt(filemod - 1)) {}
                         End If
 
                         'Read 16 bytes of Encrypted data
@@ -314,10 +314,10 @@ Public Class PS3PKGExtractor
                 Array.Reverse(NameSize)
                 Dim ExtractedFileNameSize As UInteger = BitConverter.ToUInt32(NameSize, 0)
 
-                contentType = FileTable(positionIdx + 24)
-                fileType = FileTable(positionIdx + 27)
+                contentType = FileTable(CInt(positionIdx + 24))
+                fileType = FileTable(CInt(positionIdx + 27))
 
-                Name = New Byte(ExtractedFileNameSize - 1) {}
+                Name = New Byte(CInt(ExtractedFileNameSize - 1)) {}
                 Array.Copy(FileTable, ExtractedFileNameOffset, Name, 0, ExtractedFileNameSize)
                 Dim ExtractedFileName As String = Utils.ByteArrayToAscii(Name, 0, Name.Length, True)
 
@@ -353,7 +353,7 @@ Public Class PS3PKGExtractor
                     'fileType == 0x04 = Directory
 
                     'Decrypt PS3 Filename
-                    Dim DecryptedData As Byte() = DecryptData(ExtractedFileNameSize, ExtractedFileNameOffset, UIEncryptedFileStartOffset, PS3AesKey, encrPKGReadStream, brEncrPKG)
+                    Dim DecryptedData As Byte() = DecryptData(CInt(ExtractedFileNameSize), ExtractedFileNameOffset, UIEncryptedFileStartOffset, PS3AesKey, encrPKGReadStream, brEncrPKG)
                     Array.Copy(DecryptedData, 0, Name, 0, ExtractedFileNameSize)
                     ExtractedFileName = Utils.ByteArrayToAscii(Name, 0, Name.Length, True)
 
@@ -392,14 +392,14 @@ Public Class PS3PKGExtractor
                     Dim pieces As ULong = Convert.ToUInt64(Math.Floor(division))
                     Dim Modi As ULong = Convert.ToUInt64(ExtractedFileSize) Mod Convert.ToUInt64(twentyMb)
                     If Modi > 0 Then
-                        pieces += 1
+                        pieces += CULng(1)
                     End If
 
                     dumpFile = New Byte(twentyMb - 1) {}
-                    For i As ULong = 0 To pieces - 1
+                    For i As ULong = 0 To CULng(pieces - 1)
                         'If we have a mod and this is the last piece then...
                         If (Modi > 0) AndAlso (i = (pieces - 1)) Then
-                            dumpFile = New Byte(Modi - 1) {}
+                            dumpFile = New Byte(CInt(Modi - 1)) {}
                         End If
 
                         'Fill buffer
@@ -422,15 +422,15 @@ Public Class PS3PKGExtractor
                     Dim pieces As ULong = Convert.ToUInt64(Math.Floor(division))
                     Dim Modi As ULong = Convert.ToUInt64(ExtractedFileSize) Mod Convert.ToUInt64(twentyMb)
                     If Modi > 0 Then
-                        pieces += 1
+                        pieces += CULng(1)
                     End If
 
                     dumpFile = New Byte(twentyMb - 1) {}
                     Dim elapsed As Long = 0
-                    For i As ULong = 0 To pieces - 1
+                    For i As ULong = 0 To CULng(pieces - 1)
                         'If we have a mod and this is the last piece then
                         If (Modi > 0) AndAlso (i = (pieces - 1)) Then
-                            dumpFile = New Byte(Modi - 1) {}
+                            dumpFile = New Byte(CInt(Modi - 1)) {}
                         End If
 
                         'Fill buffer
@@ -509,7 +509,7 @@ Public Class PS3PKGExtractor
         encrPKGReadStream.Seek(dataRelativeOffset + pkgEncryptedFileStartOffset, SeekOrigin.Begin)
         EncryptedData = brEncrPKG.ReadBytes(size)
 
-        For pos As Integer = 0 To dataRelativeOffset - 1 Step 16
+        For pos As Integer = 0 To CInt(dataRelativeOffset - 1) Step 16
             Utils.IncrementArray(incPKGFileKey, PKGFileKey.Length - 1)
         Next
 

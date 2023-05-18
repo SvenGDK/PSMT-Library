@@ -66,9 +66,9 @@ Public Class PS3Menu
         If LoadLatest = True Then
             Using NewWebClient As New WebClient
                 Dim GamesList As String = Await NewWebClient.DownloadStringTaskAsync(New Uri("https://nopaystation.com/tsv/" + RequestedList))
-                Dim GamesListLines As String() = GamesList.Split(vbCrLf)
+                Dim GamesListLines As String() = GamesList.Split(CChar(vbCrLf))
                 For Each GameLine As String In GamesListLines.Skip(1)
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8).Trim(), SplittedValues(6).Trim())
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2).Trim(),
                         .PackageURL = SplittedValues(3).Trim(),
@@ -87,7 +87,7 @@ Public Class PS3Menu
             If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Databases\" + RequestedList) Then
                 Dim FileReader As String() = File.ReadAllLines(My.Computer.FileSystem.CurrentDirectory + "\Databases\" + RequestedList, Text.Encoding.UTF8)
                 For Each GameLine As String In FileReader.Skip(1) 'Skip 1st line in TSV
-                    Dim SplittedValues As String() = GameLine.Split(vbTab)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
                     Dim AdditionalInfo As Structures.PackageInfo = Utils.GetFileSizeAndDate(SplittedValues(8), SplittedValues(6))
                     Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2),
                         .PackageURL = SplittedValues(3),
@@ -216,11 +216,11 @@ Public Class PS3Menu
                 'Create exdata folder if not exists
                 If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads\exdata") Then Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads\exdata")
 
-                Dim bytes As Byte() = New Byte((RAP.Length / 2) - 1) {}
-                For index As Integer = 0 To (RAP.Length / 2) - 1
+                Dim bytes As Byte() = New Byte(CInt((RAP.Length / 2) - 1)) {}
+                For index As Integer = 0 To CInt((RAP.Length / 2) - 1)
                     bytes(index) = Convert.ToByte(RAP.Substring(index * 2, 2), 16)
                 Next
-                File.WriteAllBytes(".\Downloads\exdata\" + ContentID & ".rap", bytes)
+                File.WriteAllBytes(My.Computer.FileSystem.CurrentDirectory + "\Downloads\exdata\" + ContentID & ".rap", bytes)
 
                 MsgBox(ContentID & ".rap created!" & vbCrLf & "You can find it in the 'Downloads\exdata' folder.", MsgBoxStyle.Information)
             Else
@@ -238,7 +238,7 @@ Public Class PS3Menu
     Private Sub InfosMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles InfosMenuItem.Click
         If LView.SelectedItem IsNot Nothing Then
             Dim SelectedPackage As Structures.Package = CType(LView.SelectedItem, Structures.Package)
-            Dim NewPackageInfoWindow As New PackageInfoWindow() With {.ShowActivated = True, .Title = SelectedPackage.PackageName, .CurrentPackage = SelectedPackage, .PackageConsole = "PS3"}
+            Dim NewPackageInfoWindow As New DownloadPackageInfoWindow() With {.ShowActivated = True, .Title = SelectedPackage.PackageName, .CurrentPackage = SelectedPackage, .PackageConsole = "PS3"}
             NewPackageInfoWindow.Show()
         End If
     End Sub
@@ -313,20 +313,25 @@ Public Class PS3Menu
     Private Sub DownloadAdvancedPowerOptions_Click(sender As Object, e As RoutedEventArgs) Handles DownloadAdvancedPowerOptions.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/Advanced_Power_Options_v1.11.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/Advanced_Power_Options_v1.11.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
     End Sub
 
     Private Sub DownloadAdvancedTools_Click(sender As Object, e As RoutedEventArgs) Handles DownloadAdvancedTools.Click
-
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/PS3AdvancedTools_v1.0.1.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
     End Sub
 
     Private Sub DownloadApollo_Click(sender As Object, e As RoutedEventArgs) Handles DownloadApollo.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/apollo-ps3-v1.8.4.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/apollo-ps3-v1.8.4.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -335,7 +340,7 @@ Public Class PS3Menu
     Private Sub DownloadApolloGithub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadApolloGithub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/bucanero/apollo-folderforps3/releases/latest/download/apollo-ps3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/bucanero/apollo-ps3/releases/latest/download/apollo-ps3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -344,7 +349,7 @@ Public Class PS3Menu
     Private Sub DownloadArtemis_Click(sender As Object, e As RoutedEventArgs) Handles DownloadArtemis.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ArtemisPS3-GUI-r6.3..pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ArtemisPS3-GUI-r6.3..pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -362,7 +367,7 @@ Public Class PS3Menu
     Private Sub DownloadAwesomeMPManager_Click(sender As Object, e As RoutedEventArgs) Handles DownloadAwesomeMPManager.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/Awesome_MountPoint_Manager_1.1a.AllCFW.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/Awesome_MountPoint_Manager_1.1a.AllCFW.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -371,7 +376,7 @@ Public Class PS3Menu
     Private Sub DownloadCCAPI_Click(sender As Object, e As RoutedEventArgs) Handles DownloadCCAPI.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/CCAPI_v2.80_Rev10.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/CCAPI_v2.80_Rev10.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -380,7 +385,7 @@ Public Class PS3Menu
     Private Sub DownloadComgenieGeohot_Click(sender As Object, e As RoutedEventArgs) Handles DownloadComgenieGeohot.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ComgenieAwesomeFilemanager355.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ComgenieAwesomeFilemanager355.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -389,7 +394,7 @@ Public Class PS3Menu
     Private Sub DownloadComgenieNew_Click(sender As Object, e As RoutedEventArgs) Handles DownloadComgenieNew.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ComgenieAwesomeFilemanager421.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ComgenieAwesomeFilemanager421.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -398,7 +403,7 @@ Public Class PS3Menu
     Private Sub DownloadComgenieOld_Click(sender As Object, e As RoutedEventArgs) Handles DownloadComgenieOld.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ComgenieAwesomeFilemanager.zip") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ComgenieAwesomeFilemanager.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -407,7 +412,7 @@ Public Class PS3Menu
     Private Sub DownloadIrisman_Click(sender As Object, e As RoutedEventArgs) Handles DownloadIrisman.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/IRISMAN_4.90.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/IRISMAN_4.90.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -425,7 +430,7 @@ Public Class PS3Menu
     Private Sub DownloadManagunzBM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadManagunzBM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ManaGunZ_v1.41.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ManaGunZ_v1.41.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -434,7 +439,7 @@ Public Class PS3Menu
     Private Sub DownloadManagunzFM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadManagunzFM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ManaGunZ_FileManager_v1.41.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/ManaGunZ_FileManager_v1.41.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -443,7 +448,7 @@ Public Class PS3Menu
     Private Sub DownloadMovian_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMovian.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/movian-5.0.730-deank-playstation3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/movian-5.0.730-deank-playstation3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -452,7 +457,7 @@ Public Class PS3Menu
     Private Sub DownloadMultiMAN_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMultiMAN.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/multiMAN_04.85.01_BASE_(20191010).pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/multiMAN_04.85.01_BASE_(20191010).pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -461,7 +466,7 @@ Public Class PS3Menu
     Private Sub DownloadNetsrv_Click(sender As Object, e As RoutedEventArgs) Handles DownloadNetsrv.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/ps3netsrv_20220813.zip") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/ps3netsrv_20220813.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -470,7 +475,7 @@ Public Class PS3Menu
     Private Sub DownloadPKGi_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPKGi.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/pkgi-ps3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/pkgi-ps3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -479,7 +484,7 @@ Public Class PS3Menu
     Private Sub DownloadPKGiGithub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPKGiGithub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/bucanero/pkgi-folderforps3/releases/latest/download/pkgi-ps3.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/bucanero/pkgi-ps3/releases/latest/download/pkgi-ps3.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -488,7 +493,7 @@ Public Class PS3Menu
     Private Sub DownloadPrepIso_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPrepIso.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/prepISO_1.30.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/prepISO_1.30.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -497,7 +502,7 @@ Public Class PS3Menu
     Private Sub DownloadPS2ClassicsLauncher_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS2ClassicsLauncher.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/PS2_Classics_Launcher.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/PS2_Classics_Launcher.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -506,7 +511,7 @@ Public Class PS3Menu
     Private Sub DownloadPS2Config_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS2Config.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/PS2CONFIG.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/PS2CONFIG.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -515,7 +520,7 @@ Public Class PS3Menu
     Private Sub DownloadPSPMinisLauncher_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPSPMinisLauncher.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/PSP_Minis_Launcher.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/PSP_Minis_Launcher.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -524,7 +529,7 @@ Public Class PS3Menu
     Private Sub DownloadPSPRemastersLauncher_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPSPRemastersLauncher.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/PSP_Remasters_Launcher.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/PSP_Remasters_Launcher.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -533,7 +538,7 @@ Public Class PS3Menu
     Private Sub DownloadReact_Click(sender As Object, e As RoutedEventArgs) Handles DownloadReact.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/reActPSN_v3.20+.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/reActPSN_v3.20+.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -542,7 +547,7 @@ Public Class PS3Menu
     Private Sub DownloadRebugToolbox_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRebugToolbox.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/REBUG_TOOLBOX_02.03.06.MULTI.16.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/REBUG_TOOLBOX_02.03.06.MULTI.16.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -551,7 +556,7 @@ Public Class PS3Menu
     Private Sub DownloadSENEnabler_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSENEnabler.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/SEN_Enabler_v6.2.7_[CEX-DEX]_[4.87].pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/SEN_Enabler_v6.2.7_[CEX-DEX]_[4.87].pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -560,7 +565,7 @@ Public Class PS3Menu
     Private Sub DownloadUltimateToolbox_Click(sender As Object, e As RoutedEventArgs) Handles DownloadUltimateToolbox.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/Ultimate_Toolbox_v2.03_FULL_version.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/Ultimate_Toolbox_v2.03_FULL_version.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -569,7 +574,7 @@ Public Class PS3Menu
     Private Sub DownloadUnlockHDDSpace_Click(sender As Object, e As RoutedEventArgs) Handles DownloadUnlockHDDSpace.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/Unlock_HDD_Space.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/hb/Unlock_HDD_Space.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -578,7 +583,7 @@ Public Class PS3Menu
     Private Sub DownloadWebManMod_Click(sender As Object, e As RoutedEventArgs) Handles DownloadWebManMod.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/hb/webMAN_MOD_1.47.44_Installer.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/aldostools/webMAN-MOD/releases/download/1.47.45/webMAN_MOD_1.47.45_Installer.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -591,7 +596,7 @@ Public Class PS3Menu
     Private Sub Download355DexDowngrader_Click(sender As Object, e As RoutedEventArgs) Handles Download355DexDowngrader.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/PS3-CFW-3.55-DEX-DOWNGRADER_PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/PS3-CFW-3.55-DEX-DOWNGRADER_PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -600,7 +605,7 @@ Public Class PS3Menu
     Private Sub DownloadCobra355_Click(sender As Object, e As RoutedEventArgs) Handles DownloadCobra355.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/Cobra%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/Cobra%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -609,7 +614,7 @@ Public Class PS3Menu
     Private Sub DownloadGeoHot_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGeoHot.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/GeoHot%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/GeoHot%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -618,7 +623,7 @@ Public Class PS3Menu
     Private Sub DownloadKmeaw_Click(sender As Object, e As RoutedEventArgs) Handles DownloadKmeaw.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/Kmeaw%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/Kmeaw%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -627,7 +632,7 @@ Public Class PS3Menu
     Private Sub DownloadMiralaTijera_Click(sender As Object, e As RoutedEventArgs) Handles DownloadMiralaTijera.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/MiralaTijera%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/MiralaTijera%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -636,7 +641,7 @@ Public Class PS3Menu
     Private Sub DownloadOFW102_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOFW102.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/ofw/1.02/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/ofw/1.02/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -645,7 +650,7 @@ Public Class PS3Menu
     Private Sub DownloadOFW315_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOFW315.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/ofw/3.15/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/ofw/3.15/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -654,7 +659,7 @@ Public Class PS3Menu
     Private Sub DownloadOFW355_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOFW355.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/ofw/3.55/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/ofw/3.55/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -663,7 +668,7 @@ Public Class PS3Menu
     Private Sub DownloadOTHEROSColdBoot_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOTHEROSColdBoot.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/OTHEROS++%20COLD-BOOT%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/OTHEROS++%20COLD-BOOT%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -672,7 +677,7 @@ Public Class PS3Menu
     Private Sub DownloadOTHEROSSpecial_Click(sender As Object, e As RoutedEventArgs) Handles DownloadOTHEROSSpecial.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/OTHEROS++%20SPECIAL%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/OTHEROS++%20SPECIAL%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -681,7 +686,7 @@ Public Class PS3Menu
     Private Sub DownloadPS3ITA_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS3ITA.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/PS3ITA%203.55%20CFW%20v1.1/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/PS3ITA%203.55%20CFW%20v1.1/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -690,7 +695,7 @@ Public Class PS3Menu
     Private Sub DownloadPS3ULTIMATE_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS3ULTIMATE.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/PS3ULTIMATE%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/PS3ULTIMATE%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -699,7 +704,7 @@ Public Class PS3Menu
     Private Sub DownloadRebugRex_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRebugRex.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/REBUG%20REX%20EDITION%203.55.4%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/REBUG%20REX%20EDITION%203.55.4%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -708,7 +713,7 @@ Public Class PS3Menu
     Private Sub DownloadRogero_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRogero.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/Rogero%20v3.7%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/Rogero%20v3.7%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -717,7 +722,7 @@ Public Class PS3Menu
     Private Sub DownloadWaninkoko_Click(sender As Object, e As RoutedEventArgs) Handles DownloadWaninkoko.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/Waninkoko%203.55%20CFW%20v2/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/Waninkoko%203.55%20CFW%20v2/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -726,7 +731,7 @@ Public Class PS3Menu
     Private Sub DownloadWutangrza_Click(sender As Object, e As RoutedEventArgs) Handles DownloadWutangrza.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/3.55/Wutangrza%203.55%20CFW/PS3UPDAT.PUP") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/3.55/Wutangrza%203.55%20CFW/PS3UPDAT.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -735,7 +740,7 @@ Public Class PS3Menu
     Private Sub DownloadREBUGDRex484_Click(sender As Object, e As RoutedEventArgs) Handles DownloadREBUGDRex484.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/4.84/REBUG%20D-REX%20EDITION%204.84.2%20CFW.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/4.84/REBUG%20D-REX%20EDITION%204.84.2%20CFW.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -744,7 +749,7 @@ Public Class PS3Menu
     Private Sub DownloadREBUGRex484_Click(sender As Object, e As RoutedEventArgs) Handles DownloadREBUGRex484.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/4.84/REBUG%20REX%20EDITION%204.84.2%20CFW.7z") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/4.84/REBUG%20REX%20EDITION%204.84.2%20CFW.7z") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -753,7 +758,7 @@ Public Class PS3Menu
     Private Sub DownloadEvilnatCobra490Cex_Click(sender As Object, e As RoutedEventArgs) Handles DownloadEvilnatCobra490Cex.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/4.90/CFW%204.90%20Evilnat%20Cobra%208.4%20[CEX].rar") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/4.90/CFW%204.90%20Evilnat%20Cobra%208.4%20[CEX].rar") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -762,7 +767,7 @@ Public Class PS3Menu
     Private Sub DownloadEvilnatCobra490Dex_Click(sender As Object, e As RoutedEventArgs) Handles DownloadEvilnatCobra490Dex.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/fw/cfw/4.90/CFW%204.90%20Evilnat%20Cobra%208.4%20[DEX].rar") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/fw/cfw/4.90/CFW%204.90%20Evilnat%20Cobra%208.4%20[DEX].rar") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -775,7 +780,7 @@ Public Class PS3Menu
     Private Sub DownloadRetroArchCommunity_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRetroArchCommunity.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/folderforps3/emu/RetroArch_Psx-Place_Community_Edition_unofficial_beta-20220315.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps3/emu/RetroArch_Psx-Place_Community_Edition_unofficial_beta-20220315.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
