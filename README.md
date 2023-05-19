@@ -18,12 +18,14 @@ The PS Multi Tools .NET Library contains various tools and downloads for almost 
 - Fix Tar Tool
 - PS3 ISO Tools
 - PKG Extractor
+- PKG Infos Reader
 - PUP Unpacker
 - RCO Dumper
 - SELF Reader
 
 ## PS4
 - PKG Sender (currently not working)
+- PKG Infos Reader
 - Payload Sender
 - Show PSN Store Infos
 - Decrypted PUP Unpacker
@@ -40,6 +42,7 @@ The PS Multi Tools .NET Library contains various tools and downloads for almost 
 
 ## PSVita
 - PKG Extractor
+- PKG Infos Reader
 - PSVIMAGE Tools (currently not working)
 - RCO Data Table Extractor
 
