@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="800">
-    <MenuItem Header="Library">
-    </MenuItem>
+    <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
         <MenuItem Header="Extract PKG File" x:Name="OpenPKGExtractor"></MenuItem>
         <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowser"></MenuItem>

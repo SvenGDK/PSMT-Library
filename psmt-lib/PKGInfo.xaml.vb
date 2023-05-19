@@ -1,18 +1,25 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Windows
+Imports System.Windows.Forms
 Imports System.Windows.Media
+Imports System.Windows.Media.Imaging
+Imports System.Windows.Shapes
 Imports PS4_Tools
 
 Public Class PKGInfo
 
+    Public Console As String = String.Empty
     Public SelectedPKG As String = String.Empty
 
     Dim WithEvents PKGWorker As New BackgroundWorker()
+    Dim WithEvents NPSBrowser As New Forms.WebBrowser() With {.ScriptErrorsSuppressed = True}
+
     Dim PKGSoundBytes As Byte() = Nothing
     Dim IsSoundPlaying As Boolean = False
 
     Private Sub PKGInfo_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        If Not String.IsNullOrEmpty(SelectedPKG) Then
+        If Not String.IsNullOrEmpty(SelectedPKG) AndAlso Not String.IsNullOrEmpty(Console) Then
             PKGWorker.RunWorkerAsync()
         End If
     End Sub
@@ -30,6 +37,17 @@ Public Class PKGInfo
     End Sub
 
     Private Sub PKGWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles PKGWorker.DoWork
+        Select Case Console
+            Case "PS3"
+                LoadPS3Info()
+            Case "PS4"
+                LoadPS4Info()
+            Case "PSV"
+                LoadPSVInfo()
+        End Select
+    End Sub
+
+    Private Sub LoadPS4Info()
 
         Dim GamePKG As PKG.SceneRelated.Unprotected_PKG = PKG.SceneRelated.Read_PKG(SelectedPKG)
 
@@ -100,34 +118,20 @@ Public Class PKGInfo
         End Select
 
         Select Case GamePKG.Param.PlaystationVersion
-            Case Param_SFO.PARAM_SFO.Playstation.ps3
-                PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PS3")
             Case Param_SFO.PARAM_SFO.Playstation.ps4
                 PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PS4")
             Case Param_SFO.PARAM_SFO.Playstation.psp
                 PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PSP")
-            Case Param_SFO.PARAM_SFO.Playstation.psvita
-                PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PS Vita")
             Case Param_SFO.PARAM_SFO.Playstation.unknown
-                PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "Unknown")
-            Case Else
                 PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "Unknown")
         End Select
 
-        If GamePKG.Param IsNot Nothing Then
-            LoadParamSFO(GamePKG.Param)
-        End If
+        PKGAttributesTextBlock.Dispatcher.BeginInvoke(Sub() PKGAttributesTextBlock.Text = GamePKG.Param.Attribute)
+        PKGAppVerTextBlock.Dispatcher.BeginInvoke(Sub() PKGAppVerTextBlock.Text = GamePKG.Param.APP_VER)
+        PKGCategoryTextBlock.Dispatcher.BeginInvoke(Sub() PKGCategoryTextBlock.Text = GetPS4Category(GamePKG.Param.Category))
+        PKGTitleTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleTextBlock.Text = GamePKG.Param.Title)
 
-    End Sub
-
-    Private Sub LoadParamSFO(Param As Param_SFO.PARAM_SFO)
-
-        PKGAttributesTextBlock.Dispatcher.BeginInvoke(Sub() PKGAttributesTextBlock.Text = Param.Attribute)
-        PKGAppVerTextBlock.Dispatcher.BeginInvoke(Sub() PKGAppVerTextBlock.Text = Param.APP_VER)
-        PKGCategoryTextBlock.Dispatcher.BeginInvoke(Sub() PKGCategoryTextBlock.Text = GetCategory(Param.Category))
-        PKGTitleTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleTextBlock.Text = Param.Title)
-
-        Select Case Param.DataType
+        Select Case GamePKG.Param.DataType
             Case Param_SFO.PARAM_SFO.DataTypes.DiscGame
                 PKGDataTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGDataTypeTextBlock.Text = "Disc Game")
             Case Param_SFO.PARAM_SFO.DataTypes.Additional_Content
@@ -188,7 +192,7 @@ Public Class PKGInfo
                 PKGDataTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGDataTypeTextBlock.Text = "Unknown")
         End Select
 
-        For Each TableEntry As Param_SFO.PARAM_SFO.Table In Param.Tables.ToList()
+        For Each TableEntry As Param_SFO.PARAM_SFO.Table In GamePKG.Param.Tables.ToList()
             If TableEntry.Name = "TITLE_ID" Then
                 PKGTitleDTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleDTextBlock.Text = TableEntry.Value.Trim())
             End If
@@ -199,7 +203,126 @@ Public Class PKGInfo
 
     End Sub
 
-    Public Shared Function GetCategory(SFOCategory As String) As String
+    Private Sub LoadPS3Info()
+
+        Dim PKGFileInfo As New FileInfo(SelectedPKG)
+        Dim NewPKGDecryptor As New PKGDecryptor()
+
+        NewPKGDecryptor.ProcessPKGFile(SelectedPKG)
+
+        PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PS3")
+        PKGSizeTextBlock.Dispatcher.BeginInvoke(Sub() PKGSizeTextBlock.Text = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB")
+
+        If NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.ICON0) IsNot Nothing Then
+            GameImage.Dispatcher.BeginInvoke(Sub() GameImage.Source = NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.ICON0))
+        End If
+        If NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.PIC1) IsNot Nothing Then
+            Dispatcher.BeginInvoke(Sub() Background = New ImageBrush(NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.PIC1)))
+        End If
+        If NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.PIC2) IsNot Nothing Then
+            GameIcon.Dispatcher.BeginInvoke(Sub() GameIcon.Source = NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.PIC2))
+        End If
+        If NewPKGDecryptor.GetImage(PKGDecryptor.PKGFiles.SND0) IsNot Nothing Then
+            Dispatcher.BeginInvoke(Sub() PKGSoundBytes = NewPKGDecryptor.GetSND())
+        End If
+
+        If NewPKGDecryptor.GetPARAMSFO IsNot Nothing Then
+            Dim SFOKeys As Dictionary(Of String, Object) = SFONew.ReadSFO(NewPKGDecryptor.GetPARAMSFO)
+            If SFOKeys.ContainsKey("TITLE") Then
+                PKGTitleTextBlock.Dispatcher.BeginInvoke(Sub() Utils.CleanTitle(SFOKeys("TITLE").ToString))
+            End If
+            If SFOKeys.ContainsKey("TITLE_ID") Then
+                PKGTitleDTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleDTextBlock.Text = SFOKeys("TITLE_ID").ToString)
+                PKGRegionTextBlock.Dispatcher.BeginInvoke(Sub() PKGRegionTextBlock.Text = GetPS3GameRegion(SFOKeys("TITLE_ID").ToString))
+            End If
+            If SFOKeys.ContainsKey("CATEGORY") Then
+                PKGCategoryTextBlock.Dispatcher.BeginInvoke(Sub() PKGCategoryTextBlock.Text = GetPS3Category(SFOKeys("CATEGORY").ToString))
+            End If
+            If SFOKeys.ContainsKey("CONTENT_ID") Then
+                PKGContentIDTextBlock.Dispatcher.BeginInvoke(Sub() PKGContentIDTextBlock.Text = SFOKeys("CONTENT_ID").ToString)
+            End If
+            If SFOKeys.ContainsKey("APP_TYPE") Then
+                PKGTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGTypeTextBlock.Text = SFOKeys("APP_TYPE").ToString)
+            End If
+            If SFOKeys.ContainsKey("APP_VER") Then
+                PKGAppVerTextBlock.Dispatcher.BeginInvoke(Sub() PKGAppVerTextBlock.Text = FormatNumber(SFOKeys("APP_VER").ToString, 2))
+            End If
+            If SFOKeys.ContainsKey("PS3_SYSTEM_VER") Then
+                PKGFirmwareVersionTextBlock.Dispatcher.BeginInvoke(Sub() PKGFirmwareVersionTextBlock.Text = FormatNumber(SFOKeys("PS3_SYSTEM_VER").ToString))
+            End If
+            If SFOKeys.ContainsKey("VERSION") Then
+                PKGVersionTextBlock.Dispatcher.BeginInvoke(Sub() PKGVersionTextBlock.Text = SFOKeys("VERSION").ToString)
+            End If
+        End If
+
+    End Sub
+
+    Private Sub LoadPSVInfo()
+        Dim PKGFileInfo As New FileInfo(SelectedPKG)
+        Dim PKGIconURL As String = String.Empty
+        Dim PKGTitleID As String = String.Empty
+        Dim PKGContentID As String = String.Empty
+
+        PKGConsoleTextBlock.Dispatcher.BeginInvoke(Sub() PKGConsoleTextBlock.Text = "PS Vita")
+        PKGSizeTextBlock.Dispatcher.BeginInvoke(Sub() PKGSizeTextBlock.Text = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB")
+
+        Using SFOReader As New Process()
+            SFOReader.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PSN_get_pkg_info.exe"
+            SFOReader.StartInfo.Arguments = """" + SelectedPKG + """"
+            SFOReader.StartInfo.RedirectStandardOutput = True
+            SFOReader.StartInfo.UseShellExecute = False
+            SFOReader.StartInfo.CreateNoWindow = True
+            SFOReader.Start()
+
+            Dim OutputReader As StreamReader = SFOReader.StandardOutput
+            Dim ProcessOutput As String() = OutputReader.ReadToEnd().Split(New String() {vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
+
+            If ProcessOutput.Count > 0 Then
+                For Each Line In ProcessOutput
+                    If Line.StartsWith("Title:") Then
+                        PKGTitleTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                    ElseIf Line.StartsWith("Title ID:") Then
+                        PKGTitleDTextBlock.Dispatcher.BeginInvoke(Sub() PKGTitleDTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                        PKGTitleID = Line.Split(":"c)(1).Trim(""""c).Trim()
+                    ElseIf Line.StartsWith("NPS Type:") Then
+                        PKGTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGTypeTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                        PKGCategoryTextBlock.Dispatcher.BeginInvoke(Sub() PKGCategoryTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                    ElseIf Line.StartsWith("App Ver:") Then
+                        PKGAppVerTextBlock.Dispatcher.BeginInvoke(Sub() PKGAppVerTextBlock.Text = FormatNumber(Line.Split(":"c)(1).Trim(""""c), 2))
+                    ElseIf Line.StartsWith("Min FW:") Then
+                        PKGFirmwareVersionTextBlock.Dispatcher.BeginInvoke(Sub() PKGFirmwareVersionTextBlock.Text = FormatNumber(Line.Split(":"c)(1).Trim(""""c), 2))
+                    ElseIf Line.StartsWith("Version:") Then
+                        PKGVersionTextBlock.Dispatcher.BeginInvoke(Sub() PKGVersionTextBlock.Text = FormatNumber(Line.Split(":"c)(1).Trim(""""c), 2))
+                    ElseIf Line.StartsWith("Content ID:") Then
+                        PKGContentIDTextBlock.Dispatcher.BeginInvoke(Sub() PKGContentIDTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                        PKGContentID = Line.Split(":"c)(1).Trim(""""c).Trim()
+                    ElseIf Line.StartsWith("Region:") Then
+                        PKGRegionTextBlock.Dispatcher.BeginInvoke(Sub() PKGRegionTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                    ElseIf Line.StartsWith("c_date:") Then
+                        PKGBuildDateTextBlock.Dispatcher.BeginInvoke(Sub() PKGBuildDateTextBlock.Text = Line.Split(":"c)(1).Trim(""""c).Trim())
+                    End If
+                Next
+
+                PKGIconURL = "https://nopaystation.com/view/PSV/" + PKGTitleID + "/" + PKGContentID.Split("-"c)(2) + "/1"
+            End If
+        End Using
+
+        PKGStateTextBlock.Dispatcher.BeginInvoke(Sub() PKGStateTextBlock.Text = "Not available")
+        PKGDataTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGDataTypeTextBlock.Text = "Not available")
+        PKGAttributesTextBlock.Dispatcher.BeginInvoke(Sub() PKGAttributesTextBlock.Text = "Not available")
+
+        NPSBrowser.Navigate(PKGIconURL)
+    End Sub
+
+    Private Sub NPSBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles NPSBrowser.DocumentCompleted
+        If NPSBrowser.Document.GetElementById("itemArtwork") IsNot Nothing Then
+            If NPSBrowser.Document.GetElementById("itemArtwork").GetAttribute("src") IsNot Nothing Then
+                GameIcon.Source = New BitmapImage(New Uri(NPSBrowser.Document.GetElementById("itemArtwork").GetAttribute("src").Trim(), UriKind.RelativeOrAbsolute))
+            End If
+        End If
+    End Sub
+
+    Public Shared Function GetPS4Category(SFOCategory As String) As String
         Select Case SFOCategory
             Case "ac"
                 Return "Additional Content"
@@ -246,6 +369,75 @@ Public Class PKGInfo
             Case Else
                 Return "Unknown"
         End Select
+    End Function
+
+    Public Shared Function GetPS3Category(SFOCategory As String) As String
+        Select Case SFOCategory
+            Case "DG"
+                Return "Disc Game"
+            Case "AR"
+                Return "Autoinstall Root"
+            Case "DP"
+                Return "Disc Packages"
+            Case "IP"
+                Return "Install Package"
+            Case "TR"
+                Return "Theme Root"
+            Case "VR"
+                Return "Vide Root"
+            Case "VI"
+                Return "Video Item"
+            Case "XR"
+                Return "Extra Root"
+            Case "DM"
+                Return "Disc Movie"
+            Case "HG"
+                Return "HDD Game"
+            Case "GD"
+                Return "Game Data"
+            Case "SD"
+                Return "Save Data"
+            Case "PP"
+                Return "PSP"
+            Case "PE"
+                Return "PSP Emulator"
+            Case "MN"
+                Return "PSP Minis"
+            Case "1P"
+                Return "PS1 PSN"
+            Case "2P"
+                Return "PS2 PSN"
+            Case Else
+                Return "Unknown"
+        End Select
+    End Function
+
+    Public Shared Function GetPS3GameRegion(GameID As String) As String
+        If GameID.StartsWith("BLES") Then
+            Return "Europe"
+        ElseIf GameID.StartsWith("BCES") Then
+            Return "Europe"
+        ElseIf GameID.StartsWith("NPEB") Then
+            Return "Europe"
+        ElseIf GameID.StartsWith("BLUS") Then
+            Return "USA"
+        ElseIf GameID.StartsWith("BCUS") Then
+            Return "USA"
+        ElseIf GameID.StartsWith("NPUB") Then
+            Return "USA"
+        ElseIf GameID.StartsWith("BCJS") Then
+            Return "Japan"
+        ElseIf GameID.StartsWith("BLJS") Then
+            Return "Japan"
+        ElseIf GameID.StartsWith("NPJB") Then
+            Return "Japan"
+        ElseIf GameID.StartsWith("BCAS") Then
+            Return "Asia"
+        ElseIf GameID.StartsWith("BLAS") Then
+            Return "Asia"
+        Else
+            Return ""
+        End If
     End Function
 
 End Class
