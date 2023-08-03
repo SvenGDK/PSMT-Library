@@ -1,5 +1,6 @@
 # PS Multi Tools .NET Library
 The PS Multi Tools .NET Library contains various tools and downloads for almost any Playstation console or handheld. </br>
+Some tools are written by other developers and will be executed from an executable binary with arguments - please take a look at the code.
 
 ## General:
 - FTP Browser
