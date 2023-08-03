@@ -33,7 +33,8 @@ Some tools are written by other developers and will be executed from an executab
 - USB Writer
 
 ## PS5
-- Mast1c0re Payload & ISO Sender
+- General ELF Payload sender where the port can be specified
+- Mast1c0re Payload & PS2 ISO Sender
 
 ## PSP
 - ISO to CSO Converter
