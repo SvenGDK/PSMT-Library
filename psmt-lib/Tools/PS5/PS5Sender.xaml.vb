@@ -2,12 +2,16 @@
 Imports System.IO
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text.RegularExpressions
 Imports System.Windows
 Imports System.Windows.Forms
+Imports System.Windows.Input
 
 Public Class PS5Sender
 
+    Dim WithEvents DefaultSenderWorker As New BackgroundWorker() With {.WorkerReportsProgress = True}
     Dim WithEvents SenderWorker As New BackgroundWorker() With {.WorkerReportsProgress = True}
+
     ReadOnly Magic As UInteger = &HEA6E
     Dim TotalBytes As Integer = 0
     Dim CurrentType As SendType
@@ -17,6 +21,7 @@ Public Class PS5Sender
         Private _DeviceIP As IPAddress
         Private _FileToSend As String
         Private _ChunkSize As Integer
+        Private _DevicePort As Integer
 
         Public Property DeviceIP As IPAddress
             Get
@@ -24,6 +29,15 @@ Public Class PS5Sender
             End Get
             Set
                 _DeviceIP = Value
+            End Set
+        End Property
+
+        Public Property DevicePort As Integer
+            Get
+                Return _DevicePort
+            End Get
+            Set
+                _DevicePort = Value
             End Set
         End Property
 
@@ -44,6 +58,7 @@ Public Class PS5Sender
                 _ChunkSize = Value
             End Set
         End Property
+
     End Structure
 
     Enum SendType
@@ -81,7 +96,13 @@ Public Class PS5Sender
 
                 'Start sending
                 CurrentType = SendType.ELF
-                SenderWorker.RunWorkerAsync(New WorkerArgs() With {.DeviceIP = DeviceIP, .FileToSend = SelectedELF, .ChunkSize = 4096})
+                If Not String.IsNullOrEmpty(PortTextBox.Text) Then
+                    Dim DevicePort As Integer = Integer.Parse(PortTextBox.Text)
+                    DefaultSenderWorker.RunWorkerAsync(New WorkerArgs() With {.DeviceIP = DeviceIP, .FileToSend = SelectedELF, .DevicePort = DevicePort})
+                Else
+                    SenderWorker.RunWorkerAsync(New WorkerArgs() With {.DeviceIP = DeviceIP, .FileToSend = SelectedELF, .ChunkSize = 4096})
+                End If
+
             Else
                 MsgBox("No IP address was entered." + vbCrLf + "Please enter an IP address.", MsgBoxStyle.Exclamation, "No IP address")
             End If
@@ -173,13 +194,14 @@ Public Class PS5Sender
             Dim SendBytes As Integer = 0
             Dim Buffer(CurrentWorkerArgs.ChunkSize - 1) As Byte
 
-            'Open the file and send
+            'Open the file and read
             Using SenderFileStream As New FileStream(CurrentWorkerArgs.FileToSend, FileMode.Open, FileAccess.Read)
 
                 Do
                     BytesRead = SenderFileStream.Read(Buffer, 0, Buffer.Length)
 
                     If BytesRead > 0 Then
+                        'Send bytes
                         SendBytes += SenderSocket.Send(Buffer, 0, BytesRead, SocketFlags.None)
 
                         'Update the status text
@@ -220,7 +242,7 @@ Public Class PS5Sender
                     SendISOButton.IsEnabled = True
                     BrowseELFButton.IsEnabled = True
                     BrowseISOButton.IsEnabled = True
-                    MsgBox("ELF successfully sent!")
+                    MsgBox("ELF successfully sent!", MsgBoxStyle.Information, "Success")
                 Case SendType.ISO
                     SendConfigButton.IsEnabled = True
                     SendELFButton.IsEnabled = True
@@ -259,4 +281,39 @@ Public Class PS5Sender
             SelectedELFTextBox.Text = SelectedISO
         End If
     End Sub
+
+    Private Sub DefaultSenderWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles DefaultSenderWorker.DoWork
+        Dim CurrentWorkerArgs As WorkerArgs = CType(e.Argument, WorkerArgs)
+
+        Using SenderSocket As New Socket(SocketType.Stream, ProtocolType.Tcp) With {.ReceiveTimeout = 3000}
+            'Connect
+            SenderSocket.Connect(CurrentWorkerArgs.DeviceIP, CurrentWorkerArgs.DevicePort)
+            'Send ELF
+            SenderSocket.SendFile(CurrentWorkerArgs.FileToSend)
+            'Close the connection
+            SenderSocket.Close()
+        End Using
+    End Sub
+
+    Private Sub DefaultSenderWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles DefaultSenderWorker.RunWorkerCompleted
+
+        SendConfigButton.IsEnabled = True
+        SendELFButton.IsEnabled = True
+        SendISOButton.IsEnabled = True
+        BrowseELFButton.IsEnabled = True
+        BrowseISOButton.IsEnabled = True
+
+        MsgBox("ELF successfully sent!", MsgBoxStyle.Information, "Success")
+    End Sub
+
+    Private Sub PortTextBox_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles PortTextBox.PreviewTextInput
+        Dim NumbersOnly As New Regex("[^0-9]+")
+        e.Handled = NumbersOnly.IsMatch(e.Text)
+    End Sub
+
+    Private Sub IPTextBox_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles IPTextBox.PreviewTextInput
+        Dim OnlyNumbersAndDot As New Regex("[^0-9.]+")
+        e.Handled = OnlyNumbersAndDot.IsMatch(e.Text)
+    End Sub
+
 End Class

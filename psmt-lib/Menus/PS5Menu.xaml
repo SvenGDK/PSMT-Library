@@ -7,28 +7,25 @@
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="800">
     <MenuItem Header="Tools">
-        <MenuItem Header="Mast1c0re Sender" x:Name="SenderMenuItem">
+        <MenuItem Header="Payload &amp; Game Sender" x:Name="SenderMenuItem">
             <MenuItem.Icon>
                 <Image Source="/Images/av.png"/>
             </MenuItem.Icon>
         </MenuItem>
     </MenuItem>
     <MenuItem Header="Exploits">
-        <MenuItem Header="PS5 IPV6 Kernel Exploit">
-            <MenuItem Header="Go to GitHub" x:Name="OpenKexGitHub">
-                <MenuItem.Icon>
-                    <Image Source="/Images/github-mark.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Download v1.03" x:Name="DownloadPS5IPV6Expl">
-                <MenuItem.Icon>
-                    <Image Source="/Images/download.png"/>
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Download PS5 BD-JB ELF Loader v1.6.1" x:Name="DownloadPS5BDJBElfLoader">
-                <MenuItem.Icon>
-                    <Image Source="/Images/download.png"/>
-                </MenuItem.Icon>
+        <MenuItem Header="3.00 - 4.51 (4.00 not ready)">
+            <MenuItem Header="PS5 IPV6 Kernel Exploit">
+                <MenuItem Header="Go to GitHub" x:Name="OpenKexGitHub">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/github-mark.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download v1.03" x:Name="DownloadPS5IPV6Expl">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="Mast1c0re Exploit">
@@ -39,32 +36,114 @@
             </MenuItem>
         </MenuItem>
     </MenuItem>
-    <MenuItem Header="Homebrew">
-        <MenuItem Header="FTPS5">
-            <MenuItem Header="4.03 - 4.50 - 4.51">
-                <MenuItem Header="Download" x:Name="DownloadFTPS5">
+    <MenuItem Header="Hosts &amp; DNS">
+        <MenuItem Header="PS Multi Tools Host: http://X.X.X.X/ps5ex/"/>
+        <MenuItem Header="DNS 1: 192.241.221.79"/>
+        <MenuItem Header="DNS 1 alternative: 165.227.83.145"/>
+    </MenuItem>
+    <MenuItem Header="Downloads">
+        <MenuItem Header="Exploits">
+            <MenuItem Header="Download PS5 BD-JB ELF Loader v1.6.1" x:Name="DownloadPS5BDJBElfLoader">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+
+        <MenuItem Header="Firmwares">
+            <MenuItem Header="Recovery Firmware">
+                <MenuItem Header="Download 4.03" x:Name="DownloadRecoveryFW403">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 4.50" x:Name="DownloadRecoveryFW450">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 4.51" x:Name="DownloadRecoveryFW451">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 5.50" x:Name="DownloadRecoveryFW550">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 6.00" x:Name="DownloadRecoveryFW600">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 6.50" x:Name="DownloadRecoveryFW650">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="System Firmware">
+                <MenuItem Header="Download 4.03" x:Name="DownloadSystemFW403">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 4.50" x:Name="DownloadSystemFW450">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 4.51" x:Name="DownloadSystemFW451">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 5.50" x:Name="DownloadSystemFW550">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 6.00" x:Name="DownloadSystemFW600">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download 6.50" x:Name="DownloadSystemFW650">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="Mast1c0re Exploit">
-            <MenuItem Header="Download latest PS2 Network ELF Loader VMC0 .card">
-                <MenuItem Header="PS5 6.50">
-                    <MenuItem Header="Download" x:Name="DownloadPS5NetworkELFLoader650">
+
+        <MenuItem Header="Homebrew">
+            <MenuItem Header="FTPS5">
+                <MenuItem Header="4.03 - 4.50 - 4.51">
+                    <MenuItem Header="Download v1.3" x:Name="DownloadFTPS5">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="Download latest PS2 Network Game Loader ELF">
-                <MenuItem Header="PS5 6.50">
-                    <MenuItem Header="Download" x:Name="DownloadPS5NetworkGameLoader650">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
+            <MenuItem Header="For Mast1c0re Exploit">
+                <MenuItem Header="Download latest PS2 Network ELF Loader VMC0 .card">
+                    <MenuItem Header="PS5 6.50">
+                        <MenuItem Header="Download" x:Name="DownloadPS5NetworkELFLoader650">
+                            <MenuItem.Icon>
+                                <Image Source="/Images/download.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem Header="Download latest PS2 Network Game Loader ELF">
+                    <MenuItem Header="PS5 6.50">
+                        <MenuItem Header="Download" x:Name="DownloadPS5NetworkGameLoader650">
+                            <MenuItem.Icon>
+                                <Image Source="/Images/download.png"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>

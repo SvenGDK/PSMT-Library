@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Mast1c0re Sender" Height="385" Width="535" Background="#FF252525" ResizeMode="CanMinimize">
     <Grid>
-        <TextBox x:Name="IPTextBox" HorizontalAlignment="Left" Margin="25,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" Height="20"/>
+        <TextBox x:Name="IPTextBox" HorizontalAlignment="Left" Margin="25,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="25,21,0,0" TextWrapping="Wrap" Text="PS5 IP:" VerticalAlignment="Top" FontSize="14" Width="200" Foreground="White"/>
         <TextBox x:Name="SelectedELFTextBox" HorizontalAlignment="Left" Margin="25,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" Height="20"/>
         <Button x:Name="SendELFButton" Content="Send ELF" HorizontalAlignment="Left" Margin="345,157,0,0" VerticalAlignment="Top" Width="80"/>
@@ -22,5 +22,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="25,182,0,0" TextWrapping="Wrap" Text="Send a Game" VerticalAlignment="Top" FontSize="18" Width="471" Foreground="White" TextAlignment="Center" FontWeight="Bold"/>
         <ProgressBar x:Name="SendProgressBar" HorizontalAlignment="Left" Height="20" Margin="25,310,0,0" VerticalAlignment="Top" Width="471" Foreground="#FF00A4E3"/>
         <TextBlock x:Name="SendStatusTextBlock" HorizontalAlignment="Left" Margin="25,285,0,0" TextWrapping="Wrap" Text="Send Status:" VerticalAlignment="Top" Width="471" Height="20" Foreground="White"/>
+        <TextBox x:Name="PortTextBox" HorizontalAlignment="Left" Margin="280,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145" Height="20"/>
+        <TextBlock HorizontalAlignment="Left" Margin="280,21,0,0" TextWrapping="Wrap" Text="Port:" VerticalAlignment="Top" FontSize="14" Width="145" Foreground="White"/>
     </Grid>
 </Window>

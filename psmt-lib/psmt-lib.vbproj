@@ -214,6 +214,15 @@
     <Compile Include="Tools\PS4\PKGSender.xaml.vb">
       <DependentUpon>PKGSender.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS4\PS4PS1Classics.xaml.vb">
+      <DependentUpon>PS4PS1Classics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS4\PS4PS2Classics.xaml.vb">
+      <DependentUpon>PS4PS2Classics.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS4\PS4PSPClassics.xaml.vb">
+      <DependentUpon>PS4PSPClassics.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS4\PSNInfo.xaml.vb">
       <DependentUpon>PSNInfo.xaml</DependentUpon>
     </Compile>
@@ -385,6 +394,18 @@
     <Page Include="Tools\PS4\PKGSender.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PS4\PS4PS1Classics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS4\PS4PS2Classics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS4\PS4PSPClassics.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS4\PSNInfo.xaml">
       <Generator>MSBuild:Compile</Generator>
