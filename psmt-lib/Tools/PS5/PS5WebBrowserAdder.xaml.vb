@@ -229,7 +229,13 @@ Public Class PS5WebBrowserAdder
  ('nsx_content_flag_CUSA00556','{""deleted"":true,""pushed"":false}');"
                                 TableRowsAffected = SelectCommand.ExecuteNonQuery()
                             ElseIf Table.StartsWith("tbl_iconinfo") Then
-                                SelectCommand.CommandText = "INSERT or REPLACE INTO " + Table + " VALUES ('NPXS20102','Internet browser','cid:local:NPXS20102',0,'2022-10-12 13:16:03.571',847,NULL,NULL,NULL,NULL,'1994-12-03 00:00:00.110','1994-12-03 00:00:00.110',2,146,1,0,0,'pssettings:play?mode=settings&function=update','pshome:gamehub?titleId=NPXS20102',0,0,0,0,0,4295163907,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);"
+
+                                If LowFW = True Then
+                                    SelectCommand.CommandText = "INSERT or REPLACE INTO " + Table + " VALUES ('NPXS20102','Internet browser','2022-10-12 13:16:03.571',847,NULL,NULL,NULL,NULL,'1994-12-03 00:00:00.110','1994-12-03 00:00:00.110',146,1,0,0,'pssettings:play?mode=settings&function=update','pshome:gamehub?titleId=NPXS20102',0,0,0,0,0,4295163907,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);"
+                                Else
+                                    SelectCommand.CommandText = "INSERT or REPLACE INTO " + Table + " VALUES ('NPXS20102','Internet browser','cid:local:NPXS20102',0,'2022-10-12 13:16:03.571',847,NULL,NULL,NULL,NULL,'1994-12-03 00:00:00.110','1994-12-03 00:00:00.110',2,146,1,0,0,'pssettings:play?mode=settings&function=update','pshome:gamehub?titleId=NPXS20102',0,0,0,0,0,4295163907,'',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);"
+                                End If
+
                                 TableRowsAffected = SelectCommand.ExecuteNonQuery()
                             ElseIf Table.StartsWith("tbl_concepticoninfo") Then
 
