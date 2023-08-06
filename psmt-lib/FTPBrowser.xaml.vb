@@ -135,6 +135,29 @@ Public Class FTPBrowser
         Return FileURL.Segments(FileURL.Segments.Length - 1)
     End Function
 
+    Private Sub FTPS5_MountRW(ConsoleIP As String)
+        Using conn As New FtpClient(ConsoleIP, "anonymous", "anonymous", 1337)
+            'Configurate the FTP connection
+            conn.Config.EncryptionMode = FtpEncryptionMode.None
+            conn.Config.SslProtocols = SslProtocols.None
+            conn.Config.DataConnectionEncryption = False
+
+            'Connect
+            conn.Connect()
+
+            'Mount /system & /system_ex with RW permission
+            Dim RequestRWReply As FtpReply = Nothing
+            RequestRWReply = conn.Execute("MTRW")
+
+            If RequestRWReply.Success() = False Then
+                MsgBox("Could not acquire R/W permissions." + vbCrLf + "Writing to /system and /system_ex will not be possible.", MsgBoxStyle.Information)
+            End If
+
+            'Disconnect
+            conn.Disconnect()
+        End Using
+    End Sub
+
 #Region "FTP Uploader"
 
     Private Sub FTPUploadWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles FTPUploadWorker.DoWork
@@ -255,9 +278,7 @@ Public Class FTPBrowser
 
         LockUI()
 
-        ListDirContent2(ConsoleIPTextBox.Text,
-                                       PortTextBox.Text,
-                                       CurrentPath + "/")
+        ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/")
     End Sub
 
 #End Region
@@ -345,7 +366,7 @@ Public Class FTPBrowser
         End Try
     End Sub
 
-    Public Sub ListDirContent2(ConsoleIP As String, ConsolePort As String, Optional Dir As String = "")
+    Public Sub ListDirContent2(ConsoleIP As String, Optional Dir As String = "")
 
         FTPItemsListView.Items.Clear()
 
@@ -437,7 +458,7 @@ Public Class FTPBrowser
         End If
     End Sub
 
-    Public Sub DownloadContent2(ConsoleIP As String, ConsolePort As String, FileOrDir As String)
+    Public Sub DownloadContent2(ConsoleIP As String, FileOrDir As String)
         If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads")
 
         Dim FileName As String = FileOrDir.Split("/"c).Last()
@@ -554,7 +575,8 @@ Public Class FTPBrowser
             If FTPS5Mode = False Then
                 ListDirContent(ConsoleIPTextBox.Text, PortTextBox.Text)
             Else
-                ListDirContent2(ConsoleIPTextBox.Text, PortTextBox.Text, "/")
+                FTPS5_MountRW(ConsoleIPTextBox.Text)
+                ListDirContent2(ConsoleIPTextBox.Text, "/")
             End If
 
             CurrentPath = "/"
@@ -571,28 +593,20 @@ Public Class FTPBrowser
                     If SelectedFTPLVItem.FileOrDirName = ".." Then
                         If Not CurrentPath = "/" Then
                             CurrentPath = CurrentPath.Remove(CurrentPath.LastIndexOf("/"c))
-                            ListDirContent(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath)
+                            ListDirContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath)
                         End If
                     Else
                         If CurrentPath = "/" Then
                             CurrentPath = "/" + SelectedFTPLVItem.FileOrDirName
-                            ListDirContent(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath)
+                            ListDirContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath)
                         Else
                             CurrentPath = CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName
-                            ListDirContent(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                            ListDirContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                         End If
                     End If
                 Else
                     If MsgBox("Do you want to download the selected file ?", MsgBoxStyle.YesNo, "Download file") = MsgBoxResult.Yes Then
-                        DownloadContent(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                        DownloadContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                     End If
                 End If
             Else
@@ -600,28 +614,20 @@ Public Class FTPBrowser
                     If SelectedFTPLVItem.FileOrDirName = ".." Then
                         If Not CurrentPath = "/" Then
                             CurrentPath = CurrentPath.Remove(CurrentPath.LastIndexOf("/"c))
-                            ListDirContent2(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath)
+                            ListDirContent2(ConsoleIPTextBox.Text, CurrentPath)
                         End If
                     Else
                         If CurrentPath = "/" Then
                             CurrentPath = "/" + SelectedFTPLVItem.FileOrDirName
-                            ListDirContent2(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath)
+                            ListDirContent2(ConsoleIPTextBox.Text, CurrentPath)
                         Else
                             CurrentPath = CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName
-                            ListDirContent2(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                            ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                         End If
                     End If
                 Else
                     If MsgBox("Do you want to download the selected file ?", MsgBoxStyle.YesNo, "Download file") = MsgBoxResult.Yes Then
-                        DownloadContent2(ConsoleIPTextBox.Text,
-                                           PortTextBox.Text,
-                                           CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                        DownloadContent2(ConsoleIPTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                     End If
                 End If
             End If
@@ -679,8 +685,8 @@ Public Class FTPBrowser
                             End If
                         End If
 
-                        ListDirContent2(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/")
-                        End If
+                        ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/")
+                    End If
                     End If
             End If
 
@@ -693,23 +699,15 @@ Public Class FTPBrowser
 
             If FTPS5Mode = False Then
                 If CurrentPath = "/" Then
-                    DownloadContent(ConsoleIPTextBox.Text,
-                                       PortTextBox.Text,
-                                       CurrentPath + SelectedFTPLVItem.FileOrDirName)
+                    DownloadContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + SelectedFTPLVItem.FileOrDirName)
                 Else
-                    DownloadContent(ConsoleIPTextBox.Text,
-                                       PortTextBox.Text,
-                                       CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                    DownloadContent(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                 End If
             Else
                 If CurrentPath = "/" Then
-                    DownloadContent2(ConsoleIPTextBox.Text,
-                                       PortTextBox.Text,
-                                       CurrentPath + SelectedFTPLVItem.FileOrDirName)
+                    DownloadContent2(ConsoleIPTextBox.Text, CurrentPath + SelectedFTPLVItem.FileOrDirName)
                 Else
-                    DownloadContent2(ConsoleIPTextBox.Text,
-                                       PortTextBox.Text,
-                                       CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
+                    DownloadContent2(ConsoleIPTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName)
                 End If
             End If
 
@@ -784,7 +782,7 @@ Public Class FTPBrowser
                             NewFTPFolder2(ConsoleIPTextBox.Text, CurrentPath + "/" + InputDialogResult)
                         End If
 
-                        ListDirContent2(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/")
+                        ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/")
                     End If
                 End If
             End If
@@ -812,7 +810,7 @@ Public Class FTPBrowser
                         DeleteContent2(ConsoleIPTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName, False)
                     End If
 
-                    ListDirContent2(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/")
+                    ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/")
                 Else
                     If CurrentPath = "/" Then
                         DeleteContent2(ConsoleIPTextBox.Text, CurrentPath + SelectedFTPLVItem.FileOrDirName, True)
@@ -820,7 +818,7 @@ Public Class FTPBrowser
                         DeleteContent2(ConsoleIPTextBox.Text, CurrentPath + "/" + SelectedFTPLVItem.FileOrDirName, True)
                     End If
 
-                    ListDirContent2(ConsoleIPTextBox.Text, PortTextBox.Text, CurrentPath + "/")
+                    ListDirContent2(ConsoleIPTextBox.Text, CurrentPath + "/")
                 End If
             End If
 
