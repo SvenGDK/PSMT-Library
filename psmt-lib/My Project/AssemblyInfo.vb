@@ -9,13 +9,13 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("psmt-lib")>
-<Assembly: AssemblyDescription("")>
-<Assembly: AssemblyCompany("")>
+<Assembly: AssemblyDescription("PS Multi Tools Library containing most features.")>
+<Assembly: AssemblyCompany("SvenGDK")>
 <Assembly: AssemblyProduct("psmt-lib")>
 <Assembly: AssemblyCopyright("Copyright © SvenGDK 2023")>
-<Assembly: AssemblyTrademark("")>
+<Assembly: AssemblyTrademark("SvenGDK")>
 
-<Assembly: ComVisible(False)>
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("f8b3f66e-7055-455a-bb3c-8da76d5b9218")>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.0.4.0")>
-<Assembly: AssemblyFileVersion("1.0.4.0")>
+<Assembly: AssemblyVersion("1.0.5.0")>
+<Assembly: AssemblyFileVersion("1.0.5.0")>

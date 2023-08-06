@@ -6,15 +6,16 @@
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
              d:DesignHeight="20" d:DesignWidth="800">
+    <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
-        <MenuItem Header="Payload &amp; Game Sender" x:Name="SenderMenuItem">
-            <MenuItem.Icon>
-                <Image Source="/Images/av.png"/>
-            </MenuItem.Icon>
-        </MenuItem>
+        <MenuItem Header="Payload &amp; Game Sender" x:Name="SenderMenuItem"/>
+        <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"/>
+        <MenuItem Header="FTP BD-RIP" x:Name="OpenFTPBDRipMenuItem"/>
+        <MenuItem Header="Blu Ray disc burner" x:Name="OpenBDBurnerMenuItem"/>
+        <MenuItem Header="Web Browser Installer" x:Name="OpenWebBrowserInstallerMenuItem"/>
     </MenuItem>
     <MenuItem Header="Exploits">
-        <MenuItem Header="3.00 - 4.51 (4.00 not ready)">
+        <MenuItem Header="3.00 - 4.51">
             <MenuItem Header="PS5 IPV6 Kernel Exploit">
                 <MenuItem Header="Go to GitHub" x:Name="OpenKexGitHub">
                     <MenuItem.Icon>
@@ -147,6 +148,11 @@
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
+        </MenuItem>
+    </MenuItem>
+    <MenuItem Header="Settings">
+        <MenuItem Header="Set FTP IP address with port (IP:PORT) :">
+            <TextBox x:Name="FTPIPTextBox" Width="200"></TextBox>
         </MenuItem>
     </MenuItem>
 </Menu>

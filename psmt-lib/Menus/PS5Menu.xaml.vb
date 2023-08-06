@@ -1,12 +1,90 @@
 ﻿Imports System.Windows
+Imports System.Windows.Controls
 
 Public Class PS5Menu
+
+    Public SharedConsoleAddress As String = ""
+    Public Shared ReadOnly IPChangedEvent As RoutedEvent = EventManager.RegisterRoutedEvent(name:="ConsoleAddressChanged", routingStrategy:=RoutingStrategy.Bubble, handlerType:=GetType(RoutedEventHandler), ownerType:=GetType(PS5Menu))
+
+    Public Custom Event IPTextChanged As RoutedEventHandler
+        AddHandler(value As RoutedEventHandler)
+            [AddHandler](IPChangedEvent, value)
+        End AddHandler
+
+        RemoveHandler(value As RoutedEventHandler)
+            [RemoveHandler](IPChangedEvent, value)
+        End RemoveHandler
+
+        RaiseEvent(sender As Object, e As RoutedEventArgs)
+            [RaiseEvent](e)
+        End RaiseEvent
+    End Event
+
+    Private Sub RaiseIPTextChangedRoutedEvent()
+        Dim routedEventArgs As New RoutedEventArgs(routedEvent:=IPChangedEvent)
+        [RaiseEvent](routedEventArgs)
+    End Sub
+
+    Private Sub FTPIPTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles FTPIPTextBox.TextChanged
+        If Not String.IsNullOrEmpty(FTPIPTextBox.Text) And FTPIPTextBox.Text.Contains(":"c) Then
+            SharedConsoleAddress = FTPIPTextBox.Text
+            RaiseIPTextChangedRoutedEvent()
+        End If
+    End Sub
 
 #Region "Tools"
 
     Private Sub SenderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles SenderMenuItem.Click
         Dim NewPS5Sender As New PS5Sender() With {.ShowActivated = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewPS5Sender.IPTextBox.Text = SharedConsoleAddress.Split(":"c)(0)
+            NewPS5Sender.PortTextBox.Text = SharedConsoleAddress.Split(":"c)(1)
+        End If
+
         NewPS5Sender.Show()
+    End Sub
+
+    Private Sub OpenFTPBDRipMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenFTPBDRipMenuItem.Click
+        Dim NewFTPBDRip As New FTPBDRip() With {.ShowActivated = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewFTPBDRip.ConsoleIP = SharedConsoleAddress.Split(":"c)(0)
+            NewFTPBDRip.IPTextBox.Text = SharedConsoleAddress.Split(":"c)(0)
+            NewFTPBDRip.PortTextBox.Text = SharedConsoleAddress.Split(":"c)(1)
+        End If
+
+        NewFTPBDRip.Show()
+    End Sub
+
+    Private Sub OpenFTPBrowserMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenFTPBrowserMenuItem.Click
+        Dim NewFTPBrowser As New FTPBrowser() With {.ShowActivated = True, .FTPS5Mode = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewFTPBrowser.ConsoleIPTextBox.Text = SharedConsoleAddress.Split(":"c)(0)
+            NewFTPBrowser.PortTextBox.Text = SharedConsoleAddress.Split(":"c)(1)
+        End If
+
+        NewFTPBrowser.Show()
+    End Sub
+
+    Private Sub OpenBDBurnerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenBDBurnerMenuItem.Click
+        Dim NewBDBurner As New BDBurner() With {.ShowActivated = True}
+        NewBDBurner.Show()
+    End Sub
+
+    Private Sub OpenWebBrowserInstallerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenWebBrowserInstallerMenuItem.Click
+        Dim NewPS5WebBrowserAdder As New PS5WebBrowserAdder() With {.ShowActivated = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewPS5WebBrowserAdder.ConsoleIP = SharedConsoleAddress.Split(":"c)(0)
+        End If
+
+        NewPS5WebBrowserAdder.Show()
     End Sub
 
 #End Region
@@ -156,10 +234,6 @@ Public Class PS5Menu
 
 #End Region
 
-    Private Sub OpenMast1c0reGitHub_Click(sender As Object, e As RoutedEventArgs) Handles OpenMast1c0reGitHub.Click
-        Process.Start("https://github.com/McCaulay/mast1c0re")
-    End Sub
-
     Private Sub DownloadPS5BDJBElfLoader_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS5BDJBElfLoader.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
@@ -167,6 +241,14 @@ Public Class PS5Menu
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
+    End Sub
+
+#End Region
+
+#Region "Exploits"
+
+    Private Sub OpenMast1c0reGitHub_Click(sender As Object, e As RoutedEventArgs) Handles OpenMast1c0reGitHub.Click
+        Process.Start("https://github.com/McCaulay/mast1c0re")
     End Sub
 
     Private Sub DownloadPS5IPV6Expl_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS5IPV6Expl.Click
