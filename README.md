@@ -35,6 +35,9 @@ Some tools are written by other developers and will be executed from an executab
 ## PS5
 - General ELF Payload sender where the port can be specified
 - Mast1c0re Payload & PS2 ISO Sender
+- Add the Internet Browser to the home menu for every profile with a simple click (requires FTPS5 loaded first)
+- Rip the content of discs over FTP (requires FTPS5 loaded first)
+- Burn BR .iso images to Blu Ray discs
 
 ## PSP
 - ISO to CSO Converter
