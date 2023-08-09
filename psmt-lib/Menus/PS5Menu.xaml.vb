@@ -1,5 +1,9 @@
-﻿Imports System.Windows
+﻿Imports System.Security.Authentication
+Imports System.Windows
 Imports System.Windows.Controls
+Imports System.Windows.Input
+Imports FluentFTP
+Imports psmt_lib.FTPBrowser
 
 Public Class PS5Menu
 
@@ -85,6 +89,66 @@ Public Class PS5Menu
         End If
 
         NewPS5WebBrowserAdder.Show()
+    End Sub
+
+    Private Sub OpenNotificationManagerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenNotificationManagerMenuItem.Click
+        Dim NewPS5NotificationsManager As New PS5Notifications() With {.ShowActivated = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewPS5NotificationsManager.IPTextBox.Text = SharedConsoleAddress.Split(":"c)(0)
+            NewPS5NotificationsManager.PortTextBox.Text = SharedConsoleAddress.Split(":"c)(1)
+        End If
+
+        NewPS5NotificationsManager.Show()
+    End Sub
+
+    Private Sub ClearErrorHistoryMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles ClearErrorHistoryMenuItem.Click
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+
+            Cursor = Cursors.Wait
+
+            Try
+                Using conn As New FtpClient(SharedConsoleAddress.Split(":"c)(0), "anonymous", "anonymous", 1337)
+
+                    'Configurate the FTP connection
+                    conn.Config.EncryptionMode = FtpEncryptionMode.None
+                    conn.Config.SslProtocols = SslProtocols.None
+                    conn.Config.DataConnectionEncryption = False
+
+                    'Connect
+                    conn.Connect()
+
+                    Dim ErrorFiles As New List(Of FtpListItem)()
+
+                    'List disc directory
+                    For Each item In conn.GetListing("/system_data/priv/error/history")
+                        Select Case item.Type
+                            Case FtpObjectType.File
+                                ErrorFiles.Add(item)
+                        End Select
+                    Next
+
+                    MsgBox(ErrorFiles.Count.ToString)
+
+                    For Each FTPFile In ErrorFiles
+                        'Delete the error file
+                        conn.DeleteFile(FTPFile.FullName)
+                    Next
+
+                    'Disonnect
+                    conn.Disconnect()
+                End Using
+
+                MsgBox("The error history on the console has been deleted." + vbCrLf + "Check your Settings->System Software->Error History on the PS5.", MsgBoxStyle.Information)
+            Catch ex As Exception
+                MsgBox("Could delete the error history, please verify your connection.", MsgBoxStyle.Exclamation)
+            End Try
+
+            Cursor = Cursors.Arrow
+        Else
+            MsgBox("Please set your IP:Port in the settings first.", MsgBoxStyle.Information, "Cannot connect to the PS5")
+        End If
     End Sub
 
 #End Region

@@ -143,6 +143,7 @@
     <Compile Include="Classes\BytesConverter.vb" />
     <Compile Include="Classes\MD5Hash.vb" />
     <Compile Include="Classes\PKGDecryptor.vb" />
+    <Compile Include="Classes\PS5Notification.vb" />
     <Compile Include="Classes\SFONew.vb" />
     <Compile Include="Classes\Structures.vb" />
     <Compile Include="Classes\Utils.vb" />
@@ -276,6 +277,12 @@
     </Compile>
     <Compile Include="Tools\PS5\FTPBDRip.xaml.vb">
       <DependentUpon>FTPBDRip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
+      <DependentUpon>GP5Manager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5Notifications.xaml.vb">
+      <DependentUpon>PS5Notifications.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5Sender.xaml.vb">
       <DependentUpon>PS5Sender.xaml</DependentUpon>
@@ -473,6 +480,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\FTPBDRip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\GP5Manager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5Notifications.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

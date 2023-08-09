@@ -76,21 +76,20 @@ Public Class Utils
 
     Public Shared Function ByteArrayToAscii(ByteArray As Byte(), StartPos As Integer, Length As Integer, CleanEndOfString As Boolean) As String
         Dim NumArray As Byte() = New Byte(Length - 1 + 1 - 1) {}
-        Array.Copy(ByteArray, StartPos, numArray, 0, numArray.Length)
-        Return HexStringToAscii(ByteArrayToHexString(numArray), CleanEndOfString)
+        Array.Copy(ByteArray, StartPos, NumArray, 0, NumArray.Length)
+        Return HexStringToAscii(ByteArrayToHexString(NumArray), CleanEndOfString)
     End Function
 
     Public Shared Function ByteArrayToHexString(ByteArray As Byte()) As String
         Dim HexString = ""
         Dim Num As Integer = ByteArray.Length - 1
         Dim Index = 0
-
-        While index <= num
-            hexString += ByteArray(index).ToString("X2")
-            index += 1
+        While Index <= Num
+            HexString += ByteArray(Index).ToString("X2")
+            Index += 1
         End While
 
-        Return hexString
+        Return HexString
     End Function
 
     Public Shared Function DirSize(SourceDir As String, Recurse As Boolean) As Long
@@ -103,20 +102,18 @@ Public Class Utils
 
         If Recurse Then
             Dim SubdirEntries As String() = Directory.GetDirectories(SourceDir)
-            Parallel.[For](Of Long)(0, subdirEntries.Length, Function() 0, Function(i, [loop], subtotal)
-
-                                                                               If (File.GetAttributes(subdirEntries(i)) And FileAttributes.ReparsePoint) <> FileAttributes.ReparsePoint Then
-                                                                                   subtotal += DirSize(subdirEntries(i), True)
+            Parallel.[For](Of Long)(0, SubdirEntries.Length, Function() 0, Function(i, [loop], subtotal)
+                                                                               If (File.GetAttributes(SubdirEntries(i)) And FileAttributes.ReparsePoint) <> FileAttributes.ReparsePoint Then
+                                                                                   subtotal += DirSize(SubdirEntries(i), True)
                                                                                    Return subtotal
                                                                                End If
 
                                                                                Return 0
-                                                                           End Function, Function(x) Interlocked.Add(size, x))
+                                                                           End Function, Function(x) Interlocked.Add(Size, x))
         End If
 
         Return Size
     End Function
-
     Public Shared Sub CreateWorkingDirectories()
         If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then
             With Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads")

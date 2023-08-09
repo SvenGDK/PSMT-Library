@@ -71,7 +71,6 @@ Public Class PS5WebBrowserAdder
     End Function
 
     Public Function GetDatabaseOverFTP() As Boolean
-
         If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache") Then Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Cache")
 
         Try
