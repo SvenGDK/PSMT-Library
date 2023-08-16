@@ -33,11 +33,13 @@ Some tools are written by other developers and will be executed from an executab
 - USB Writer
 
 ## PS5
-- General ELF Payload sender where the port can be specified
+- General ELF Payload Sender
 - Mast1c0re Payload & PS2 ISO Sender
 - Add the Internet Browser to the home menu for every profile with a simple click (requires FTPS5 loaded first)
 - Rip the content of discs over FTP (requires FTPS5 loaded first)
 - Burn BR .iso images to Blu Ray discs
+- Notification Manager (requires FTPS5 loaded first)
+- Clear the console's error history (requires FTPS5 loaded first)
 
 ## PSP
 - ISO to CSO Converter
