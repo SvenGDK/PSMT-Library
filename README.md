@@ -42,8 +42,8 @@ Some tools are written by other developers and will be executed from an executab
 - Notification Manager (requires FTPS5 loaded first)
 - Clear the console's error history (requires FTPS5 loaded first)
 - PARAM.JSON Creator & Editor
-- GP5 Project Creator (requires pub tools at \Tools\PS5\...)
-- PKG Builder (requires pub tools at \Tools\PS5\...)
+- GP5 Project Creator (requires pub tools at \Tools\PS5\ )
+- PKG Builder (requires pub tools at \Tools\PS5\ )
 - RCO Dumper (requires FTPS5 loaded first)
 - RCO Extractor
 
