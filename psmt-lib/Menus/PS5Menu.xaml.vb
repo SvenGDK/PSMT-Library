@@ -1,9 +1,9 @@
-﻿Imports System.Security.Authentication
+﻿Imports System.IO
+Imports System.Security.Authentication
 Imports System.Windows
 Imports System.Windows.Controls
 Imports System.Windows.Input
 Imports FluentFTP
-Imports psmt_lib.FTPBrowser
 
 Public Class PS5Menu
 
@@ -129,8 +129,6 @@ Public Class PS5Menu
                         End Select
                     Next
 
-                    MsgBox(ErrorFiles.Count.ToString)
-
                     For Each FTPFile In ErrorFiles
                         'Delete the error file
                         conn.DeleteFile(FTPFile.FullName)
@@ -149,6 +147,48 @@ Public Class PS5Menu
         Else
             MsgBox("Please set your IP:Port in the settings first.", MsgBoxStyle.Information, "Cannot connect to the PS5")
         End If
+    End Sub
+
+    Private Sub OpenGP5ManagerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenGP5ManagerMenuItem.Click
+        Dim NewGP5Creator As New GP5Creator() With {.ShowActivated = True}
+        NewGP5Creator.Show()
+    End Sub
+
+    Private Sub OpenRCODumperMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenRCODumperMenuItem.Click
+        Dim NewPS5RcoDumper As New PS5RcoDumper() With {.ShowActivated = True}
+
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewPS5RcoDumper.ConsoleIP = SharedConsoleAddress.Split(":"c)(0)
+        End If
+
+        NewPS5RcoDumper.Show()
+    End Sub
+
+    Private Sub OpenRCOExtractorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenRCOExtractorMenuItem.Click
+        Dim NewPS5RcoExtractor As New PS5RcoExtractor() With {.ShowActivated = True}
+        NewPS5RcoExtractor.Show()
+    End Sub
+
+    Private Sub OpenParamEditorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenParamEditorMenuItem.Click
+        Dim NewParamEditor As New PS5ParamEditor() With {.ShowActivated = True}
+        NewParamEditor.Show()
+    End Sub
+
+    Private Sub OpenPKGBuilderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGBuilderMenuItem.Click
+
+        Dim NewPKGBuilder As New PS5PKGBuilder()
+
+        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe") Then
+            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe"
+        ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+        Else
+            MsgBox("Could not find any publishing tools." + vbCrLf + "Please add them inside the Tools\PS5 folder inside PS Multi Toools.", MsgBoxStyle.Information, "Pub Tools not available")
+        End If
+
+        NewPKGBuilder.Show()
+
     End Sub
 
 #End Region
@@ -179,6 +219,51 @@ Public Class PS5Menu
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
         If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/PS2NetworkGameLoader/mast1c0re-ps2-network-game-loader-PS5-6-50.elf") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadInternetBrowserPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadInternetBrowserPKG.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/InternetBrowserPS5.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadStorePreviewPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadStorePreviewPKG.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/StorePreviewPS5.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadGameHubPreviewPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGameHubPreviewPKG.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/GameHubPreviewPS5.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadDebugPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadDebugPKG.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/DebugSettingsPS5.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadPSMTPKG_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPSMTPKG.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/PSMultiToolsHost.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

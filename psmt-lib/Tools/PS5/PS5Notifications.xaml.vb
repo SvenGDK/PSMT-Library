@@ -36,6 +36,9 @@ Public Class PS5Notifications
                     'Get notification2.db
                     conn.DownloadFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\notification2.db", "/system_data/priv/mms/notification2.db", FtpLocalExists.Overwrite)
 
+                    'Also get notification.db in case we can't find any user_id
+                    conn.DownloadFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\notification.db", "/system_data/priv/mms/notification.db", FtpLocalExists.Overwrite)
+
                     'Disconnect
                     conn.Disconnect()
                 End Using
@@ -50,6 +53,7 @@ Public Class PS5Notifications
                 End If
             End If
 
+            'Load values
             Try
                 Using conn As New SQLiteConnection("Data Source=" + My.Computer.FileSystem.CurrentDirectory + "\Cache\notification2.db")
                     conn.Open()
@@ -98,6 +102,32 @@ Public Class PS5Notifications
                     conn.Dispose()
                     SelectCommand.Dispose()
                 End Using
+
+                'Try to get user profiles from notification.db if we can't find them inside notification2.db
+                If UserProfiles.Count = 0 Then
+                    Using conn As New SQLiteConnection("Data Source=" + My.Computer.FileSystem.CurrentDirectory + "\Cache\notification.db")
+                        conn.Open()
+
+                        Dim SelectCommand = conn.CreateCommand()
+                        SelectCommand.CommandText = "SELECT DISTINCT user_id FROM notification" 'No duplicates
+
+                        Using DataReader = SelectCommand.ExecuteReader()
+                            Dim NewDataTable As New DataTable()
+                            NewDataTable.Load(DataReader)
+                            If Not NewDataTable.Rows.Count = 0 Then
+                                'Add each user profile to the UserProfiles list
+                                For Each Record As DataRow In NewDataTable.Rows
+                                    UserProfiles.Add(Record(0).ToString)
+                                Next
+                            End If
+                        End Using
+
+                        'Close & dispose
+                        conn.Close()
+                        conn.Dispose()
+                        SelectCommand.Dispose()
+                    End Using
+                End If
 
                 'Completely close the SQLiteConnection and release access to notification2.db
                 SQLiteConnection.ClearAllPools()

@@ -278,11 +278,29 @@
     <Compile Include="Tools\PS5\FTPBDRip.xaml.vb">
       <DependentUpon>FTPBDRip.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\GP5Creator.xaml.vb">
+      <DependentUpon>GP5Creator.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\GP5LanguageSelector.xaml.vb">
+      <DependentUpon>GP5LanguageSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
       <DependentUpon>GP5Manager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5Notifications.xaml.vb">
       <DependentUpon>PS5Notifications.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5ParamEditor.xaml.vb">
+      <DependentUpon>PS5ParamEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5PKGBuilder.xaml.vb">
+      <DependentUpon>PS5PKGBuilder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5RcoDumper.xaml.vb">
+      <DependentUpon>PS5RcoDumper.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5RcoExtractor.xaml.vb">
+      <DependentUpon>PS5RcoExtractor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5Sender.xaml.vb">
       <DependentUpon>PS5Sender.xaml</DependentUpon>
@@ -483,11 +501,35 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\PS5\GP5Creator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\GP5LanguageSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\PS5\GP5Manager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\PS5Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5ParamEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5PKGBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5RcoDumper.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5RcoExtractor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

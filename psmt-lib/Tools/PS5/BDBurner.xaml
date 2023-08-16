@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="Blu Ray Burner" Height="350" Width="465" Background="#FF252525" ResizeMode="CanMinimize">
+             Title="Blu Ray Burner" Height="350" Width="465" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="BurnDiscButton" Content="Burn Disc" HorizontalAlignment="Left" Margin="335,212,0,0" VerticalAlignment="Top" Width="100"/>
         <ComboBox x:Name="DiscDrivesComboBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="425"/>

@@ -1,4 +1,6 @@
-﻿Public Class Structures
+﻿Imports Newtonsoft.Json
+
+Public Class Structures
 
     Public Structure PS3PKG
         Public FilePath As String
@@ -247,5 +249,1629 @@
         End Property
 
     End Structure
+
+    Public Structure GP5Project
+        Private _ProjectFormat As String
+        Private _ProjectVersion As String
+        Private _ProjectChunks As List(Of GP5Chunk)
+        Private _ProjectScenarios As List(Of GP5Scenario)
+        Private _ProjectVolume As GP5Volume
+        Private _ProjectGlobalExclude As GP5GlobalExclude
+        Private _ProjectRootDir As GP5RootDir
+        Private _ProjectLanguages As List(Of String)
+
+        Public Property ProjectFormat As String
+            Get
+                Return _ProjectFormat
+            End Get
+            Set
+                _ProjectFormat = Value
+            End Set
+        End Property
+
+        Public Property ProjectVersion As String
+            Get
+                Return _ProjectVersion
+            End Get
+            Set
+                _ProjectVersion = Value
+            End Set
+        End Property
+
+        Public Property ProjectChunks As List(Of GP5Chunk)
+            Get
+                Return _ProjectChunks
+            End Get
+            Set
+                _ProjectChunks = Value
+            End Set
+        End Property
+
+        Public Property ProjectScenarios As List(Of GP5Scenario)
+            Get
+                Return _ProjectScenarios
+            End Get
+            Set
+                _ProjectScenarios = Value
+            End Set
+        End Property
+
+        Public Property ProjectVolume As GP5Volume
+            Get
+                Return _ProjectVolume
+            End Get
+            Set
+                _ProjectVolume = Value
+            End Set
+        End Property
+
+        Public Property ProjectGlobalExclude As GP5GlobalExclude
+            Get
+                Return _ProjectGlobalExclude
+            End Get
+            Set
+                _ProjectGlobalExclude = Value
+            End Set
+        End Property
+
+        Public Property ProjectRootDir As GP5RootDir
+            Get
+                Return _ProjectRootDir
+            End Get
+            Set
+                _ProjectRootDir = Value
+            End Set
+        End Property
+
+        Public Property ProjectLanguages As List(Of String)
+            Get
+                Return _ProjectLanguages
+            End Get
+            Set
+                _ProjectLanguages = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Enum GP5VolumeType
+        Application
+        AdditionalContent
+    End Enum
+
+    Public Structure GP5Volume
+        Private _VolumeType As GP5VolumeType
+        Private _VolumeEntitlementKey As String
+        Private _VolumeTime As String
+        Private _VolumePasscode As String
+
+        Public Property VolumeType As GP5VolumeType
+            Get
+                Return _VolumeType
+            End Get
+            Set
+                _VolumeType = Value
+            End Set
+        End Property
+
+        Public Property VolumePasscode As String
+            Get
+                Return _VolumePasscode
+            End Get
+            Set
+                _VolumePasscode = Value
+            End Set
+        End Property
+
+        Public Property VolumeEntitlementKey As String
+            Get
+                Return _VolumeEntitlementKey
+            End Get
+            Set
+                _VolumeEntitlementKey = Value
+            End Set
+        End Property
+
+        Public Property VolumeTime As String
+            Get
+                Return _VolumeTime
+            End Get
+            Set
+                _VolumeTime = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5GlobalExclude
+        Private _FilenameExcludes As List(Of String)
+        Private _DirectoryExcludes As List(Of String)
+
+        Public Property FilenameExcludes As List(Of String)
+            Get
+                Return _FilenameExcludes
+            End Get
+            Set
+                _FilenameExcludes = Value
+            End Set
+        End Property
+
+        Public Property DirectoryExcludes As List(Of String)
+            Get
+                Return _DirectoryExcludes
+            End Get
+            Set
+                _DirectoryExcludes = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5RootDir
+        Private _PathType As GP5PathType
+        Private _Chunk As String
+        Private _UseRecursive As Boolean
+        Private _Mappings As String
+        Private _FilenameExcludes As List(Of String)
+        Private _DirectoryExcludes As List(Of String)
+        Private _FilenameIncludes As List(Of String)
+        Private _SourcePath As String
+        Private _LaunchPath As String
+        Private _Files As List(Of GP5File)
+        Private _Directories As List(Of GP5Directory)
+
+        Public Property Files As List(Of GP5File)
+            Get
+                Return _Files
+            End Get
+            Set
+                _Files = Value
+            End Set
+        End Property
+
+        Public Property Directories As List(Of GP5Directory)
+            Get
+                Return _Directories
+            End Get
+            Set
+                _Directories = Value
+            End Set
+        End Property
+
+        Public Property PathType As GP5PathType
+            Get
+                Return _PathType
+            End Get
+            Set
+                _PathType = Value
+            End Set
+        End Property
+
+        Public Property Chunk As String
+            Get
+                Return _Chunk
+            End Get
+            Set
+                _Chunk = Value
+            End Set
+        End Property
+
+        Public Property UseRecursive As Boolean
+            Get
+                Return _UseRecursive
+            End Get
+            Set
+                _UseRecursive = Value
+            End Set
+        End Property
+
+        Public Property Mappings As String
+            Get
+                Return _Mappings
+            End Get
+            Set
+                _Mappings = Value
+            End Set
+        End Property
+
+        Public Property FilenameExcludes As List(Of String)
+            Get
+                Return _FilenameExcludes
+            End Get
+            Set
+                _FilenameExcludes = Value
+            End Set
+        End Property
+
+        Public Property DirectoryExcludes As List(Of String)
+            Get
+                Return _DirectoryExcludes
+            End Get
+            Set
+                _DirectoryExcludes = Value
+            End Set
+        End Property
+
+        Public Property FilenameIncludes As List(Of String)
+            Get
+                Return _FilenameIncludes
+            End Get
+            Set
+                _FilenameIncludes = Value
+            End Set
+        End Property
+
+        Public Property SourcePath As String
+            Get
+                Return _SourcePath
+            End Get
+            Set
+                _SourcePath = Value
+            End Set
+        End Property
+
+        Public Property LaunchPath As String
+            Get
+                Return _LaunchPath
+            End Get
+            Set
+                _LaunchPath = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Enum GP5PathType
+        Virtual
+        SourcePath
+        LaunchPath
+    End Enum
+
+    Public Structure GP5File
+        Private _Type As GP5PathType
+        Private _DestinationPath As String
+        Private _SourcePath As String
+        Private _ContentConfigLabel As String
+        Private _Chunk As String
+        Private _LaunchPath As String
+
+        Public Property Type As GP5PathType
+            Get
+                Return _Type
+            End Get
+            Set
+                _Type = Value
+            End Set
+        End Property
+
+        Public Property DestinationPath As String
+            Get
+                Return _DestinationPath
+            End Get
+            Set
+                _DestinationPath = Value
+            End Set
+        End Property
+
+        Public Property SourcePath As String
+            Get
+                Return _SourcePath
+            End Get
+            Set
+                _SourcePath = Value
+            End Set
+        End Property
+
+        Public Property LaunchPath As String
+            Get
+                Return _LaunchPath
+            End Get
+            Set
+                _LaunchPath = Value
+            End Set
+        End Property
+
+        Public Property ContentConfigLabel As String
+            Get
+                Return _ContentConfigLabel
+            End Get
+            Set
+                _ContentConfigLabel = Value
+            End Set
+        End Property
+
+        Public Property Chunk As String
+            Get
+                Return _Chunk
+            End Get
+            Set
+                _Chunk = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5Directory
+        Private _DirectoryType As GP5PathType
+        Private _DirectoryUseRecursive As Boolean
+        Private _DirectoryDestinationPath As String
+        Private _DirectorySourcePath As String
+        Private _DirectoryFilenameExcludes As List(Of String)
+        Private _DirectoryDirectoryExcludes As List(Of String)
+        Private _DirectoryFilenameIncludes As List(Of String)
+        Private _DirectoryChunk As String
+        Private _DirectoryContentConfigLabel As String
+        Private _DirectoryLaunchPath As String
+
+        Public Property DirectoryType As GP5PathType
+            Get
+                Return _DirectoryType
+            End Get
+            Set
+                _DirectoryType = Value
+            End Set
+        End Property
+
+        Public Property DirectoryUseRecursive As Boolean
+            Get
+                Return _DirectoryUseRecursive
+            End Get
+            Set
+                _DirectoryUseRecursive = Value
+            End Set
+        End Property
+
+        Public Property DirectoryDestinationPath As String
+            Get
+                Return _DirectoryDestinationPath
+            End Get
+            Set
+                _DirectoryDestinationPath = Value
+            End Set
+        End Property
+
+        Public Property DirectorySourcePath As String
+            Get
+                Return _DirectorySourcePath
+            End Get
+            Set
+                _DirectorySourcePath = Value
+            End Set
+        End Property
+
+        Public Property DirectoryLaunchPath As String
+            Get
+                Return _DirectoryLaunchPath
+            End Get
+            Set
+                _DirectoryLaunchPath = Value
+            End Set
+        End Property
+
+        Public Property DirectoryFilenameExcludes As List(Of String)
+            Get
+                Return _DirectoryFilenameExcludes
+            End Get
+            Set
+                _DirectoryFilenameExcludes = Value
+            End Set
+        End Property
+
+        Public Property DirectoryDirectoryExcludes As List(Of String)
+            Get
+                Return _DirectoryDirectoryExcludes
+            End Get
+            Set
+                _DirectoryDirectoryExcludes = Value
+            End Set
+        End Property
+
+        Public Property DirectoryFilenameIncludes As List(Of String)
+            Get
+                Return _DirectoryFilenameIncludes
+            End Get
+            Set
+                _DirectoryFilenameIncludes = Value
+            End Set
+        End Property
+
+        Public Property DirectoryChunk As String
+            Get
+                Return _DirectoryChunk
+            End Get
+            Set
+                _DirectoryChunk = Value
+            End Set
+        End Property
+
+        Public Property DirectoryContentConfigLabel As String
+            Get
+                Return _DirectoryContentConfigLabel
+            End Get
+            Set
+                _DirectoryContentConfigLabel = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5Chunk
+        Private _ChunkIDs As String
+        Private _ChunkLabel As String
+        Private _ChunkLanguages As List(Of String)
+        Private _ChunkSize As String
+        Private _UseChunk As Boolean
+        Private _ChunkFilesAndFolders As List(Of GP5ChunkInfos)
+
+        Public Property ChunkIDs As String
+            Get
+                Return _ChunkIDs
+            End Get
+            Set
+                _ChunkIDs = Value
+            End Set
+        End Property
+
+        Public Property ChunkLabel As String
+            Get
+                Return _ChunkLabel
+            End Get
+            Set
+                _ChunkLabel = Value
+            End Set
+        End Property
+
+        Public Property ChunkLanguages As List(Of String)
+            Get
+                Return _ChunkLanguages
+            End Get
+            Set
+                _ChunkLanguages = Value
+            End Set
+        End Property
+
+        Public Property ChunkSize As String
+            Get
+                Return _ChunkSize
+            End Get
+            Set
+                _ChunkSize = Value
+            End Set
+        End Property
+
+        Public Property UseChunk As Boolean
+            Get
+                Return _UseChunk
+            End Get
+            Set
+                _UseChunk = Value
+            End Set
+        End Property
+
+        Public Property ChunkFilesAndFolders As List(Of GP5ChunkInfos)
+            Get
+                Return _ChunkFilesAndFolders
+            End Get
+            Set
+                _ChunkFilesAndFolders = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5ChunkInfos
+        Private _ChunkName As String
+        Private _ChunkSize As String
+
+        Public Property ChunkName As String
+            Get
+                Return _ChunkName
+            End Get
+            Set
+                _ChunkName = Value
+            End Set
+        End Property
+
+        Public Property ChunkSize As String
+            Get
+                Return _ChunkSize
+            End Get
+            Set
+                _ChunkSize = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5Scenario
+        Private _ScenarioID As String
+        Private _ScenarioLabel As String
+        Private _ScenarioType As String
+        Private _ScenarioInitialChunkCount As Integer
+        Private _ScenarioChunksCount As Integer
+        Private _ScenarioChunks As List(Of GP5Chunk)
+        Private _ScenarioChunkSequence As String
+
+        Public Property ScenarioID As String
+            Get
+                Return _ScenarioID
+            End Get
+            Set
+                _ScenarioID = Value
+            End Set
+        End Property
+
+        Public Property ScenarioLabel As String
+            Get
+                Return _ScenarioLabel
+            End Get
+            Set
+                _ScenarioLabel = Value
+            End Set
+        End Property
+
+        Public Property ScenarioType As String
+            Get
+                Return _ScenarioType
+            End Get
+            Set
+                _ScenarioType = Value
+            End Set
+        End Property
+
+        Public Property ScenarioInitialChunkCount As Integer
+            Get
+                Return _ScenarioInitialChunkCount
+            End Get
+            Set
+                _ScenarioInitialChunkCount = Value
+            End Set
+        End Property
+
+        Public Property ScenarioChunksCount As Integer
+            Get
+                Return _ScenarioChunksCount
+            End Get
+            Set
+                _ScenarioChunksCount = Value
+            End Set
+        End Property
+
+        Public Property ScenarioChunks As List(Of GP5Chunk)
+            Get
+                Return _ScenarioChunks
+            End Get
+            Set
+                _ScenarioChunks = Value
+            End Set
+        End Property
+
+        Public Property ScenarioChunkSequence As String
+            Get
+                Return _ScenarioChunkSequence
+            End Get
+            Set
+                _ScenarioChunkSequence = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure GP5ChunkFilesFolderListViewItem
+        Private _SourcePath As String
+        Private _DestinationPath As String
+        Private _ChunkType As String
+
+        Public Property ChunkType As String
+            Get
+                Return _ChunkType
+            End Get
+            Set
+                _ChunkType = Value
+            End Set
+        End Property
+
+        Public Property SourcePath As String
+            Get
+                Return _SourcePath
+            End Get
+            Set
+                _SourcePath = Value
+            End Set
+        End Property
+
+        Public Property DestinationPath As String
+            Get
+                Return _DestinationPath
+            End Get
+            Set
+                _DestinationPath = Value
+            End Set
+        End Property
+    End Structure
+
+End Class
+
+Public Class PS5ParamClass
+    Public Class AgeLevel
+        Private _US As Integer
+        Private _Default As Integer
+
+        <JsonProperty("US")>
+        Public Property US As Integer
+            Get
+                Return _US
+            End Get
+            Set
+                _US = Value
+            End Set
+        End Property
+
+        <JsonProperty("default")>
+        Public Property [Default] As Integer
+            Get
+                Return _Default
+            End Get
+            Set
+                _Default = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ArAE
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class CsCZ
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class DaDK
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class DeDE
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ElGR
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class EnGB
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class EnUS
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class Es419
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class EsES
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class FiFI
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class FrCA
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class FrFR
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class HuHU
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class IdID
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ItIT
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class JaJP
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class KoKR
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class NlNL
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class NoNO
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class PlPL
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class PtBR
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class PtPT
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class RoRO
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class RuRU
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class SvSE
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ThTH
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class TrTR
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ViVN
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ZhHans
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ZhHant
+        Private _TitleName As String
+
+        <JsonProperty("titleName")>
+        Public Property TitleName As String
+            Get
+                Return _TitleName
+            End Get
+            Set
+                _TitleName = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class LocalizedParameters
+        Private _ArAE As ArAE
+        Private _CsCZ As CsCZ
+        Private _DaDK As DaDK
+        Private _DeDE As DeDE
+        Private _DefaultLanguage As String
+        Private _ElGR As ElGR
+        Private _FrCA As FrCA
+        Private _FiFI As FiFI
+        Private _EsES As EsES
+        Private _Es419 As Es419
+        Private _EnUS As EnUS
+        Private _EnGB As EnGB
+        Private _PtBR As PtBR
+        Private _PlPL As PlPL
+        Private _NoNO As NoNO
+        Private _NlNL As NlNL
+        Private _KoKR As KoKR
+        Private _JaJP As JaJP
+        Private _ItIT As ItIT
+        Private _IdID As IdID
+        Private _HuHU As HuHU
+        Private _FrFR As FrFR
+        Private _ZhHant As ZhHant
+        Private _ZhHans As ZhHans
+        Private _ViVN As ViVN
+        Private _TrTR As TrTR
+        Private _ThTH As ThTH
+        Private _SvSE As SvSE
+        Private _RuRU As RuRU
+        Private _RoRO As RoRO
+        Private _PtPT As PtPT
+
+        <JsonProperty("ar-AE")>
+        Public Property ArAE As ArAE
+            Get
+                Return _ArAE
+            End Get
+            Set
+                _ArAE = Value
+            End Set
+        End Property
+
+        <JsonProperty("cs-CZ")>
+        Public Property CsCZ As CsCZ
+            Get
+                Return _CsCZ
+            End Get
+            Set
+                _CsCZ = Value
+            End Set
+        End Property
+
+        <JsonProperty("da-DK")>
+        Public Property DaDK As DaDK
+            Get
+                Return _DaDK
+            End Get
+            Set
+                _DaDK = Value
+            End Set
+        End Property
+
+        <JsonProperty("de-DE")>
+        Public Property DeDE As DeDE
+            Get
+                Return _DeDE
+            End Get
+            Set
+                _DeDE = Value
+            End Set
+        End Property
+
+        <JsonProperty("defaultLanguage")>
+        Public Property DefaultLanguage As String
+            Get
+                Return _DefaultLanguage
+            End Get
+            Set
+                _DefaultLanguage = Value
+            End Set
+        End Property
+
+        <JsonProperty("el-GR")>
+        Public Property ElGR As ElGR
+            Get
+                Return _ElGR
+            End Get
+            Set
+                _ElGR = Value
+            End Set
+        End Property
+
+        <JsonProperty("en-GB")>
+        Public Property EnGB As EnGB
+            Get
+                Return _EnGB
+            End Get
+            Set
+                _EnGB = Value
+            End Set
+        End Property
+
+        <JsonProperty("en-US")>
+        Public Property EnUS As EnUS
+            Get
+                Return _EnUS
+            End Get
+            Set
+                _EnUS = Value
+            End Set
+        End Property
+
+        <JsonProperty("es-419")>
+        Public Property Es419 As Es419
+            Get
+                Return _Es419
+            End Get
+            Set
+                _Es419 = Value
+            End Set
+        End Property
+
+        <JsonProperty("es-ES")>
+        Public Property EsES As EsES
+            Get
+                Return _EsES
+            End Get
+            Set
+                _EsES = Value
+            End Set
+        End Property
+
+        <JsonProperty("fi-FI")>
+        Public Property FiFI As FiFI
+            Get
+                Return _FiFI
+            End Get
+            Set
+                _FiFI = Value
+            End Set
+        End Property
+
+        <JsonProperty("fr-CA")>
+        Public Property FrCA As FrCA
+            Get
+                Return _FrCA
+            End Get
+            Set
+                _FrCA = Value
+            End Set
+        End Property
+
+        <JsonProperty("fr-FR")>
+        Public Property FrFR As FrFR
+            Get
+                Return _FrFR
+            End Get
+            Set
+                _FrFR = Value
+            End Set
+        End Property
+
+        <JsonProperty("hu-HU")>
+        Public Property HuHU As HuHU
+            Get
+                Return _HuHU
+            End Get
+            Set
+                _HuHU = Value
+            End Set
+        End Property
+
+        <JsonProperty("id-ID")>
+        Public Property IdID As IdID
+            Get
+                Return _IdID
+            End Get
+            Set
+                _IdID = Value
+            End Set
+        End Property
+
+        <JsonProperty("it-IT")>
+        Public Property ItIT As ItIT
+            Get
+                Return _ItIT
+            End Get
+            Set
+                _ItIT = Value
+            End Set
+        End Property
+
+        <JsonProperty("ja-JP")>
+        Public Property JaJP As JaJP
+            Get
+                Return _JaJP
+            End Get
+            Set
+                _JaJP = Value
+            End Set
+        End Property
+
+        <JsonProperty("ko-KR")>
+        Public Property KoKR As KoKR
+            Get
+                Return _KoKR
+            End Get
+            Set
+                _KoKR = Value
+            End Set
+        End Property
+
+        <JsonProperty("nl-NL")>
+        Public Property NlNL As NlNL
+            Get
+                Return _NlNL
+            End Get
+            Set
+                _NlNL = Value
+            End Set
+        End Property
+
+        <JsonProperty("no-NO")>
+        Public Property NoNO As NoNO
+            Get
+                Return _NoNO
+            End Get
+            Set
+                _NoNO = Value
+            End Set
+        End Property
+
+        <JsonProperty("pl-PL")>
+        Public Property PlPL As PlPL
+            Get
+                Return _PlPL
+            End Get
+            Set
+                _PlPL = Value
+            End Set
+        End Property
+
+        <JsonProperty("pt-BR")>
+        Public Property PtBR As PtBR
+            Get
+                Return _PtBR
+            End Get
+            Set
+                _PtBR = Value
+            End Set
+        End Property
+
+        <JsonProperty("pt-PT")>
+        Public Property PtPT As PtPT
+            Get
+                Return _PtPT
+            End Get
+            Set
+                _PtPT = Value
+            End Set
+        End Property
+
+        <JsonProperty("ro-RO")>
+        Public Property RoRO As RoRO
+            Get
+                Return _RoRO
+            End Get
+            Set
+                _RoRO = Value
+            End Set
+        End Property
+
+        <JsonProperty("ru-RU")>
+        Public Property RuRU As RuRU
+            Get
+                Return _RuRU
+            End Get
+            Set
+                _RuRU = Value
+            End Set
+        End Property
+
+        <JsonProperty("sv-SE")>
+        Public Property SvSE As SvSE
+            Get
+                Return _SvSE
+            End Get
+            Set
+                _SvSE = Value
+            End Set
+        End Property
+
+        <JsonProperty("th-TH")>
+        Public Property ThTH As ThTH
+            Get
+                Return _ThTH
+            End Get
+            Set
+                _ThTH = Value
+            End Set
+        End Property
+
+        <JsonProperty("tr-TR")>
+        Public Property TrTR As TrTR
+            Get
+                Return _TrTR
+            End Get
+            Set
+                _TrTR = Value
+            End Set
+        End Property
+
+        <JsonProperty("vi-VN")>
+        Public Property ViVN As ViVN
+            Get
+                Return _ViVN
+            End Get
+            Set
+                _ViVN = Value
+            End Set
+        End Property
+
+        <JsonProperty("zh-Hans")>
+        Public Property ZhHans As ZhHans
+            Get
+                Return _ZhHans
+            End Get
+            Set
+                _ZhHans = Value
+            End Set
+        End Property
+
+        <JsonProperty("zh-Hant")>
+        Public Property ZhHant As ZhHant
+            Get
+                Return _ZhHant
+            End Get
+            Set
+                _ZhHant = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class PS5Param
+        Private _AgeLevel As AgeLevel
+        Private _ApplicationCategoryType As Integer
+        Private _ApplicationDrmType As String
+        Private _Attribute As Integer
+        Private _Attribute2 As Integer
+        Private _Attribute3 As Integer
+        Private _ConceptId As String
+        Private _ContentBadgeType As Integer
+        Private _ContentId As String
+        Private _ContentVersion As String
+        Private _DeeplinkUri As String
+        Private _LocalizedParameters As LocalizedParameters
+        Private _MasterVersion As String
+        Private _TitleId As String
+        Private _DownloadDataSize As Integer
+
+        <JsonProperty("ageLevel")>
+        Public Property AgeLevel As AgeLevel
+            Get
+                Return _AgeLevel
+            End Get
+            Set
+                _AgeLevel = Value
+            End Set
+        End Property
+
+        <JsonProperty("applicationCategoryType")>
+        Public Property ApplicationCategoryType As Integer
+            Get
+                Return _ApplicationCategoryType
+            End Get
+            Set
+                _ApplicationCategoryType = Value
+            End Set
+        End Property
+
+        <JsonProperty("applicationDrmType")>
+        Public Property ApplicationDrmType As String
+            Get
+                Return _ApplicationDrmType
+            End Get
+            Set
+                _ApplicationDrmType = Value
+            End Set
+        End Property
+
+        <JsonProperty("attribute")>
+        Public Property Attribute As Integer
+            Get
+                Return _Attribute
+            End Get
+            Set
+                _Attribute = Value
+            End Set
+        End Property
+
+        <JsonProperty("attribute2")>
+        Public Property Attribute2 As Integer
+            Get
+                Return _Attribute2
+            End Get
+            Set
+                _Attribute2 = Value
+            End Set
+        End Property
+
+        <JsonProperty("attribute3")>
+        Public Property Attribute3 As Integer
+            Get
+                Return _Attribute3
+            End Get
+            Set
+                _Attribute3 = Value
+            End Set
+        End Property
+
+        <JsonProperty("conceptId")>
+        Public Property ConceptId As String
+            Get
+                Return _ConceptId
+            End Get
+            Set
+                _ConceptId = Value
+            End Set
+        End Property
+
+        <JsonProperty("contentBadgeType")>
+        Public Property ContentBadgeType As Integer
+            Get
+                Return _ContentBadgeType
+            End Get
+            Set
+                _ContentBadgeType = Value
+            End Set
+        End Property
+
+        <JsonProperty("contentId")>
+        Public Property ContentId As String
+            Get
+                Return _ContentId
+            End Get
+            Set
+                _ContentId = Value
+            End Set
+        End Property
+
+        <JsonProperty("contentVersion")>
+        Public Property ContentVersion As String
+            Get
+                Return _ContentVersion
+            End Get
+            Set
+                _ContentVersion = Value
+            End Set
+        End Property
+
+        <JsonProperty("downloadDataSize")>
+        Public Property DownloadDataSize As Integer
+            Get
+                Return _DownloadDataSize
+            End Get
+            Set
+                _DownloadDataSize = Value
+            End Set
+        End Property
+
+        <JsonProperty("deeplinkUri")>
+        Public Property DeeplinkUri As String
+            Get
+                Return _DeeplinkUri
+            End Get
+            Set
+                _DeeplinkUri = Value
+            End Set
+        End Property
+
+        <JsonProperty("localizedParameters")>
+        Public Property LocalizedParameters As LocalizedParameters
+            Get
+                Return _LocalizedParameters
+            End Get
+            Set
+                _LocalizedParameters = Value
+            End Set
+        End Property
+
+        <JsonProperty("masterVersion")>
+        Public Property MasterVersion As String
+            Get
+                Return _MasterVersion
+            End Get
+            Set
+                _MasterVersion = Value
+            End Set
+        End Property
+
+        <JsonProperty("titleId")>
+        Public Property TitleId As String
+            Get
+                Return _TitleId
+            End Get
+            Set
+                _TitleId = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ParamListViewItem
+        Private _ParamName As String
+        Private _ParamType As String
+        Private _ParamValue As String
+
+        Public Property ParamName As String
+            Get
+                Return _ParamName
+            End Get
+            Set
+                _ParamName = Value
+            End Set
+        End Property
+
+        Public Property ParamType As String
+            Get
+                Return _ParamType
+            End Get
+            Set
+                _ParamType = Value
+            End Set
+        End Property
+
+        Public Property ParamValue As String
+            Get
+                Return _ParamValue
+            End Get
+            Set
+                _ParamValue = Value
+            End Set
+        End Property
+    End Class
 
 End Class
