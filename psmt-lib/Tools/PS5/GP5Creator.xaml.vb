@@ -179,6 +179,9 @@ Public Class GP5Creator
 
     Private Sub BuildPKGButton_Click(sender As Object, e As RoutedEventArgs) Handles BuildPKGButton.Click
         Dim NewPKGBuilder As New PS5PKGBuilder() With {.PubToolsPath = PubToolsPath}
+        If Not String.IsNullOrEmpty(SaveToTextBox.Text) Then
+            NewPKGBuilder.SelectedProjectTextBox.Text = SaveToTextBox.Text
+        End If
         NewPKGBuilder.Show()
     End Sub
 

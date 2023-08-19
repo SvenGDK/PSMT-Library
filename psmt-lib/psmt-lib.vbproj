@@ -290,6 +290,9 @@
     <Compile Include="Tools\PS5\PS5Notifications.xaml.vb">
       <DependentUpon>PS5Notifications.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\PS5ParamAdvanced.xaml.vb">
+      <DependentUpon>PS5ParamAdvanced.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\PS5ParamEditor.xaml.vb">
       <DependentUpon>PS5ParamEditor.xaml</DependentUpon>
     </Compile>
@@ -514,6 +517,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\PS5Notifications.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5ParamAdvanced.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

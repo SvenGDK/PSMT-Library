@@ -887,6 +887,75 @@ Public Class PS5ParamClass
     Public Class AgeLevel
         Private _US As Integer
         Private _Default As Integer
+        Private _AE As Integer
+        Private _AR As Integer
+        Private _AT As Integer
+        Private _AU As Integer
+        Private _BE As Integer
+        Private _BG As Integer
+        Private _BH As Integer
+        Private _BO As Integer
+        Private _BR As Integer
+        Private _CA As Integer
+        Private _CH As Integer
+        Private _CL As Integer
+        Private _CN As Integer
+        Private _CO As Integer
+        Private _CR As Integer
+        Private _CY As Integer
+        Private _CZ As Integer
+        Private _DE As Integer
+        Private _DK As Integer
+        Private _EC As Integer
+        Private _ES As Integer
+        Private _FI As Integer
+        Private _FR As Integer
+        Private _GB As Integer
+        Private _GR As Integer
+        Private _GT As Integer
+        Private _HK As Integer
+        Private _HN As Integer
+        Private _HR As Integer
+        Private _HU As Integer
+        Private _ID As Integer
+        Private _IE As Integer
+        Private _IL As Integer
+        Private _IT As Integer
+        Private _JP As Integer
+        Private _KR As Integer
+        Private _KW As Integer
+        Private _LB As Integer
+        Private _LU As Integer
+        Private _MT As Integer
+        Private _MX As Integer
+        Private _MY As Integer
+        Private _NI As Integer
+        Private _NL As Integer
+        Private _NO As Integer
+        Private _NZ As Integer
+        Private _OM As Integer
+        Private _PA As Integer
+        Private _PE As Integer
+        Private _PL As Integer
+        Private _PT As Integer
+        Private _PY As Integer
+        Private _QA As Integer
+        Private _RO As Integer
+        Private _RU As Integer
+        Private _SA As Integer
+        Private _SE As Integer
+        Private _SG As Integer
+        Private _SI As Integer
+        Private _SK As Integer
+        Private _SV As Integer
+        Private _TH As Integer
+        Private _TR As Integer
+        Private _TW As Integer
+        Private _UA As Integer
+        Private _UY As Integer
+        Private _ZA As Integer
+        Private _India As Integer
+        Private _Iceland As Integer
 
         <JsonProperty("US")>
         Public Property US As Integer
@@ -895,6 +964,696 @@ Public Class PS5ParamClass
             End Get
             Set
                 _US = Value
+            End Set
+        End Property
+
+        <JsonProperty("AE")>
+        Public Property AE As Integer
+            Get
+                Return _AE
+            End Get
+            Set
+                _AE = Value
+            End Set
+        End Property
+
+        <JsonProperty("AR")>
+        Public Property AR As Integer
+            Get
+                Return _AR
+            End Get
+            Set
+                _AR = Value
+            End Set
+        End Property
+
+        <JsonProperty("AT")>
+        Public Property AT As Integer
+            Get
+                Return _AT
+            End Get
+            Set
+                _AT = Value
+            End Set
+        End Property
+
+        <JsonProperty("AU")>
+        Public Property AU As Integer
+            Get
+                Return _AU
+            End Get
+            Set
+                _AU = Value
+            End Set
+        End Property
+
+        <JsonProperty("BE")>
+        Public Property BE As Integer
+            Get
+                Return _BE
+            End Get
+            Set
+                _BE = Value
+            End Set
+        End Property
+
+        <JsonProperty("BG")>
+        Public Property BG As Integer
+            Get
+                Return _BG
+            End Get
+            Set
+                _BG = Value
+            End Set
+        End Property
+
+        <JsonProperty("BH")>
+        Public Property BH As Integer
+            Get
+                Return _BH
+            End Get
+            Set
+                _BH = Value
+            End Set
+        End Property
+
+        <JsonProperty("BO")>
+        Public Property BO As Integer
+            Get
+                Return _BO
+            End Get
+            Set
+                _BO = Value
+            End Set
+        End Property
+
+        <JsonProperty("BR")>
+        Public Property BR As Integer
+            Get
+                Return _BR
+            End Get
+            Set
+                _BR = Value
+            End Set
+        End Property
+
+        <JsonProperty("CA")>
+        Public Property CA As Integer
+            Get
+                Return _CA
+            End Get
+            Set
+                _CA = Value
+            End Set
+        End Property
+
+        <JsonProperty("CH")>
+        Public Property CH As Integer
+            Get
+                Return _CH
+            End Get
+            Set
+                _CH = Value
+            End Set
+        End Property
+
+        <JsonProperty("CL")>
+        Public Property CL As Integer
+            Get
+                Return _CL
+            End Get
+            Set
+                _CL = Value
+            End Set
+        End Property
+
+        <JsonProperty("CN")>
+        Public Property CN As Integer
+            Get
+                Return _CN
+            End Get
+            Set
+                _CN = Value
+            End Set
+        End Property
+
+        <JsonProperty("CO")>
+        Public Property CO As Integer
+            Get
+                Return _CO
+            End Get
+            Set
+                _CO = Value
+            End Set
+        End Property
+
+        <JsonProperty("CR")>
+        Public Property CR As Integer
+            Get
+                Return _CR
+            End Get
+            Set
+                _CR = Value
+            End Set
+        End Property
+
+        <JsonProperty("CY")>
+        Public Property CY As Integer
+            Get
+                Return _CY
+            End Get
+            Set
+                _CY = Value
+            End Set
+        End Property
+
+        <JsonProperty("CZ")>
+        Public Property CZ As Integer
+            Get
+                Return _CZ
+            End Get
+            Set
+                _CZ = Value
+            End Set
+        End Property
+
+        <JsonProperty("DE")>
+        Public Property DE As Integer
+            Get
+                Return _DE
+            End Get
+            Set
+                _DE = Value
+            End Set
+        End Property
+
+        <JsonProperty("DK")>
+        Public Property DK As Integer
+            Get
+                Return _DK
+            End Get
+            Set
+                _DK = Value
+            End Set
+        End Property
+
+        <JsonProperty("EC")>
+        Public Property EC As Integer
+            Get
+                Return _EC
+            End Get
+            Set
+                _EC = Value
+            End Set
+        End Property
+
+        <JsonProperty("ES")>
+        Public Property ES As Integer
+            Get
+                Return _ES
+            End Get
+            Set
+                _ES = Value
+            End Set
+        End Property
+
+        <JsonProperty("FI")>
+        Public Property FI As Integer
+            Get
+                Return _FI
+            End Get
+            Set
+                _FI = Value
+            End Set
+        End Property
+
+        <JsonProperty("FR")>
+        Public Property FR As Integer
+            Get
+                Return _FR
+            End Get
+            Set
+                _FR = Value
+            End Set
+        End Property
+
+        <JsonProperty("GB")>
+        Public Property GB As Integer
+            Get
+                Return _GB
+            End Get
+            Set
+                _GB = Value
+            End Set
+        End Property
+
+        <JsonProperty("GR")>
+        Public Property GR As Integer
+            Get
+                Return _GR
+            End Get
+            Set
+                _GR = Value
+            End Set
+        End Property
+
+        <JsonProperty("GT")>
+        Public Property GT As Integer
+            Get
+                Return _GT
+            End Get
+            Set
+                _GT = Value
+            End Set
+        End Property
+
+        <JsonProperty("HK")>
+        Public Property HK As Integer
+            Get
+                Return _HK
+            End Get
+            Set
+                _HK = Value
+            End Set
+        End Property
+
+        <JsonProperty("HN")>
+        Public Property HN As Integer
+            Get
+                Return _HN
+            End Get
+            Set
+                _HN = Value
+            End Set
+        End Property
+
+        <JsonProperty("HR")>
+        Public Property HR As Integer
+            Get
+                Return _HR
+            End Get
+            Set
+                _HR = Value
+            End Set
+        End Property
+
+        <JsonProperty("HU")>
+        Public Property HU As Integer
+            Get
+                Return _HU
+            End Get
+            Set
+                _HU = Value
+            End Set
+        End Property
+
+        <JsonProperty("ID")>
+        Public Property ID As Integer
+            Get
+                Return _ID
+            End Get
+            Set
+                _ID = Value
+            End Set
+        End Property
+
+        <JsonProperty("IE")>
+        Public Property IE As Integer
+            Get
+                Return _IE
+            End Get
+            Set
+                _IE = Value
+            End Set
+        End Property
+
+        <JsonProperty("IL")>
+        Public Property IL As Integer
+            Get
+                Return _IL
+            End Get
+            Set
+                _IL = Value
+            End Set
+        End Property
+
+        <JsonProperty("IN")>
+        Public Property India As Integer
+            Get
+                Return _India
+            End Get
+            Set
+                _India = Value
+            End Set
+        End Property
+
+        <JsonProperty("IS")>
+        Public Property Iceland As Integer
+            Get
+                Return _Iceland
+            End Get
+            Set
+                _Iceland = Value
+            End Set
+        End Property
+
+        <JsonProperty("IT")>
+        Public Property IT As Integer
+            Get
+                Return _IT
+            End Get
+            Set
+                _IT = Value
+            End Set
+        End Property
+
+        <JsonProperty("JP")>
+        Public Property JP As Integer
+            Get
+                Return _JP
+            End Get
+            Set
+                _JP = Value
+            End Set
+        End Property
+
+        <JsonProperty("KR")>
+        Public Property KR As Integer
+            Get
+                Return _KR
+            End Get
+            Set
+                _KR = Value
+            End Set
+        End Property
+
+        <JsonProperty("KW")>
+        Public Property KW As Integer
+            Get
+                Return _KW
+            End Get
+            Set
+                _KW = Value
+            End Set
+        End Property
+
+        <JsonProperty("LB")>
+        Public Property LB As Integer
+            Get
+                Return _LB
+            End Get
+            Set
+                _LB = Value
+            End Set
+        End Property
+
+        <JsonProperty("LU")>
+        Public Property LU As Integer
+            Get
+                Return _LU
+            End Get
+            Set
+                _LU = Value
+            End Set
+        End Property
+
+        <JsonProperty("MT")>
+        Public Property MT As Integer
+            Get
+                Return _MT
+            End Get
+            Set
+                _MT = Value
+            End Set
+        End Property
+
+        <JsonProperty("MX")>
+        Public Property MX As Integer
+            Get
+                Return _MX
+            End Get
+            Set
+                _MX = Value
+            End Set
+        End Property
+
+        <JsonProperty("MY")>
+        Public Property MY As Integer
+            Get
+                Return _MY
+            End Get
+            Set
+                _MY = Value
+            End Set
+        End Property
+
+        <JsonProperty("NI")>
+        Public Property NI As Integer
+            Get
+                Return _NI
+            End Get
+            Set
+                _NI = Value
+            End Set
+        End Property
+
+        <JsonProperty("NL")>
+        Public Property NL As Integer
+            Get
+                Return _NL
+            End Get
+            Set
+                _NL = Value
+            End Set
+        End Property
+
+        <JsonProperty("NO")>
+        Public Property NO As Integer
+            Get
+                Return _NO
+            End Get
+            Set
+                _NO = Value
+            End Set
+        End Property
+
+        <JsonProperty("NZ")>
+        Public Property NZ As Integer
+            Get
+                Return _NZ
+            End Get
+            Set
+                _NZ = Value
+            End Set
+        End Property
+
+        <JsonProperty("OM")>
+        Public Property OM As Integer
+            Get
+                Return _OM
+            End Get
+            Set
+                _OM = Value
+            End Set
+        End Property
+
+        <JsonProperty("PA")>
+        Public Property PA As Integer
+            Get
+                Return _PA
+            End Get
+            Set
+                _PA = Value
+            End Set
+        End Property
+
+        <JsonProperty("PE")>
+        Public Property PE As Integer
+            Get
+                Return _PE
+            End Get
+            Set
+                _PE = Value
+            End Set
+        End Property
+
+        <JsonProperty("PL")>
+        Public Property PL As Integer
+            Get
+                Return _PL
+            End Get
+            Set
+                _PL = Value
+            End Set
+        End Property
+
+        <JsonProperty("PT")>
+        Public Property PT As Integer
+            Get
+                Return _PT
+            End Get
+            Set
+                _PT = Value
+            End Set
+        End Property
+
+        <JsonProperty("PY")>
+        Public Property PY As Integer
+            Get
+                Return _PY
+            End Get
+            Set
+                _PY = Value
+            End Set
+        End Property
+
+        <JsonProperty("QA")>
+        Public Property QA As Integer
+            Get
+                Return _QA
+            End Get
+            Set
+                _QA = Value
+            End Set
+        End Property
+
+        <JsonProperty("RO")>
+        Public Property RO As Integer
+            Get
+                Return _RO
+            End Get
+            Set
+                _RO = Value
+            End Set
+        End Property
+
+        <JsonProperty("RU")>
+        Public Property RU As Integer
+            Get
+                Return _RU
+            End Get
+            Set
+                _RU = Value
+            End Set
+        End Property
+
+        <JsonProperty("SA")>
+        Public Property SA As Integer
+            Get
+                Return _SA
+            End Get
+            Set
+                _SA = Value
+            End Set
+        End Property
+
+        <JsonProperty("SE")>
+        Public Property SE As Integer
+            Get
+                Return _SE
+            End Get
+            Set
+                _SE = Value
+            End Set
+        End Property
+
+        <JsonProperty("SG")>
+        Public Property SG As Integer
+            Get
+                Return _SG
+            End Get
+            Set
+                _SG = Value
+            End Set
+        End Property
+
+        <JsonProperty("SI")>
+        Public Property SI As Integer
+            Get
+                Return _SI
+            End Get
+            Set
+                _SI = Value
+            End Set
+        End Property
+
+        <JsonProperty("SK")>
+        Public Property SK As Integer
+            Get
+                Return _SK
+            End Get
+            Set
+                _SK = Value
+            End Set
+        End Property
+
+        <JsonProperty("SV")>
+        Public Property SV As Integer
+            Get
+                Return _SV
+            End Get
+            Set
+                _SV = Value
+            End Set
+        End Property
+
+        <JsonProperty("TH")>
+        Public Property TH As Integer
+            Get
+                Return _TH
+            End Get
+            Set
+                _TH = Value
+            End Set
+        End Property
+
+        <JsonProperty("TR")>
+        Public Property TR As Integer
+            Get
+                Return _TR
+            End Get
+            Set
+                _TR = Value
+            End Set
+        End Property
+
+        <JsonProperty("TW")>
+        Public Property TW As Integer
+            Get
+                Return _TW
+            End Get
+            Set
+                _TW = Value
+            End Set
+        End Property
+
+        <JsonProperty("UA")>
+        Public Property UA As Integer
+            Get
+                Return _UA
+            End Get
+            Set
+                _UA = Value
+            End Set
+        End Property
+
+        <JsonProperty("UY")>
+        Public Property UY As Integer
+            Get
+                Return _UY
+            End Get
+            Set
+                _UY = Value
+            End Set
+        End Property
+
+        <JsonProperty("ZA")>
+        Public Property ZA As Integer
+            Get
+                Return _ZA
+            End Get
+            Set
+                _ZA = Value
             End Set
         End Property
 
@@ -1689,6 +2448,8 @@ Public Class PS5ParamClass
         Private _MasterVersion As String
         Private _TitleId As String
         Private _DownloadDataSize As Integer
+        Private _VersionFileUri As String
+        Private _RequiredSystemSoftwareVersion As String
 
         <JsonProperty("ageLevel")>
         Public Property AgeLevel As AgeLevel
@@ -1830,6 +2591,16 @@ Public Class PS5ParamClass
             End Set
         End Property
 
+        <JsonProperty("requiredSystemSoftwareVersion")>
+        Public Property RequiredSystemSoftwareVersion As String
+            Get
+                Return _RequiredSystemSoftwareVersion
+            End Get
+            Set
+                _RequiredSystemSoftwareVersion = Value
+            End Set
+        End Property
+
         <JsonProperty("titleId")>
         Public Property TitleId As String
             Get
@@ -1837,6 +2608,16 @@ Public Class PS5ParamClass
             End Get
             Set
                 _TitleId = Value
+            End Set
+        End Property
+
+        <JsonProperty("versionFileUri")>
+        Public Property VersionFileUri As String
+            Get
+                Return _VersionFileUri
+            End Get
+            Set
+                _VersionFileUri = Value
             End Set
         End Property
     End Class

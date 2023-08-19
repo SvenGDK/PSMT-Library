@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Net
 Imports System.Text
+Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Windows.Media.Imaging
 Imports FluentFTP
@@ -115,6 +116,7 @@ Public Class Utils
 
         Return Size
     End Function
+
     Public Shared Sub CreateWorkingDirectories()
         If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then
             With Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads")
@@ -279,5 +281,23 @@ Public Class Utils
     Public Shared Function CleanTitle(Title As String) As String
         Return Title.Replace("¢", "").Replace("„", "").Replace("â", "").Replace("Â", "").Replace("Ô", "").Replace("Ê", "").Replace("ô", "").Replace("ê", "").Replace(",", "").Replace(";", "")
     End Function
+
+    Public Shared Function IsInt(Input As String) As Boolean
+        Dim DigitOnly As New Regex("^\d+$")
+        Return DigitOnly.Match(Input).Success
+    End Function
+
+    Public Shared Function IsHex(Input As String) As Boolean
+        Return Regex.IsMatch(Input, "\A\b[0-9a-fA-F]+\b\Z")
+    End Function
+
+    Public Shared Sub UpdatePS5ParamEditor(UpdatedParams As PS5ParamClass.PS5Param)
+        For Each OpenWin In Windows.Application.Current.Windows()
+            If OpenWin.ToString = "psmt_lib.PS5ParamEditor" Then
+                CType(OpenWin, PS5ParamEditor).CurrentParamJson = UpdatedParams
+                Exit For
+            End If
+        Next
+    End Sub
 
 End Class
