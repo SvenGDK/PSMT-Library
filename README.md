@@ -4,7 +4,6 @@ Some tools are written by other developers and will be executed from an executab
 
 ## General:
 - FTP Browser
-- PARAM.SFO Editor
 - Downloader
 
 ## PS1
@@ -23,6 +22,7 @@ Some tools are written by other developers and will be executed from an executab
 - PUP Unpacker
 - RCO Dumper
 - SELF Reader
+- PARAM.SFO Editor
 
 ## PS4
 - PKG Sender (currently not working)
@@ -31,6 +31,7 @@ Some tools are written by other developers and will be executed from an executab
 - Show PSN Store Infos
 - Decrypted PUP Unpacker
 - USB Writer
+- PARAM.SFO Editor
 
 ## PS5
 - General ELF Payload Sender
@@ -40,6 +41,11 @@ Some tools are written by other developers and will be executed from an executab
 - Burn BR .iso images to Blu Ray discs
 - Notification Manager (requires FTPS5 loaded first)
 - Clear the console's error history (requires FTPS5 loaded first)
+- PARAM.JSON Creator & Editor
+- GP5 Project Creator (requires pub tools at \Tools\PS5\ )
+- PKG Builder (requires pub tools at \Tools\PS5\ )
+- RCO Dumper (requires FTPS5 loaded first)
+- RCO Extractor
 
 ## PSP
 - ISO to CSO Converter
