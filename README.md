@@ -1,5 +1,5 @@
 # PS Multi Tools .NET Library
-The PS Multi Tools .NET Library contains various tools and downloads for almost any Playstation console or handheld. </br>
+The PS Multi Tools .NET Library contains all tools, downloads and other stuff for almost any Playstation console or handheld. </br>
 Some tools are written by other developers and will be executed from an executable binary with arguments - please take a look at the code.
 
 ## General:
@@ -32,12 +32,12 @@ Some tools are written by other developers and will be executed from an executab
 - Decrypted PUP Unpacker
 - USB Writer
 - PARAM.SFO Editor
+- PKG Merger
 
 ## PS5
 - General ELF Payload Sender
 - Mast1c0re Payload & PS2 ISO Sender
 - Add the Internet Browser to the home menu for every profile with a simple click (requires FTPS5 loaded first)
-- Rip the content of discs over FTP (requires FTPS5 loaded first)
 - Burn BR .iso images to Blu Ray discs
 - Notification Manager (requires FTPS5 loaded first)
 - Clear the console's error history (requires FTPS5 loaded first)
@@ -46,6 +46,12 @@ Some tools are written by other developers and will be executed from an executab
 - PKG Builder (requires pub tools at \Tools\PS5\ )
 - RCO Dumper (requires FTPS5 loaded first)
 - RCO Extractor
+- AT9<->WAV Converter
+- FTP Grabber (requires FTPS5 loaded first)
+- PS5 Game Patches Downloader
+  - Currently loads only patch list with information and can redirect to download page
+- Unofficial patches loader (libhijack fork of illusion)
+- PKG Merger
 
 ## PSP
 - ISO to CSO Converter
