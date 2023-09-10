@@ -7,7 +7,7 @@ Public Class PS3PUPUnpacker
 #Region "Browse Buttons"
 
     Private Sub BrowsePUPButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles BrowsePUPButton.Click
-        Dim OFD As New OpenFileDialog() With {.CheckFileExists = True, .Filter = "tar files (*.tar)|*.tar", .Multiselect = False}
+        Dim OFD As New OpenFileDialog() With {.CheckFileExists = True, .Filter = "pup files (*.pup)|*.pup", .Multiselect = False}
         If OFD.ShowDialog() = Forms.DialogResult.OK Then
             SelectedPUPTextBox.Text = OFD.FileName
         End If

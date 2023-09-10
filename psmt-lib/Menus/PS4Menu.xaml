@@ -12,6 +12,7 @@
         <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"></MenuItem>
         <MenuItem Header="PARAM.SFO Editor" x:Name="OpenParamSFOEditorMenuItem"></MenuItem>
         <MenuItem Header="Payload &amp; PKG Sender" x:Name="OpenPKGSenderMenuItem"></MenuItem>
+        <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"></MenuItem>
         <MenuItem Header="PUP Unpacker" x:Name="OpenPUPExtractorMenuItem"></MenuItem>
         <Separator/>
         <MenuItem Header="PS1 Classics" ></MenuItem>

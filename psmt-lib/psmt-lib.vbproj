@@ -74,6 +74,15 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\..\..\Desktop\Debug\HtmlAgilityPack.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.1901.177, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1901.177\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.1901.177, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1901.177\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.1901.177, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.1901.177\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -206,9 +215,6 @@
     <Compile Include="Tools\PS1\MergeBinTool.xaml.vb">
       <DependentUpon>MergeBinTool.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS1\MKPS1ISO.xaml.vb">
-      <DependentUpon>MKPS1ISO.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tools\PS2\BINCUEConverter.xaml.vb">
       <DependentUpon>BINCUEConverter.xaml</DependentUpon>
     </Compile>
@@ -275,9 +281,6 @@
     <Compile Include="Tools\PS5\BDBurner.xaml.vb">
       <DependentUpon>BDBurner.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS5\FTPBDRip.xaml.vb">
-      <DependentUpon>FTPBDRip.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tools\PS5\GP5Creator.xaml.vb">
       <DependentUpon>GP5Creator.xaml</DependentUpon>
     </Compile>
@@ -286,6 +289,18 @@
     </Compile>
     <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
       <DependentUpon>GP5Manager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5AT9Converter.xaml.vb">
+      <DependentUpon>PS5AT9Converter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5FTPGrabber.xaml.vb">
+      <DependentUpon>PS5FTPGrabber.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5GamePatches.xaml.vb">
+      <DependentUpon>PS5GamePatches.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5ModPatches.xaml.vb">
+      <DependentUpon>PS5ModPatches.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5Notifications.xaml.vb">
       <DependentUpon>PS5Notifications.xaml</DependentUpon>
@@ -298,6 +313,9 @@
     </Compile>
     <Compile Include="Tools\PS5\PS5PKGBuilder.xaml.vb">
       <DependentUpon>PS5PKGBuilder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5PKGMerger.xaml.vb">
+      <DependentUpon>PS5PKGMerger.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5RcoDumper.xaml.vb">
       <DependentUpon>PS5RcoDumper.xaml</DependentUpon>
@@ -408,10 +426,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS1\MKPS1ISO.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Tools\PS2\BINCUEConverter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -500,10 +514,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS5\FTPBDRip.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Tools\PS5\GP5Creator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -513,6 +523,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\GP5Manager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5AT9Converter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5FTPGrabber.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5GamePatches.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5ModPatches.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -529,6 +555,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\PS5PKGBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5PKGMerger.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -606,6 +636,9 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\PKG.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="..\packages\WinSCP.6.1.1\build\WinSCP.targets" Condition="Exists('..\packages\WinSCP.6.1.1\build\WinSCP.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -616,7 +649,9 @@
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.1901.177\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.1901.177\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.1901.177\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.1901.177\build\Microsoft.Web.WebView2.targets')" />
 </Project>

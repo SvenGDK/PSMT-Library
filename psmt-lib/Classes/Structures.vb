@@ -881,6 +881,94 @@ Public Class Structures
         End Property
     End Structure
 
+    Public Structure ProsperoPatch
+        Private _PKGSize As String
+        Private _RequiredFirmware As String
+        Private _DateAdded As String
+        Private _Version As String
+
+        Public Property Version As String
+            Get
+                Return _Version
+            End Get
+            Set
+                _Version = Value
+            End Set
+        End Property
+
+        Public Property PKGSize As String
+            Get
+                Return _PKGSize
+            End Get
+            Set
+                _PKGSize = Value
+            End Set
+        End Property
+
+        Public Property RequiredFirmware As String
+            Get
+                Return _RequiredFirmware
+            End Get
+            Set
+                _RequiredFirmware = Value
+            End Set
+        End Property
+
+        Public Property DateAdded As String
+            Get
+                Return _DateAdded
+            End Get
+            Set
+                _DateAdded = Value
+            End Set
+        End Property
+
+    End Structure
+
+    Public Structure ModPatch
+        Private _PatchDetails As String
+        Private _RequiredVersion As String
+        Private _GameTitle As String
+        Private _Platform As String
+
+        Public Property Platform As String
+            Get
+                Return _Platform
+            End Get
+            Set
+                _Platform = Value
+            End Set
+        End Property
+
+        Public Property GameTitle As String
+            Get
+                Return _GameTitle
+            End Get
+            Set
+                _GameTitle = Value
+            End Set
+        End Property
+
+        Public Property RequiredVersion As String
+            Get
+                Return _RequiredVersion
+            End Get
+            Set
+                _RequiredVersion = Value
+            End Set
+        End Property
+
+        Public Property PatchDetails As String
+            Get
+                Return _PatchDetails
+            End Get
+            Set
+                _PatchDetails = Value
+            End Set
+        End Property
+
+    End Structure
+
 End Class
 
 Public Class PS5ParamClass
@@ -2654,5 +2742,139 @@ Public Class PS5ParamClass
             End Set
         End Property
     End Class
+
+End Class
+
+Public Class WAVFile
+    Private _RIFF As Integer
+    Private _TotalLength As Integer
+    Private _Wave As Integer
+    Private _ByteRate As Integer
+    Private _FormatChunkMarker As Integer
+    Private _Subchunk1Size As Integer
+    Private _AudioFormat As Integer
+    Private _Channels As Integer
+    Private _SampleRate As Integer
+    Private _BitsPerSample As Integer
+    Private _DataLength As Integer
+    Private _Data As Integer
+    Private _BlockAlign As Integer
+
+    Public Property RIFF As Integer
+        Get
+            Return _RIFF
+        End Get
+        Set
+            _RIFF = Value
+        End Set
+    End Property
+
+    Public Property TotalLength As Integer
+        Get
+            Return _TotalLength
+        End Get
+        Set
+            _TotalLength = Value
+        End Set
+    End Property
+
+    Public Property Wave As Integer
+        Get
+            Return _Wave
+        End Get
+        Set
+            _Wave = Value
+        End Set
+    End Property
+
+    Public Property FormatChunkMarker As Integer
+        Get
+            Return _FormatChunkMarker
+        End Get
+        Set
+            _FormatChunkMarker = Value
+        End Set
+    End Property
+
+    Public Property Subchunk1Size As Integer
+        Get
+            Return _Subchunk1Size
+        End Get
+        Set
+            _Subchunk1Size = Value
+        End Set
+    End Property
+
+    Public Property AudioFormat As Integer
+        Get
+            Return _AudioFormat
+        End Get
+        Set
+            _AudioFormat = Value
+        End Set
+    End Property
+
+    Public Property Channels As Integer
+        Get
+            Return _Channels
+        End Get
+        Set
+            _Channels = Value
+        End Set
+    End Property
+
+    Public Property SampleRate As Integer
+        Get
+            Return _SampleRate
+        End Get
+        Set
+            _SampleRate = Value
+        End Set
+    End Property
+
+    Public Property ByteRate As Integer
+        Get
+            Return _ByteRate
+        End Get
+        Set
+            _ByteRate = Value
+        End Set
+    End Property
+
+    Public Property BlockAlign As Integer
+        Get
+            Return _BlockAlign
+        End Get
+        Set
+            _BlockAlign = Value
+        End Set
+    End Property
+
+    Public Property BitsPerSample As Integer
+        Get
+            Return _BitsPerSample
+        End Get
+        Set
+            _BitsPerSample = Value
+        End Set
+    End Property
+
+    Public Property Data As Integer
+        Get
+            Return _Data
+        End Get
+        Set
+            _Data = Value
+        End Set
+    End Property
+
+    Public Property DataLength As Integer
+        Get
+            Return _DataLength
+        End Get
+        Set
+            _DataLength = Value
+        End Set
+    End Property
 
 End Class

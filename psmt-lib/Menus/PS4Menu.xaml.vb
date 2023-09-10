@@ -495,6 +495,11 @@ Public Class PS4Menu
         NewSFOEditor.Show()
     End Sub
 
+    Private Sub OpenPKGMergerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGMergerMenuItem.Click
+        Dim NewPS4PKGMerger As New PS5PKGMerger() With {.ShowActivated = True}
+        NewPS4PKGMerger.Show()
+    End Sub
+
 #End Region
 
 End Class

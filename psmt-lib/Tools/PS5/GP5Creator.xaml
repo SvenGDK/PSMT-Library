@@ -21,10 +21,10 @@
             </ListView.View>
         </ListView>
         <TextBlock x:Name="CurrentChunkTextBlock" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="Files and folders inside Chunk#0 :" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="928" Margin="12,297,0,0"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Create or modify a project" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Create or modify a project" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="NoWrap" Text="Save Path:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="150"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,62,0,0" TextWrapping="NoWrap" Text="Enter a passcode:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="150"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,136,0,0" TextWrapping="NoWrap" Text="Add a file or folder" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,136,0,0" TextWrapping="NoWrap" Text="Add a file or folder" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="230,235,0,0" TextWrapping="NoWrap" Text="Add to Chunk#:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="110"/>
         <ComboBox x:Name="ChunksComboBox" HorizontalAlignment="Left" Margin="725,505,0,0" VerticalAlignment="Top" Width="215" SelectedIndex="0" IsReadOnly="True" Visibility="Hidden">
             <ComboBoxItem Content="0"/>
@@ -38,7 +38,7 @@
         <Button x:Name="AddToChunkButton" Content="Add to chunk" HorizontalAlignment="Left" Margin="345,258,0,0" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="PasscodeTextBox" HorizontalAlignment="Left" Margin="165,64,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="300" Text="GvE6xCpZxd96scOUGuLPbuLp8O800B0s"/>
         <TextBox x:Name="SaveToTextBox" HorizontalAlignment="Left" Margin="165,38,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="250"/>
-        <TextBlock HorizontalAlignment="Left" Margin="475,10,0,0" TextWrapping="NoWrap" Text="Extract a PS5 pkg" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="475,10,0,0" TextWrapping="NoWrap" Text="Extract a PS5 pkg" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="475,36,0,0" TextWrapping="NoWrap" Text="Select a .pkg file:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="150"/>
         <TextBlock HorizontalAlignment="Left" Margin="475,62,0,0" TextWrapping="NoWrap" Text="Enter the passcode:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="150"/>
         <TextBox x:Name="ExtractPasscodeTextBox" HorizontalAlignment="Left" Margin="630,64,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="300"/>
@@ -50,7 +50,7 @@
         <TextBox x:Name="ExtractToTextBox" HorizontalAlignment="Left" Margin="630,90,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="250"/>
         <Button x:Name="BrowseExtractDestinationPathButton" Content="..." HorizontalAlignment="Left" Margin="885,90,0,0" VerticalAlignment="Top" Width="45" Height="18"/>
         <Button x:Name="CreateParamButton" Content="Create a new param.json" HorizontalAlignment="Left" Margin="476,165,0,0" VerticalAlignment="Top" Width="224"/>
-        <TextBlock HorizontalAlignment="Left" Margin="475,136,0,0" TextWrapping="NoWrap" Text="Utilities" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="222" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="475,136,0,0" TextWrapping="NoWrap" Text="Utilities" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="222" FontWeight="Bold"/>
         <Button x:Name="BrowseFolderSourcePathButton" Content="Folder" HorizontalAlignment="Left" Margin="405,188,0,0" VerticalAlignment="Top" Width="60" Height="19"/>
         <Button x:Name="BrowseFileSourcePathButton" Content="File" HorizontalAlignment="Left" Margin="345,188,0,0" VerticalAlignment="Top" Width="55" Height="19"/>
         <Button x:Name="CreateProjectButton" Content="Create" HorizontalAlignment="Left" Margin="345,88,0,0" VerticalAlignment="Top" Width="120"/>

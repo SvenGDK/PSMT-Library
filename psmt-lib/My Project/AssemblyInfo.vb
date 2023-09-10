@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("psmt-lib")>
-<Assembly: AssemblyDescription("PS Multi Tools Library containing most features.")>
+<Assembly: AssemblyDescription("PS Multi Tools Library")>
 <Assembly: AssemblyCompany("SvenGDK")>
 <Assembly: AssemblyProduct("psmt-lib")>
 <Assembly: AssemblyCopyright("Copyright © SvenGDK 2023")>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.1.3.0")>
-<Assembly: AssemblyFileVersion("1.1.3.0")>
+<Assembly: AssemblyVersion("1.1.5.0")>
+<Assembly: AssemblyFileVersion("1.1.5.0")>

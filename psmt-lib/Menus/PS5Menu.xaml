@@ -14,17 +14,21 @@
             <MenuItem Header="GP5 Creator" x:Name="OpenGP5ManagerMenuItem"/>
             <MenuItem Header="Param Editor" x:Name="OpenParamEditorMenuItem"/>
             <MenuItem Header="PKG Builder" x:Name="OpenPKGBuilderMenuItem"/>
+            <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"/>
+        </MenuItem>
+        <MenuItem Header="Converters">
+            <MenuItem Header="WAV &lt;-&gt; AT9" x:Name="OpenAudioConverterMenuItem"/>
+        </MenuItem>
+        <MenuItem Header="Over FTP (Requires FTPS5 to be loaded first)">
+            <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"/>
+            <MenuItem Header="FTP Grabber" x:Name="OpenFTPGrabberMenuItem"/>
+            <MenuItem Header="Web Browser Installer" x:Name="OpenWebBrowserInstallerMenuItem"/>
+            <MenuItem Header="Notification Manager" x:Name="OpenNotificationManagerMenuItem"/>
+            <MenuItem Header="Clear error history on the console" x:Name="ClearErrorHistoryMenuItem"/>
         </MenuItem>
         <MenuItem Header="UI Customization">
             <MenuItem Header="Dump RCO files (Requires FTPS5 to be loaded first)" x:Name="OpenRCODumperMenuItem"/>
             <MenuItem Header="Extract RCO files" x:Name="OpenRCOExtractorMenuItem"/>
-        </MenuItem>
-        <MenuItem Header="Over FTP (Requires FTPS5 to be loaded first)">
-            <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"/>
-            <MenuItem Header="FTP Disc Grabber" x:Name="OpenFTPBDRipMenuItem"/>
-            <MenuItem Header="Web Browser Installer" x:Name="OpenWebBrowserInstallerMenuItem"/>
-            <MenuItem Header="Notification Manager" x:Name="OpenNotificationManagerMenuItem"/>
-            <MenuItem Header="Clear error history on the console" x:Name="ClearErrorHistoryMenuItem"/>
         </MenuItem>
     </MenuItem>
     <MenuItem Header="Exploits">
@@ -42,11 +46,13 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="Mast1c0re Exploit">
-            <MenuItem Header="Learn more at GitHub" x:Name="OpenMast1c0reGitHub">
-                <MenuItem.Icon>
-                    <Image Source="/Images/github-mark.png"/>
-                </MenuItem.Icon>
+        <MenuItem Header="4.51+">
+            <MenuItem Header="Mast1c0re Exploit">
+                <MenuItem Header="Learn more at GitHub" x:Name="OpenMast1c0reGitHub">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/github-mark.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
         </MenuItem>
     </MenuItem>
@@ -188,6 +194,11 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+        </MenuItem>
+
+        <MenuItem Header="Patches">
+            <MenuItem Header="Official Game Patches" x:Name="OpenGamePatchesMenuItem"/>
+            <MenuItem Header="Game Mods &amp; Patches" x:Name="OpenModPatchesMenuItem"/>
         </MenuItem>
     </MenuItem>
     <MenuItem Header="Settings">

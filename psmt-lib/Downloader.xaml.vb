@@ -24,7 +24,7 @@ Public Class Downloader
     Dim TimeLeftAverage As Double = 0
     Dim DownloadIcon As ImageSource = Nothing
 
-    Dim WithEvents NPSBrowser As New Forms.WebBrowser() With {.ScriptErrorsSuppressed = True}
+    Dim WithEvents NPSBrowser As New WebBrowser() With {.ScriptErrorsSuppressed = True}
     Dim WithEvents DownloadClient As New WebClient()
     Public PackageConsole As String
     Public PackageTitleID As String
@@ -165,6 +165,8 @@ Public Class Downloader
             If Utils.IsURLValid("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/0") Then
                 NPSBrowser.Navigate("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/0")
             End If
+        ElseIf PackageConsole = "PS5" Then
+            DownloadImage.Source = New BitmapImage(New Uri("/Images/PKG.png", UriKind.Relative))
         End If
     End Sub
 
