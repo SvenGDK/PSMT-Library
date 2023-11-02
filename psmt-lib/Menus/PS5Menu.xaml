@@ -55,11 +55,38 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="7.61 and below">
+            <MenuItem Header="JAR Loader (PoC)">
+                <MenuItem Header="Download v2023-10-27" x:Name="DownloadJARLoader">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Learn more at GitHub" x:Name="OpenJARLoaderGitHub">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/github-mark.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </MenuItem>
     </MenuItem>
     <MenuItem Header="Hosts &amp; DNS">
-        <MenuItem Header="PS Multi Tools Host: http://X.X.X.X/ps5ex/"/>
-        <MenuItem Header="DNS 1: 192.241.221.79"/>
-        <MenuItem Header="DNS 1 alternative: 165.227.83.145"/>
+        <MenuItem Header="PS Multi Tools Host:">
+            <TextBox Text="http://X.X.X.X/ps5ex/"></TextBox>
+        </MenuItem>
+        <MenuItem Header="Sleirsgoevy Host:">
+            <TextBox Text="https://sleirsgoevy.github.io/ps4jb2/ps5-403/index.html"></TextBox>
+        </MenuItem>
+        <MenuItem Header="Zecoxao Host:">
+            <TextBox Text="https://zecoxao.github.io/ps5jb/"></TextBox>
+        </MenuItem>
+        <Separator/>
+        <MenuItem Header="Al Azif DNS:">
+            <TextBox Text="192.241.221.79"></TextBox>
+        </MenuItem>
+        <MenuItem Header="Kameleon DNS:">
+            <TextBox Text="62.210.38.117"></TextBox>
+        </MenuItem>
     </MenuItem>
     <MenuItem Header="Downloads">
         <MenuItem Header="Exploits">
@@ -138,9 +165,18 @@
         </MenuItem>
 
         <MenuItem Header="Homebrew">
-            <MenuItem Header="FTPS5">
-                <MenuItem Header="4.03 - 4.50 - 4.51">
-                    <MenuItem Header="Download v1.3" x:Name="DownloadFTPS5">
+            <MenuItem Header="etaHEN by LightningMods">
+                <MenuItem Header="4.03 and 4.50">
+                    <MenuItem Header="Download v1.1b" x:Name="DownloadetaHEN">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/download.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="etaHEN with cheats">
+                <MenuItem Header="4.03 and 4.50">
+                    <MenuItem Header="Download v1.1b" x:Name="DownloadetaHENwithCheats">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -164,6 +200,24 @@
                                 <Image Source="/Images/download.png"/>
                             </MenuItem.Icon>
                         </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="FTPS5">
+                <MenuItem Header="4.03 - 4.50 - 4.51">
+                    <MenuItem Header="Download v1.3" x:Name="DownloadFTPS5">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/download.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Homebrew Store by LightningMods">
+                <MenuItem Header="4.03 and 4.50">
+                    <MenuItem Header="Download R2" x:Name="DownloadHomebrewStore">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/download.png"/>
+                        </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
@@ -192,6 +246,15 @@
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="PS5-Kstuff">
+                <MenuItem Header="4.03 and 4.50">
+                    <MenuItem Header="Download" x:Name="DownloadKStuff">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/download.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </MenuItem>
         </MenuItem>

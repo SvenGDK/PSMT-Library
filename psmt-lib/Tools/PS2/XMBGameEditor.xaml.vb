@@ -11,7 +11,11 @@ Public Class XMBGameEditor
 
     Private Sub LoadFromPSXButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles LoadFromPSXButton.Click
         Try
-            PSXDatacenterBrowser.Navigate("https://psxdatacenter.com/psx2/games2/" + GameIDTextBox.Text + ".html")
+            If Utils.IsURLValid("https://psxdatacenter.com/psx2/games2/" + GameIDTextBox.Text + ".html") Then
+                PSXDatacenterBrowser.Navigate("https://psxdatacenter.com/psx2/games2/" + GameIDTextBox.Text + ".html")
+            Else
+                MsgBox("Could not load game images and informations, please check your Game ID.", MsgBoxStyle.Exclamation, "No information found for this Game ID")
+            End If
         Catch ex As Exception
             MsgBox("Could not load game images and informations, please check your Game ID.", MsgBoxStyle.Exclamation, "No information found for this Game ID")
         End Try

@@ -11,26 +11,30 @@ Public Class PS5ModPatches
 
     Private Async Sub PS5ModPatches_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
 
-        Using NewWebClient As New WebClient
+        If Utils.IsURLValid("http://X.X.X.X/ps5/patches/ps5patches.db") Then
+            Using NewWebClient As New WebClient
 
-            Dim PatchesList As String = Await NewWebClient.DownloadStringTaskAsync(New Uri("http://X.X.X.X/ps5/patches/ps5patches.db"))
+                Dim PatchesList As String = Await NewWebClient.DownloadStringTaskAsync(New Uri("http://X.X.X.X/ps5/patches/ps5patches.db"))
 
-            If Not String.IsNullOrEmpty(PatchesList) Then
-                Dim GamesListLines As String() = PatchesList.Split(New String() {vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
+                If Not String.IsNullOrEmpty(PatchesList) Then
+                    Dim GamesListLines As String() = PatchesList.Split(New String() {vbCrLf}, StringSplitOptions.RemoveEmptyEntries)
 
-                For Each GameLine As String In GamesListLines
-                    If Not String.IsNullOrWhiteSpace(GameLine) Then
-                        Dim SplittedValues As String() = GameLine.Split(New String() {";"}, StringSplitOptions.None)
-                        Dim AvailablePatch As New Structures.ModPatch() With {.Platform = SplittedValues(0), .GameTitle = SplittedValues(1), .RequiredVersion = SplittedValues(2), .PatchDetails = SplittedValues(3)}
-                        PatchesListView.Items.Add(AvailablePatch)
-                    End If
+                    For Each GameLine As String In GamesListLines
+                        If Not String.IsNullOrWhiteSpace(GameLine) Then
+                            Dim SplittedValues As String() = GameLine.Split(New String() {";"}, StringSplitOptions.None)
+                            Dim AvailablePatch As New Structures.ModPatch() With {.Platform = SplittedValues(0), .GameTitle = SplittedValues(1), .RequiredVersion = SplittedValues(2), .PatchDetails = SplittedValues(3)}
+                            PatchesListView.Items.Add(AvailablePatch)
+                        End If
 
-                Next
-            Else
-                MsgBox("Could not load the patches list.", MsgBoxStyle.Critical, "Error")
-            End If
+                    Next
+                Else
+                    MsgBox("Could not load the patches list.", MsgBoxStyle.Critical, "Error")
+                End If
 
-        End Using
+            End Using
+        Else
+            MsgBox("Could not load the patches list.", MsgBoxStyle.Information, "No internet connection")
+        End If
 
     End Sub
 

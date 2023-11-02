@@ -1,6 +1,7 @@
 ﻿Imports System.Globalization
 Imports System.IO
 Imports System.Net
+Imports System.Net.NetworkInformation
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
@@ -253,29 +254,42 @@ Public Class Utils
     End Function
 
     Public Shared Function IsURLValid(Url As String) As Boolean
-        Try
-            Dim NewWebRequest As HttpWebRequest = CType(WebRequest.Create(Url), HttpWebRequest)
-            Using WebRequestResponse As HttpWebResponse = CType(NewWebRequest.GetResponse(), HttpWebResponse)
-                If WebRequestResponse.StatusCode = HttpStatusCode.OK Then
-                    Return True
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Found Then
-                    Return True
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.NotFound Then
-                    Return False
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Unauthorized Then
-                    Return False
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.Forbidden Then
-                    Return False
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.BadGateway Then
-                    Return False
-                ElseIf WebRequestResponse.StatusCode = HttpStatusCode.BadRequest Then
-                    Return False
-                End If
+        If NetworkInterface.GetIsNetworkAvailable Then
+            Try
+                Dim request As HttpWebRequest = CType(WebRequest.Create(Url), HttpWebRequest)
+                Using response As HttpWebResponse = CType(request.GetResponse(), HttpWebResponse)
+                    If response.StatusCode = HttpStatusCode.OK Then
+                        Return True
+                    ElseIf response.StatusCode = HttpStatusCode.Found Then
+                        Return True
+                    ElseIf response.StatusCode = HttpStatusCode.NotFound Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.Unauthorized Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.Forbidden Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.BadGateway Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.BadRequest Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.RequestTimeout Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.GatewayTimeout Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.InternalServerError Then
+                        Return False
+                    ElseIf response.StatusCode = HttpStatusCode.ServiceUnavailable Then
+                        Return False
+                    Else
+                        Return False
+                    End If
+                End Using
+            Catch Ex As WebException
                 Return False
-            End Using
-        Catch Ex As Exception
+            End Try
+        Else
             Return False
-        End Try
+        End If
     End Function
 
     Public Shared Function CleanTitle(Title As String) As String

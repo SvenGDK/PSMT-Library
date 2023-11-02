@@ -14,7 +14,7 @@ Public Class PS5PKGBuilder
         PKGBuilder.StartInfo.UseShellExecute = False
         PKGBuilder.StartInfo.CreateNoWindow = True
         PKGBuilder.EnableRaisingEvents = True
-        PKGBuilder.StartInfo.Arguments = "img_create --oformat nwonly " + ProjectPath + " " + DestinationPath
+        PKGBuilder.StartInfo.Arguments = "img_create --oformat nwonly """ + ProjectPath + """ """ + DestinationPath + """"
         PKGBuilder.Start()
         PKGBuilder.BeginOutputReadLine()
     End Sub

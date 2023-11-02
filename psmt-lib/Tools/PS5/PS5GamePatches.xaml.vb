@@ -10,7 +10,9 @@ Public Class PS5GamePatches
     Private Sub SearchButton_Click(sender As Object, e As RoutedEventArgs) Handles SearchButton.Click
         If Not String.IsNullOrEmpty(SearchGameIDTextBox.Text) Then
             PatchesListView.Items.Clear()
-            ContentWebView.Source = New Uri("https://prosperopatches.com/" + SearchGameIDTextBox.Text)
+            If Utils.IsURLValid("https://prosperopatches.com/" + SearchGameIDTextBox.Text) Then
+                ContentWebView.Source = New Uri("https://prosperopatches.com/" + SearchGameIDTextBox.Text)
+            End If
         End If
     End Sub
 
