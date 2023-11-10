@@ -72,9 +72,9 @@ Some tools are written by other developers and will be executed from an executab
 - Adding a menu: ```<psmt_lib:PSMENUNAME Height="20" VerticalAlignment="Top"></psmt_lib:PSMENUNAME>```
 - Open a tool (SFO Editor for ex.):</br>```Imports psmt_lib```<br/>```Dim NewSFOEditor As New SFOEditor()```<br/>```NewSFOEditor.Show()```
 
-## PSMT Library currently uses the following utilities/libraries from other developers
-| Tool / Library | Created by | Repository |
-| --- | --- | --- |
+## The PSMT Library currently uses the following tools & libraries from other developers
+| Tool / Library | Created by | Repository | Info |
+| --- | --- | --- | --- |
 | `bchunk` | extramaster | https://github.com/extramaster/bchunk
 | `binmerge` | putnam | https://github.com/putnam/binmerge
 | `CEX2DEX` |  | 
@@ -94,6 +94,7 @@ Some tools are written by other developers and will be executed from an executab
 | `hexdump` | di-mgt | https://www.di-mgt.com.au/hexdump-for-windows.html
 | `HtmlAgilityPack` | ZZZ Projects | https://html-agility-pack.net/
 | `IsoPbpConverter` | LMAN | 
+| `kill_daemon` | illusion0001 | https://github.com/illusion0001/libhijacker| Python script -> single .exe
 | `klicencebruteforce` | MAGiC333X | 
 | `make_fself` |  | 
 | `maxcso` | unknownbrackets | https://github.com/unknownbrackets/maxcso
@@ -104,9 +105,10 @@ Some tools are written by other developers and will be executed from an executab
 | `pbppacker` |  | 
 | `pfsshell & pfsfuse` |  | https://github.com/ps2homebrew/pfsshell
 | `pkg2zip` | lusid1 | https://github.com/lusid1/pkg2zip
+| `pkg_merge` | aldo-o & Tustin | https://github.com/aldo-o/pkg-merge
 | `ps3iso-utils` | bucanero | https://github.com/bucanero/ps3iso-utils
 | `PS4_Tools Library` | xXxTheDarkprogramerxXx | https://github.com/xXxTheDarkprogramerxXx/PS4_Tools
-| `PSN_get_pkg_info` | windsurfer1122 | https://github.com/windsurfer1122/PSN_get_pkg_info
+| `PSN_get_pkg_info` | windsurfer1122 | https://github.com/windsurfer1122/PSN_get_pkg_info | Python script -> Single .exe
 | `psvpfstools` | motoharu-gosuto | https://github.com/motoharu-gosuto/psvpfstools
 | `psxtract` | Hykem | https://github.com/mrlucas84/psxtract
 | `pup_unpacker` | Zer0xFF | https://github.com/Zer0xFF/ps4-pup-unpacker
@@ -114,7 +116,8 @@ Some tools are written by other developers and will be executed from an executab
 | `rcomage` | ZiNgA BuRgA | 
 | `readself` | Team fail0verflow | https://github.com/daryl317/fail0verflow-PS3-tools/tree/master
 | `SCEDoormat_NoME` | krHACKen | 
-| `scetool` | naehrwert | https://github.com/naehrwert/scetool
+| `scetool` | naehrwert | https://github.com/naehrwert/scetool | 
+| `send_elf` | illusion0001 | https://github.com/illusion0001/libhijacker | Python script -> Single .exe
 | `sfo` | hippie68 | https://github.com/hippie68/sfo
 | `sngre` | cfwprophet | https://github.com/cfwprpht/Simply_Vita_RCO_Extractor
 | `strings` | Mark Russinovich | https://learn.microsoft.com/en-us/sysinternals/downloads/strings
