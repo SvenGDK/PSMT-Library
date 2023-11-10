@@ -314,4 +314,13 @@ Public Class Utils
         Next
     End Sub
 
+    Public Shared Sub UpdatePS5ManifestEditor(UpdatedParams As PS5ManifestClass.PS5Manifest)
+        For Each OpenWin In Windows.Application.Current.Windows()
+            If OpenWin.ToString = "psmt_lib.PS5ManifestEditor" Then
+                CType(OpenWin, PS5ManifestEditor).CurrentManifestJson = UpdatedParams
+                Exit For
+            End If
+        Next
+    End Sub
+
 End Class

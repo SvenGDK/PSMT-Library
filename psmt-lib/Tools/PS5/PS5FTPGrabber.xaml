@@ -5,20 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="FTP Grabber" Height="270" Width="505" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="FTP Grabber" Height="320" Width="705" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <ComboBox x:Name="SelectedFolderComboBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="470" IsEditable="True">
+        <ComboBox x:Name="SelectedFolderComboBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="665" IsEditable="True">
             <ComboBoxItem Content="/mnt/sandbox/pfsmnt/"/>
             <ComboBoxItem Content="/mnt/disc/"/>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Enter or select a folder to grab from:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="470"/>
-        <Button x:Name="DownloadButton" Content="Start Download" HorizontalAlignment="Left" Margin="310,140,0,0" VerticalAlignment="Top" Width="170"/>
-        <ProgressBar x:Name="ReceiveProgressBar" HorizontalAlignment="Left" Height="20" Margin="10,196,0,0" VerticalAlignment="Top" Width="470" Foreground="#FF00A4E3"/>
-        <TextBlock x:Name="ReceiveStatusTextBlock" HorizontalAlignment="Left" Margin="10,171,0,0" TextWrapping="Wrap" Text="Transfer Status:" VerticalAlignment="Top" Width="470" Height="20" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,61,0,0" TextWrapping="NoWrap" Text="Info: Selecting pfsmt will automatically detect the game." VerticalAlignment="Top" Foreground="White" Width="470" TextAlignment="Center" FontSize="11" FontStyle="Italic"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,91,0,0" TextWrapping="Wrap" Text="Select a directory to save the dump:" VerticalAlignment="Top" FontSize="14" Width="470" Foreground="White"/>
-        <TextBox x:Name="SelectedDirectoryTextBox" HorizontalAlignment="Left" Margin="10,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="400" Height="20"/>
-        <Button x:Name="BrowseFolderButton" Content="Browse" HorizontalAlignment="Left" Margin="414,115,0,0" VerticalAlignment="Top" Width="66"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Enter or select a folder to grab from:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="665"/>
+        <Button x:Name="DownloadButton" Content="Start Download" HorizontalAlignment="Left" Margin="505,182,0,0" VerticalAlignment="Top" Width="170"/>
+        <ProgressBar x:Name="ReceiveProgressBar" HorizontalAlignment="Left" Height="20" Margin="10,237,0,0" VerticalAlignment="Top" Width="665" Foreground="#FF00A4E3"/>
+        <TextBlock x:Name="ReceiveStatusTextBlock" HorizontalAlignment="Left" Margin="10,212,0,0" Text="Transfer Status:" VerticalAlignment="Top" Width="665" Height="20" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,61,0,0" TextWrapping="NoWrap" Text="Info: Selecting pfsmt will automatically detect the mounted game." VerticalAlignment="Top" Foreground="White" Width="665" TextAlignment="Center" FontSize="11" FontStyle="Italic"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,133,0,0" TextWrapping="Wrap" Text="Save to:" VerticalAlignment="Top" FontSize="14" Width="665" Foreground="White"/>
+        <TextBox x:Name="SelectedDirectoryTextBox" HorizontalAlignment="Left" Margin="10,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="594" Height="20"/>
+        <Button x:Name="BrowseFolderButton" Content="Browse" HorizontalAlignment="Left" Margin="609,157,0,0" VerticalAlignment="Top" Width="66"/>
+        <CheckBox x:Name="FullDumpCheckBox" Content="Create a full dump" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="NoWrap" Text="Options:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="665"/>
 
     </Grid>
 </Window>

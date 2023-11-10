@@ -2745,6 +2745,116 @@ Public Class PS5ParamClass
 
 End Class
 
+Public Class PS5ManifestClass
+
+    Public Class ApplicationData
+        Private _branchType As String
+
+        Public Property branchType As String
+            Get
+                Return _branchType
+            End Get
+            Set
+                _branchType = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class PS5Manifest
+        Private _applicationName As String
+        Private _applicationVersion As String
+        Private _commitHash As String
+        Private _titleId As String
+        Private _repositoryUrl As String
+        Private _reactNativePlaystationVersion As String
+        Private _applicationData As ApplicationData
+        Private _twinTurbo As Boolean
+        Private _bootAnimation As String
+
+        Public Property applicationName As String
+            Get
+                Return _applicationName
+            End Get
+            Set
+                _applicationName = Value
+            End Set
+        End Property
+
+        Public Property applicationVersion As String
+            Get
+                Return _applicationVersion
+            End Get
+            Set
+                _applicationVersion = Value
+            End Set
+        End Property
+
+        Public Property bootAnimation As String
+            Get
+                Return _bootAnimation
+            End Get
+            Set
+                _bootAnimation = Value
+            End Set
+        End Property
+
+        Public Property commitHash As String
+            Get
+                Return _commitHash
+            End Get
+            Set
+                _commitHash = Value
+            End Set
+        End Property
+
+        Public Property titleId As String
+            Get
+                Return _titleId
+            End Get
+            Set
+                _titleId = Value
+            End Set
+        End Property
+
+        Public Property repositoryUrl As String
+            Get
+                Return _repositoryUrl
+            End Get
+            Set
+                _repositoryUrl = Value
+            End Set
+        End Property
+
+        Public Property reactNativePlaystationVersion As String
+            Get
+                Return _reactNativePlaystationVersion
+            End Get
+            Set
+                _reactNativePlaystationVersion = Value
+            End Set
+        End Property
+
+        Public Property applicationData As ApplicationData
+            Get
+                Return _applicationData
+            End Get
+            Set
+                _applicationData = Value
+            End Set
+        End Property
+
+        Public Property twinTurbo As Boolean
+            Get
+                Return _twinTurbo
+            End Get
+            Set
+                _twinTurbo = Value
+            End Set
+        End Property
+    End Class
+
+End Class
+
 Public Class WAVFile
     Private _RIFF As Integer
     Private _TotalLength As Integer

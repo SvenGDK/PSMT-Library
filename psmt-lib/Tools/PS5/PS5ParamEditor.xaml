@@ -17,7 +17,7 @@
                 <MenuItem Header="PS5 Dev Wiki" x:Name="LoadPSDevWikiMenuItem"></MenuItem>
             </MenuItem>
         </Menu>
-        <TextBlock HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" Text="Current parameters" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="940" FontWeight="Bold" FontStyle="Italic"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,34,0,0"  Text="Current parameters" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="940" FontWeight="Bold" FontStyle="Italic"/>
         <ListView x:Name="ParamsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,60,0,0" Height="309" VerticalAlignment="Top" HorizontalAlignment="Left" Width="920">
             <ListView.View>
                 <GridView>
@@ -27,7 +27,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock HorizontalAlignment="Left" Margin="10,383,0,0" TextWrapping="Wrap" Text="Add a parameter" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,383,0,0"  Text="Add a parameter" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150" FontStyle="Italic" FontWeight="Bold"/>
         <ComboBox x:Name="ParamsComboBox" HorizontalAlignment="Left" Margin="165,411,0,0" VerticalAlignment="Top" Width="300">
             <ComboBoxItem Content="AgeLevel"/>
             <ComboBoxItem Content="ApplicationCategoryType"/>
@@ -46,12 +46,12 @@
             <ComboBoxItem Content="TitleId"/>
             <ComboBoxItem Content="VersionFileUri"/>
         </ComboBox>
-        <TextBlock HorizontalAlignment="Left" Margin="10,411,0,0" TextWrapping="Wrap" Text="Select param:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,436,0,0" TextWrapping="Wrap" Text="Set value:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
-        <TextBox x:Name="ParamValueTextBox" HorizontalAlignment="Left" Margin="165,438,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
-        <TextBlock HorizontalAlignment="Left" Margin="475,383,0,0" TextWrapping="Wrap" Text="Modify selected parameter" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontStyle="Italic" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="475,409,0,0" TextWrapping="Wrap" Text="Modify value:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
-        <TextBox x:Name="ModifyValueTextBox" HorizontalAlignment="Left" Margin="630,411,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,411,0,0" Text="Select param:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,436,0,0" Text="Set value:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
+        <TextBox x:Name="ParamValueTextBox" HorizontalAlignment="Left" Margin="165,438,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="475,383,0,0" Text="Modify selected parameter" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="475,409,0,0" Text="Modify value:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="150"/>
+        <TextBox x:Name="ModifyValueTextBox" HorizontalAlignment="Left" Margin="630,411,0,0" VerticalAlignment="Top" Width="300"/>
         <Button x:Name="SaveModifiedValueButton" Content="Save changes" HorizontalAlignment="Left" Margin="630,434,0,0" VerticalAlignment="Top" Width="115" FontSize="14" IsEnabled="False"/>
         <Button x:Name="AddParamButton" Content="Add param" HorizontalAlignment="Left" Margin="315,461,0,0" VerticalAlignment="Top" Width="150" FontSize="14" IsEnabled="False"/>
         <Button x:Name="RemoveParamButton" Content="Remove param" HorizontalAlignment="Left" Margin="815,434,0,0" VerticalAlignment="Top" Width="115" FontSize="14" IsEnabled="False"/>

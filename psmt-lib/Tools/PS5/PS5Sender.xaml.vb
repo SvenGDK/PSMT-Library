@@ -62,12 +62,12 @@ Public Class PS5Sender
     End Structure
 
     Enum SendType
-        ELF
+        PAYLOAD
         ISO
         CONF
     End Enum
 
-    Private Sub SendELFButton_Click(sender As Object, e As RoutedEventArgs) Handles SendELFButton.Click
+    Private Sub SendButton_Click(sender As Object, e As RoutedEventArgs) Handles SendButton.Click
         'Check if a ELF is selected
         If Not String.IsNullOrEmpty(SelectedELFTextBox.Text) Then
             'Check if an IP address was entered
@@ -77,16 +77,16 @@ Public Class PS5Sender
                 Try
                     DeviceIP = IPAddress.Parse(IPTextBox.Text)
                 Catch ex As FormatException
-                    MsgBox("Could not send selected ELF. Please check your IP.", MsgBoxStyle.Exclamation, "Error sending file")
+                    MsgBox("Could not send selected payload. Please check your IP.", MsgBoxStyle.Exclamation, "Error sending payload")
                     Exit Sub
                 End Try
 
                 Dim SelectedELF As String = SelectedELFTextBox.Text
                 Dim ELFFileInfo As New FileInfo(SelectedELF)
 
-                SendELFButton.IsEnabled = False
+                SendButton.IsEnabled = False
                 SendISOButton.IsEnabled = False
-                BrowseELFButton.IsEnabled = False
+                BrowseButton.IsEnabled = False
                 BrowseISOButton.IsEnabled = False
 
                 'Set the progress bar maximum and TotalBytes to send
@@ -95,7 +95,7 @@ Public Class PS5Sender
                 TotalBytes = CInt(ELFFileInfo.Length)
 
                 'Start sending
-                CurrentType = SendType.ELF
+                CurrentType = SendType.PAYLOAD
                 If Not String.IsNullOrEmpty(PortTextBox.Text) Then
                     Dim DevicePort As Integer = Integer.Parse(PortTextBox.Text)
                     DefaultSenderWorker.RunWorkerAsync(New WorkerArgs() With {.DeviceIP = DeviceIP, .FileToSend = SelectedELF, .DevicePort = DevicePort})
@@ -107,7 +107,7 @@ Public Class PS5Sender
                 MsgBox("No IP address was entered." + vbCrLf + "Please enter an IP address.", MsgBoxStyle.Exclamation, "No IP address")
             End If
         Else
-            MsgBox("No ELF selected." + vbCrLf + "Please select an ELF first.", MsgBoxStyle.Exclamation, "No ELF selected")
+            MsgBox("Please select a file first.", MsgBoxStyle.Exclamation, "No file selected")
         End If
     End Sub
 
@@ -122,9 +122,9 @@ Public Class PS5Sender
                     Dim DeviceIP As IPAddress = IPAddress.Parse(IPTextBox.Text)
                     Dim GameFileInfo As New FileInfo(SelectedISOTextBox.Text)
 
-                    SendELFButton.IsEnabled = False
+                    SendButton.IsEnabled = False
                     SendISOButton.IsEnabled = False
-                    BrowseELFButton.IsEnabled = False
+                    BrowseButton.IsEnabled = False
                     BrowseISOButton.IsEnabled = False
 
                     'Set the progress bar maximum and TotalBytes to send
@@ -152,9 +152,9 @@ Public Class PS5Sender
 
         If OFD.ShowDialog() = Forms.DialogResult.OK Then
 
-            SendELFButton.IsEnabled = False
+            SendButton.IsEnabled = False
             SendISOButton.IsEnabled = False
-            BrowseELFButton.IsEnabled = False
+            BrowseButton.IsEnabled = False
             BrowseISOButton.IsEnabled = False
 
             Dim ConfigFileInfo As New FileInfo(OFD.FileName)
@@ -236,25 +236,25 @@ Public Class PS5Sender
 
         If Not e.Cancelled Then
             Select Case CurrentType
-                Case SendType.ELF
+                Case SendType.PAYLOAD
                     SendConfigButton.IsEnabled = True
-                    SendELFButton.IsEnabled = True
+                    SendButton.IsEnabled = True
                     SendISOButton.IsEnabled = True
-                    BrowseELFButton.IsEnabled = True
+                    BrowseButton.IsEnabled = True
                     BrowseISOButton.IsEnabled = True
-                    MsgBox("ELF successfully sent!", MsgBoxStyle.Information, "Success")
+                    MsgBox("Payload successfully sent!", MsgBoxStyle.Information, "Success")
                 Case SendType.ISO
                     SendConfigButton.IsEnabled = True
-                    SendELFButton.IsEnabled = True
+                    SendButton.IsEnabled = True
                     SendISOButton.IsEnabled = True
-                    BrowseELFButton.IsEnabled = True
+                    BrowseButton.IsEnabled = True
                     BrowseISOButton.IsEnabled = True
                     MsgBox("Game successfully sent!" + vbCrLf + "You can now send a config file if you want to.", MsgBoxStyle.Information, "Success")
                 Case SendType.CONF
                     SendConfigButton.IsEnabled = False
-                    SendELFButton.IsEnabled = True
+                    SendButton.IsEnabled = True
                     SendISOButton.IsEnabled = True
-                    BrowseELFButton.IsEnabled = True
+                    BrowseButton.IsEnabled = True
                     BrowseISOButton.IsEnabled = True
                     MsgBox("Config successfully sent!", MsgBoxStyle.Information, "Success")
             End Select
@@ -262,8 +262,8 @@ Public Class PS5Sender
 
     End Sub
 
-    Private Sub BrowseELFButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseELFButton.Click
-        Dim OFD As New OpenFileDialog() With {.Title = "Select an .elf file", .Filter = "ELF files (*.elf)|*.elf"}
+    Private Sub BrowseButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseButton.Click
+        Dim OFD As New OpenFileDialog() With {.Title = "Select an .elf or .bin file", .Filter = "ELF files (*.elf)|*.elf|BIN files (*.bin)|*.bin"}
         If OFD.ShowDialog() = Forms.DialogResult.OK Then
             SelectedELFTextBox.Text = OFD.FileName
         End If
@@ -298,12 +298,12 @@ Public Class PS5Sender
     Private Sub DefaultSenderWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles DefaultSenderWorker.RunWorkerCompleted
 
         SendConfigButton.IsEnabled = True
-        SendELFButton.IsEnabled = True
+        SendButton.IsEnabled = True
         SendISOButton.IsEnabled = True
-        BrowseELFButton.IsEnabled = True
+        BrowseButton.IsEnabled = True
         BrowseISOButton.IsEnabled = True
 
-        MsgBox("ELF successfully sent!", MsgBoxStyle.Information, "Success")
+        MsgBox("Successfully sent!", MsgBoxStyle.Information, "Success")
     End Sub
 
     Private Sub PortTextBox_PreviewTextInput(sender As Object, e As TextCompositionEventArgs) Handles PortTextBox.PreviewTextInput

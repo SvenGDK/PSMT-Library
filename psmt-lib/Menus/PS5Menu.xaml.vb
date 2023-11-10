@@ -166,8 +166,8 @@ Public Class PS5Menu
 
         Dim NewPKGBuilder As New PS5PKGBuilder()
 
-        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Pub Tools\bin\pros-pub-cmd.exe") Then
-            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Pub Tools\bin\pros-pub-cmd.exe"
+        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe") Then
+            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe"
         ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
             NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
         Else
@@ -222,6 +222,11 @@ Public Class PS5Menu
         End If
 
         NewFTPGrabber.Show()
+    End Sub
+
+    Private Sub OpenManifestEditorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenManifestEditorMenuItem.Click
+        Dim NewManifestEditor As New PS5ManifestEditor() With {.ShowActivated = True}
+        NewManifestEditor.Show()
     End Sub
 
 #End Region

@@ -299,6 +299,9 @@
     <Compile Include="Tools\PS5\PS5GamePatches.xaml.vb">
       <DependentUpon>PS5GamePatches.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\PS5ManifestEditor.xaml.vb">
+      <DependentUpon>PS5ManifestEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\PS5ModPatches.xaml.vb">
       <DependentUpon>PS5ModPatches.xaml</DependentUpon>
     </Compile>
@@ -535,6 +538,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\PS5GamePatches.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5ManifestEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

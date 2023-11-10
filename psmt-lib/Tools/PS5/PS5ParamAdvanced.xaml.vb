@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Windows
+Imports psmt_lib.PS5ManifestClass
 Imports psmt_lib.PS5ParamClass
 Imports psmt_lib.Utils
 
@@ -8,6 +9,8 @@ Public Class PS5ParamAdvanced
     Public AdvancedParam As String
     Public CurrentParamJsonPath As String = Nothing
     Public CurrentParamJson As PS5Param = Nothing
+    Public CurrentManifestJsonPath As String = Nothing
+    Public CurrentManifestJson As PS5Manifest = Nothing
 
     Private Sub PS5ParamAdvanced_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         Try
@@ -21,6 +24,19 @@ Public Class PS5ParamAdvanced
                         Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
                         If Parameter.GetValue(ParamAgeLevel, Nothing) IsNot Nothing Then
                             NewParamLVItem.ParamValue = Parameter.GetValue(ParamAgeLevel, Nothing).ToString
+                            ParamsListView.Items.Add(NewParamLVItem)
+                        End If
+                    Next
+
+                Case "applicationData"
+
+                    Dim ParamApplicationData As ApplicationData = CurrentManifestJson.applicationData
+
+                    For Each Parameter In ParamApplicationData.GetType().GetProperties()
+                        'Add to ParamsListView
+                        Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
+                        If Parameter.GetValue(ParamApplicationData, Nothing) IsNot Nothing Then
+                            NewParamLVItem.ParamValue = Parameter.GetValue(ParamApplicationData, Nothing).ToString
                             ParamsListView.Items.Add(NewParamLVItem)
                         End If
                     Next
@@ -764,6 +780,11 @@ Public Class PS5ParamAdvanced
                     End If
 
 #End Region
+#Region "applicationData"
+                Case "branchType"
+                    CurrentManifestJson.applicationData.branchType = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
+#End Region
             End Select
 
             ParamsListView.Items.Refresh()
@@ -986,6 +1007,10 @@ Public Class PS5ParamAdvanced
                 Case "default"
                     CurrentParamJson.AgeLevel.Default = Nothing
 
+#End Region
+#Region "applicationData"
+                Case "branchType"
+                    CurrentManifestJson.applicationData.branchType = Nothing
 #End Region
             End Select
 
@@ -1634,6 +1659,12 @@ Public Class PS5ParamAdvanced
                             End If
 
 #End Region
+#Region "applicationData"
+                        Case "branchType"
+                            CurrentManifestJson.applicationData.branchType = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "branchType", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+#End Region
                     End Select
                 End If
 
@@ -1647,6 +1678,8 @@ Public Class PS5ParamAdvanced
 
         'Return the updated values to the param.json editor
         UpdatePS5ParamEditor(CurrentParamJson)
+        UpdatePS5ManifestEditor(CurrentManifestJson)
+
         MsgBox("Do not forget to save the changes with File -> Save.", MsgBoxStyle.Information)
 
     End Sub

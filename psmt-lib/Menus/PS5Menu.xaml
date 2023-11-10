@@ -12,6 +12,7 @@
         <MenuItem Header="Build / Create">
             <MenuItem Header="Blu Ray Disc Burner" x:Name="OpenBDBurnerMenuItem"/>
             <MenuItem Header="GP5 Creator" x:Name="OpenGP5ManagerMenuItem"/>
+            <MenuItem Header="Manifest Editor" x:Name="OpenManifestEditorMenuItem"/>
             <MenuItem Header="Param Editor" x:Name="OpenParamEditorMenuItem"/>
             <MenuItem Header="PKG Builder" x:Name="OpenPKGBuilderMenuItem"/>
             <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"/>
@@ -73,6 +74,9 @@
     <MenuItem Header="Hosts &amp; DNS">
         <MenuItem Header="PS Multi Tools Host:">
             <TextBox Text="http://X.X.X.X/ps5ex/"></TextBox>
+        </MenuItem>
+        <MenuItem Header="PKG-Zone Host:">
+            <TextBox Text="https://pkg-zone.com/exploit/PS5/index.html"></TextBox>
         </MenuItem>
         <MenuItem Header="Sleirsgoevy Host:">
             <TextBox Text="https://sleirsgoevy.github.io/ps4jb2/ps5-403/index.html"></TextBox>
