@@ -1,8 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.Net
-Imports System.Net.Sockets
-Imports System.Threading
 Imports System.Windows.Input
 Imports WinSCP
 
@@ -17,6 +14,7 @@ Public Class PS5FTPGrabber
     Dim CustomRemoteFolder As String = String.Empty
 
     Dim AppMetadataRemoteFolder As String = String.Empty
+    Dim SystemAppMetadataRemoteFolder As String = String.Empty
     Dim NPBind As String = String.Empty
 
     Dim TotalFiles As Integer = 0
@@ -34,30 +32,59 @@ Public Class PS5FTPGrabber
         DiscRemoteFolder = String.Empty
         CustomRemoteFolder = String.Empty
         AppMetadataRemoteFolder = String.Empty
+        SystemAppMetadataRemoteFolder = String.Empty
         NPBind = String.Empty
 
         Cursor = Cursors.Wait
 
         If SelectedFolderComboBox.Text = "/mnt/sandbox/pfsmnt/" Then
 
-            If GetApp0(ConsoleIP) = True Then
+            If MetadataDumpCheckBox.IsChecked Then
 
-                If Dispatcher.CheckAccess() = False Then
-                    Dispatcher.BeginInvoke(Sub()
-                                               ReceiveProgressBar.Value = 0
-                                               ReceiveStatusTextBlock.Text = "Starting, please wait ... 0/" + TotalFiles.ToString()
-                                               ReceiveProgressBar.Maximum = TotalFiles
-                                           End Sub)
+                If GetAppMetadata() = True Then
+
+                    If Dispatcher.CheckAccess() = False Then
+                        Dispatcher.BeginInvoke(Sub()
+                                                   ReceiveProgressBar.Value = 0
+                                                   ReceiveStatusTextBlock.Text = "Getting metadata, please wait ... 0/" + TotalFiles.ToString()
+                                                   ReceiveProgressBar.Maximum = TotalFiles
+                                               End Sub)
+                    Else
+                        ReceiveProgressBar.Value = 0
+                        ReceiveStatusTextBlock.Text = "Getting metadata, please wait ... 0/" + TotalFiles.ToString()
+                        ReceiveProgressBar.Maximum = TotalFiles
+                    End If
+
+                    LockUI()
+                    MetadataWorker.RunWorkerAsync()
                 Else
-                    ReceiveProgressBar.Value = 0
-                    ReceiveStatusTextBlock.Text = "Starting, please wait ... 0/" + TotalFiles.ToString()
-                    ReceiveProgressBar.Maximum = TotalFiles
+                    Cursor = Cursors.Arrow
+                    MsgBox("Could not find any metadata.", MsgBoxStyle.Exclamation, "Error reading data")
                 End If
 
-                AppCopyWorker.RunWorkerAsync()
             Else
-                Cursor = Cursors.Arrow
-                MsgBox("Could not find any mounted game.", MsgBoxStyle.Exclamation, "Error reading data")
+
+                If GetApp0(ConsoleIP) = True Then
+
+                    If Dispatcher.CheckAccess() = False Then
+                        Dispatcher.BeginInvoke(Sub()
+                                                   ReceiveProgressBar.Value = 0
+                                                   ReceiveStatusTextBlock.Text = "Starting, please wait ... 0/" + TotalFiles.ToString()
+                                                   ReceiveProgressBar.Maximum = TotalFiles
+                                               End Sub)
+                    Else
+                        ReceiveProgressBar.Value = 0
+                        ReceiveStatusTextBlock.Text = "Starting, please wait ... 0/" + TotalFiles.ToString()
+                        ReceiveProgressBar.Maximum = TotalFiles
+                    End If
+
+                    LockUI()
+                    AppCopyWorker.RunWorkerAsync()
+                Else
+                    Cursor = Cursors.Arrow
+                    MsgBox("Could not find any mounted game.", MsgBoxStyle.Exclamation, "Error reading data")
+                End If
+
             End If
 
         ElseIf SelectedFolderComboBox.Text = "/mnt/disc/" Then
@@ -75,6 +102,7 @@ Public Class PS5FTPGrabber
                     ReceiveProgressBar.Maximum = TotalFiles
                 End If
 
+                LockUI()
                 AppCopyWorker.RunWorkerAsync()
             Else
                 Cursor = Cursors.Arrow
@@ -96,6 +124,7 @@ Public Class PS5FTPGrabber
                     ReceiveProgressBar.Maximum = TotalFiles
                 End If
 
+                LockUI()
                 AppCopyWorker.RunWorkerAsync()
             Else
                 Cursor = Cursors.Arrow
@@ -123,7 +152,7 @@ Public Class PS5FTPGrabber
             NewSession.Open(sessionOptions)
 
             ' Get the app0 folder
-            For Each DirectoryInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles(SelectedFolderComboBox.Text, "", EnumerationOptions.MatchDirectories)
+            For Each DirectoryInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles("/mnt/sandbox/pfsmnt/", "", EnumerationOptions.MatchDirectories)
                 If DirectoryInFTP.Name.EndsWith("app0") Then
                     App0RemoteFolderName = DirectoryInFTP.Name
                     App0RemoteFolder = DirectoryInFTP.FullName
@@ -167,22 +196,42 @@ Public Class PS5FTPGrabber
         End With
 
         Dim NewSession As New Session()
-        Dim GameID As String = App0RemoteFolderName.Split("-"c)(0)
+        Dim GameID As String = String.Empty
 
         Try
-            ' Connect
+
+            'Connect
             NewSession.Open(sessionOptions)
 
-            ' Check if the metadata exists
+            If String.IsNullOrEmpty(App0RemoteFolderName) Then
+                ' Get the app0 folder
+                For Each DirectoryInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles("/mnt/sandbox/pfsmnt/", "", EnumerationOptions.MatchDirectories)
+                    If DirectoryInFTP.Name.EndsWith("app0") Then
+                        App0RemoteFolderName = DirectoryInFTP.Name
+                        App0RemoteFolder = DirectoryInFTP.FullName
+                        Exit For
+                    End If
+                Next
+            End If
+
+            GameID = App0RemoteFolderName.Split("-"c)(0)
+
+            'Check if the metadata exists
             For Each DirectoryInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles("/user/appmeta/", "", EnumerationOptions.MatchDirectories)
                 If DirectoryInFTP.Name = GameID Then
                     AppMetadataRemoteFolder = DirectoryInFTP.FullName
                     Exit For
                 End If
             Next
+            For Each DirectoryInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles("/system_data/priv/appmeta/", "", EnumerationOptions.MatchDirectories)
+                If DirectoryInFTP.Name = GameID Then
+                    SystemAppMetadataRemoteFolder = DirectoryInFTP.FullName
+                    Exit For
+                End If
+            Next
 
             'Check for npbind.dat
-            For Each FileInFTP In NewSession.EnumerateRemoteFiles("/system_data/priv/appmeta/" + GameID + "/trophy2/", "", EnumerationOptions.AllDirectories)
+            For Each FileInFTP As RemoteFileInfo In NewSession.EnumerateRemoteFiles("/system_data/priv/appmeta/" + GameID + "/trophy2/", "", EnumerationOptions.AllDirectories)
                 If FileInFTP.Name = "npbind.dat" Then
                     NPBind = FileInFTP.FullName
                     Exit For
@@ -198,11 +247,14 @@ Public Class PS5FTPGrabber
             Return False
         Else
             Try
-                ' Reset and get total files count
-                TotalFiles = 3 'already including npbind.dat and both .ucp files
+                'Reset and get total files count
+                TotalFiles = 3
                 CopiedFiles = 0
 
                 For Each FileInFTP In NewSession.EnumerateRemoteFiles(AppMetadataRemoteFolder, "", EnumerationOptions.AllDirectories)
+                    TotalFiles += 1
+                Next
+                For Each FileInFTP In NewSession.EnumerateRemoteFiles(SystemAppMetadataRemoteFolder, "", EnumerationOptions.AllDirectories)
                     TotalFiles += 1
                 Next
             Catch ex As Exception
@@ -339,6 +391,7 @@ Public Class PS5FTPGrabber
 
             Else
                 MsgBox("Dump completed.", MsgBoxStyle.Information, "Success")
+                LockUI()
             End If
 
         Else
@@ -418,7 +471,9 @@ Public Class PS5FTPGrabber
                 Next
 
                 If File.Exists(SelectedPath + "\sce_sys\uds\uds.ucp") Then
-                    My.Computer.FileSystem.RenameFile(SelectedPath + "\sce_sys\uds\uds.ucp", "uds00.ucp")
+                    If Not File.Exists(SelectedPath + "\sce_sys\uds\uds00.ucp") Then
+                        My.Computer.FileSystem.RenameFile(SelectedPath + "\sce_sys\uds\uds.ucp", "uds00.ucp")
+                    End If
                 End If
 
                 'Check if folder exists for trophy and get the file
@@ -430,7 +485,9 @@ Public Class PS5FTPGrabber
                 Next
 
                 If File.Exists(SelectedPath + "\sce_sys\trophy2\TROPHY.UCP") Then
-                    My.Computer.FileSystem.RenameFile(SelectedPath + "\sce_sys\trophy2\TROPHY.UCP", "trophy00.ucp")
+                    If Not File.Exists(SelectedPath + "\sce_sys\trophy2\trophy00.ucp") Then
+                        My.Computer.FileSystem.RenameFile(SelectedPath + "\sce_sys\trophy2\TROPHY.UCP", "trophy00.ucp")
+                    End If
                 End If
 
             End If
@@ -441,25 +498,33 @@ Public Class PS5FTPGrabber
         If Not String.IsNullOrEmpty(AppMetadataRemoteFolder) Then
             MetadataDumpResult = NewSession.SynchronizeDirectories(SynchronizationMode.Local, SelectedPath + "\sce_sys", AppMetadataRemoteFolder, False)
         End If
+        If Not String.IsNullOrEmpty(SystemAppMetadataRemoteFolder) Then
+            MetadataDumpResult = NewSession.SynchronizeDirectories(SynchronizationMode.Local, SelectedPath + "\sce_sys", SystemAppMetadataRemoteFolder, False)
+        End If
     End Sub
 
     Private Sub MetadataWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles MetadataWorker.RunWorkerCompleted
 
         Cursor = Cursors.Arrow
 
-        If Dispatcher.CheckAccess() = False Then
-            Dispatcher.BeginInvoke(Sub() ReceiveProgressBar.Value = 0)
-        Else
-            ReceiveProgressBar.Value = 0
-        End If
-
         ' Throw on any error
         MetadataDumpResult.Check()
 
         If MetadataDumpResult.IsSuccess Then
-            MsgBox("Full dump completed!", MsgBoxStyle.Information, "Success")
+            MsgBox("Dump completed!", MsgBoxStyle.Information, "Success")
+            LockUI()
         Else
             MsgBox("Could not dump all files.", MsgBoxStyle.Exclamation, "Error while getting the metadata")
+        End If
+
+        If Dispatcher.CheckAccess() = False Then
+            Dispatcher.BeginInvoke(Sub()
+                                       ReceiveProgressBar.Value = 0
+                                       ReceiveStatusTextBlock.Text = "Transfer Status: Dump completed!"
+                                   End Sub)
+        Else
+            ReceiveProgressBar.Value = 0
+            ReceiveStatusTextBlock.Text = "Transfer Status: Dump completed!"
         End If
 
     End Sub
@@ -468,8 +533,54 @@ Public Class PS5FTPGrabber
         If SelectedFolderComboBox.SelectedItem IsNot Nothing Then
             If SelectedFolderComboBox.SelectedIndex = 0 Then
                 FullDumpCheckBox.IsEnabled = True
+                MetadataDumpCheckBox.IsEnabled = True
             Else
                 FullDumpCheckBox.IsEnabled = False
+                MetadataDumpCheckBox.IsEnabled = False
+            End If
+        End If
+    End Sub
+
+    Private Sub PS5FTPGrabber_ContentRendered(sender As Object, e As EventArgs) Handles Me.ContentRendered
+        Utils.CheckForMissingFiles()
+    End Sub
+
+    Public Sub LockUI()
+        If SelectedFolderComboBox.IsEnabled Then
+            If Dispatcher.CheckAccess() = False Then
+                Dispatcher.BeginInvoke(Sub()
+                                           SelectedFolderComboBox.IsEnabled = False
+                                           FullDumpCheckBox.IsEnabled = False
+                                           MetadataDumpCheckBox.IsEnabled = False
+                                           SelectedDirectoryTextBox.IsEnabled = False
+                                           BrowseFolderButton.IsEnabled = False
+                                           DownloadButton.IsEnabled = False
+                                       End Sub)
+            Else
+                SelectedFolderComboBox.IsEnabled = False
+                FullDumpCheckBox.IsEnabled = False
+                MetadataDumpCheckBox.IsEnabled = False
+                SelectedDirectoryTextBox.IsEnabled = False
+                BrowseFolderButton.IsEnabled = False
+                DownloadButton.IsEnabled = False
+            End If
+        Else
+            If Dispatcher.CheckAccess() = False Then
+                Dispatcher.BeginInvoke(Sub()
+                                           SelectedFolderComboBox.IsEnabled = True
+                                           FullDumpCheckBox.IsEnabled = True
+                                           MetadataDumpCheckBox.IsEnabled = True
+                                           SelectedDirectoryTextBox.IsEnabled = True
+                                           BrowseFolderButton.IsEnabled = True
+                                           DownloadButton.IsEnabled = True
+                                       End Sub)
+            Else
+                SelectedFolderComboBox.IsEnabled = True
+                FullDumpCheckBox.IsEnabled = True
+                MetadataDumpCheckBox.IsEnabled = True
+                SelectedDirectoryTextBox.IsEnabled = True
+                BrowseFolderButton.IsEnabled = True
+                DownloadButton.IsEnabled = True
             End If
         End If
     End Sub
