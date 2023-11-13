@@ -22,6 +22,7 @@
         <CheckBox x:Name="FullDumpCheckBox" Content="Create a full dump" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" IsEnabled="False"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="NoWrap" Text="Options:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="665"/>
         <CheckBox x:Name="MetadataDumpCheckBox" Content="Dump metadata only" HorizontalAlignment="Left" Margin="149,105,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" IsEnabled="False"/>
+        <CheckBox x:Name="SELFDumpCheckBox" Content="Dump SELF files only" HorizontalAlignment="Left" Margin="304,105,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" IsEnabled="False"/>
 
     </Grid>
 </Window>

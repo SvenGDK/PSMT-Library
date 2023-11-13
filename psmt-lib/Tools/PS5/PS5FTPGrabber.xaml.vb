@@ -1,7 +1,9 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.Windows.Input
+Imports System.Net
+Imports System.Net.Sockets
 Imports WinSCP
+Imports Cursors = System.Windows.Input.Cursors
 
 Public Class PS5FTPGrabber
 
@@ -22,6 +24,7 @@ Public Class PS5FTPGrabber
 
     Dim WithEvents AppCopyWorker As New BackgroundWorker With {.WorkerReportsProgress = True}
     Dim WithEvents MetadataWorker As New BackgroundWorker With {.WorkerReportsProgress = True}
+    Dim WithEvents ReceiveWorker As New BackgroundWorker() With {.WorkerReportsProgress = True}
 
     Dim AppDumpResult As SynchronizationResult
     Dim MetadataDumpResult As SynchronizationResult
@@ -62,6 +65,21 @@ Public Class PS5FTPGrabber
                     MsgBox("Could not find any metadata.", MsgBoxStyle.Exclamation, "Error reading data")
                 End If
 
+            ElseIf SELFDumpCheckBox.IsChecked Then
+
+                If String.IsNullOrEmpty(SelectedDirectoryTextBox.Text) Then
+
+                    'If not path is specified then create a "Dumps" folder
+                    If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Dumps") Then
+                        Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Dumps")
+                    End If
+                    'Set the new folder
+                    SelectedPath = My.Computer.FileSystem.CurrentDirectory + "\Dumps"
+
+                End If
+
+                LockUI()
+                ReceiveWorker.RunWorkerAsync()
             Else
 
                 If GetApp0(ConsoleIP) = True Then
@@ -531,12 +549,15 @@ Public Class PS5FTPGrabber
 
     Private Sub SelectedFolderComboBox_SelectionChanged(sender As Object, e As Windows.Controls.SelectionChangedEventArgs) Handles SelectedFolderComboBox.SelectionChanged
         If SelectedFolderComboBox.SelectedItem IsNot Nothing Then
+            'Make options available if first entry is selected (should be "/mnt/sandbox/pfsmnt/")
             If SelectedFolderComboBox.SelectedIndex = 0 Then
                 FullDumpCheckBox.IsEnabled = True
                 MetadataDumpCheckBox.IsEnabled = True
+                SELFDumpCheckBox.IsEnabled = True
             Else
                 FullDumpCheckBox.IsEnabled = False
                 MetadataDumpCheckBox.IsEnabled = False
+                SELFDumpCheckBox.IsEnabled = False
             End If
         End If
     End Sub
@@ -583,6 +604,90 @@ Public Class PS5FTPGrabber
                 DownloadButton.IsEnabled = True
             End If
         End If
+    End Sub
+
+    Private Sub ReceiveWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles ReceiveWorker.DoWork
+        Dim Read As Integer
+        Dim TotalBytesRead As Integer = 0
+        Dim ReceivedBytes As Integer = 0
+        Dim Buffer As Byte() = New Byte(1024 - 1) {}
+        Dim EndpointIPAddress As IPAddress = IPAddress.Parse(ConsoleIP)
+        Dim NewIPEndPoint As New IPEndPoint(EndpointIPAddress, 9023)
+
+        'Change progress bar
+        If ReceiveProgressBar.Dispatcher.CheckAccess() = False Then
+            ReceiveProgressBar.Dispatcher.BeginInvoke(Sub() ReceiveProgressBar.IsIndeterminate = True)
+        Else
+            ReceiveProgressBar.IsIndeterminate = True
+        End If
+
+        Using ReceiverSocket As New Socket(SocketType.Stream, ProtocolType.Tcp)
+
+            ReceiverSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, True)
+            ReceiverSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, 5000)
+
+            'Connect to the SELF dumper
+            ReceiverSocket.Connect(NewIPEndPoint)
+
+            'Create the dump
+            Using NewFileStream As New FileStream(SelectedPath + "\self-dump.tar", FileMode.Create, FileAccess.ReadWrite)
+
+                Do
+                    'Receive from socket
+                    Read = ReceiverSocket.Receive(Buffer)
+
+                    'Continue if data is present
+                    If Read > 0 Then
+
+                        'Write to file & update TotalBytesRead
+                        NewFileStream.Write(Buffer, 0, Read)
+                        TotalBytesRead += Read
+
+                        'Update the status text
+                        If ReceiveStatusTextBlock.Dispatcher.CheckAccess() = False Then
+                            ReceiveStatusTextBlock.Dispatcher.BeginInvoke(Sub() ReceiveStatusTextBlock.Text = "Creating self-dump.tar. " + FormatNumber(TotalBytesRead / 1048576, 2) + " MB received.")
+                        Else
+                            ReceiveStatusTextBlock.Text = "Creating self-dump.tar. " + FormatNumber(TotalBytesRead / 1048576, 2) + " MB received."
+                        End If
+
+                    End If
+
+                Loop While Read > 0
+
+            End Using
+
+            'Close the connection
+            ReceiverSocket.Close()
+
+        End Using
+    End Sub
+
+    Private Sub ReceiveWorker_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles ReceiveWorker.RunWorkerCompleted
+
+        'Change progress bar
+        If ReceiveProgressBar.Dispatcher.CheckAccess() = False Then
+            ReceiveProgressBar.Dispatcher.BeginInvoke(Sub() ReceiveProgressBar.IsIndeterminate = False)
+        Else
+            ReceiveProgressBar.IsIndeterminate = False
+        End If
+
+        'Update the status text
+        If ReceiveStatusTextBlock.Dispatcher.CheckAccess() = False Then
+            ReceiveStatusTextBlock.Dispatcher.BeginInvoke(Sub() ReceiveStatusTextBlock.Text = "")
+        Else
+            ReceiveStatusTextBlock.Text = ""
+        End If
+
+        If SelectedPath = My.Computer.FileSystem.CurrentDirectory + "\Dumps" Then
+            If MsgBox("SELF files dumped!" + vbCrLf + "Open the 'Dumps' folder ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                Process.Start("explorer", My.Computer.FileSystem.CurrentDirectory + "\Dumps")
+            End If
+        Else
+            MsgBox("SELF files dumped!", MsgBoxStyle.Information)
+        End If
+
+        LockUI()
+
     End Sub
 
 End Class
