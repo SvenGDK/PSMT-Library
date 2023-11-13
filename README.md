@@ -35,19 +35,23 @@ Some tools are written by other developers and will be executed from an executab
 - PKG Merger
 
 ## PS5
-- General ELF Payload Sender
-- Mast1c0re Payload & PS2 ISO Sender
-- Add the Internet Browser to the home menu for every profile with a simple click (requires FTPS5 loaded first)
-- Burn BR .iso images to Blu Ray discs
-- Notification Manager (requires FTPS5 loaded first)
+- General ELF & BIN Payload Sender
+- Mast1c0re ELF Payload & PS2 ISO Sender
+- APP.DB Modifier (Add the Internet Browser to the home menu for every profile with a simple click (requires FTPS5 loaded first))
+- Burn Blu Ray ISO images to Blu Ray discs
+- NOTIFICATION2.DB Manager (requires FTPS5 loaded first)
 - Clear the console's error history (requires FTPS5 loaded first)
 - PARAM.JSON Creator & Editor
-- GP5 Project Creator (requires pub tools at \Tools\PS5\ )
-- PKG Builder (requires pub tools at \Tools\PS5\ )
+- MANIFEST.JSON Creator & Editor
+- GP5 Project Creator (requires prospero-pub-cmd at \Tools\PS5\ )
+- PKG Builder (requires prospero-pub-cmd at \Tools\PS5\ )
 - RCO Dumper (requires FTPS5 loaded first)
 - RCO Extractor
-- AT9<->WAV Converter
-- FTP Grabber (requires FTPS5 loaded first)
+- AT9 <-> WAV Audio Converter
+- FTP Grabber
+  - Allows dumping of games (/mnt/sandbox/pfsmnt)
+  - Allows dumping of game metadata (/user/appmeta/ + /system_data/priv/appmeta/ & /user/np_uds/nobackup/conf/ + /user/trophy2/nobackup/conf/)
+  - Allows dumping SELF files using sleirsgoevy's ps5-self-dumper payload (https://github.com/sleirsgoevy/ps4jb-payloads/tree/bd-jb/ps5-self-dumper)
 - PS5 Game Patches Downloader
   - Currently loads only patch list with information and can redirect to download page
 - Unofficial patches loader (libhijack fork of illusion)
