@@ -47,13 +47,13 @@ Some tools are written by other developers and will be executed from an executab
 - PKG Builder (requires prospero-pub-cmd at \Tools\PS5\ )
 - RCO Dumper (requires FTPS5 loaded first)
 - RCO Extractor
-- AT9 <-> WAV Audio Converter
+- AT9 <-> WAV Audio Converter (requires at9tool at \Tools\PS5\ )
 - FTP Grabber
-  - Allows dumping of games (/mnt/sandbox/pfsmnt)
+  - Allows dumping of games (/mnt/sandbox/pfsmnt) (detects the remote game folder automatically)
   - Allows dumping of game metadata (/user/appmeta/ + /system_data/priv/appmeta/ & /user/np_uds/nobackup/conf/ + /user/trophy2/nobackup/conf/)
   - Allows dumping SELF files using sleirsgoevy's ps5-self-dumper payload (https://github.com/sleirsgoevy/ps4jb-payloads/tree/bd-jb/ps5-self-dumper)
 - PS5 Game Patches Downloader
-  - Currently loads only patch list with information and can redirect to download page
+  - Currently loads only patch list with information and can redirects download page
 - Unofficial patches loader (libhijack fork of illusion)
 - PKG Merger
 
