@@ -40,11 +40,8 @@ Public Class PS5GamePatches
     End Sub
 
     Private Sub DownloadButton_Click(sender As Object, e As RoutedEventArgs) Handles DownloadButton.Click
-
-        If DownloadQueueListView.SelectedItem Is Nothing Then
+        If DownloadQueueListView.SelectedItem IsNot Nothing Then
             If DownloadQueueListView.SelectedItems.Count > 1 Then
-
-                MsgBox("More than 1")
 
                 For Each SelectedItem In DownloadQueueListView.SelectedItems
                     Dim SelectedItemAsQueueItem As Structures.DownloadQueueItem = CType(SelectedItem, Structures.DownloadQueueItem)
