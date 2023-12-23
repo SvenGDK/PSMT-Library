@@ -10,12 +10,12 @@ Public Class GP5Creator
 
     Private Sub GP5Creator_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         'Set the path of the pub tools
-        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Pub Tools\bin\pros-pub-cmd.exe") Then
-            PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Pub Tools\bin\pros-pub-cmd.exe"
+        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\SCE\Prospero\Tools\Publishing Tools\bin\prospero-pub-cmd.exe") Then
+            PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\SCE\Prospero\Tools\Publishing Tools\bin\prospero-pub-cmd.exe"
             PubToolsFoundTextBlock.Text = PubToolsPath
             PubToolsFoundTextBlock.Foreground = Brushes.Green
-        ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
-            PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+        ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
+            PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
             PubToolsFoundTextBlock.Text = PubToolsPath
             PubToolsFoundTextBlock.Foreground = Brushes.Green
         Else

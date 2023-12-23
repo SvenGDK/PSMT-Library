@@ -46,41 +46,13 @@ Public Class Downloader
         AddHandler SystemEvents.TimerElapsed, AddressOf DownloadUpdating
     End Sub
 
-    Public Shared Function GetFilenameFromUrl(FileURL As Uri) As String
-        Return FileURL.Segments(FileURL.Segments.Length - 1)
-    End Function
-
-    Public Function WebFileSize(sURL As String) As Double
-
-        If sURL.StartsWith("ftp://") Then
-            Dim myRequest As FtpWebRequest
-
-            myRequest = CType(WebRequest.Create(sURL), FtpWebRequest)
-            myRequest.Method = WebRequestMethods.Ftp.GetFileSize
-            myRequest.Credentials = New NetworkCredential("anonymous", "")
-
-            Dim myResponse As FtpWebResponse = CType(myRequest.GetResponse(), FtpWebResponse)
-            Dim ResponseLenght As Long = myResponse.ContentLength
-            myResponse.Close()
-
-            Return Math.Round(ResponseLenght / 1024 / 1024, 2)
-        Else
-            Dim myRequest As HttpWebRequest = CType(WebRequest.Create(sURL), HttpWebRequest)
-            Dim myResponse As HttpWebResponse = CType(myRequest.GetResponse(), HttpWebResponse)
-            myResponse.Close()
-
-            Return Math.Round(myResponse.ContentLength / 1024 / 1024, 2)
-        End If
-
-    End Function
-
     Public Function CreateNewDownload(Source As String, Optional ModifyName As Boolean = False, Optional NewName As String = "") As Boolean
         'Create Downloads directory if not exists
         If Not Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then Directory.CreateDirectory(My.Computer.FileSystem.CurrentDirectory + "\Downloads")
 
         If DownloadIcon IsNot Nothing Then DownloadImage.Source = DownloadIcon
 
-        Dim FileName As String = GetFilenameFromUrl(New Uri(Source))
+        Dim FileName As String = Utils.GetFilenameFromUrl(New Uri(Source))
         If Not String.IsNullOrEmpty(FileName) Then
             TimerID = SystemEvents.CreateTimer(1000)
             StartTime = Now.Ticks
@@ -90,7 +62,7 @@ Public Class Downloader
                 FileName = NewName
             End If
 
-            DownloadFileSizeTB.Text = "File Size: " + WebFileSize(Source).ToString + " MB"
+            DownloadFileSizeTB.Text = "File Size: " + Utils.WebFileSize(Source).ToString + " MB"
             FileToDownloadTB.Text = "Downloading " + FileName + " ..."
             DownloadClient.DownloadFileAsync(New Uri(Source), My.Computer.FileSystem.CurrentDirectory + "\Downloads\" + FileName)
             Return True

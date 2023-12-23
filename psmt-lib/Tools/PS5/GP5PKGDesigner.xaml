@@ -1,0 +1,13 @@
+﻿<Window x:Class="GP5PKGDesigner"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:psmt_lib"
+             mc:Ignorable="d" 
+             Title="PKG Designer" Height="455" Width="748" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Create or modify a project" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="455" FontWeight="Bold"/>
+
+    </Grid>
+</Window>

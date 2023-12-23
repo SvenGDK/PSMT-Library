@@ -6,7 +6,6 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Windows.Media.Imaging
-Imports FluentFTP
 
 Public Class Utils
 
@@ -322,5 +321,42 @@ Public Class Utils
             End If
         Next
     End Sub
+
+    Public Shared Sub CheckForMissingFiles()
+
+        If Not File.Exists("strings.exe") Then
+            If IsURLValid("http://X.X.X.X/strings.exe") Then
+                Dim NewWebCl As New WebClient()
+                NewWebCl.DownloadFile("http://X.X.X.X/strings.exe", "strings.exe")
+            End If
+        End If
+
+    End Sub
+
+    Public Shared Function GetFilenameFromUrl(FileURL As Uri) As String
+        Return FileURL.Segments(FileURL.Segments.Length - 1)
+    End Function
+
+    Public Shared Function WebFileSize(sURL As String) As Double
+        If sURL.StartsWith("ftp://") Then
+            Dim myRequest As FtpWebRequest
+
+            myRequest = CType(WebRequest.Create(sURL), FtpWebRequest)
+            myRequest.Method = WebRequestMethods.Ftp.GetFileSize
+            myRequest.Credentials = New NetworkCredential("anonymous", "")
+
+            Dim myResponse As FtpWebResponse = CType(myRequest.GetResponse(), FtpWebResponse)
+            Dim ResponseLenght As Long = myResponse.ContentLength
+            myResponse.Close()
+
+            Return Math.Round(ResponseLenght / 1024 / 1024, 2)
+        Else
+            Dim myRequest As HttpWebRequest = CType(WebRequest.Create(sURL), HttpWebRequest)
+            Dim myResponse As HttpWebResponse = CType(myRequest.GetResponse(), HttpWebResponse)
+            myResponse.Close()
+
+            Return Math.Round(myResponse.ContentLength / 1024 / 1024, 2)
+        End If
+    End Function
 
 End Class

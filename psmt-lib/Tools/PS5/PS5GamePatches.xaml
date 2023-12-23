@@ -6,29 +6,24 @@
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS5 Game Patches" Height="510" Width="840" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS5 Game Patches" Height="375" Width="835" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock HorizontalAlignment="Left" Margin="137,10,0,0" TextWrapping="NoWrap" Text="Search For Game Patches" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="311" FontWeight="Bold"/>
-        <TextBlock HorizontalAlignment="Left" Margin="137,37,0,0" TextWrapping="NoWrap" Text="Enter Game ID:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="100"/>
-        <TextBox x:Name="SearchGameIDTextBox" HorizontalAlignment="Left" Margin="242,38,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="125"/>
-        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="372,37,0,0" VerticalAlignment="Top" Width="76"/>
-        <wv2:WebView2 x:Name="ContentWebView" HorizontalAlignment="Center" Height="326" Margin="0,87,0,0" VerticalAlignment="Top" Width="830" Source="https://google.com" Visibility="Hidden"/>
-        <ListView x:Name="PatchesListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,151,0,0" Width="800" Height="240" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Search for available Game Patches" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="311" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="NoWrap" Text="Enter Game ID:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="100"/>
+        <TextBox x:Name="SearchGameIDTextBox" HorizontalAlignment="Left" Margin="115,38,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="SearchButton" Content="Search" HorizontalAlignment="Left" Margin="270,37,0,0" VerticalAlignment="Top" Width="76"/>
+        <ListView x:Name="DownloadQueueListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,97,0,0" Width="800" Height="214" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Patch Version" Width="200" DisplayMemberBinding="{Binding Version}"/>
+                    <GridViewColumn Header="Game ID" Width="125" DisplayMemberBinding="{Binding GameID}"/>
+                    <GridViewColumn Header="File Name" Width="350" DisplayMemberBinding="{Binding FileName}"/>
                     <GridViewColumn Header="PKG Size" Width="100" DisplayMemberBinding="{Binding PKGSize}"/>
-                    <GridViewColumn Header="Required Firmware" Width="200" DisplayMemberBinding="{Binding RequiredFirmware}"/>
-                    <GridViewColumn Header="Date Added" Width="200" DisplayMemberBinding="{Binding DateAdded}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock x:Name="AvailableGamePatchesTextBlock" HorizontalAlignment="Left" Margin="10,125,0,0" TextWrapping="NoWrap" Text="Available Game Patches" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="800" FontWeight="Bold"/>
-        <Image x:Name="GameImage" HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="/psmt-lib;component/Images/av.png"/>
-        <CheckBox Content="Merge packages after download" HorizontalAlignment="Left" Margin="10,396,0,0" VerticalAlignment="Top" Foreground="White" Width="215"/>
-        <CheckBox Content="Open folder after download" HorizontalAlignment="Left" Margin="10,416,0,0" VerticalAlignment="Top" Foreground="White" Width="215"/>
-        <Button x:Name="VisitButton" Content="Visit Prosperopatches" HorizontalAlignment="Left" Margin="610,396,0,0" VerticalAlignment="Top" Width="200"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,436,0,0" TextWrapping="NoWrap" Text="Downloading is not possible yet in PS Multi Tools, press the visit button to go to the game's patch download page." VerticalAlignment="Top" Foreground="#FFFF7B7B" Width="800" TextAlignment="Center" FontSize="14" FontStyle="Italic"/>
+        <Button x:Name="VisitButton" Content="Visit Prosperopatches" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top" Width="200"/>
+        <TextBlock x:Name="AvailableGamePatchesTextBlock_Copy" HorizontalAlignment="Left" Margin="10,71,0,0" TextWrapping="NoWrap" Text="Patch Download Queue:" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="800" FontWeight="Bold"/>
+        <Button x:Name="DownloadButton" Content="Download selected file(s)" HorizontalAlignment="Left" Margin="610,316,0,0" VerticalAlignment="Top" Width="200" IsEnabled="False"/>
 
     </Grid>
 </Window>

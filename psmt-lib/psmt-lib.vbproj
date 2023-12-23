@@ -290,6 +290,9 @@
     <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
       <DependentUpon>GP5Manager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\GP5PKGDesigner.xaml.vb">
+      <DependentUpon>GP5PKGDesigner.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\PS5AT9Converter.xaml.vb">
       <DependentUpon>PS5AT9Converter.xaml</DependentUpon>
     </Compile>
@@ -298,6 +301,9 @@
     </Compile>
     <Compile Include="Tools\PS5\PS5GamePatches.xaml.vb">
       <DependentUpon>PS5GamePatches.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5GamePatchSelector.xaml.vb">
+      <DependentUpon>PS5GamePatchSelector.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5ManifestEditor.xaml.vb">
       <DependentUpon>PS5ManifestEditor.xaml</DependentUpon>
@@ -529,6 +535,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\PS5\GP5PKGDesigner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\PS5\PS5AT9Converter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -538,6 +548,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Tools\PS5\PS5GamePatches.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\PS5GamePatchSelector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

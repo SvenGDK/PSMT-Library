@@ -32,9 +32,9 @@ Public Class GP5Manager
         If SFD.ShowDialog() = Forms.DialogResult.OK Then
 
             'Create a new gp5 project
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_proj_create " + SFD.FileName
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -146,9 +146,9 @@ Public Class GP5Manager
                 Dim DateAndTime As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
                 'Create an empty app project with current date and a passcode (GvE6xCpZxd96scOUGuLPbuLp8O800B0s)
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_proj_create --volume_type prospero_app --passcode GvE6xCpZxd96scOUGuLPbuLp8O800B0s --c_date " + DateAndTime + " " + SFD.FileName
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -234,9 +234,9 @@ Public Class GP5Manager
             Dim NewChunkName As String = InputBox("Please enter a new name for " + SelectedChunk.ChunkLabel, "Change chunk label", SelectedChunk.ChunkLabel)
 
             If Not String.IsNullOrEmpty(NewChunkName) Then
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentScenario.ScenarioChunkSequence) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentScenario.ScenarioChunkSequence) Then
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_chunk_update --id " + SelectedChunk.ChunkIDs + " --label " + NewChunkName + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -270,9 +270,9 @@ Public Class GP5Manager
             ChunksListView.Items.Add(NewChunk)
 
             'Add to gp5
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_chunk_add --id " + NewChunkID + " --label " + NewChunk.ChunkLabel + " --use true " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -293,10 +293,10 @@ Public Class GP5Manager
             CurrentGP5Project.ProjectChunks.Remove(SelectedChunk)
 
             'Remove in gp5
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Dim NewInitialChunkCount As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_chunk_delete --id " + SelectedChunk.ChunkIDs + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -386,9 +386,9 @@ Public Class GP5Manager
 
     Private Sub ScenarioChunksTextBox_KeyDown(sender As Object, e As Input.KeyEventArgs) Handles ScenarioChunksTextBox.KeyDown
         If e.Key = Input.Key.Enter Then
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentScenario.ScenarioChunkSequence) Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentScenario.ScenarioChunkSequence) Then
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_update --id " + CurrentScenario.ScenarioID + " --scenario " + CurrentScenario.ScenarioChunkSequence + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -407,10 +407,10 @@ Public Class GP5Manager
 
     Private Sub ScenarioInitialChunkCountTextBox_KeyDown(sender As Object, e As Input.KeyEventArgs) Handles ScenarioInitialChunkCountTextBox.KeyDown
         If e.Key = Input.Key.Enter Then
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(ScenarioChunksTextBox.Text) Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(ScenarioChunksTextBox.Text) Then
                 Dim NewInitialChunkCount As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_update --id " + CurrentScenario.ScenarioID + " --initial_chunk_count " + NewInitialChunkCount + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -429,10 +429,10 @@ Public Class GP5Manager
 
     Private Sub ScenarioLabelTextBox_KeyDown(sender As Object, e As Input.KeyEventArgs) Handles ScenarioLabelTextBox.KeyDown
         If e.Key = Input.Key.Enter Then
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(ScenarioChunksTextBox.Text) Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(ScenarioChunksTextBox.Text) Then
                 Dim NewLabel As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_update --id " + CurrentScenario.ScenarioID + " --label " + NewLabel + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -460,10 +460,10 @@ Public Class GP5Manager
             ScenariosListView.Items.Add(NewScenario)
 
             'Add to gp5
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Dim NewInitialChunkCount As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_add --id " + NewScenario.ScenarioID + " --initial_chunk_count " + NewScenario.ScenarioInitialChunkCount.ToString + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -484,10 +484,10 @@ Public Class GP5Manager
             CurrentGP5Project.ProjectScenarios.Remove(SelectedScenario)
 
             'Remove in gp5
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Dim NewInitialChunkCount As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_delete --id " + SelectedScenario.ScenarioID + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -508,10 +508,10 @@ Public Class GP5Manager
             Dim ScenarioToUpdate As Structures.GP5Scenario = CType(ScenariosListView.SelectedItem, Structures.GP5Scenario)
 
             'Remove in gp5
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
                 Dim NewChunkSequence As String = ScenarioChunksTextBox.Text
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_scenario_update --id " + ScenarioToUpdate.ScenarioID + " --scenario " + NewChunkSequence + " " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -879,9 +879,9 @@ Public Class GP5Manager
         AddToRootDir(NewFileItem)
 
         'Add new blank file to gp5
-        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
             Using PubCMD As New Process()
-                PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                 PubCMD.StartInfo.Arguments = "gp5_file_add --force --chunk 0 " + CurrentGP5ProjectPath
                 PubCMD.StartInfo.UseShellExecute = False
                 PubCMD.StartInfo.CreateNoWindow = True
@@ -914,9 +914,9 @@ Public Class GP5Manager
         AddToRootDir(NewFolderItem)
 
         'Add new folder to gp5
-        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
             Using PubCMD As New Process()
-                PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                 PubCMD.StartInfo.Arguments = "gp5_dir_add --virtual false --force --chunk 0 " + CurrentGP5ProjectPath
                 PubCMD.StartInfo.UseShellExecute = False
                 PubCMD.StartInfo.CreateNoWindow = True
@@ -937,9 +937,9 @@ Public Class GP5Manager
                 Dim SelectedGP5Directory As Structures.GP5Directory = CType(SelectedRuleItem.Tag, Structures.GP5Directory)
 
                 'Remove directory from gp5
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_dir_delete --dst_path " + SelectedGP5Directory.DirectoryDestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -953,9 +953,9 @@ Public Class GP5Manager
                 Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                 'Remove file from gp5
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_delete --dst_path " + SelectedGP5File.DestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -998,9 +998,9 @@ Public Class GP5Manager
             VolumeIsApplicationRadioButton.IsChecked = False
 
             'Change volume type
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_proj_update --volume_type prospero_ac " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -1017,9 +1017,9 @@ Public Class GP5Manager
             VolumeIsAdditionalContentRadioButton.IsChecked = False
 
             'Change volume type
-            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                 Using PubCMD As New Process()
-                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                    PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                     PubCMD.StartInfo.Arguments = "gp5_proj_update --volume_type prospero_app " + CurrentGP5ProjectPath
                     PubCMD.StartInfo.UseShellExecute = False
                     PubCMD.StartInfo.CreateNoWindow = True
@@ -1036,10 +1036,10 @@ Public Class GP5Manager
             If Not String.IsNullOrEmpty(VolumePasscodeTextBox.Text) Then
 
                 'Change volume passcode
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     Dim NewPasscode As String = VolumePasscodeTextBox.Text
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_proj_update --passcode " + NewPasscode + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1056,10 +1056,10 @@ Public Class GP5Manager
         If e.Key = Input.Key.Enter Then
             If Not String.IsNullOrEmpty(VolumeTimeTextBox.Text) Then
                 'Change volume creation date or date/time
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     Dim NewDateTime As String = VolumeTimeTextBox.Text
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_proj_update --c_date " + NewDateTime + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1132,10 +1132,10 @@ Public Class GP5Manager
                 Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                 'Change file type
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     'Delete old entry in gp5
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_delete --dst_path " + SelectedGP5File.DestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1143,7 +1143,7 @@ Public Class GP5Manager
                     End Using
                     'Re-create with new type
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_add --dst_path " + SelectedGP5File.DestinationPath + " --force --chunk " + SelectedGP5File.Chunk + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1166,10 +1166,10 @@ Public Class GP5Manager
                 Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                 'Change file type
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     'Delete old entry in gp5
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_delete --dst_path " + SelectedGP5File.DestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1177,7 +1177,7 @@ Public Class GP5Manager
                     End Using
                     'Re-create with new type
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_add --src_path / --dst_path " + SelectedGP5File.DestinationPath + " --force --chunk " + SelectedGP5File.Chunk + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1200,10 +1200,10 @@ Public Class GP5Manager
                     Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                     'Change file destination path
-                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                         Dim NewDestinationPath As String = FileDestinationPathTextBox.Text
                         Using PubCMD As New Process()
-                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                             PubCMD.StartInfo.Arguments = "gp5_file_update --dst_path " + NewDestinationPath + " --chunk " + SelectedGP5File.Chunk + " " + CurrentGP5ProjectPath
                             PubCMD.StartInfo.UseShellExecute = False
                             PubCMD.StartInfo.CreateNoWindow = True
@@ -1227,10 +1227,10 @@ Public Class GP5Manager
                     Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                     'Change file source path
-                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                         Dim NewSourcePath As String = FileSourcePathTextBox.Text
                         Using PubCMD As New Process()
-                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                             PubCMD.StartInfo.Arguments = "gp5_file_update --src_path " + NewSourcePath + " --chunk " + SelectedGP5File.Chunk + " " + CurrentGP5ProjectPath
                             PubCMD.StartInfo.UseShellExecute = False
                             PubCMD.StartInfo.CreateNoWindow = True
@@ -1254,10 +1254,10 @@ Public Class GP5Manager
                     Dim SelectedGP5File As Structures.GP5File = CType(SelectedRuleItem.Tag, Structures.GP5File)
 
                     'Change file chunk
-                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                    If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                         Dim NewChunk As String = FileChunkTextBox.Text
                         Using PubCMD As New Process()
-                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                            PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                             PubCMD.StartInfo.Arguments = "gp5_file_update --dst_path " + SelectedGP5File.DestinationPath + " --chunk " + NewChunk + " " + CurrentGP5ProjectPath
                             PubCMD.StartInfo.UseShellExecute = False
                             PubCMD.StartInfo.CreateNoWindow = True
@@ -1287,9 +1287,9 @@ Public Class GP5Manager
                 Dim SelectedGP5Directory As Structures.GP5Directory = CType(SelectedRuleItem.Tag, Structures.GP5Directory)
 
                 'Change directory type
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_file_delete --chunk " + SelectedGP5Directory.DirectoryChunk + " --virtual true " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1313,10 +1313,10 @@ Public Class GP5Manager
                 Dim SelectedGP5Directory As Structures.GP5Directory = CType(SelectedRuleItem.Tag, Structures.GP5Directory)
 
                 'Change directory type
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     'Delete old entry in gp5
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_dir_delete --dst_path " + SelectedGP5Directory.DirectoryDestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1324,7 +1324,7 @@ Public Class GP5Manager
                     End Using
                     'Re-create with new type
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_dir_add --virtual false --src_path " + SelectedGP5Directory.DirectorySourcePath + " --dst_path " + SelectedGP5Directory.DirectoryDestinationPath + " --force --chunk " + SelectedGP5Directory.DirectoryChunk + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1348,10 +1348,10 @@ Public Class GP5Manager
                 Dim SelectedGP5Directory As Structures.GP5Directory = CType(SelectedRuleItem.Tag, Structures.GP5Directory)
 
                 'Change directory type
-                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") And Not String.IsNullOrEmpty(CurrentGP5ProjectPath) Then
                     'Delete old entry in gp5
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_dir_delete --dst_path " + SelectedGP5Directory.DirectoryDestinationPath + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True
@@ -1359,7 +1359,7 @@ Public Class GP5Manager
                     End Using
                     'Re-create with new type
                     Using PubCMD As New Process()
-                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+                        PubCMD.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
                         PubCMD.StartInfo.Arguments = "gp5_dir_add --dst_path " + SelectedGP5Directory.DirectoryDestinationPath + " --force --chunk " + SelectedGP5Directory.DirectoryChunk + " " + CurrentGP5ProjectPath
                         PubCMD.StartInfo.UseShellExecute = False
                         PubCMD.StartInfo.CreateNoWindow = True

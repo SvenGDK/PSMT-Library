@@ -166,10 +166,10 @@ Public Class PS5Menu
 
         Dim NewPKGBuilder As New PS5PKGBuilder()
 
-        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe") Then
-            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\XXX\Pros\Tools\Publishing Tools\bin\pros-pub-cmd.exe"
-        ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe") Then
-            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\pros-pub-cmd.exe"
+        If File.Exists(My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\SCE\Prospero\Tools\Publishing Tools\bin\prospero-pub-cmd.exe") Then
+            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.SpecialDirectories.ProgramFiles + "\SCE\Prospero\Tools\Publishing Tools\bin\prospero-pub-cmd.exe"
+        ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe") Then
+            NewPKGBuilder.PubToolsPath = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS5\prospero-pub-cmd.exe"
         Else
             NewPKGBuilder.IsEnabled = False
             MsgBox("Could not find any publishing tools." + vbCrLf + "Please add them inside the 'Tools\PS5' folder inside PS Multi Tools.", MsgBoxStyle.Information, "Pub Tools not available")

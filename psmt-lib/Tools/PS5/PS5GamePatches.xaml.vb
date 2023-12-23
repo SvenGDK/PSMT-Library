@@ -1,59 +1,75 @@
 ﻿Imports System.Windows
-Imports System.Windows.Media.Imaging
-Imports Microsoft.Web.WebView2.Core
-Imports Newtonsoft.Json.Linq
 
 Public Class PS5GamePatches
 
     Dim TotalPatches As Integer = 0
+    Public SearchForGamePatchWithID As String = String.Empty
 
     Private Sub SearchButton_Click(sender As Object, e As RoutedEventArgs) Handles SearchButton.Click
         If Not String.IsNullOrEmpty(SearchGameIDTextBox.Text) Then
-            PatchesListView.Items.Clear()
             If Utils.IsURLValid("https://prosperopatches.com/" + SearchGameIDTextBox.Text) Then
-                ContentWebView.Source = New Uri("https://prosperopatches.com/" + SearchGameIDTextBox.Text)
+                Dim NewWin As New PS5GamePatchSelector() With {.CurrentGameID = SearchGameIDTextBox.Text}
+                NewWin.GamePatchesWebView.Source = New Uri("https://prosperopatches.com/" + SearchGameIDTextBox.Text)
+                NewWin.Show()
             End If
         End If
     End Sub
 
-    Private Async Sub ContentWebView_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles ContentWebView.NavigationCompleted
-        Try
-            If e.IsSuccess And ContentWebView.Source.ToString.StartsWith("https://prosperopatches.com/") Then
-                Dim PatchesList As String = Await ContentWebView.ExecuteScriptAsync("document.getElementsByClassName('mb-4 patch-wrapper');")
-                Dim GameTitle As String = Await ContentWebView.ExecuteScriptAsync("document.getElementsByClassName('bd-title mb-0 text-white')[0].innerText;")
-
-                'Game Title
-                If Not String.IsNullOrEmpty(GameTitle) Then
-                    AvailableGamePatchesTextBlock.Text = "Available Game Patches for " + GameTitle.Replace("""", "")
-                End If
-
-                'Game Image
-                Dim GameImageURL As String = Await ContentWebView.ExecuteScriptAsync("document.getElementsByClassName('game-icon secondary')[0].outerHTML;")
-                Dim SplittedGameImageURL As String() = GameImageURL.Split(New String() {"(", ")"}, StringSplitOptions.None)
-                If SplittedGameImageURL.Count > 0 Then
-                    GameImage.Source = New BitmapImage(New Uri(SplittedGameImageURL(1)))
-                End If
-
-                'Patches
-                Dim JSONParser As JObject = JObject.Parse(PatchesList)
-                TotalPatches = JSONParser.Count
-
-                For index As Integer = 0 To TotalPatches - 1
-                    Dim PatchInfo As String = Await ContentWebView.ExecuteScriptAsync("document.getElementsByClassName('mb-4 patch-wrapper')[" + index.ToString + "].innerText;")
-                    Dim SplittedPatchInfo As String() = PatchInfo.Split(New String() {"\n"}, StringSplitOptions.RemoveEmptyEntries)
-
-                    Dim NewGamePatch As New Structures.ProsperoPatch() With {.Version = SplittedPatchInfo(0).Replace("""", ""), .RequiredFirmware = SplittedPatchInfo(4), .DateAdded = SplittedPatchInfo(6), .PKGSize = SplittedPatchInfo(2)}
-                    PatchesListView.Items.Add(NewGamePatch)
-                Next
-            End If
-
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-    End Sub
-
     Private Sub VisitButton_Click(sender As Object, e As RoutedEventArgs) Handles VisitButton.Click
         Process.Start("https://prosperopatches.com/" + SearchGameIDTextBox.Text)
+    End Sub
+
+    Private Sub PS5GamePatches_ContentRendered(sender As Object, e As EventArgs) Handles Me.ContentRendered
+        If Not String.IsNullOrEmpty(SearchForGamePatchWithID) Then
+            SearchGameIDTextBox.Text = SearchForGamePatchWithID
+
+            If Utils.IsURLValid("https://prosperopatches.com/" + SearchForGamePatchWithID) Then
+                Dim NewWin As New PS5GamePatchSelector() With {.CurrentGameID = SearchForGamePatchWithID}
+                NewWin.GamePatchesWebView.Source = New Uri("https://prosperopatches.com/" + SearchForGamePatchWithID)
+                NewWin.Show()
+            End If
+        End If
+    End Sub
+
+    Private Sub DownloadQueueListView_SelectionChanged(sender As Object, e As Controls.SelectionChangedEventArgs) Handles DownloadQueueListView.SelectionChanged
+        If DownloadQueueListView.SelectedItem Is Nothing Then
+            DownloadButton.IsEnabled = False
+        Else
+            DownloadButton.IsEnabled = True
+        End If
+    End Sub
+
+    Private Sub DownloadButton_Click(sender As Object, e As RoutedEventArgs) Handles DownloadButton.Click
+
+        If DownloadQueueListView.SelectedItem Is Nothing Then
+            If DownloadQueueListView.SelectedItems.Count > 1 Then
+
+                MsgBox("More than 1")
+
+                For Each SelectedItem In DownloadQueueListView.SelectedItems
+                    Dim SelectedItemAsQueueItem As Structures.DownloadQueueItem = CType(SelectedItem, Structures.DownloadQueueItem)
+
+                    'Create a new download window for each selected item
+                    Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+                    NewDownloader.Show()
+                    If NewDownloader.CreateNewDownload(SelectedItemAsQueueItem.DownloadURL) = False Then
+                        MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+                        NewDownloader.Close()
+                    End If
+                Next
+
+            Else
+                Dim SelectedItemAsQueueItem As Structures.DownloadQueueItem = CType(DownloadQueueListView.SelectedItem, Structures.DownloadQueueItem)
+
+                Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+                NewDownloader.Show()
+                If NewDownloader.CreateNewDownload(SelectedItemAsQueueItem.DownloadURL) = False Then
+                    MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+                    NewDownloader.Close()
+                End If
+            End If
+        End If
+
     End Sub
 
 End Class
