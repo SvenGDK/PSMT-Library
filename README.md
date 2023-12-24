@@ -53,7 +53,6 @@ Some tools are written by other developers and will be executed from an executab
   - Allows dumping of game metadata (/user/appmeta/ + /system_data/priv/appmeta/ & /user/np_uds/nobackup/conf/ + /user/trophy2/nobackup/conf/)
   - Allows dumping SELF files using sleirsgoevy's ps5-self-dumper payload (https://github.com/sleirsgoevy/ps4jb-payloads/tree/bd-jb/ps5-self-dumper)
 - PS5 Game Patches Downloader
-  - Currently loads only patch list with information and can redirects download page
 - Unofficial patches loader (libhijack fork of illusion)
 - PKG Merger
 
