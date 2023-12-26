@@ -171,16 +171,7 @@
         <MenuItem Header="Homebrew">
             <MenuItem Header="etaHEN by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.1b" x:Name="DownloadetaHEN">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-            </MenuItem>
-            <MenuItem Header="etaHEN with cheats">
-                <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.1b" x:Name="DownloadetaHENwithCheats">
+                    <MenuItem Header="Download v1.2B" x:Name="DownloadetaHEN">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -209,7 +200,7 @@
             </MenuItem>
             <MenuItem Header="FTPS5">
                 <MenuItem Header="4.03 - 4.50 - 4.51">
-                    <MenuItem Header="Download v1.3" x:Name="DownloadFTPS5">
+                    <MenuItem Header="Download v1.4" x:Name="DownloadFTPS5">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -219,6 +210,15 @@
             <MenuItem Header="Homebrew Store by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
                     <MenuItem Header="Download R2" x:Name="DownloadHomebrewStore">
+                        <MenuItem.Icon>
+                            <Image Source="/Images/download.png"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Itemzflow by LightningMods">
+                <MenuItem Header="4.03 and 4.50">
+                    <MenuItem Header="Download v1.03" x:Name="DownloadItemzflow">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>

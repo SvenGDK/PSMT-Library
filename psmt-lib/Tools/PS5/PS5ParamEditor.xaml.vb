@@ -212,7 +212,7 @@ Public Class PS5ParamEditor
                 SaveModifiedValueButton.IsEnabled = True
                 RemoveParamButton.IsEnabled = True
 
-            Catch ex As Exception
+            Catch ex As JsonSerializationException
                 MsgBox("Could not parse the selected param.json file.", MsgBoxStyle.Critical, "Error")
             End Try
         End If
@@ -550,7 +550,7 @@ Public Class PS5ParamEditor
                     Dim RawDataJSON As String = JsonConvert.SerializeObject(CurrentParamJson, Formatting.Indented, New JsonSerializerSettings With {.NullValueHandling = NullValueHandling.Ignore})
                     File.WriteAllText(SFD.FileName, RawDataJSON)
                     MsgBox("File saved!", MsgBoxStyle.Information)
-                Catch ex As Exception
+                Catch ex As JsonSerializationException
                     MsgBox("Cannot save the param.json file, please report the next error.", MsgBoxStyle.Critical, "Error")
                     MsgBox(ex.Message)
                     Exit Sub

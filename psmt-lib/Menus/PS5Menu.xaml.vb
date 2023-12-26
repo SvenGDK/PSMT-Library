@@ -238,7 +238,7 @@ Public Class PS5Menu
     Private Sub DownloadFTPS5_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFTPS5.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/ftps5.elf") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/EchoStretch/FTPS5/releases/download/v1.4/ftps5-1.4.zip") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -319,16 +319,7 @@ Public Class PS5Menu
     Private Sub DownloadetaHEN_Click(sender As Object, e As RoutedEventArgs) Handles DownloadetaHEN.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.1b/etaHEN.bin") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadetaHENwithCheats_Click(sender As Object, e As RoutedEventArgs) Handles DownloadetaHENwithCheats.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.1b/etaHENwithcheats.bin") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.21b/etaHEN-1.2B.bin") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -337,7 +328,16 @@ Public Class PS5Menu
     Private Sub DownloadHomebrewStore_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHomebrewStore.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/Store-R2-PS5.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://pkg-zone.com/Store-R2-PS5.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadItemzflow_Click(sender As Object, e As RoutedEventArgs) Handles DownloadItemzflow.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/ITEM00001/PS5_IV0002-ITEM00001_00-STOREUPD00000000.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
