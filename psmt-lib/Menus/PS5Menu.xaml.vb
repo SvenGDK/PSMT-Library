@@ -4,6 +4,7 @@ Imports System.Windows
 Imports System.Windows.Controls
 Imports System.Windows.Input
 Imports FluentFTP
+Imports psmt_lib.INI
 
 Public Class PS5Menu
 
@@ -227,6 +228,11 @@ Public Class PS5Menu
     Private Sub OpenManifestEditorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenManifestEditorMenuItem.Click
         Dim NewManifestEditor As New PS5ManifestEditor() With {.ShowActivated = True}
         NewManifestEditor.Show()
+    End Sub
+
+    Private Sub OpenMakefSELFMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenMakefSELFMenuItem.Click
+        Dim NewMakefSELFWindow As New PS5MakefSelfs() With {.ShowActivated = True}
+        NewMakefSELFWindow.Show()
     End Sub
 
 #End Region
@@ -498,6 +504,19 @@ Public Class PS5Menu
         If NewDownloader.CreateNewDownload("https://github.com/hammer-83/ps5-jar-loader/releases/download/v20231027/ps5-jar-loader.iso") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub PS5Menu_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        'Load config if exists
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini") Then
+            Try
+                Dim MainConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini")
+                SharedConsoleAddress = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
+                FTPIPTextBox.Text = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
+            Catch ex As FileNotFoundException
+                MsgBox("Could not find a valid config file.", MsgBoxStyle.Exclamation)
+            End Try
         End If
     End Sub
 

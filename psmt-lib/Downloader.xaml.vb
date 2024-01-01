@@ -1,7 +1,10 @@
 ﻿Imports Microsoft.Win32
+Imports psmt_lib.Structures
 Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
+Imports System.Net.Security
+Imports System.Security.Cryptography.X509Certificates
 Imports System.Windows
 Imports System.Windows.Forms
 Imports System.Windows.Media
@@ -29,6 +32,8 @@ Public Class Downloader
     Public PackageConsole As String
     Public PackageTitleID As String
     Public PackageContentID As String
+
+    Public DownloadQueueItem As DownloadQueueItem
 
     Public Sub New()
         InitializeComponent()
@@ -64,6 +69,7 @@ Public Class Downloader
 
             DownloadFileSizeTB.Text = "File Size: " + Utils.WebFileSize(Source).ToString + " MB"
             FileToDownloadTB.Text = "Downloading " + FileName + " ..."
+
             DownloadClient.DownloadFileAsync(New Uri(Source), My.Computer.FileSystem.CurrentDirectory + "\Downloads\" + FileName)
             Return True
         Else
@@ -117,6 +123,28 @@ Public Class Downloader
                 FileToDownloadTB.Text = "Download finished"
             End If
 
+            'For PS5 game patches
+            If Not String.IsNullOrEmpty(DownloadQueueItem.FileName) Then
+                'Update progress in PS5GamePatches (if open)
+                Dim OpenGamePatchesWindow As PS5GamePatches
+                For Each OpenWin In Windows.Application.Current.Windows()
+                    If OpenWin.ToString = "psmt_lib.PS5GamePatches" Then
+                        OpenGamePatchesWindow = CType(OpenWin, PS5GamePatches)
+
+                        For Each DownloadItem In OpenGamePatchesWindow.DownloadQueueListView.Items
+                            Dim DownloadItemAsDownloadQueueItem As DownloadQueueItem = CType(DownloadItem, DownloadQueueItem)
+                            If DownloadItemAsDownloadQueueItem.FileName = DownloadQueueItem.FileName Then
+                                DownloadItemAsDownloadQueueItem.DownloadState = "Downloaded"
+                                OpenGamePatchesWindow.DownloadQueueListView.Items.Refresh()
+                                Exit For
+                            End If
+                        Next
+
+                        Exit For
+                    End If
+                Next
+            End If
+
             If MsgBox("Download completed. Open the Downloads folder ?", MsgBoxStyle.YesNo, "Completed") = MsgBoxResult.Yes Then
                 Process.Start("explorer", My.Computer.FileSystem.CurrentDirectory + "\Downloads")
             End If
@@ -140,7 +168,13 @@ Public Class Downloader
         ElseIf PackageConsole = "PS5" Then
             DownloadImage.Source = New BitmapImage(New Uri("/Images/PKG.png", UriKind.Relative))
         End If
+
+        ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate 'Allows downloading the sc package that causes an certificate error
     End Sub
+
+    Public Shared Function ValidateRemoteCertificate(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean
+        Return True
+    End Function
 
     Private Sub NPSBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles NPSBrowser.DocumentCompleted
         'Art

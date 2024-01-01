@@ -966,50 +966,6 @@ Public Class Structures
                 _PatchDetails = Value
             End Set
         End Property
-
-    End Structure
-
-    Public Structure DownloadQueueItem
-        Private _GameID As String
-        Private _FileName As String
-        Private _PKGSize As String
-        Private _DownloadURL As String
-
-        Public Property GameID As String
-            Get
-                Return _GameID
-            End Get
-            Set
-                _GameID = Value
-            End Set
-        End Property
-
-        Public Property FileName As String
-            Get
-                Return _FileName
-            End Get
-            Set
-                _FileName = Value
-            End Set
-        End Property
-
-        Public Property PKGSize As String
-            Get
-                Return _PKGSize
-            End Get
-            Set
-                _PKGSize = Value
-            End Set
-        End Property
-
-        Public Property DownloadURL As String
-            Get
-                Return _DownloadURL
-            End Get
-            Set
-                _DownloadURL = Value
-            End Set
-        End Property
     End Structure
 
 End Class

@@ -9,6 +9,8 @@ Imports System.Windows.Input
 
 Public Class PS5Sender
 
+    Public ConsoleIP As String = String.Empty
+
     Dim WithEvents DefaultSenderWorker As New BackgroundWorker() With {.WorkerReportsProgress = True}
     Dim WithEvents SenderWorker As New BackgroundWorker() With {.WorkerReportsProgress = True}
 
@@ -279,6 +281,9 @@ Public Class PS5Sender
     Private Sub PS5Sender_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
         If Not String.IsNullOrEmpty(SelectedISO) Then
             SelectedELFTextBox.Text = SelectedISO
+        End If
+        If Not String.IsNullOrEmpty(ConsoleIP) Then
+            IPTextBox.Text = ConsoleIP
         End If
     End Sub
 

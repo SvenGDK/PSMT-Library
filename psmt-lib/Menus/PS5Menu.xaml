@@ -11,6 +11,7 @@
         <MenuItem Header="Payload &amp; Mast1c0re PS2 Game Sender" x:Name="SenderMenuItem"/>
         <MenuItem Header="Build / Create">
             <MenuItem Header="Blu Ray Disc Burner" x:Name="OpenBDBurnerMenuItem"/>
+            <MenuItem Header="Fake sign SELF files" x:Name="OpenMakefSELFMenuItem"/>
             <MenuItem Header="GP5 Creator" x:Name="OpenGP5ManagerMenuItem"/>
             <MenuItem Header="Manifest Editor" x:Name="OpenManifestEditorMenuItem"/>
             <MenuItem Header="Param Editor" x:Name="OpenParamEditorMenuItem"/>

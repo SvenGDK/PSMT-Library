@@ -6,6 +6,19 @@ Public Class PS5GamePatchSelector
 
     Public CurrentGameID As String = ""
 
+    Private Async Function InitializeCoreWebView2Async() As Task
+        Dim CoreWebView2EnvOptions As New CoreWebView2EnvironmentOptions("--allow-insecure-localhost")
+        Dim CoreWebView2Env As CoreWebView2Environment = Await CoreWebView2Environment.CreateAsync(Nothing, Nothing, CoreWebView2EnvOptions)
+        Await GamePatchesWebView.EnsureCoreWebView2Async(CoreWebView2Env)
+    End Function
+
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+        ' Add any initialization after the InitializeComponent() call.
+        Dim unused = InitializeCoreWebView2Async()
+    End Sub
+
     Private Async Sub GamePatchesWebView_NavigationCompleted(sender As Object, e As CoreWebView2NavigationCompletedEventArgs) Handles GamePatchesWebView.NavigationCompleted
         'Remove parts of the site
         Dim JS As String = "document.getElementsByClassName('navbar navbar-expand-lg bd-navbar sticky-top')[0].style.display='none';document.getElementsByClassName('py-2')[0].style.display='none';document.getElementsByClassName('py-4')[0].style.display='none';document.getElementsByClassName('ms-2 fw-normal')[0].style.display='none';document.getElementsByClassName('nav-link flex-fill share-icon')[0-x].style.display='none';"
@@ -21,12 +34,21 @@ Public Class PS5GamePatchSelector
     End Sub
 
     Private Sub DownloadStarting(sender As Object, args As CoreWebView2DownloadStartingEventArgs)
+        'Supress default download window & DownloadOperation
         args.Handled = True
+        args.Cancel = True
 
         Dim MsgBoxResult = MsgBox("Do you want to add this download to the queue ?" + vbNewLine + "Selecting 'No' will download the file instantly.", MsgBoxStyle.YesNoCancel, "Select Download Option")
         If MsgBoxResult = MsgBoxResult.Yes Then
-            AddToQueue(args.DownloadOperation.Uri, Utils.GetFilenameFromUrl(New Uri(args.DownloadOperation.Uri)), args.DownloadOperation.TotalBytesToReceive)
+
+            Dim DownloadUri As String = args.DownloadOperation.Uri
+            Dim DownloadFileName As String = Utils.GetFilenameFromUrl(New Uri(args.DownloadOperation.Uri))
+            Dim TotalBytes As ULong? = args.DownloadOperation.TotalBytesToReceive
+
+            'Add to queue
+            AddToQueue(DownloadUri, DownloadFileName, TotalBytes)
         ElseIf MsgBoxResult = MsgBoxResult.No Then
+            'Start the download directly
             Dim NewDownloader As New Downloader() With {.ShowActivated = True}
             NewDownloader.Show()
 
@@ -35,9 +57,9 @@ Public Class PS5GamePatchSelector
                 NewDownloader.Close()
             End If
         Else
+            'Cancel download
             args.DownloadOperation.Cancel()
         End If
-
     End Sub
 
     Private Sub PS5GamePatchSelector_ContentRendered(sender As Object, e As EventArgs) Handles Me.ContentRendered
@@ -46,11 +68,10 @@ Public Class PS5GamePatchSelector
     End Sub
 
     Private Sub AddToQueue(URL As String, FileName As String, TotalSize As ULong?)
-
-        Dim NewQueueItem As New Structures.DownloadQueueItem() With {.FileName = FileName, .GameID = CurrentGameID, .DownloadURL = URL}
+        Dim NewQueueItem As New DownloadQueueItem() With {.FileName = FileName, .GameID = CurrentGameID, .DownloadURL = URL, .DownloadState = "Not started", .MergeState = "Not merged"}
 
         'Set the download file size
-        If TotalSize Is Nothing Then
+        If TotalSize IsNot Nothing Then
             Dim FileSize As String = FormatNumber(TotalSize / 1073741824, 2) + " GB"
             NewQueueItem.PKGSize = FileSize
         Else
@@ -61,20 +82,26 @@ Public Class PS5GamePatchSelector
             NewQueueItem.PKGSize = NewRetrievedSize
         End If
 
-        'Add to queue
+        'Add to queue in the PS5GamePatches window
         Dim OpenGamePatchesWindow As PS5GamePatches
         For Each OpenWin In Application.Current.Windows()
             If OpenWin.ToString = "psmt_lib.PS5GamePatches" Then
                 OpenGamePatchesWindow = CType(OpenWin, PS5GamePatches)
-                OpenGamePatchesWindow.DownloadQueueListView.Items.Add(NewQueueItem)
+                OpenGamePatchesWindow.DownloadQueueItemCollection.Add(NewQueueItem)
                 Exit For
             End If
         Next
-
     End Sub
 
     Private Sub GamePatchesWebView_CoreWebView2InitializationCompleted(sender As Object, e As CoreWebView2InitializationCompletedEventArgs) Handles GamePatchesWebView.CoreWebView2InitializationCompleted
         'Add custom download handler
         AddHandler GamePatchesWebView.CoreWebView2.DownloadStarting, AddressOf DownloadStarting
+        AddHandler GamePatchesWebView.CoreWebView2.ServerCertificateErrorDetected, AddressOf CertificateErrorDetected 'SC packages show ERR_CERT_AUTHORITY_INVALID, this supresses the error
     End Sub
+
+    Private Sub CertificateErrorDetected(sender As Object, e As CoreWebView2ServerCertificateErrorDetectedEventArgs)
+        Dim ErrorCertificate As CoreWebView2Certificate = e.ServerCertificate
+        e.Action = CoreWebView2ServerCertificateErrorAction.AlwaysAllow
+    End Sub
+
 End Class

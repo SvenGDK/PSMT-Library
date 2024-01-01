@@ -609,7 +609,6 @@ Public Class PS5FTPGrabber
     Private Sub ReceiveWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles ReceiveWorker.DoWork
         Dim Read As Integer
         Dim TotalBytesRead As Integer = 0
-        Dim ReceivedBytes As Integer = 0
         Dim Buffer As Byte() = New Byte(1024 - 1) {}
         Dim EndpointIPAddress As IPAddress = IPAddress.Parse(ConsoleIP)
         Dim NewIPEndPoint As New IPEndPoint(EndpointIPAddress, 9023)
@@ -677,6 +676,8 @@ Public Class PS5FTPGrabber
         Else
             ReceiveStatusTextBlock.Text = ""
         End If
+
+        Cursor = Cursors.Arrow
 
         If SelectedPath = My.Computer.FileSystem.CurrentDirectory + "\Dumps" Then
             If MsgBox("SELF files dumped!" + vbCrLf + "Open the 'Dumps' folder ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then

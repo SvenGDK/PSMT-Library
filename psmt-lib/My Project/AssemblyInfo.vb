@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("PS Multi Tools Library")>
 <Assembly: AssemblyCompany("SvenGDK")>
 <Assembly: AssemblyProduct("psmt-lib")>
-<Assembly: AssemblyCopyright("Copyright © SvenGDK 2023")>
+<Assembly: AssemblyCopyright("Copyright © SvenGDK 2023-2024")>
 <Assembly: AssemblyTrademark("SvenGDK")>
 
 <Assembly: ComVisible(True)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.3.3.0")>
-<Assembly: AssemblyFileVersion("1.3.3.0")>
+<Assembly: AssemblyVersion("1.4.0.0")>
+<Assembly: AssemblyFileVersion("1.4.0.0")>
