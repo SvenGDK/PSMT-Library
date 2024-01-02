@@ -99,11 +99,11 @@ Some tools are written by other developers and will be executed from an executab
 | `hexdump` | di-mgt | https://www.di-mgt.com.au/hexdump-for-windows.html
 | `HtmlAgilityPack` | ZZZ Projects | https://html-agility-pack.net/
 | `IsoPbpConverter` | LMAN | 
-| `kill_daemon` | illusion0001 | https://github.com/illusion0001/libhijacker| Python script -> single .exe
+| `kill_daemon` | illusion0001 | https://github.com/illusion0001/libhijacker | Python script -> single .exe
 | `klicencebruteforce` | MAGiC333X | 
 | `make_fself` | (PS3) ? | 
-| `Make_FSELF_PY3` | EchoStretch | 
-| `make_fself_python3-1` | Flatz (updated by LightningMods) | 
+| `Make_FSELF_PY3` | EchoStretch |  | Batch script translated to VB
+| `make_fself_python3-1` | Flatz (updated by LightningMods) |  | Python script -> single .exe
 | `maxcso` | unknownbrackets | https://github.com/unknownbrackets/maxcso
 | `mCiso` | sindastra | https://github.com/sindastra/psp-mciso
 | `Newtonsoft.Json` | Newtonsoft | https://www.newtonsoft.com/json
