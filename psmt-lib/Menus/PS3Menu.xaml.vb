@@ -275,27 +275,27 @@ Public Class PS3Menu
     End Sub
 
     Private Sub OpenCoreOSTools_Click(sender As Object, e As RoutedEventArgs) Handles OpenCoreOSTools.Click
-        Dim NewCoreOSTools As New SFOEditor() With {.ShowActivated = True}
+        Dim NewCoreOSTools As New PS3CoreOSTools() With {.ShowActivated = True}
         NewCoreOSTools.Show()
     End Sub
 
     Private Sub OpenFixTar_Click(sender As Object, e As RoutedEventArgs) Handles OpenFixTar.Click
-        Dim NewFixTar As New SFOEditor() With {.ShowActivated = True}
+        Dim NewFixTar As New PS3FixTar() With {.ShowActivated = True}
         NewFixTar.Show()
     End Sub
 
     Private Sub OpenPUPUnpacker_Click(sender As Object, e As RoutedEventArgs) Handles OpenPUPUnpacker.Click
-        Dim NewPUPUnpacker As New SFOEditor() With {.ShowActivated = True}
+        Dim NewPUPUnpacker As New PS3PUPUnpacker() With {.ShowActivated = True}
         NewPUPUnpacker.Show()
     End Sub
 
     Private Sub OpenRCODumper_Click(sender As Object, e As RoutedEventArgs) Handles OpenRCODumper.Click
-        Dim NewRCODumper As New SFOEditor() With {.ShowActivated = True}
+        Dim NewRCODumper As New PS3RCODumper() With {.ShowActivated = True}
         NewRCODumper.Show()
     End Sub
 
     Private Sub OpenSELFReader_Click(sender As Object, e As RoutedEventArgs) Handles OpenSELFReader.Click
-        Dim NewSELFReader As New SFOEditor() With {.ShowActivated = True}
+        Dim NewSELFReader As New PS3ReadSELF() With {.ShowActivated = True}
         NewSELFReader.Show()
     End Sub
 

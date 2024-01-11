@@ -172,7 +172,7 @@
         <MenuItem Header="Homebrew">
             <MenuItem Header="etaHEN by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.2B" x:Name="DownloadetaHEN">
+                    <MenuItem Header="Download v1.3B" x:Name="DownloadetaHEN">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -219,7 +219,7 @@
             </MenuItem>
             <MenuItem Header="Itemzflow by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.03" x:Name="DownloadItemzflow">
+                    <MenuItem Header="Download v1.04" x:Name="DownloadItemzflow">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
