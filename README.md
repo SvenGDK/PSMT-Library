@@ -57,6 +57,8 @@ Some tools are written by other developers and will be executed from an executab
 - PKG Merger
 - Make fSELF tool to fake sign SELF files of created dumps
   - Based on EchoStretch's Make_FSELF_PY3.bat & LightningMods updated make_fself by Flatz
+- etaHEN Configurator
+- klog Viewer
 
 ## PSP
 - ISO to CSO Converter
