@@ -235,6 +235,14 @@ Public Class PS5Menu
         NewMakefSELFWindow.Show()
     End Sub
 
+    Private Sub OpenetaHENConfiguratorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenetaHENConfiguratorMenuItem.Click
+        Dim NewetaHENConfigurator As New PS5etaHENConfigurator() With {.ShowActivated = True}
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            NewetaHENConfigurator.ConsoleIP = SharedConsoleAddress.Split(":"c)(0)
+        End If
+        NewetaHENConfigurator.Show()
+    End Sub
+
 #End Region
 
 #Region "Menu Downloads"
@@ -325,7 +333,7 @@ Public Class PS5Menu
     Private Sub DownloadetaHEN_Click(sender As Object, e As RoutedEventArgs) Handles DownloadetaHEN.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.3b/etaHEN-1.3B.bin") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.4b/etaHEN-1.4B.bin") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -344,6 +352,15 @@ Public Class PS5Menu
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
         If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/ITEM00001/PS5_IV0002-ITEM00001_00-STOREUPD00000000.pkg") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadPS5Xplorer_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS5Xplorer.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/LAPY20011/PS5_PS5-Xplorer%20(LAPY20011)%20-%201.00.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

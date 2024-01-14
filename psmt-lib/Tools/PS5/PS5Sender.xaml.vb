@@ -185,7 +185,7 @@ Public Class PS5Sender
         Dim MagicBytes = BytesConverter.ToLittleEndian(Magic)
         Dim NewFileSizeBytes = BytesConverter.ToLittleEndian(FileSizeAsULong)
 
-        Using SenderSocket As New Socket(SocketType.Stream, ProtocolType.Tcp) With {.ReceiveTimeout = 3000}
+        Using SenderSocket As New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {.ReceiveTimeout = 3000}
 
             SenderSocket.Connect(CurrentWorkerArgs.DeviceIP, 9045)
 
@@ -290,7 +290,7 @@ Public Class PS5Sender
     Private Sub DefaultSenderWorker_DoWork(sender As Object, e As DoWorkEventArgs) Handles DefaultSenderWorker.DoWork
         Dim CurrentWorkerArgs As WorkerArgs = CType(e.Argument, WorkerArgs)
 
-        Using SenderSocket As New Socket(SocketType.Stream, ProtocolType.Tcp) With {.ReceiveTimeout = 3000}
+        Using SenderSocket As New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp) With {.ReceiveTimeout = 3000}
             'Connect
             SenderSocket.Connect(CurrentWorkerArgs.DeviceIP, CurrentWorkerArgs.DevicePort)
             'Send ELF

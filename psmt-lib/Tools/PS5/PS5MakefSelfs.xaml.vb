@@ -2,7 +2,7 @@
 
 Public Class PS5MakefSelfs
 
-    'PS5 Make Fake Self Script by EchoStretch in VB.NET
+    'PS5 Make Fake Self Batch Script by EchoStretch, translated in VB.NET
 
     Dim SelectedPath As String = ""
 

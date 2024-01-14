@@ -21,7 +21,8 @@
         <MenuItem Header="Converters">
             <MenuItem Header="WAV &lt;-&gt; AT9" x:Name="OpenAudioConverterMenuItem"/>
         </MenuItem>
-        <MenuItem Header="Over FTP (Requires FTPS5 to be loaded first)">
+        <MenuItem Header="Over FTP (Requires running FTP server)">
+            <MenuItem Header="etaHEN Configurator" x:Name="OpenetaHENConfiguratorMenuItem"/>
             <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"/>
             <MenuItem Header="FTP Grabber" x:Name="OpenFTPGrabberMenuItem"/>
             <MenuItem Header="Web Browser Installer" x:Name="OpenWebBrowserInstallerMenuItem"/>
@@ -29,7 +30,7 @@
             <MenuItem Header="Clear error history on the console" x:Name="ClearErrorHistoryMenuItem"/>
         </MenuItem>
         <MenuItem Header="UI Customization">
-            <MenuItem Header="Dump RCO files (Requires FTPS5 to be loaded first)" x:Name="OpenRCODumperMenuItem"/>
+            <MenuItem Header="Dump RCO files (Requires running FTP server)" x:Name="OpenRCODumperMenuItem"/>
             <MenuItem Header="Extract RCO files" x:Name="OpenRCOExtractorMenuItem"/>
         </MenuItem>
     </MenuItem>
@@ -172,7 +173,7 @@
         <MenuItem Header="Homebrew">
             <MenuItem Header="etaHEN by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.3B" x:Name="DownloadetaHEN">
+                    <MenuItem Header="Download v1.4B" x:Name="DownloadetaHEN">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -219,7 +220,7 @@
             </MenuItem>
             <MenuItem Header="Itemzflow by LightningMods">
                 <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.04" x:Name="DownloadItemzflow">
+                    <MenuItem Header="Download v1.05" x:Name="DownloadItemzflow">
                         <MenuItem.Icon>
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
@@ -260,6 +261,13 @@
                             <Image Source="/Images/download.png"/>
                         </MenuItem.Icon>
                     </MenuItem>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="PS5-Xplorer">
+                <MenuItem Header="Download" x:Name="DownloadPS5Xplorer">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
         </MenuItem>

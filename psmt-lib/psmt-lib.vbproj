@@ -292,11 +292,11 @@
     <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
       <DependentUpon>GP5Manager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS5\GP5PKGDesigner.xaml.vb">
-      <DependentUpon>GP5PKGDesigner.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tools\PS5\PS5AT9Converter.xaml.vb">
       <DependentUpon>PS5AT9Converter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\PS5etaHENConfigurator.xaml.vb">
+      <DependentUpon>PS5etaHENConfigurator.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS5\PS5FTPGrabber.xaml.vb">
       <DependentUpon>PS5FTPGrabber.xaml</DependentUpon>
@@ -540,11 +540,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS5\GP5PKGDesigner.xaml">
+    <Page Include="Tools\PS5\PS5AT9Converter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS5\PS5AT9Converter.xaml">
+    <Page Include="Tools\PS5\PS5etaHENConfigurator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
