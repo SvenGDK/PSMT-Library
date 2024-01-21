@@ -18,7 +18,6 @@ Public Class PS5ParamAdvanced
             Select Case AdvancedParam
                 Case "AgeLevel"
                     Dim ParamAgeLevel As AgeLevel = CurrentParamJson.AgeLevel
-
                     For Each Parameter In ParamAgeLevel.GetType().GetProperties()
                         'Add to ParamsListView
                         Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
@@ -27,20 +26,33 @@ Public Class PS5ParamAdvanced
                             ParamsListView.Items.Add(NewParamLVItem)
                         End If
                     Next
-
                 Case "applicationData"
-
                     Dim ParamApplicationData As ApplicationData = CurrentManifestJson.applicationData
-
                     For Each Parameter In ParamApplicationData.GetType().GetProperties()
-                        'Add to ParamsListView
                         Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
                         If Parameter.GetValue(ParamApplicationData, Nothing) IsNot Nothing Then
                             NewParamLVItem.ParamValue = Parameter.GetValue(ParamApplicationData, Nothing).ToString
                             ParamsListView.Items.Add(NewParamLVItem)
                         End If
                     Next
-
+                Case "Asa"
+                    Dim ParamAsa As Asa = CurrentParamJson.Asa
+                    For Each Parameter In ParamAsa.GetType().GetProperties()
+                        Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
+                        If Parameter.GetValue(ParamAsa, Nothing) IsNot Nothing Then
+                            NewParamLVItem.ParamValue = Parameter.GetValue(ParamAsa, Nothing).ToString
+                            ParamsListView.Items.Add(NewParamLVItem)
+                        End If
+                    Next
+                Case "Kernel"
+                    Dim ParamKernel As Kernel = CurrentParamJson.Kernel
+                    For Each Parameter In ParamKernel.GetType().GetProperties()
+                        Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
+                        If Parameter.GetValue(ParamKernel, Nothing) IsNot Nothing Then
+                            NewParamLVItem.ParamValue = Parameter.GetValue(ParamKernel, Nothing).ToString
+                            ParamsListView.Items.Add(NewParamLVItem)
+                        End If
+                    Next
                 Case "LocalizedParameters"
                     Dim ParamLocalizedParameters As LocalizedParameters = CurrentParamJson.LocalizedParameters
                     Dim _ArAE As ArAE = CurrentParamJson.LocalizedParameters.ArAE
@@ -75,9 +87,7 @@ Public Class PS5ParamAdvanced
                     Dim _PtPT As PtPT = CurrentParamJson.LocalizedParameters.PtPT
 
                     For Each Parameter In ParamLocalizedParameters.GetType().GetProperties()
-
                         Dim NewParamLVItem As New ParamListViewItem()
-
                         If Parameter.Name = "DefaultLanguage" Then
                             NewParamLVItem.ParamName = Parameter.Name
                             NewParamLVItem.ParamValue = Parameter.GetValue(ParamLocalizedParameters, Nothing).ToString
@@ -148,6 +158,25 @@ Public Class PS5ParamAdvanced
                                     NewParamLVItem.ParamValue = _PtPT.TitleName
                             End Select
 
+                            ParamsListView.Items.Add(NewParamLVItem)
+                        End If
+                    Next
+
+                Case "Pubtools"
+                    Dim ParamPubtools As Pubtools = CurrentParamJson.Pubtools
+                    For Each Parameter In ParamPubtools.GetType().GetProperties()
+                        Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
+                        If Parameter.GetValue(ParamPubtools, Nothing) IsNot Nothing Then
+                            NewParamLVItem.ParamValue = Parameter.GetValue(ParamPubtools, Nothing).ToString
+                            ParamsListView.Items.Add(NewParamLVItem)
+                        End If
+                    Next
+                Case "Savedata"
+                    Dim ParamSavedata As Savedata = CurrentParamJson.Savedata
+                    For Each Parameter In ParamSavedata.GetType().GetProperties()
+                        Dim NewParamLVItem As New ParamListViewItem() With {.ParamName = Parameter.Name}
+                        If Parameter.GetValue(ParamSavedata, Nothing) IsNot Nothing Then
+                            NewParamLVItem.ParamValue = Parameter.GetValue(ParamSavedata, Nothing).ToString
                             ParamsListView.Items.Add(NewParamLVItem)
                         End If
                     Next
@@ -785,6 +814,48 @@ Public Class PS5ParamAdvanced
                     CurrentManifestJson.applicationData.branchType = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
 #End Region
+                Case "Asa"
+                    'Todo
+                Case "CpuPageTableSize"
+                    If IsInt(ModifyValueTextBox.Text) Then
+                        CurrentParamJson.Kernel.CpuPageTableSize = CInt(ModifyValueTextBox.Text)
+                        SelectedParam.ParamValue = ModifyValueTextBox.Text
+                    Else
+                        MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                    End If
+                Case "FlexibleMemorySize"
+                    If IsInt(ModifyValueTextBox.Text) Then
+                        CurrentParamJson.Kernel.FlexibleMemorySize = CInt(ModifyValueTextBox.Text)
+                        SelectedParam.ParamValue = ModifyValueTextBox.Text
+                    Else
+                        MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                    End If
+                Case "GpuPageTableSize"
+                    If IsInt(ModifyValueTextBox.Text) Then
+                        CurrentParamJson.Kernel.GpuPageTableSize = CInt(ModifyValueTextBox.Text)
+                        SelectedParam.ParamValue = ModifyValueTextBox.Text
+                    Else
+                        MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                    End If
+                Case "CreationDate"
+                    CurrentParamJson.Pubtools.CreationDate = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "LoudnessSnd0"
+                    CurrentParamJson.Pubtools.LoudnessSnd0 = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "Submission"
+                    If ModifyValueTextBox.Text = "True" Then
+                        CurrentParamJson.Pubtools.Submission = True
+                        SelectedParam.ParamValue = ModifyValueTextBox.Text
+                    ElseIf ModifyValueTextBox.Text = "False" Then
+                        CurrentParamJson.Pubtools.Submission = False
+                        SelectedParam.ParamValue = ModifyValueTextBox.Text
+                    Else
+                        MsgBox("Only True or False allowed.", MsgBoxStyle.Exclamation, "Boolean value required")
+                    End If
+                Case "ToolVersion"
+                    CurrentParamJson.Pubtools.ToolVersion = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
             End Select
 
             ParamsListView.Items.Refresh()
@@ -1012,6 +1083,22 @@ Public Class PS5ParamAdvanced
                 Case "branchType"
                     CurrentManifestJson.applicationData.branchType = Nothing
 #End Region
+                Case "Asa"
+                    'Todo
+                Case "CpuPageTableSize"
+                    CurrentParamJson.Kernel.CpuPageTableSize = Nothing
+                Case "FlexibleMemorySize"
+                    CurrentParamJson.Kernel.FlexibleMemorySize = Nothing
+                Case "GpuPageTableSize"
+                    CurrentParamJson.Kernel.GpuPageTableSize = Nothing
+                Case "CreationDate"
+                    CurrentParamJson.Pubtools.CreationDate = Nothing
+                Case "LoudnessSnd0"
+                    CurrentParamJson.Pubtools.LoudnessSnd0 = Nothing
+                Case "Submission"
+                    CurrentParamJson.Pubtools.Submission = Nothing
+                Case "ToolVersion"
+                    CurrentParamJson.Pubtools.ToolVersion = Nothing
             End Select
 
             'Remove from the ParamsListView
@@ -1665,6 +1752,48 @@ Public Class PS5ParamAdvanced
                             ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "branchType", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
                             Exit For
 #End Region
+                        Case "Asa"
+                            'Todo
+                        Case "CpuPageTableSize"
+                            If IsInt(ParamValueTextBox.Text) Then
+                                CurrentParamJson.Kernel.CpuPageTableSize = CInt(ParamValueTextBox.Text)
+                                ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "cpuPageTableSize", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
+                            Else
+                                MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                            End If
+                            Exit For
+                        Case "FlexibleMemorySize"
+                            If IsInt(ParamValueTextBox.Text) Then
+                                CurrentParamJson.Kernel.FlexibleMemorySize = CInt(ParamValueTextBox.Text)
+                                ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "flexibleMemorySize", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
+                            Else
+                                MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                            End If
+                            Exit For
+                        Case "GpuPageTableSize"
+                            If IsInt(ParamValueTextBox.Text) Then
+                                CurrentParamJson.Kernel.GpuPageTableSize = CInt(ParamValueTextBox.Text)
+                                ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "gpuPageTableSize", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
+                            Else
+                                MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
+                            End If
+                            Exit For
+                        Case "CreationDate"
+                            CurrentParamJson.Pubtools.CreationDate = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "creationDate", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+                        Case "LoudnessSnd0"
+                            CurrentParamJson.Pubtools.LoudnessSnd0 = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "loudnessSnd0", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+                        Case "Submission"
+                            CurrentParamJson.Pubtools.Submission = False
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "submission", .ParamType = "Boolean", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+                        Case "ToolVersion"
+                            CurrentParamJson.Pubtools.ToolVersion = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "toolVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
                     End Select
                 End If
 
@@ -1675,13 +1804,11 @@ Public Class PS5ParamAdvanced
     End Sub
 
     Private Sub PS5ParamAdvanced_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-
         'Return the updated values to the param.json editor
         UpdatePS5ParamEditor(CurrentParamJson)
         UpdatePS5ManifestEditor(CurrentManifestJson)
 
         MsgBox("Do not forget to save the changes with File -> Save.", MsgBoxStyle.Information)
-
     End Sub
 
 End Class

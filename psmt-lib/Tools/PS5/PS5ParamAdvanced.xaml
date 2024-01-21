@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              Title="Advanced Param Editor" Height="410" Width="760" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <TextBlock x:Name="TitleTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Modifying ageLevel" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="675" FontStyle="Italic" FontWeight="Bold"/>
+        <TextBlock x:Name="TitleTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Modifying ageLevel" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="699" FontStyle="Italic" FontWeight="Bold"/>
         <ListView x:Name="ParamsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,36,0,0" Height="215" VerticalAlignment="Top" HorizontalAlignment="Left" Width="699">
             <ListView.View>
                 <GridView>

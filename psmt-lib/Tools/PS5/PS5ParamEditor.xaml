@@ -32,17 +32,25 @@
             <ComboBoxItem Content="AgeLevel"/>
             <ComboBoxItem Content="ApplicationCategoryType"/>
             <ComboBoxItem Content="ApplicationDrmType"/>
+            <ComboBoxItem Content="Asa"/>
             <ComboBoxItem Content="Attribute"/>
             <ComboBoxItem Content="Attribute2"/>
             <ComboBoxItem Content="Attribute3"/>
+            <ComboBoxItem Content="BackgroundBasematType"/>
             <ComboBoxItem Content="ContentBadgeType"/>
             <ComboBoxItem Content="ContentId"/>
             <ComboBoxItem Content="ContentVersion"/>
             <ComboBoxItem Content="DeeplinkUri"/>
             <ComboBoxItem Content="DownloadDataSize"/>
+            <ComboBoxItem Content="Kernel"/>
             <ComboBoxItem Content="LocalizedParameters"/>
             <ComboBoxItem Content="MasterVersion"/>
+            <ComboBoxItem Content="OriginContentVersion"/>
+            <ComboBoxItem Content="Pubtools"/>
             <ComboBoxItem Content="RequiredSystemSoftwareVersion"/>
+            <ComboBoxItem Content="Savedata"/>
+            <ComboBoxItem Content="SdkVersion"/>
+            <ComboBoxItem Content="TargetContentVersion"/>
             <ComboBoxItem Content="TitleId"/>
             <ComboBoxItem Content="VersionFileUri"/>
         </ComboBox>

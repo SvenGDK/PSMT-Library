@@ -243,6 +243,11 @@ Public Class PS5Menu
         NewetaHENConfigurator.Show()
     End Sub
 
+    Private Sub OpenShortcutPKGCreatorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenShortcutPKGCreatorMenuItem.Click
+        Dim NewShortcutPKGCreator As New GP5PKGBuilder() With {.ShowActivated = True}
+        NewShortcutPKGCreator.Show()
+    End Sub
+
 #End Region
 
 #Region "Menu Downloads"
@@ -324,7 +329,7 @@ Public Class PS5Menu
     Private Sub DownloadKStuff_Click(sender As Object, e As RoutedEventArgs) Handles DownloadKStuff.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/ps5-kstuff.bin") = False Then
+        If NewDownloader.CreateNewDownload("https://sleirsgoevy.github.io/ps4jb2/ps5-403/ps5-kstuff.bin") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -360,7 +365,7 @@ Public Class PS5Menu
     Private Sub DownloadPS5Xplorer_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS5Xplorer.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/LAPY20011/PS5_PS5-Xplorer%20(LAPY20011)%20-%201.00.pkg") = False Then
+        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/LAPY20011/PS5_PS5-Xplorer%20(LAPY20011)%20-%201.01.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

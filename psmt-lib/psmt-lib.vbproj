@@ -292,6 +292,12 @@
     <Compile Include="Tools\PS5\GP5Manager.xaml.vb">
       <DependentUpon>GP5Manager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\GP5PKGBuilder.xaml.vb">
+      <DependentUpon>GP5PKGBuilder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS5\NewUserHelp.xaml.vb">
+      <DependentUpon>NewUserHelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\PS5AT9Converter.xaml.vb">
       <DependentUpon>PS5AT9Converter.xaml</DependentUpon>
     </Compile>
@@ -540,6 +546,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\PS5\GP5PKGBuilder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS5\NewUserHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\PS5\PS5AT9Converter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -637,7 +651,6 @@
     <Folder Include="Icons\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\av.png" />
     <Resource Include="Images\create.png" />
     <Resource Include="Images\delete.png" />
     <Resource Include="Images\download.png" />
@@ -667,7 +680,11 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\PKG.png" />
+    <Resource Include="Images\PKG.png" />
+    <Resource Include="Images\disc.png" />
+    <Resource Include="Images\explore.png" />
+    <Resource Include="Images\gallery.png" />
+    <Resource Include="Images\nothing.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

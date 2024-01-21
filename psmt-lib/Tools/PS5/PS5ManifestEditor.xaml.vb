@@ -3,7 +3,6 @@ Imports System.Windows
 Imports System.Windows.Controls
 Imports System.Windows.Forms
 Imports Newtonsoft.Json
-Imports psmt_lib.Utils
 Imports psmt_lib.PS5ManifestClass
 Imports psmt_lib.PS5ParamClass
 
@@ -35,22 +34,27 @@ Public Class PS5ManifestEditor
             Dim NewParamType As String
             Dim NewParamValue As String = String.Empty
             Select Case Parameter.Name
+                Case "applicationData"
+                    NewParamType = "Object"
+                    NewParamValue = "Open in advanced editor"
                 Case "applicationName"
                     NewParamType = "String"
                 Case "applicationVersion"
                     NewParamType = "String"
+                Case "bootAnimation"
+                    NewParamType = "String"
                 Case "commitHash"
                     NewParamType = "String"
-                Case "titleId"
+                Case "enableAccessibility"
+                    NewParamType = "String Array"
+                    NewParamValue = "Open in advanced editor"
+                Case "enableHttpCache"
+                    NewParamType = "Boolean"
+                Case "reactNativePlaystationVersion"
                     NewParamType = "String"
                 Case "repositoryUrl"
                     NewParamType = "String"
-                Case "reactNativePlaystationVersion"
-                    NewParamType = "String"
-                Case "applicationData"
-                    NewParamType = "Object"
-                    NewParamValue = "Open in advanced editor"
-                Case "bootAnimation"
+                Case "titleId"
                     NewParamType = "String"
                 Case "twinTurbo"
                     NewParamType = "Boolean"
@@ -102,22 +106,27 @@ Public Class PS5ManifestEditor
                     Dim NewParamType As String
                     Dim NewParamValue As String = String.Empty
                     Select Case Parameter.Name
+                        Case "applicationData"
+                            NewParamType = "Object"
+                            NewParamValue = "Open in advanced editor"
                         Case "applicationName"
                             NewParamType = "String"
                         Case "applicationVersion"
                             NewParamType = "String"
+                        Case "bootAnimation"
+                            NewParamType = "String"
                         Case "commitHash"
                             NewParamType = "String"
-                        Case "titleId"
+                        Case "enableAccessibility"
+                            NewParamType = "String Array"
+                            NewParamValue = "Open in advanced editor"
+                        Case "enableHttpCache"
+                            NewParamType = "Boolean"
+                        Case "reactNativePlaystationVersion"
                             NewParamType = "String"
                         Case "repositoryUrl"
                             NewParamType = "String"
-                        Case "reactNativePlaystationVersion"
-                            NewParamType = "String"
-                        Case "applicationData"
-                            NewParamType = "Object"
-                            NewParamValue = "Open in advanced editor"
-                        Case "bootAnimation"
+                        Case "titleId"
                             NewParamType = "String"
                         Case "twinTurbo"
                             NewParamType = "Boolean"
@@ -190,14 +199,27 @@ Public Class PS5ManifestEditor
                 Case "bootAnimation"
                     CurrentManifestJson.bootAnimation = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "enableHttpCache"
+                    Select Case ModifyValueTextBox.Text
+                        Case "True"
+                            CurrentManifestJson.enableHttpCache = True
+                            SelectedParam.ParamValue = ModifyValueTextBox.Text
+                        Case "False"
+                            CurrentManifestJson.enableHttpCache = False
+                            SelectedParam.ParamValue = ModifyValueTextBox.Text
+                        Case Else
+                            MsgBox("Only True or False is allowed.", MsgBoxStyle.Exclamation, "Boolean value required")
+                    End Select
                 Case "reactNativePlaystationVersion"
                     CurrentManifestJson.reactNativePlaystationVersion = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "repositoryUrl"
+                    CurrentManifestJson.repositoryUrl = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "titleId"
                     CurrentManifestJson.titleId = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "twinTurbo"
-
                     Select Case ModifyValueTextBox.Text
                         Case "True"
                             CurrentManifestJson.twinTurbo = True
@@ -208,11 +230,6 @@ Public Class PS5ManifestEditor
                         Case Else
                             MsgBox("Only True or False is allowed.", MsgBoxStyle.Exclamation, "Boolean value required")
                     End Select
-
-                Case "repositoryUrl"
-                    CurrentManifestJson.repositoryUrl = ModifyValueTextBox.Text
-                    SelectedParam.ParamValue = ModifyValueTextBox.Text
-
             End Select
 
             ManifestParamListView.Items.Refresh()
@@ -236,33 +253,54 @@ Public Class PS5ManifestEditor
                 Else
                     Select Case ManifestParamsComboBox.Text
                         Case "applicationData"
-
-                            'Will be updated on next release
-                            MsgBox("Not completely supported yet. Will be added with a default value of 0 years.", MsgBoxStyle.Information)
-
                             CurrentManifestJson.applicationData = New ApplicationData() With {.branchType = "release"}
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "applicationData", .ParamType = "Object", .ParamValue = "0"})
                             Exit For
                         Case "applicationName"
                             CurrentManifestJson.applicationName = ManifestParamValueTextBox.Text
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "applicationName", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
                         Case "applicationVersion"
                             CurrentManifestJson.applicationVersion = ManifestParamValueTextBox.Text
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "applicationVersion", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
-                        Case "commitHash"
-                            CurrentManifestJson.commitHash = ManifestParamValueTextBox.Text
-                            ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "commitHash", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
                         Case "bootAnimation"
                             CurrentManifestJson.bootAnimation = ManifestParamValueTextBox.Text
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "bootAnimation", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
+                        Case "commitHash"
+                            CurrentManifestJson.commitHash = ManifestParamValueTextBox.Text
+                            ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "commitHash", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
+                        Case "enableAccessibility"
+                            CurrentManifestJson.enableAccessibility = {""}
+                            ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "enableAccessibility", .ParamType = "String Array", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
+                        Case "enableHttpCache"
+                            Select Case ManifestParamValueTextBox.Text
+                                Case "True"
+                                    CurrentManifestJson.enableHttpCache = True
+                                    ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "enableHttpCache", .ParamType = "Boolean", .ParamValue = "True"})
+                                Case "False"
+                                    CurrentManifestJson.enableHttpCache = False
+                                    ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "enableHttpCache", .ParamType = "Boolean", .ParamValue = "False"})
+                                Case Else
+                                    MsgBox("Only True or False is allowed.", MsgBoxStyle.Exclamation, "Boolean value required")
+                            End Select
+                            Exit For
                         Case "reactNativePlaystationVersion"
                             CurrentManifestJson.reactNativePlaystationVersion = ManifestParamValueTextBox.Text
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "reactNativePlaystationVersion", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
+                        Case "repositoryUrl"
+                            CurrentManifestJson.repositoryUrl = ManifestParamValueTextBox.Text
+                            ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "repositoryUrl", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
                         Case "titleId"
                             CurrentManifestJson.titleId = ManifestParamValueTextBox.Text
                             ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "titleId", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
                         Case "twinTurbo"
-
                             Select Case ManifestParamValueTextBox.Text
                                 Case "True"
                                     CurrentManifestJson.twinTurbo = True
@@ -273,10 +311,7 @@ Public Class PS5ManifestEditor
                                 Case Else
                                     MsgBox("Only True or False is allowed.", MsgBoxStyle.Exclamation, "Boolean value required")
                             End Select
-
-                        Case "repositoryUrl"
-                            CurrentManifestJson.repositoryUrl = ManifestParamValueTextBox.Text
-                            ManifestParamListView.Items.Add(New ParamListViewItem() With {.ParamName = "repositoryUrl", .ParamType = "String", .ParamValue = ManifestParamValueTextBox.Text})
+                            Exit For
                     End Select
 
                 End If
@@ -325,24 +360,30 @@ Public Class PS5ManifestEditor
                     Case "applicationVersion"
                         CurrentManifestJson.applicationVersion = Nothing
                         MsgBox("applicationVersion removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
-                    Case "commitHash"
-                        CurrentManifestJson.commitHash = Nothing
-                        MsgBox("commitHash removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "bootAnimation"
                         CurrentManifestJson.bootAnimation = Nothing
                         MsgBox("bootAnimation removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
-                    Case "titleId"
-                        CurrentManifestJson.titleId = Nothing
-                        MsgBox("titleId removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "commitHash"
+                        CurrentManifestJson.commitHash = Nothing
+                        MsgBox("commitHash removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "enableAccessibility"
+                        CurrentManifestJson.enableAccessibility = Nothing
+                        MsgBox("enableAccessibility removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "enableHttpCache"
+                        CurrentManifestJson.enableHttpCache = Nothing
+                        MsgBox("enableHttpCache removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "reactNativePlaystationVersion"
                         CurrentManifestJson.reactNativePlaystationVersion = Nothing
                         MsgBox("reactNativePlaystationVersion removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
-                    Case "twinTurbo"
-                        CurrentManifestJson.twinTurbo = Nothing
-                        MsgBox("twinTurbo removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "repositoryUrl"
                         CurrentManifestJson.repositoryUrl = Nothing
                         MsgBox("repositoryUrl removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "titleId"
+                        CurrentManifestJson.titleId = Nothing
+                        MsgBox("titleId removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "twinTurbo"
+                        CurrentManifestJson.twinTurbo = Nothing
+                        MsgBox("twinTurbo removed from manifest.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                 End Select
 
                 'Remove from the ManifestParamListView

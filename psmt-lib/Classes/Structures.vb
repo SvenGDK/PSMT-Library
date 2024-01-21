@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json
+﻿Imports System.Windows.Media
+Imports Newtonsoft.Json
 
 Public Class Structures
 
@@ -964,6 +965,89 @@ Public Class Structures
             End Get
             Set
                 _PatchDetails = Value
+            End Set
+        End Property
+    End Structure
+
+    Public Structure PKGBuilderProject
+        Private _ProjectPath As String
+        Private _ProjectCategory As String
+        Private _ProjectIcon As ImageSource
+        Private _ProjectTitle As String
+        Private _ProjectBackground As ImageSource
+        Private _ProjectSoundtrack As String
+        Private _ProjectURL As String
+        Private _GP5Created As Boolean
+
+        Public Property ProjectPath As String
+            Get
+                Return _ProjectPath
+            End Get
+            Set
+                _ProjectPath = Value
+            End Set
+        End Property
+
+        Public Property ProjectCategory As String
+            Get
+                Return _ProjectCategory
+            End Get
+            Set
+                _ProjectCategory = Value
+            End Set
+        End Property
+
+        Public Property ProjectIcon As ImageSource
+            Get
+                Return _ProjectIcon
+            End Get
+            Set
+                _ProjectIcon = Value
+            End Set
+        End Property
+
+        Public Property ProjectTitle As String
+            Get
+                Return _ProjectTitle
+            End Get
+            Set
+                _ProjectTitle = Value
+            End Set
+        End Property
+
+        Public Property ProjectBackground As ImageSource
+            Get
+                Return _ProjectBackground
+            End Get
+            Set
+                _ProjectBackground = Value
+            End Set
+        End Property
+
+        Public Property ProjectSoundtrack As String
+            Get
+                Return _ProjectSoundtrack
+            End Get
+            Set
+                _ProjectSoundtrack = Value
+            End Set
+        End Property
+
+        Public Property ProjectURL As String
+            Get
+                Return _ProjectURL
+            End Get
+            Set
+                _ProjectURL = Value
+            End Set
+        End Property
+
+        Public Property GP5Created As Boolean
+            Get
+                Return _GP5Created
+            End Get
+            Set
+                _GP5Created = Value
             End Set
         End Property
     End Structure
@@ -2519,24 +2603,168 @@ Public Class PS5ParamClass
         End Property
     End Class
 
+    Public Class Savedata
+        Private _TitleIdForTransferringPs4 As String()
+
+        <JsonProperty("titleIdForTransferringPs4")>
+        Public Property TitleIdForTransferringPs4 As String()
+            Get
+                Return _TitleIdForTransferringPs4
+            End Get
+            Set
+                _TitleIdForTransferringPs4 = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class Code
+        Private _Asa10 As String
+
+        <JsonProperty("asa10")>
+        Public Property Asa10 As String
+            Get
+                Return _Asa10
+            End Get
+            Set
+                _Asa10 = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class Asa
+        Private _Code As Code
+        Private _Sign As String()
+
+        <JsonProperty("code")>
+        Public Property Code As Code
+            Get
+                Return _Code
+            End Get
+            Set
+                _Code = Value
+            End Set
+        End Property
+
+        <JsonProperty("sign")>
+        Public Property Sign As String()
+            Get
+                Return _Sign
+            End Get
+            Set
+                _Sign = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class Kernel
+        Private _CpuPageTableSize As Integer
+        Private _FlexibleMemorySize As Integer
+        Private _GpuPageTableSize As Integer
+
+        <JsonProperty("cpuPageTableSize")>
+        Public Property CpuPageTableSize As Integer
+            Get
+                Return _CpuPageTableSize
+            End Get
+            Set
+                _CpuPageTableSize = Value
+            End Set
+        End Property
+
+        <JsonProperty("flexibleMemorySize")>
+        Public Property FlexibleMemorySize As Integer
+            Get
+                Return _FlexibleMemorySize
+            End Get
+            Set
+                _FlexibleMemorySize = Value
+            End Set
+        End Property
+
+        <JsonProperty("gpuPageTableSize")>
+        Public Property GpuPageTableSize As Integer
+            Get
+                Return _GpuPageTableSize
+            End Get
+            Set
+                _GpuPageTableSize = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class Pubtools
+        Private _CreationDate As String
+        Private _LoudnessSnd0 As String
+        Private _Submission As Boolean
+        Private _ToolVersion As String
+
+        <JsonProperty("creationDate")>
+        Public Property CreationDate As String
+            Get
+                Return _CreationDate
+            End Get
+            Set
+                _CreationDate = Value
+            End Set
+        End Property
+
+        <JsonProperty("loudnessSnd0")>
+        Public Property LoudnessSnd0 As String
+            Get
+                Return _LoudnessSnd0
+            End Get
+            Set
+                _LoudnessSnd0 = Value
+            End Set
+        End Property
+
+        <JsonProperty("submission")>
+        Public Property Submission As Boolean
+            Get
+                Return _Submission
+            End Get
+            Set
+                _Submission = Value
+            End Set
+        End Property
+
+        <JsonProperty("toolVersion")>
+        Public Property ToolVersion As String
+            Get
+                Return _ToolVersion
+            End Get
+            Set
+                _ToolVersion = Value
+            End Set
+        End Property
+    End Class
+
     Public Class PS5Param
         Private _AgeLevel As AgeLevel
         Private _ApplicationCategoryType As Integer
         Private _ApplicationDrmType As String
+        Private _Asa As Asa
         Private _Attribute As Integer
         Private _Attribute2 As Integer
         Private _Attribute3 As Integer
+        Private _BackgroundBasematType As String
         Private _ConceptId As String
         Private _ContentBadgeType As Integer
         Private _ContentId As String
         Private _ContentVersion As String
         Private _DeeplinkUri As String
+        Private _DownloadDataSize As Integer
+        Private _Kernel As Kernel
         Private _LocalizedParameters As LocalizedParameters
         Private _MasterVersion As String
-        Private _TitleId As String
-        Private _DownloadDataSize As Integer
-        Private _VersionFileUri As String
+        Private _OriginContentVersion As String
+        Private _Pubtools As Pubtools
         Private _RequiredSystemSoftwareVersion As String
+        Private _Savedata As Savedata
+        Private _SdkVersion As String
+        Private _TargetContentVersion As String
+        Private _TitleId As String
+        Private _VersionFileUri As String
 
         <JsonProperty("ageLevel")>
         Public Property AgeLevel As AgeLevel
@@ -2568,6 +2796,16 @@ Public Class PS5ParamClass
             End Set
         End Property
 
+        <JsonProperty("asa")>
+        Public Property Asa As Asa
+            Get
+                Return _Asa
+            End Get
+            Set
+                _Asa = Value
+            End Set
+        End Property
+
         <JsonProperty("attribute")>
         Public Property Attribute As Integer
             Get
@@ -2595,6 +2833,16 @@ Public Class PS5ParamClass
             End Get
             Set
                 _Attribute3 = Value
+            End Set
+        End Property
+
+        <JsonProperty("backgroundBasematType")>
+        Public Property BackgroundBasematType As String
+            Get
+                Return _BackgroundBasematType
+            End Get
+            Set
+                _BackgroundBasematType = Value
             End Set
         End Property
 
@@ -2658,6 +2906,16 @@ Public Class PS5ParamClass
             End Set
         End Property
 
+        <JsonProperty("kernel")>
+        Public Property Kernel As Kernel
+            Get
+                Return _Kernel
+            End Get
+            Set
+                _Kernel = Value
+            End Set
+        End Property
+
         <JsonProperty("localizedParameters")>
         Public Property LocalizedParameters As LocalizedParameters
             Get
@@ -2678,6 +2936,26 @@ Public Class PS5ParamClass
             End Set
         End Property
 
+        <JsonProperty("originContentVersion")>
+        Public Property OriginContentVersion As String
+            Get
+                Return _OriginContentVersion
+            End Get
+            Set
+                _OriginContentVersion = Value
+            End Set
+        End Property
+
+        <JsonProperty("pubtools")>
+        Public Property Pubtools As Pubtools
+            Get
+                Return _Pubtools
+            End Get
+            Set
+                _Pubtools = Value
+            End Set
+        End Property
+
         <JsonProperty("requiredSystemSoftwareVersion")>
         Public Property RequiredSystemSoftwareVersion As String
             Get
@@ -2685,6 +2963,36 @@ Public Class PS5ParamClass
             End Get
             Set
                 _RequiredSystemSoftwareVersion = Value
+            End Set
+        End Property
+
+        <JsonProperty("savedata")>
+        Public Property Savedata As Savedata
+            Get
+                Return _Savedata
+            End Get
+            Set
+                _Savedata = Value
+            End Set
+        End Property
+
+        <JsonProperty("sdkVersion")>
+        Public Property SdkVersion As String
+            Get
+                Return _SdkVersion
+            End Get
+            Set
+                _SdkVersion = Value
+            End Set
+        End Property
+
+        <JsonProperty("targetContentVersion")>
+        Public Property TargetContentVersion As String
+            Get
+                Return _TargetContentVersion
+            End Get
+            Set
+                _TargetContentVersion = Value
             End Set
         End Property
 
@@ -2760,15 +3068,26 @@ Public Class PS5ManifestClass
     End Class
 
     Public Class PS5Manifest
+        Private _applicationData As ApplicationData
         Private _applicationName As String
         Private _applicationVersion As String
+        Private _bootAnimation As String
         Private _commitHash As String
-        Private _titleId As String
+        Private _enableAccessibility As String()
+        Private _enableHttpCache As Boolean
         Private _repositoryUrl As String
         Private _reactNativePlaystationVersion As String
-        Private _applicationData As ApplicationData
+        Private _titleId As String
         Private _twinTurbo As Boolean
-        Private _bootAnimation As String
+
+        Public Property applicationData As ApplicationData
+            Get
+                Return _applicationData
+            End Get
+            Set
+                _applicationData = Value
+            End Set
+        End Property
 
         Public Property applicationName As String
             Get
@@ -2806,12 +3125,21 @@ Public Class PS5ManifestClass
             End Set
         End Property
 
-        Public Property titleId As String
+        Public Property enableAccessibility As String()
             Get
-                Return _titleId
+                Return _enableAccessibility
             End Get
             Set
-                _titleId = Value
+                _enableAccessibility = Value
+            End Set
+        End Property
+
+        Public Property enableHttpCache As Boolean
+            Get
+                Return _enableHttpCache
+            End Get
+            Set
+                _enableHttpCache = Value
             End Set
         End Property
 
@@ -2833,12 +3161,12 @@ Public Class PS5ManifestClass
             End Set
         End Property
 
-        Public Property applicationData As ApplicationData
+        Public Property titleId As String
             Get
-                Return _applicationData
+                Return _titleId
             End Get
             Set
-                _applicationData = Value
+                _titleId = Value
             End Set
         End Property
 

@@ -31,6 +31,8 @@
             <ComboBoxItem Content="applicationVersion"/>
             <ComboBoxItem Content="bootAnimation"/>
             <ComboBoxItem Content="commitHash"/>
+            <ComboBoxItem Content="enableAccessibility"/>
+            <ComboBoxItem Content="enableHttpCache"/>
             <ComboBoxItem Content="reactNativePlaystationVersion"/>
             <ComboBoxItem Content="repositoryUrl"/>
             <ComboBoxItem Content="titleId"/>

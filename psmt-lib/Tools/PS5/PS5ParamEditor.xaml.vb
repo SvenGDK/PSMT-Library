@@ -78,12 +78,17 @@ Public Class PS5ParamEditor
                     NewParamType = "Integer"
                 Case "ApplicationDrmType"
                     NewParamType = "String"
+                Case "Asa"
+                    NewParamType = "Object"
+                    NewParamValue = "Open in advanced editor"
                 Case "Attribute"
                     NewParamType = "Integer"
                 Case "Attribute2"
                     NewParamType = "Integer"
                 Case "Attribute3"
                     NewParamType = "Integer"
+                Case "BackgroundBasematType"
+                    NewParamType = "String"
                 Case "ConceptId"
                     NewParamType = "String"
                 Case "ContentBadgeType"
@@ -92,16 +97,31 @@ Public Class PS5ParamEditor
                     NewParamType = "String"
                 Case "ContentVersion"
                     NewParamType = "String"
-                Case "DownloadDataSize"
-                    NewParamType = "Integer"
                 Case "DeeplinkUri"
                     NewParamType = "String"
+                Case "DownloadDataSize"
+                    NewParamType = "Integer"
+                Case "Kernel"
+                    NewParamType = "Object"
+                    NewParamValue = "Open in advanced editor"
                 Case "LocalizedParameters"
                     NewParamType = "Object"
                     NewParamValue = "Open in advanced editor"
                 Case "MasterVersion"
                     NewParamType = "String"
+                Case "OriginContentVersion"
+                    NewParamType = "String"
+                Case "Pubtools"
+                    NewParamType = "Object"
+                    NewParamValue = "Open in advanced editor"
                 Case "RequiredSystemSoftwareVersion"
+                    NewParamType = "String"
+                Case "Savedata"
+                    NewParamType = "Object"
+                    NewParamValue = "Open in advanced editor"
+                Case "SdkVersion"
+                    NewParamType = "String"
+                Case "TargetContentVersion"
                     NewParamType = "String"
                 Case "TitleId"
                     NewParamType = "String"
@@ -132,7 +152,6 @@ Public Class PS5ParamEditor
     End Sub
 
     Private Sub LoadParamMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles LoadParamMenuItem.Click
-
         'Clear previous data
         ParamsListView.Items.Clear()
 
@@ -161,12 +180,17 @@ Public Class PS5ParamEditor
                             NewParamType = "Integer"
                         Case "ApplicationDrmType"
                             NewParamType = "String"
+                        Case "Asa"
+                            NewParamType = "Object"
+                            NewParamValue = "Open in advanced editor"
                         Case "Attribute"
                             NewParamType = "Integer"
                         Case "Attribute2"
                             NewParamType = "Integer"
                         Case "Attribute3"
                             NewParamType = "Integer"
+                        Case "BackgroundBasematType"
+                            NewParamType = "String"
                         Case "ConceptId"
                             NewParamType = "String"
                         Case "ContentBadgeType"
@@ -175,16 +199,31 @@ Public Class PS5ParamEditor
                             NewParamType = "String"
                         Case "ContentVersion"
                             NewParamType = "String"
-                        Case "DownloadDataSize"
-                            NewParamType = "Integer"
                         Case "DeeplinkUri"
                             NewParamType = "String"
+                        Case "DownloadDataSize"
+                            NewParamType = "Integer"
+                        Case "Kernel"
+                            NewParamType = "Object"
+                            NewParamValue = "Open in advanced editor"
                         Case "LocalizedParameters"
                             NewParamType = "Object"
                             NewParamValue = "Open in advanced editor"
                         Case "MasterVersion"
                             NewParamType = "String"
+                        Case "OriginContentVersion"
+                            NewParamType = "String"
+                        Case "Pubtools"
+                            NewParamType = "Object"
+                            NewParamValue = "Open in advanced editor"
                         Case "RequiredSystemSoftwareVersion"
+                            NewParamType = "String"
+                        Case "Savedata"
+                            NewParamType = "Object"
+                            NewParamValue = "Open in advanced editor"
+                        Case "SdkVersion"
+                            NewParamType = "String"
+                        Case "TargetContentVersion"
                             NewParamType = "String"
                         Case "TitleId"
                             NewParamType = "String"
@@ -232,7 +271,19 @@ Public Class PS5ParamEditor
                 Case "AgeLevel"
                     AdvancedEditorButton.IsEnabled = True
                     SaveModifiedValueButton.IsEnabled = False
+                Case "Asa"
+                    AdvancedEditorButton.IsEnabled = True
+                    SaveModifiedValueButton.IsEnabled = False
+                Case "Kernel"
+                    AdvancedEditorButton.IsEnabled = True
+                    SaveModifiedValueButton.IsEnabled = False
                 Case "LocalizedParameters"
+                    AdvancedEditorButton.IsEnabled = True
+                    SaveModifiedValueButton.IsEnabled = False
+                Case "Pubtools"
+                    AdvancedEditorButton.IsEnabled = True
+                    SaveModifiedValueButton.IsEnabled = False
+                Case "Savedata"
                     AdvancedEditorButton.IsEnabled = True
                     SaveModifiedValueButton.IsEnabled = False
                 Case Else
@@ -247,10 +298,7 @@ Public Class PS5ParamEditor
         If ParamsListView.SelectedItem IsNot Nothing And Not String.IsNullOrEmpty(ModifyValueTextBox.Text) Then
 
             Dim SelectedParam As ParamListViewItem = CType(ParamsListView.SelectedItem, ParamListViewItem)
-
             Select Case SelectedParam.ParamName
-                Case "AgeLevel"
-
                 Case "ApplicationCategoryType"
                     If IsInt(ModifyValueTextBox.Text) Then
                         CurrentParamJson.ApplicationCategoryType = CInt(ModifyValueTextBox.Text)
@@ -264,7 +312,7 @@ Public Class PS5ParamEditor
                             CurrentParamJson.ApplicationDrmType = ModifyValueTextBox.Text
                             SelectedParam.ParamValue = ModifyValueTextBox.Text
                         Case Else
-                            MsgBox("Only standard, demo, upgradable & free are currently available.", MsgBoxStyle.Exclamation, "Other value required")
+                            MsgBox("Only 'standard', 'demo', 'upgradable' & 'free' are currently available.", MsgBoxStyle.Exclamation, "Other value required")
                     End Select
                 Case "Attribute"
                     If IsInt(ModifyValueTextBox.Text) Then
@@ -287,6 +335,9 @@ Public Class PS5ParamEditor
                     Else
                         MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
                     End If
+                Case "BackgroundBasematType"
+                    CurrentParamJson.BackgroundBasematType = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "ConceptId"
                     CurrentParamJson.ConceptId = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
@@ -307,6 +358,9 @@ Public Class PS5ParamEditor
                 Case "ContentVersion"
                     CurrentParamJson.ContentVersion = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "DeeplinkUri"
+                    CurrentParamJson.DeeplinkUri = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "DownloadDataSize"
                     If IsInt(ModifyValueTextBox.Text) Then
                         CurrentParamJson.DownloadDataSize = CInt(ModifyValueTextBox.Text)
@@ -314,25 +368,25 @@ Public Class PS5ParamEditor
                     Else
                         MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
                     End If
-                Case "DeeplinkUri"
-                    CurrentParamJson.DeeplinkUri = ModifyValueTextBox.Text
-                    SelectedParam.ParamValue = ModifyValueTextBox.Text
-                Case "LocalizedParameters"
-
                 Case "MasterVersion"
-
                     CurrentParamJson.MasterVersion = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
-
+                Case "OriginContentVersion"
+                    CurrentParamJson.OriginContentVersion = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "RequiredSystemSoftwareVersion"
-
                     If IsHex(ModifyValueTextBox.Text) Then
                         CurrentParamJson.RequiredSystemSoftwareVersion = ModifyValueTextBox.Text
                         SelectedParam.ParamValue = ModifyValueTextBox.Text
                     Else
                         MsgBox("Please enter a correct RequiredSystemSoftwareVersion like 0x0114000000000000", MsgBoxStyle.Exclamation, "RequiredSystemSoftwareVersion not in correct format")
                     End If
-
+                Case "SdkVersion"
+                    CurrentParamJson.SdkVersion = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
+                Case "TargetContentVersion"
+                    CurrentParamJson.TargetContentVersion = ModifyValueTextBox.Text
+                    SelectedParam.ParamValue = ModifyValueTextBox.Text
                 Case "TitleId"
                     If ModifyValueTextBox.Text.Length = 9 Then
                         CurrentParamJson.TitleId = ModifyValueTextBox.Text
@@ -340,12 +394,9 @@ Public Class PS5ParamEditor
                     Else
                         MsgBox("Please enter a correct TitleId like CUSA99999", MsgBoxStyle.Exclamation, "TitleId not in correct format")
                     End If
-
                 Case "VersionFileUri"
-
                     CurrentParamJson.VersionFileUri = ModifyValueTextBox.Text
                     SelectedParam.ParamValue = ModifyValueTextBox.Text
-
             End Select
 
             ParamsListView.Items.Refresh()
@@ -369,15 +420,10 @@ Public Class PS5ParamEditor
                 Else
                     Select Case ParamsComboBox.Text
                         Case "AgeLevel"
-
-                            'Will be updated on next release
-                            MsgBox("Not completely supported yet. Will be added with a default value of 0 years.", MsgBoxStyle.Information)
-
                             CurrentParamJson.AgeLevel = New AgeLevel() With {.[Default] = 0, .US = 0}
-                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "AgeLevel", .ParamType = "Object", .ParamValue = "0"})
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "AgeLevel", .ParamType = "Object", .ParamValue = "Open in advanced editor"})
                             Exit For
                         Case "ApplicationCategoryType"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.ApplicationCategoryType = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "ApplicationCategoryType", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -386,7 +432,6 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "ApplicationDrmType"
-
                             Select Case ParamValueTextBox.Text
                                 Case "standard", "demo", "upgradable", "free"
                                     CurrentParamJson.ApplicationDrmType = ParamValueTextBox.Text
@@ -396,7 +441,6 @@ Public Class PS5ParamEditor
                             End Select
                             Exit For
                         Case "Attribute"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.Attribute = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Attribute", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -405,7 +449,6 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "Attribute2"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.Attribute2 = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Attribute2", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -414,7 +457,6 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "Attribute3"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.Attribute3 = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Attribute3", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -422,13 +464,15 @@ Public Class PS5ParamEditor
                                 MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
                             End If
                             Exit For
+                        Case "BackgroundBasematType"
+                            CurrentParamJson.BackgroundBasematType = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "BackgroundBasematType", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
                         Case "ConceptId"
-
                             CurrentParamJson.ConceptId = ParamValueTextBox.Text
                             ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "ConceptId", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
                             Exit For
                         Case "ContentBadgeType"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.ContentBadgeType = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "ContentBadgeType", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -437,7 +481,6 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "ContentId"
-
                             If ParamValueTextBox.Text.Length = 36 Then
                                 CurrentParamJson.ContentId = ParamValueTextBox.Text
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "ContentId", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
@@ -446,12 +489,14 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "ContentVersion"
-
                             CurrentParamJson.ContentVersion = ParamValueTextBox.Text
                             ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "ContentVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
                             Exit For
+                        Case "DeeplinkUri"
+                            CurrentParamJson.DeeplinkUri = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "DeeplinkUri", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
                         Case "DownloadDataSize"
-
                             If IsInt(ParamValueTextBox.Text) Then
                                 CurrentParamJson.DownloadDataSize = CInt(ParamValueTextBox.Text)
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "DownloadDataSize", .ParamType = "Integer", .ParamValue = ParamValueTextBox.Text})
@@ -459,16 +504,11 @@ Public Class PS5ParamEditor
                                 MsgBox("Only numbers are allowed.", MsgBoxStyle.Exclamation, "Integer value required")
                             End If
                             Exit For
-                        Case "DeeplinkUri"
-
-                            CurrentParamJson.DeeplinkUri = ParamValueTextBox.Text
-                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "DeeplinkUri", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                        Case "Kernel"
+                            CurrentParamJson.Kernel = New Kernel() With {.CpuPageTableSize = 0, .FlexibleMemorySize = 0, .GpuPageTableSize = 0}
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Kernel", .ParamType = "Object", .ParamValue = "Open in advanced editor"})
                             Exit For
                         Case "LocalizedParameters"
-
-                            'Will be updated on next release
-                            MsgBox("Not completely supported yet. The default language will be set to 'enUS' with with the Title Name: " + ParamValueTextBox.Text, MsgBoxStyle.Information)
-
                             CurrentParamJson.LocalizedParameters = New LocalizedParameters() With {.DefaultLanguage = "en-US",
                     .EnUS = New EnUS() With {.TitleName = ParamValueTextBox.Text},
                     .ArAE = New ArAE() With {.TitleName = ParamValueTextBox.Text},
@@ -501,15 +541,21 @@ Public Class PS5ParamEditor
                     .ZhHans = New ZhHans() With {.TitleName = ParamValueTextBox.Text},
                     .ZhHant = New ZhHant() With {.TitleName = ParamValueTextBox.Text}}
 
-                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "LocalizedParameters", .ParamType = "Object", .ParamValue = ParamValueTextBox.Text})
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "LocalizedParameters", .ParamType = "Object", .ParamValue = "Open in advanced editor"})
                             Exit For
                         Case "MasterVersion"
-
                             CurrentParamJson.MasterVersion = ParamValueTextBox.Text
                             ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "MasterVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
                             Exit For
+                        Case "OriginContentVersion"
+                            CurrentParamJson.OriginContentVersion = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "OriginContentVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+                        Case "Pubtools"
+                            CurrentParamJson.Pubtools = New Pubtools() With {.CreationDate = "", .LoudnessSnd0 = "", .Submission = False, .ToolVersion = ""}
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Pubtools", .ParamType = "Object", .ParamValue = "Open in advanced editor"})
+                            Exit For
                         Case "RequiredSystemSoftwareVersion"
-
                             If IsHex(ParamValueTextBox.Text) Then
                                 CurrentParamJson.RequiredSystemSoftwareVersion = ParamValueTextBox.Text
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "RequiredSystemSoftwareVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
@@ -517,8 +563,19 @@ Public Class PS5ParamEditor
                                 MsgBox("Please enter a correct RequiredSystemSoftwareVersion like 0x0114000000000000", MsgBoxStyle.Exclamation, "RequiredSystemSoftwareVersion not in correct format")
                             End If
                             Exit For
+                        Case "Savedata"
+                            CurrentParamJson.Savedata = New Savedata() With {.TitleIdForTransferringPs4 = {""}}
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "Savedata", .ParamType = "Object", .ParamValue = "Open in advanced editor"})
+                            Exit For
+                        Case "SdkVersion"
+                            CurrentParamJson.SdkVersion = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "SdkVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
+                        Case "TargetContentVersion"
+                            CurrentParamJson.TargetContentVersion = ParamValueTextBox.Text
+                            ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "TargetContentVersion", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
+                            Exit For
                         Case "TitleId"
-
                             If ParamValueTextBox.Text.Length = 9 Then
                                 CurrentParamJson.TitleId = ParamValueTextBox.Text
                                 ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "TitleId", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
@@ -527,7 +584,6 @@ Public Class PS5ParamEditor
                             End If
                             Exit For
                         Case "VersionFileUri"
-
                             CurrentParamJson.VersionFileUri = ParamValueTextBox.Text
                             ParamsListView.Items.Add(New ParamListViewItem() With {.ParamName = "VersionFileUri", .ParamType = "String", .ParamValue = ParamValueTextBox.Text})
                             Exit For
@@ -583,6 +639,9 @@ Public Class PS5ParamEditor
                     Case "ApplicationDrmType"
                         CurrentParamJson.ApplicationDrmType = Nothing
                         MsgBox("ApplicationDrmType removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "Asa"
+                        CurrentParamJson.Asa = Nothing
+                        MsgBox("Asa removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "Attribute"
                         CurrentParamJson.Attribute = Nothing
                         MsgBox("Attribute removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
@@ -592,6 +651,9 @@ Public Class PS5ParamEditor
                     Case "Attribute3"
                         CurrentParamJson.Attribute3 = Nothing
                         MsgBox("Attribute3 removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "BackgroundBasematType"
+                        CurrentParamJson.BackgroundBasematType = Nothing
+                        MsgBox("BackgroundBasematType removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "ConceptId"
                         CurrentParamJson.ConceptId = Nothing
                         MsgBox("ConceptId removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
@@ -604,21 +666,39 @@ Public Class PS5ParamEditor
                     Case "ContentVersion"
                         CurrentParamJson.ContentVersion = Nothing
                         MsgBox("ContentVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
-                    Case "DownloadDataSize"
-                        CurrentParamJson.DownloadDataSize = Nothing
-                        MsgBox("DownloadDataSize removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "DeeplinkUri"
                         CurrentParamJson.DeeplinkUri = Nothing
                         MsgBox("DeeplinkUri removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "DownloadDataSize"
+                        CurrentParamJson.DownloadDataSize = Nothing
+                        MsgBox("DownloadDataSize removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "Kernel"
+                        CurrentParamJson.Kernel = Nothing
+                        MsgBox("Kernel removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "LocalizedParameters"
                         CurrentParamJson.LocalizedParameters = Nothing
                         MsgBox("LocalizedParameters removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "MasterVersion"
                         CurrentParamJson.MasterVersion = Nothing
                         MsgBox("MasterVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "OriginContentVersion"
+                        CurrentParamJson.OriginContentVersion = Nothing
+                        MsgBox("OriginContentVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "Pubtools"
+                        CurrentParamJson.Pubtools = Nothing
+                        MsgBox("Pubtools removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "RequiredSystemSoftwareVersion"
                         CurrentParamJson.RequiredSystemSoftwareVersion = Nothing
                         MsgBox("RequiredSystemSoftwareVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "Savedata"
+                        CurrentParamJson.Savedata = Nothing
+                        MsgBox("Savedata removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "SdkVersion"
+                        CurrentParamJson.SdkVersion = Nothing
+                        MsgBox("SdkVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
+                    Case "TargetContentVersion"
+                        CurrentParamJson.TargetContentVersion = Nothing
+                        MsgBox("TargetContentVersion removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
                     Case "TitleId"
                         CurrentParamJson.TitleId = Nothing
                         MsgBox("TitleId removed from param.json. Do not forget to save the changes.", MsgBoxStyle.Information)
@@ -646,11 +726,23 @@ Public Class PS5ParamEditor
 
             Select Case SelectedParam.ParamName
                 Case "AgeLevel"
-                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying ageLevel"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying AgeLevel"
                     NewAdvParamEditor.AdvancedParam = "AgeLevel"
+                Case "Asa"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying Asa"
+                    NewAdvParamEditor.AdvancedParam = "Asa"
+                Case "Kernel"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying Kernel"
+                    NewAdvParamEditor.AdvancedParam = "Kernel"
                 Case "LocalizedParameters"
-                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying localizedParameters"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying LocalizedParameters"
                     NewAdvParamEditor.AdvancedParam = "LocalizedParameters"
+                Case "Pubtools"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying Pubtools"
+                    NewAdvParamEditor.AdvancedParam = "Pubtools"
+                Case "Savedata"
+                    NewAdvParamEditor.TitleTextBlock.Text = "Modifying Savedata"
+                    NewAdvParamEditor.AdvancedParam = "Savedata"
             End Select
 
             NewAdvParamEditor.Show()
