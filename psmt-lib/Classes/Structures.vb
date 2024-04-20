@@ -194,63 +194,6 @@ Public Class Structures
         Public Property ParamLocation As Integer
     End Structure
 
-    Public Structure StorePageInfos
-
-        Private _name As String
-        Private _category As String
-        Private _description As String
-        Private _sku As String
-        Private _image As String
-        Private _price As String
-        Private _priceCurrency As String
-
-        Public Property name As String
-            Get
-                Return _name
-            End Get
-            Set
-                _name = Value
-            End Set
-        End Property
-
-        Public Property category As String
-            Get
-                Return _category
-            End Get
-            Set
-                _category = Value
-            End Set
-        End Property
-
-        Public Property description As String
-            Get
-                Return _description
-            End Get
-            Set
-                _description = Value
-            End Set
-        End Property
-
-        Public Property sku As String
-            Get
-                Return _sku
-            End Get
-            Set
-                _sku = Value
-            End Set
-        End Property
-
-        Public Property image As String
-            Get
-                Return _image
-            End Get
-            Set
-                _image = Value
-            End Set
-        End Property
-
-    End Structure
-
     Public Structure GP5Project
         Private _ProjectFormat As String
         Private _ProjectVersion As String
@@ -3311,6 +3254,185 @@ Public Class WAVFile
         End Get
         Set
             _DataLength = Value
+        End Set
+    End Property
+
+End Class
+
+Public Class Translations
+    Public Class DetectedLanguage
+        Private _confidence As Double
+        Private _language As String
+
+        Public Property confidence As Double
+            Get
+                Return _confidence
+            End Get
+            Set
+                _confidence = Value
+            End Set
+        End Property
+
+        Public Property language As String
+            Get
+                Return _language
+            End Get
+            Set
+                _language = Value
+            End Set
+        End Property
+    End Class
+
+    Public Class ReceivedTranslation
+        Private _detectedLanguage As DetectedLanguage
+        Private _translatedText As String
+
+        Public Property detectedLanguage As DetectedLanguage
+            Get
+                Return _detectedLanguage
+            End Get
+            Set
+                _detectedLanguage = Value
+            End Set
+        End Property
+
+        Public Property translatedText As String
+            Get
+                Return _translatedText
+            End Get
+            Set
+                _translatedText = Value
+            End Set
+        End Property
+    End Class
+End Class
+
+Public Class Offers
+
+    Private _Type As String
+    Private _Price As Double
+    Private _PriceCurrency As String
+
+    <JsonProperty("@type")>
+    Public Property Type As String
+        Get
+            Return _Type
+        End Get
+        Set
+            _Type = Value
+        End Set
+    End Property
+
+    <JsonProperty("price")>
+    Public Property Price As Double
+        Get
+            Return _Price
+        End Get
+        Set
+            _Price = Value
+        End Set
+    End Property
+
+    <JsonProperty("priceCurrency")>
+    Public Property PriceCurrency As String
+        Get
+            Return _PriceCurrency
+        End Get
+        Set
+            _PriceCurrency = Value
+        End Set
+    End Property
+
+End Class
+
+Public Class StorePageInfos
+
+    Private _Context As String
+    Private _Type As String
+    Private _Name As String
+    Private _Category As String
+    Private _Description As String
+    Private _Sku As String
+    Private _Image As String
+    Private _Offers As Offers
+
+    <JsonProperty("@context")>
+    Public Property Context As String
+        Get
+            Return _Context
+        End Get
+        Set
+            _Context = Value
+        End Set
+    End Property
+
+    <JsonProperty("@type")>
+    Public Property Type As String
+        Get
+            Return _Type
+        End Get
+        Set
+            _Type = Value
+        End Set
+    End Property
+
+    <JsonProperty("name")>
+    Public Property Name As String
+        Get
+            Return _Name
+        End Get
+        Set
+            _Name = Value
+        End Set
+    End Property
+
+    <JsonProperty("category")>
+    Public Property Category As String
+        Get
+            Return _Category
+        End Get
+        Set
+            _Category = Value
+        End Set
+    End Property
+
+    <JsonProperty("description")>
+    Public Property Description As String
+        Get
+            Return _Description
+        End Get
+        Set
+            _Description = Value
+        End Set
+    End Property
+
+    <JsonProperty("sku")>
+    Public Property Sku As String
+        Get
+            Return _Sku
+        End Get
+        Set
+            _Sku = Value
+        End Set
+    End Property
+
+    <JsonProperty("image")>
+    Public Property Image As String
+        Get
+            Return _Image
+        End Get
+        Set
+            _Image = Value
+        End Set
+    End Property
+
+    <JsonProperty("offers")>
+    Public Property Offers As Offers
+        Get
+            Return _Offers
+        End Get
+        Set
+            _Offers = Value
         End Set
     End Property
 

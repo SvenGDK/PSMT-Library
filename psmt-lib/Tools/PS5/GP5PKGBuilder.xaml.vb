@@ -18,6 +18,7 @@ Public Class GP5PKGBuilder
 
     Dim WithEvents PKGBuilder As New Process()
     Dim PKGBuilderOuput As String = ""
+    Dim CurrentLanguage As String = ""
 
     Private WithEvents ClockTimer As DispatcherTimer
     ReadOnly MoveRightToLeftAnimation As New ThicknessAnimation With {.From = New Thickness(175, 305, 0, 0), .To = New Thickness(55, 305, 0, 0), .Duration = New Duration(TimeSpan.FromMilliseconds(500))}
@@ -950,5 +951,54 @@ Public Class GP5PKGBuilder
     Private Sub ClockTimer_Tick(sender As Object, e As EventArgs) Handles ClockTimer.Tick
         ClockTextBlock.Text = Date.Now.ToString("HH:mm")
     End Sub
+
+    'Private Sub TranslateButton_Click(sender As Object, e As RoutedEventArgs) Handles TranslateButton.Click
+    '    Try
+    '        Select Case CurrentLanguage
+    '            Case ""
+    '                Dim NewTranslatedWindow As New GP5PKGBuilder() With {.ShowActivated = True}
+    '                NewTranslatedWindow.Show()
+    '                NewTranslatedWindow.TranslateWindow("de")
+    '                CurrentLanguage = "de"
+    '            Case "de"
+    '                Dim NewTranslatedWindow As New GP5PKGBuilder() With {.ShowActivated = True}
+    '                NewTranslatedWindow.Show()
+    '                NewTranslatedWindow.TranslateWindow("zh")
+    '                CurrentLanguage = "zh"
+    '            Case "zh"
+    '                Dim NewTranslatedWindow As New GP5PKGBuilder() With {.ShowActivated = True}
+    '                NewTranslatedWindow.Show()
+    '                NewTranslatedWindow.TranslateWindow("ru")
+    '                CurrentLanguage = "ru"
+    '            Case "ru"
+    '                Dim NewTranslatedWindow As New GP5PKGBuilder() With {.ShowActivated = True}
+    '                NewTranslatedWindow.Show()
+    '                NewTranslatedWindow.TranslateWindow("fr")
+    '                CurrentLanguage = "fr"
+    '            Case "fr"
+    '                Dim NewTranslatedWindow As New GP5PKGBuilder() With {.ShowActivated = True}
+    '                NewTranslatedWindow.Show()
+    '                NewTranslatedWindow.TranslateWindow("ar")
+    '                CurrentLanguage = "ar"
+    '        End Select
+    '    Catch ex As Exception
+    '        MsgBox(ex.ToString)
+    '    End Try
+    'End Sub
+
+    'Public Sub TranslateWindow(Lang As String)
+    '    Select Case Lang
+    '        Case "de"
+    '            SmartUtils.TranslateWindowContent("de", MainGrid)
+    '        Case "zh"
+    '            SmartUtils.TranslateWindowContent("zh", MainGrid)
+    '        Case "ru"
+    '            SmartUtils.TranslateWindowContent("ru", MainGrid)
+    '        Case "fr"
+    '            SmartUtils.TranslateWindowContent("fr", MainGrid)
+    '        Case "ar"
+    '            SmartUtils.TranslateWindowContent("ar", MainGrid)
+    '    End Select
+    'End Sub
 
 End Class

@@ -499,15 +499,11 @@ Public Class PS3PKGExtractor
             size = dataSize
         End If
 
-        Dim EncryptedData As Byte() = New Byte(size - 1) {}
-        Dim DecryptedData As Byte() = New Byte(size - 1) {}
         Dim PKGFileKeyConsec As Byte() = New Byte(size - 1) {}
-        Dim PKGXorKeyConsec As Byte() = New Byte(size - 1) {}
         Dim incPKGFileKey As Byte() = New Byte(PKGFileKey.Length - 1) {}
         Array.Copy(PKGFileKey, incPKGFileKey, PKGFileKey.Length)
 
         encrPKGReadStream.Seek(dataRelativeOffset + pkgEncryptedFileStartOffset, SeekOrigin.Begin)
-        EncryptedData = brEncrPKG.ReadBytes(size)
 
         For pos As Integer = 0 To CInt(dataRelativeOffset - 1) Step 16
             Utils.IncrementArray(incPKGFileKey, PKGFileKey.Length - 1)
@@ -518,8 +514,9 @@ Public Class PS3PKGExtractor
             Utils.IncrementArray(incPKGFileKey, PKGFileKey.Length - 1)
         Next
 
-        PKGXorKeyConsec = AESEngine.Encrypt(PKGFileKeyConsec, AesKey, AesKey, CipherMode.ECB, PaddingMode.None)
-        DecryptedData = XOREngine.GetXOR(EncryptedData, 0, PKGXorKeyConsec.Length, PKGXorKeyConsec)
+        Dim EncryptedData As Byte() = brEncrPKG.ReadBytes(size)
+        Dim PKGXorKeyConsec As Byte() = AESEngine.Encrypt(PKGFileKeyConsec, AesKey, AesKey, CipherMode.ECB, PaddingMode.None)
+        Dim DecryptedData As Byte() = XOREngine.GetXOR(EncryptedData, 0, PKGXorKeyConsec.Length, PKGXorKeyConsec)
 
         Return DecryptedData
     End Function

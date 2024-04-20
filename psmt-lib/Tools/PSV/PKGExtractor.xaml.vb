@@ -4,11 +4,10 @@ Imports System.Windows.Forms
 
 Public Class PKGExtractor
 
-    Dim DownloadsList As New List(Of Structures.Package)
+    Dim DownloadsList As New List(Of Structures.Package)()
     Dim SelectedPKGContentID As String
 
     Private Sub BrowsePKGButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles BrowsePKGButton.Click
-
         Dim OFD As New OpenFileDialog With {.Multiselect = False, .Filter = "", .CheckFileExists = True}
         If OFD.ShowDialog() = Windows.Forms.DialogResult.OK Then
             SelectedPKGTextBox.Text = OFD.FileName
@@ -34,10 +33,7 @@ Public Class PKGExtractor
                     Next
                 End If
             End Using
-
-            MsgBox(SelectedPKGContentID)
         End If
-
     End Sub
 
     Private Sub BrowseOutputFolderButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles BrowseOutputFolderButton.Click

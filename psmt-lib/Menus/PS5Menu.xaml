@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="800">
+             d:DesignHeight="20" d:DesignWidth="500">
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
         <MenuItem Header="Blu Ray Disc Burner" x:Name="OpenBDBurnerMenuItem"/>
@@ -111,27 +111,7 @@
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Download 4.50" x:Name="DownloadRecoveryFW450">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
                 <MenuItem Header="Download 4.51" x:Name="DownloadRecoveryFW451">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 5.50" x:Name="DownloadRecoveryFW550">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 6.00" x:Name="DownloadRecoveryFW600">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 6.50" x:Name="DownloadRecoveryFW650">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
@@ -143,27 +123,7 @@
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Download 4.50" x:Name="DownloadSystemFW450">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
                 <MenuItem Header="Download 4.51" x:Name="DownloadSystemFW451">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 5.50" x:Name="DownloadSystemFW550">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 6.00" x:Name="DownloadSystemFW600">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download 6.50" x:Name="DownloadSystemFW650">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
@@ -173,12 +133,10 @@
 
         <MenuItem Header="Homebrew">
             <MenuItem Header="etaHEN by LightningMods">
-                <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.4B" x:Name="DownloadetaHEN">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <MenuItem Header="Download v1.6B" x:Name="DownloadetaHEN">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="For Mast1c0re Exploit">
@@ -202,30 +160,24 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="FTPS5">
-                <MenuItem Header="4.03 - 4.50 - 4.51">
-                    <MenuItem Header="Download v1.4" x:Name="DownloadFTPS5">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <MenuItem Header="Download v1.4" x:Name="DownloadFTPS5">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Homebrew Store by LightningMods">
-                <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download R2" x:Name="DownloadHomebrewStore">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <MenuItem Header="Download R2" x:Name="DownloadHomebrewStore">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Itemzflow by LightningMods">
-                <MenuItem Header="4.03 and 4.50">
-                    <MenuItem Header="Download v1.05" x:Name="DownloadItemzflow">
-                        <MenuItem.Icon>
-                            <Image Source="/Images/download.png"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                <MenuItem Header="Download v1.06" x:Name="DownloadItemzflow">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Packages">

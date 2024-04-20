@@ -3,6 +3,8 @@ Imports System.Security.Cryptography
 
 Public Class AESEngine
 
+#Disable Warning BC40000 ' Type or member is obsolete
+
     Public Shared Function Encrypt(clearData As Byte(), Key As Byte(), IV As Byte(), cipherMode As CipherMode, paddingMode As PaddingMode) As Byte()
         Dim ms As New MemoryStream()
         Dim alg As Rijndael = Rijndael.Create()
@@ -42,8 +44,8 @@ Public Class AESEngine
         ' Then we are going to derive a Key and an IV from the
         ' Password and create an algorithm 
 
-        Dim pdb As New PasswordDeriveBytes(Password, New Byte() {&H49, &H76, &H61, &H6E, &H20, &H4D, _
-            &H65, &H64, &H76, &H65, &H64, &H65, _
+        Dim pdb As New PasswordDeriveBytes(Password, New Byte() {&H49, &H76, &H61, &H6E, &H20, &H4D,
+            &H65, &H64, &H76, &H65, &H64, &H65,
             &H76})
 
         Dim alg As Rijndael = Rijndael.Create()
@@ -122,6 +124,7 @@ Public Class AESEngine
         alg.Mode = cipherMode
         alg.Padding = paddingMode
         alg.Key = pdb.GetBytes(32)
+
         alg.IV = pdb.GetBytes(16)
 
         Dim cs As New CryptoStream(fsOut, alg.CreateDecryptor(), CryptoStreamMode.Write)
@@ -138,5 +141,7 @@ Public Class AESEngine
         cs.Close()
         fsIn.Close()
     End Sub
+
+#Enable Warning BC40000 ' Type or member is obsolete
 
 End Class

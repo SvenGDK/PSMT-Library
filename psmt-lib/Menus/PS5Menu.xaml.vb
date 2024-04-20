@@ -37,6 +37,19 @@ Public Class PS5Menu
         End If
     End Sub
 
+    Private Sub PS5Menu_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        'Load config if exists
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini") Then
+            Try
+                Dim MainConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini")
+                SharedConsoleAddress = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
+                FTPIPTextBox.Text = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
+            Catch ex As FileNotFoundException
+                MsgBox("Could not find a valid config file.", MsgBoxStyle.Exclamation)
+            End Try
+        End If
+    End Sub
+
 #Region "Tools"
 
     Private Sub SenderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles SenderMenuItem.Click
@@ -338,7 +351,7 @@ Public Class PS5Menu
     Private Sub DownloadetaHEN_Click(sender As Object, e As RoutedEventArgs) Handles DownloadetaHEN.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.4b/etaHEN-1.4B.bin") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/LightningMods/etaHEN/releases/download/1.7b/etaHEN-1.7B.bin") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -347,7 +360,7 @@ Public Class PS5Menu
     Private Sub DownloadHomebrewStore_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHomebrewStore.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://pkg-zone.com/Store-R2-PS5.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/Store-R2-PS5.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -384,46 +397,10 @@ Public Class PS5Menu
         End If
     End Sub
 
-    Private Sub DownloadRecoveryFW450_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecoveryFW450.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/recovery/04.50/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
     Private Sub DownloadRecoveryFW451_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecoveryFW451.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
         If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/recovery/04.51/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadRecoveryFW550_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecoveryFW550.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/recovery/05.50/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadRecoveryFW600_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecoveryFW600.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/recovery/06.00/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadRecoveryFW650_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecoveryFW650.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/recovery/06.50/PS5UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -438,46 +415,10 @@ Public Class PS5Menu
         End If
     End Sub
 
-    Private Sub DownloadSystemFW450_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSystemFW450.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/system/04.50/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
     Private Sub DownloadSystemFW451_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSystemFW451.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
         If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/system/04.51/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadSystemFW550_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSystemFW550.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/system/05.50/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadSystemFW600_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSystemFW600.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/system/06.00/PS5UPDATE.PUP") = False Then
-            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
-            NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub DownloadSystemFW650_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSystemFW650.Click
-        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
-        NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/fw/system/06.50/PS5UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -526,19 +467,6 @@ Public Class PS5Menu
         If NewDownloader.CreateNewDownload("https://github.com/hammer-83/ps5-jar-loader/releases/download/v20231027/ps5-jar-loader.iso") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
-        End If
-    End Sub
-
-    Private Sub PS5Menu_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        'Load config if exists
-        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini") Then
-            Try
-                Dim MainConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\psmt-config.ini")
-                SharedConsoleAddress = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
-                FTPIPTextBox.Text = MainConfig.IniReadValue("PS5 Tools", "IP") + ":" + MainConfig.IniReadValue("PS5 Tools", "Port")
-            Catch ex As FileNotFoundException
-                MsgBox("Could not find a valid config file.", MsgBoxStyle.Exclamation)
-            End Try
         End If
     End Sub
 

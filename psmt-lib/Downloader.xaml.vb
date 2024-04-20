@@ -1,12 +1,10 @@
 ﻿Imports Microsoft.Win32
-Imports psmt_lib.Structures
 Imports System.ComponentModel
 Imports System.IO
 Imports System.Net
 Imports System.Net.Security
 Imports System.Security.Cryptography.X509Certificates
 Imports System.Windows
-Imports System.Windows.Forms
 Imports System.Windows.Media
 Imports System.Windows.Media.Imaging
 
@@ -27,13 +25,12 @@ Public Class Downloader
     Dim TimeLeftAverage As Double = 0
     Dim DownloadIcon As ImageSource = Nothing
 
-    Dim WithEvents NPSBrowser As New WebBrowser() With {.ScriptErrorsSuppressed = True}
     Dim WithEvents DownloadClient As New WebClient()
     Public PackageConsole As String
     Public PackageTitleID As String
     Public PackageContentID As String
 
-    Public DownloadQueueItem As DownloadQueueItem
+    Public DownloadQueueItem As DownloadQueueItem = Nothing
 
     Public Sub New()
         InitializeComponent()
@@ -124,25 +121,27 @@ Public Class Downloader
             End If
 
             'For PS5 game patches
-            If Not String.IsNullOrEmpty(DownloadQueueItem.FileName) Then
-                'Update progress in PS5GamePatches (if open)
-                Dim OpenGamePatchesWindow As PS5GamePatches
-                For Each OpenWin In Windows.Application.Current.Windows()
-                    If OpenWin.ToString = "psmt_lib.PS5GamePatches" Then
-                        OpenGamePatchesWindow = CType(OpenWin, PS5GamePatches)
+            If DownloadQueueItem IsNot Nothing Then
+                If Not String.IsNullOrEmpty(DownloadQueueItem.FileName) Then
+                    'Update progress in PS5GamePatches (if open)
+                    Dim OpenGamePatchesWindow As PS5GamePatches
+                    For Each OpenWin In Windows.Application.Current.Windows()
+                        If OpenWin.ToString = "psmt_lib.PS5GamePatches" Then
+                            OpenGamePatchesWindow = CType(OpenWin, PS5GamePatches)
 
-                        For Each DownloadItem In OpenGamePatchesWindow.DownloadQueueListView.Items
-                            Dim DownloadItemAsDownloadQueueItem As DownloadQueueItem = CType(DownloadItem, DownloadQueueItem)
-                            If DownloadItemAsDownloadQueueItem.FileName = DownloadQueueItem.FileName Then
-                                DownloadItemAsDownloadQueueItem.DownloadState = "Downloaded"
-                                OpenGamePatchesWindow.DownloadQueueListView.Items.Refresh()
-                                Exit For
-                            End If
-                        Next
+                            For Each DownloadItem In OpenGamePatchesWindow.DownloadQueueListView.Items
+                                Dim DownloadItemAsDownloadQueueItem As DownloadQueueItem = CType(DownloadItem, DownloadQueueItem)
+                                If DownloadItemAsDownloadQueueItem.FileName = DownloadQueueItem.FileName Then
+                                    DownloadItemAsDownloadQueueItem.DownloadState = "Downloaded"
+                                    OpenGamePatchesWindow.DownloadQueueListView.Items.Refresh()
+                                    Exit For
+                                End If
+                            Next
 
-                        Exit For
-                    End If
-                Next
+                            Exit For
+                        End If
+                    Next
+                End If
             End If
 
             If MsgBox("Download completed. Open the Downloads folder ?", MsgBoxStyle.YesNo, "Completed") = MsgBoxResult.Yes Then
@@ -152,35 +151,12 @@ Public Class Downloader
     End Sub
 
     Private Sub Downloader_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        'Show art for downloads from NPS
-        If PackageConsole = "PS3" Then
-            If Utils.IsURLValid("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/1") Then
-                NPSBrowser.Navigate("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/1")
-            End If
-        ElseIf PackageConsole = "PSV" Then
-            If Utils.IsURLValid("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/1") Then
-                NPSBrowser.Navigate("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/1")
-            End If
-        ElseIf PackageConsole = "PSX" Then
-            If Utils.IsURLValid("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/0") Then
-                NPSBrowser.Navigate("https://nopaystation.com/view/" + PackageConsole + "/" + PackageTitleID + "/" + PackageContentID + "/0")
-            End If
-        ElseIf PackageConsole = "PS5" Then
-            DownloadImage.Source = New BitmapImage(New Uri("/Images/PKG.png", UriKind.Relative))
-        End If
-
+        DownloadImage.Source = New BitmapImage(New Uri("/Images/PKG.png", UriKind.Relative))
         ServicePointManager.ServerCertificateValidationCallback = AddressOf ValidateRemoteCertificate 'Allows downloading the sc package that causes an certificate error
     End Sub
 
     Public Shared Function ValidateRemoteCertificate(sender As Object, certificate As X509Certificate, chain As X509Chain, sslPolicyErrors As SslPolicyErrors) As Boolean
         Return True
     End Function
-
-    Private Sub NPSBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles NPSBrowser.DocumentCompleted
-        'Art
-        If NPSBrowser.Document.GetElementById("itemArtwork") IsNot Nothing Then
-            DownloadImage.Source = New BitmapImage(New Uri(NPSBrowser.Document.GetElementById("itemArtwork").GetAttribute("src"), UriKind.RelativeOrAbsolute))
-        End If
-    End Sub
 
 End Class

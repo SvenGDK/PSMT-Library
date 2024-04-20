@@ -151,6 +151,8 @@ Public Class XMBInstaller
     End Function
 
     Private Function IsLocalHDDConnected() As Boolean
+        Dim DriveFound As Boolean = False
+
         'Query the drives
         Using HDLDump As New Process()
             HDLDump.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\hdl_dump.exe"
@@ -174,15 +176,20 @@ Public Class XMBInstaller
                             MountStatusLabel.Content = "on " + DriveInfos(0).Trim()
                             MountStatusLabel.Foreground = Brushes.Green
                             MountedDrive.HDLDriveName = DriveInfos(0).Trim()
-                            Return True
+                            DriveFound = True
+                            Exit For
                         End If
                     End If
                 End If
             Next
         End Using
+
+        Return DriveFound
     End Function
 
     Private Function GetConnectedNBDIP(NBDDriveName As String) As String
+        Dim NBDIP As String = ""
+
         Using WNBDClient As New Process()
             WNBDClient.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\wnbd-client.exe"
             WNBDClient.StartInfo.Arguments = "show " + NBDDriveName
@@ -194,16 +201,24 @@ Public Class XMBInstaller
             Dim OutputReader As StreamReader = WNBDClient.StandardOutput
             Dim ProcessOutput As String() = OutputReader.ReadToEnd().Split({vbCrLf}, StringSplitOptions.None)
 
-            For Each ReturnedLine As String In ProcessOutput
-                If ReturnedLine.Contains("Hostname") Then
-                    Return ReturnedLine.Split(":"c)(1).Trim()
-                    Exit Function
-                End If
-            Next
+            If ProcessOutput.Count > 0 Then
+                For Each ReturnedLine As String In ProcessOutput
+                    If Not String.IsNullOrWhiteSpace(ReturnedLine) Then
+                        If ReturnedLine.Contains("Hostname") Then
+                            NBDIP = ReturnedLine.Split(":"c)(1).Trim()
+                            Exit For
+                        End If
+                    End If
+                Next
+            End If
         End Using
+
+        Return NBDIP
     End Function
 
     Private Function GetHDLDriveName() As String
+        Dim HDLDriveName As String = ""
+
         'Query the drives
         Using HDLDump As New Process()
             HDLDump.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\hdl_dump.exe"
@@ -226,15 +241,20 @@ Public Class XMBInstaller
                         If DriveInfos(0) IsNot Nothing Then
                             MountStatusLabel.Content = "on " + DriveInfos(0).Trim()
                             MountStatusLabel.Foreground = Brushes.Green
-                            Return DriveInfos(0).Trim()
+                            HDLDriveName = DriveInfos(0).Trim()
+                            Exit For
                         End If
                     End If
                 End If
             Next
         End Using
+
+        Return HDLDriveName
     End Function
 
     Private Function GetHDDID() As String
+        Dim HDDID As String = ""
+
         'Query the drives
         Using WMIC As New Process()
             WMIC.StartInfo.FileName = "wmic"
@@ -252,13 +272,15 @@ Public Class XMBInstaller
             For Each Line As String In ProcessOutput
                 If Not String.IsNullOrWhiteSpace(Line) Then
                     If Line.Contains("WNBD WNBD_DISK SCSI Disk Device") Then
-                        Return Line.Split(New String() {" "}, StringSplitOptions.RemoveEmptyEntries)(5).Trim()
+                        HDDID = Line.Split(New String() {" "}, StringSplitOptions.RemoveEmptyEntries)(5).Trim()
                     ElseIf Line.Contains("Microsoft Virtual Disk") Then 'For testing with local VHD
-                        Return Line.Split(New String() {" "}, StringSplitOptions.RemoveEmptyEntries)(3).Trim()
+                        HDDID = Line.Split(New String() {" "}, StringSplitOptions.RemoveEmptyEntries)(3).Trim()
                     End If
                 End If
             Next
         End Using
+
+        Return HDDID
     End Function
 
 #End Region

@@ -17,23 +17,23 @@ Public Class PSNInfo
     Private Sub PSNBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles PSNBrowser.DocumentCompleted
         If PSNBrowser.Document.GetElementById("mfe-jsonld-tags") IsNot Nothing Then
             If Not String.IsNullOrEmpty(PSNBrowser.Document.GetElementById("mfe-jsonld-tags").InnerHtml) Then
-                Dim JSONData = PSNBrowser.Document.GetElementById("mfe-jsonld-tags").InnerHtml
-                Dim StoreInfos = JsonConvert.DeserializeObject(Of Structures.StorePageInfos)(JSONData)
+                Dim JSONData As String = PSNBrowser.Document.GetElementById("mfe-jsonld-tags").InnerHtml.Trim()
+                Dim StoreInfos As StorePageInfos = JsonConvert.DeserializeObject(Of StorePageInfos)(JSONData)
 
-                If Not String.IsNullOrEmpty(StoreInfos.name) Then
-                    GameTitleTextBlock.Text = StoreInfos.name
+                If Not String.IsNullOrEmpty(StoreInfos.Name) Then
+                    GameTitleTextBlock.Text = StoreInfos.Name
                 End If
-                If Not String.IsNullOrEmpty(StoreInfos.description) Then
-                    DescriptionTextBlock.Text = StoreInfos.description
+                If Not String.IsNullOrEmpty(StoreInfos.Description) Then
+                    DescriptionTextBlock.Text = StoreInfos.Description
                 End If
-                If Not String.IsNullOrEmpty(StoreInfos.category) Then
-                    CategoryTextBlock.Text = StoreInfos.category
+                If Not String.IsNullOrEmpty(StoreInfos.Category) Then
+                    CategoryTextBlock.Text = StoreInfos.Category
                 End If
-                If Not String.IsNullOrEmpty(StoreInfos.sku) Then
-                    GameCodeTextBlock.Text = StoreInfos.sku
+                If Not String.IsNullOrEmpty(StoreInfos.Sku) Then
+                    GameCodeTextBlock.Text = StoreInfos.Sku
                 End If
-                If Not String.IsNullOrEmpty(StoreInfos.image) Then
-                    GameImage.Source = New BitmapImage(New Uri(StoreInfos.image, UriKind.RelativeOrAbsolute))
+                If Not String.IsNullOrEmpty(StoreInfos.Image) Then
+                    GameImage.Source = New BitmapImage(New Uri(StoreInfos.Image, UriKind.RelativeOrAbsolute))
                 End If
             End If
         End If

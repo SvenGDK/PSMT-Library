@@ -1,12 +1,29 @@
-﻿Imports System.Windows
+﻿Imports System.IO
+Imports System.Windows
 Imports System.Windows.Forms
 
 Public Class PS3ISOTools
+
+    Private WithEvents PS3NetSrvProcess As Process = Nothing
+    Private PS3NetSrvProcessAction As String = ""
 
     Public ISOToCreate As String = String.Empty
     Public ISOToExtract As String = String.Empty
     Public ISOToSplit As String = String.Empty
     Public ISOToPatch As String = String.Empty
+
+    Private Sub PS3ISOTools_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
+        'Receive input from the app
+        If Not String.IsNullOrEmpty(ISOToCreate) Then
+            SelectedGameBackupFolderTextBox.Text = ISOToCreate
+        ElseIf Not String.IsNullOrEmpty(ISOToExtract) Then
+            SelectedExtractISOTextBox.Text = ISOToExtract
+        ElseIf Not String.IsNullOrEmpty(ISOToSplit) Then
+            SelectedSplitISOTextBox.Text = ISOToSplit
+        ElseIf Not String.IsNullOrEmpty(ISOToPatch) Then
+            SelectedPatchISOTextBox.Text = ISOToPatch
+        End If
+    End Sub
 
 #Region "Browse Buttons"
 
@@ -52,12 +69,39 @@ Public Class PS3ISOTools
         End If
     End Sub
 
+    Private Sub BrowseBackupFolderUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseBackupFolderUsingPS3netsrvButton.Click
+        Dim FBD As New FolderBrowserDialog() With {.RootFolder = Environment.SpecialFolder.Desktop, .Description = "Select a game backup folder"}
+        If FBD.ShowDialog() = Forms.DialogResult.OK Then
+            SelectedGameBackupFolderUsingPS3netsrvTextBox.Text = FBD.SelectedPath
+        End If
+    End Sub
+
+    Private Sub BrowseNewISOUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseNewISOUsingPS3netsrvButton.Click
+        Dim FBD As New FolderBrowserDialog() With {.RootFolder = Environment.SpecialFolder.Desktop, .Description = "Select a folder where you want to save the ISO file"}
+        If FBD.ShowDialog() = Forms.DialogResult.OK Then
+            SelectedISOOutputUsingPS3netsrvTextBox.Text = FBD.SelectedPath
+        End If
+    End Sub
+
+    Private Sub BrowseISOUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseISOUsingPS3netsrvButton.Click
+        Dim OFD As New OpenFileDialog() With {.CheckFileExists = True, .Filter = "ISO files (*.iso)|*.iso", .Multiselect = False}
+        If OFD.ShowDialog() = Forms.DialogResult.OK Then
+            SelectedGameISOUsingPS3netsrvTextBox.Text = OFD.FileName
+        End If
+    End Sub
+
+    Private Sub BrowseNewExtractFolderUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseNewExtractFolderUsingPS3netsrvButton.Click
+        Dim FBD As New FolderBrowserDialog() With {.RootFolder = Environment.SpecialFolder.Desktop, .Description = "Select a folder where you want to save the decrypted ISO", .ShowNewFolderButton = True}
+        If FBD.ShowDialog() = Forms.DialogResult.OK Then
+            SelectedISOExtractFolderUsingPS3netsrvTextBox.Text = FBD.SelectedPath
+        End If
+    End Sub
 
 #End Region
 
 #Region "Output Data Handlers"
 
-    Public Sub makeps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
+    Public Sub Makeps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
         If e.Data.Contains("Finish!") Then
             If MsgBox("ISO created! Open folder ?", MsgBoxStyle.YesNo, "Success") = MsgBoxResult.Yes Then
                 If Dispatcher.CheckAccess() = False Then
@@ -71,7 +115,7 @@ Public Class PS3ISOTools
         End If
     End Sub
 
-    Public Sub extractps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
+    Public Sub Extractps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
         If e.Data.Contains("Finish!") Then
             If MsgBox("ISO extracted! Open folder ?", MsgBoxStyle.YesNo, "Success") = MsgBoxResult.Yes Then
                 If Dispatcher.CheckAccess() = False Then
@@ -85,7 +129,7 @@ Public Class PS3ISOTools
         End If
     End Sub
 
-    Public Sub splitps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
+    Public Sub Splitps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
         If e.Data.Contains("Finish!") Then
             If MsgBox("ISO splitted! Open folder ?", MsgBoxStyle.YesNo, "Success") = MsgBoxResult.Yes Then
                 If Dispatcher.CheckAccess() = False Then
@@ -99,7 +143,7 @@ Public Class PS3ISOTools
         End If
     End Sub
 
-    Public Sub patchps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
+    Public Sub Patchps3iso_OutputDataReceived(sender As Object, e As DataReceivedEventArgs)
         If e.Data.Contains("Finish!") Then
             If MsgBox("ISO patched! Open folder ?", MsgBoxStyle.YesNo, "Success") = MsgBoxResult.Yes Then
                 If Dispatcher.CheckAccess() = False Then
@@ -132,8 +176,8 @@ Public Class PS3ISOTools
                 makeps3iso.StartInfo.CreateNoWindow = True
                 makeps3iso.EnableRaisingEvents = True
 
-                AddHandler makeps3iso.ErrorDataReceived, AddressOf makeps3iso_OutputDataReceived
-                AddHandler makeps3iso.OutputDataReceived, AddressOf makeps3iso_OutputDataReceived
+                AddHandler makeps3iso.ErrorDataReceived, AddressOf Makeps3iso_OutputDataReceived
+                AddHandler makeps3iso.OutputDataReceived, AddressOf Makeps3iso_OutputDataReceived
 
                 makeps3iso.Start()
                 makeps3iso.BeginOutputReadLine()
@@ -161,8 +205,8 @@ Public Class PS3ISOTools
                 extractps3iso.StartInfo.CreateNoWindow = True
                 extractps3iso.EnableRaisingEvents = True
 
-                AddHandler extractps3iso.ErrorDataReceived, AddressOf extractps3iso_OutputDataReceived
-                AddHandler extractps3iso.OutputDataReceived, AddressOf extractps3iso_OutputDataReceived
+                AddHandler extractps3iso.ErrorDataReceived, AddressOf Extractps3iso_OutputDataReceived
+                AddHandler extractps3iso.OutputDataReceived, AddressOf Extractps3iso_OutputDataReceived
 
                 extractps3iso.Start()
                 extractps3iso.BeginOutputReadLine()
@@ -184,8 +228,8 @@ Public Class PS3ISOTools
                 splitps3iso.StartInfo.CreateNoWindow = True
                 splitps3iso.EnableRaisingEvents = True
 
-                AddHandler splitps3iso.ErrorDataReceived, AddressOf splitps3iso_OutputDataReceived
-                AddHandler splitps3iso.OutputDataReceived, AddressOf splitps3iso_OutputDataReceived
+                AddHandler splitps3iso.ErrorDataReceived, AddressOf Splitps3iso_OutputDataReceived
+                AddHandler splitps3iso.OutputDataReceived, AddressOf Splitps3iso_OutputDataReceived
 
                 splitps3iso.Start()
                 splitps3iso.BeginOutputReadLine()
@@ -207,8 +251,8 @@ Public Class PS3ISOTools
                 patchps3iso.StartInfo.CreateNoWindow = True
                 patchps3iso.EnableRaisingEvents = True
 
-                AddHandler patchps3iso.ErrorDataReceived, AddressOf patchps3iso_OutputDataReceived
-                AddHandler patchps3iso.OutputDataReceived, AddressOf patchps3iso_OutputDataReceived
+                AddHandler patchps3iso.ErrorDataReceived, AddressOf Patchps3iso_OutputDataReceived
+                AddHandler patchps3iso.OutputDataReceived, AddressOf Patchps3iso_OutputDataReceived
 
                 patchps3iso.Start()
                 patchps3iso.BeginOutputReadLine()
@@ -219,17 +263,42 @@ Public Class PS3ISOTools
         End If
     End Sub
 
-    Private Sub PS3ISOTools_Loaded(sender As Object, e As RoutedEventArgs) Handles Me.Loaded
-        'Receive input from the app
-        If Not String.IsNullOrEmpty(ISOToCreate) Then
-            SelectedGameBackupFolderTextBox.Text = ISOToCreate
-        ElseIf Not String.IsNullOrEmpty(ISOToExtract) Then
-            SelectedExtractISOTextBox.Text = ISOToExtract
-        ElseIf Not String.IsNullOrEmpty(ISOToSplit) Then
-            SelectedSplitISOTextBox.Text = ISOToSplit
-        ElseIf Not String.IsNullOrEmpty(ISOToPatch) Then
-            SelectedPatchISOTextBox.Text = ISOToPatch
+    Private Sub CreateISOUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles CreateISOUsingPS3netsrvButton.Click
+        If Not String.IsNullOrEmpty(SelectedGameBackupFolderUsingPS3netsrvTextBox.Text) And Not String.IsNullOrEmpty(SelectedISOOutputUsingPS3netsrvTextBox.Text) Then
+            PS3NetSrvProcessAction = "CreateISO"
+            PS3NetSrvProcess = New Process() With {.EnableRaisingEvents = True}
+            PS3NetSrvProcess.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\ps3netsrv\ps3netsrv.exe"
+            PS3NetSrvProcess.StartInfo.Arguments = """" + SelectedGameBackupFolderUsingPS3netsrvTextBox.Text + """ ISO"
+            PS3NetSrvProcess.Start()
+            PS3NetSrvProcess.WaitForExit()
+        Else
+            MsgBox("No ISO file specified, please check your input.", MsgBoxStyle.Critical)
         End If
+    End Sub
+
+    Private Sub DecryptISOUsingPS3netsrvButton_Click(sender As Object, e As RoutedEventArgs) Handles DecryptISOUsingPS3netsrvButton.Click
+
+    End Sub
+
+    Private Sub PS3NetSrvProcess_Exited(sender As Object, e As EventArgs) Handles PS3NetSrvProcess.Exited
+
+        Select Case PS3NetSrvProcessAction
+            Case "CreateISO"
+                Dim InputFolderName As String = New DirectoryInfo(SelectedGameBackupFolderUsingPS3netsrvTextBox.Text).Name
+
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\ps3netsrv\" + InputFolderName + ".iso") Then
+                    File.Move(My.Computer.FileSystem.CurrentDirectory + "\Tools\ps3netsrv\" + InputFolderName + ".iso", SelectedISOOutputUsingPS3netsrvTextBox.Text + "\" + InputFolderName + ".iso")
+                ElseIf File.Exists(My.Computer.FileSystem.CurrentDirectory + "\" + InputFolderName + ".iso") Then
+                    File.Move(My.Computer.FileSystem.CurrentDirectory + "\" + InputFolderName + ".iso", SelectedISOOutputUsingPS3netsrvTextBox.Text + "\" + InputFolderName + ".iso")
+                End If
+
+                MsgBox("ISO file created with success!" + vbCrLf + SelectedISOOutputUsingPS3netsrvTextBox.Text + "\" + InputFolderName + ".iso", MsgBoxStyle.Information)
+            Case "DecryptISO"
+
+        End Select
+
+        PS3NetSrvProcess.Dispose()
+        PS3NetSrvProcess = Nothing
     End Sub
 
 End Class

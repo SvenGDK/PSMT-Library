@@ -3,22 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="800">
+             d:DesignHeight="18" d:DesignWidth="650">
+    <wv2:WebView2 x:Name="WebMANWebView" HorizontalAlignment="Center" Height="0" Margin="0,0,0,0" VerticalAlignment="Top" Width="0" Source="https://google.com" Visibility="Hidden" AllowExternalDrop="False" Focusable="False"/>
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
-        <MenuItem Header="Extract PKG File" x:Name="OpenPKGExtractor"></MenuItem>
-        <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowser"></MenuItem>
-        <MenuItem Header="PARAM.SFO Editor" x:Name="OpenSFOEditor"></MenuItem>
-        <MenuItem Header="ISO Tools" x:Name="OpenISOTools"></MenuItem>
         <MenuItem Header="Core_OS Tools" x:Name="OpenCoreOSTools"></MenuItem>
+        <MenuItem Header="Extract a PKG File" x:Name="OpenPKGExtractor"></MenuItem>
         <MenuItem Header="Fix Tar" x:Name="OpenFixTar"></MenuItem>
+        <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowser"></MenuItem>
+        <MenuItem Header="ISO Tools" x:Name="OpenISOTools"></MenuItem>
+        <MenuItem Header="PARAM.SFO Editor" x:Name="OpenSFOEditor"></MenuItem>
         <MenuItem Header="PUP Unpacker" x:Name="OpenPUPUnpacker"></MenuItem>
         <MenuItem Header="RCO Dumper" x:Name="OpenRCODumper"></MenuItem>
         <MenuItem Header="SELF Reader" x:Name="OpenSELFReader"></MenuItem>
-        <Separator></Separator>
-        <MenuItem Header="PS2 Classics"></MenuItem>
+    </MenuItem>
+    <MenuItem Header="Downloads">
+        <MenuItem Header="PS3NetSrv" x:Name="DownloadNetsrv"></MenuItem>
+        <MenuItem Header=".key Files" x:Name="DownloadKeyFiles"></MenuItem>
+        <MenuItem Header=".dkey Files" x:Name="DownloadDKeyFiles"></MenuItem>
     </MenuItem>
     <MenuItem Header="Homebrew">
         <MenuItem Header="Applications">
@@ -146,37 +151,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="webMAN MOD">
-                <MenuItem Header="Download 1.47.45" x:Name="DownloadWebManMod">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download prepISO 1.30" x:Name="DownloadPrepIso">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download PS2CONFIG" x:Name="DownloadPS2Config">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download PS2 Classics Launcher" x:Name="DownloadPS2ClassicsLauncher">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download PS3Netsrv 2022.08.13" x:Name="DownloadNetsrv">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download PSP Minis Launcher" x:Name="DownloadPSPMinisLauncher">
-                    <MenuItem.Icon>
-                        <Image Source="/Images/download.png"/>
-                    </MenuItem.Icon>
-                </MenuItem>
-                <MenuItem Header="Download PSP Remasters Launcher" x:Name="DownloadPSPRemastersLauncher">
+                <MenuItem Header="Download 1.47.46b" x:Name="DownloadWebManMod">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
@@ -229,6 +204,72 @@
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
                 </MenuItem>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="webMAN MOD Addons">
+            <MenuItem x:Name="DownloadCoversPackPS3" Header="Covers Pack for PS3 games">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="DownloadCoversPackPSXPS2" Header="Covers Pack for PSX/PS2 games">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="prepISO (Scans content stored in exFAT/NTFS/ext2/3/4 devices)" x:Name="DownloadPrepIso">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="PS2CONFIG (Database of PS2 CONFIG files)" x:Name="DownloadPS2Config">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="WM Themes (Customize the look of the XMB icons used by webMAN MOD)">
+                <MenuItem x:Name="DownloadColorfulWMTheme" Header="Colorful">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="DownloadFlowerificationWMTheme" Header="Flowerification">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="DownloadMetalificationWMTheme" Header="Metalification">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="DownloadRebugificationWMTheme" Header="Rebugification">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem x:Name="DownloadStandardWMTheme" Header="Standard">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </MenuItem>
+        <MenuItem Header="webMAN MOD Launchers">
+            <MenuItem Header="Download PS2 Classics Launcher" x:Name="DownloadPS2ClassicsLauncher">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Download PSP Minis Launcher" x:Name="DownloadPSPMinisLauncher">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Download PSP Remasters Launcher" x:Name="DownloadPSPRemastersLauncher">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
     </MenuItem>
@@ -344,30 +385,57 @@
             </MenuItem>
         </MenuItem>
     </MenuItem>
-    <MenuItem Header="Games" >
-        <MenuItem Header="Reload" x:Name="LoadGamesListMenuItem"></MenuItem>
-        <MenuItem Header="Search by name">
-            <TextBox x:Name="NameSearchTextBox" Width="200"></TextBox>
+    <MenuItem Header="webMAN MOD">
+        <MenuItem Header="Open webMAN MOD Web Interface" x:Name="OpenwebMANMODWebGUI"/>
+        <MenuItem Header="PS3NetSrv Utilities">
+            <MenuItem Header="Create folder structure (GAMES, PS3ISO, ...)" x:Name="CreateFolderStructure"/>
+            <MenuItem Header="Manage virtual folders for ps3netsrv" x:Name="ManageVirtualFolders"/>
+            <Separator/>
+            <MenuItem Header="Share a single folder" x:Name="ShareASingleFolder"/>
+            <MenuItem Header="Share configured managed virtual folders" x:Name="ShareManagedFolders"/>
         </MenuItem>
-        <MenuItem Header="Search by title ID">
-            <TextBox x:Name="TIDSearchTextBox" Width="150"></TextBox>
+        <MenuItem Header="Disc &amp; Game Utilities">
+            <MenuItem Header="Play inserted disc" x:Name="PlayDiscMenuItem"/>
+            <MenuItem Header="Eject inserted disc" x:Name="EjectDisc"/>
+            <MenuItem Header="Insert disc in tray" x:Name="InsertDisc"/>
+            <Separator/>
+            <MenuItem Header="Exit game to XMB" x:Name="ExitToXMB"/>
+            <MenuItem Header="Reload PS3 game" x:Name="ReloadGame"/>
+            <MenuItem Header="Toggle video recording (in-game)" x:Name="ToggleVideoRecording"/>
+            <MenuItem Header="Toggle in-game background music playback" x:Name="ToggleInGameBGMusicPlayback"/>
         </MenuItem>
-        <MenuItem Header="Search by content ID">
-            <TextBox x:Name="CIDSearchTextBox" Width="240"></TextBox>
+        <MenuItem Header="General Utilities">
+            <MenuItem Header="Rescan the games and refresh XML" x:Name="RescanGamesRefreshXML"/>
+            <Separator/>
+            <MenuItem Header="Shutdown the PS3 console" x:Name="ShutdownPS3"/>
+            <MenuItem Header="Restart the PS3 console" x:Name="RestartPS3"/>
+            <MenuItem Header="Restart the PS3 console and allow scan content on startup" x:Name="RestartPS3WithContentScan"/>
+            <MenuItem Header="Restart the PS3 console and show the min version" x:Name="RestartPS3ShowMinVersion"/>
+            <MenuItem Header="Hard reboot" x:Name="HardRebootPS3"/>
+            <MenuItem Header="Soft reboot" x:Name="SoftRebootPS3"/>
+            <MenuItem Header="Quick reboot" x:Name="QuickRebootPS3"/>
+            <MenuItem Header="Reboot using VSH command" x:Name="RebootPS3UsingVSH"/>
+            <MenuItem Header="Open an URL on the PS3 web browser" x:Name="OpenPS3WebBrowserURL"/>
         </MenuItem>
-        <MenuItem Header="Region">
-            <CheckBox Content="EU" x:Name="EUCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="US" x:Name="USCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="JP" x:Name="JPCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="INT" x:Name="INTCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
+        <MenuItem Header="Download &amp; Installation Utilities">
+            <MenuItem Header="Download a PKG from an URL to the PS3 HDD" x:Name="DownloadPKGFromURLToPS3"/>
+            <MenuItem Header="Download a file from an URL to the PS3 HDD" x:Name="DownloadFileFromURLToPS3"/>
+            <MenuItem Header="Download &amp; Install a PKG from an URL" x:Name="DownloadAndInstallPKGFromURL"/>
+            <Separator/>
+            <MenuItem Header="Install a PKG from the PS3 HDD" x:Name="InstallPKGFromPS3HDD"/>
+            <MenuItem Header="Install a theme from the PS3 HDD" x:Name="InstallThemeFromPS3HDD"/>
         </MenuItem>
-        <MenuItem Header="Size">
-            <CheckBox Content="Below 10 GB" x:Name="Below10Checkbox"></CheckBox>
-            <CheckBox Content="Below 5 GB" x:Name="Below5Checkbox"></CheckBox>
+        <MenuItem Header="Temperature Monitoring">
+            <MenuItem Header="Show system info on PS3" x:Name="ShowSystemInfoOnPS3"/>
+            <MenuItem Header="Web GUI for monitor temperatures in Celcius" x:Name="OpenWebGUICelcius"/>
+            <MenuItem Header="Web GUI for monitor temperatures in Fahrenheit" x:Name="OpenWebGUIFahrenheit"/>
         </MenuItem>
     </MenuItem>
-    <MenuItem Header="Demos" x:Name="LoadDemosListMenuItem"></MenuItem>
-    <MenuItem Header="DLCs" x:Name="LoadDLCsListMenuItem"></MenuItem>
-    <MenuItem Header="Themes" x:Name="LoadThemesListMenuItem"></MenuItem>
-    <MenuItem Header="Avatars" x:Name="LoadAvatarsListMenuItem"></MenuItem>
+    <MenuItem Header="Settings">
+        <MenuItem Header="FTP IP Address">
+            <TextBox x:Name="FTPIPTextBox" Width="250"></TextBox>
+        </MenuItem>
+    </MenuItem>
+    
 </Menu>
+    

@@ -31,20 +31,25 @@ Public Class PS5GamePatches
         For Each PKG In Directory.GetFiles(My.Computer.FileSystem.CurrentDirectory + "\Downloads", "*.pkg", SearchOption.AllDirectories)
             Dim PKGFileInfo As New FileInfo(PKG)
             Dim PKGFileName As String = PKGFileInfo.Name
-            Dim PKGID As String = PKGFileName.Split("-"c)(1).Split("_"c)(0)
-            Dim PKGFileSize As String = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB"
-            Dim NewQueueItem As New DownloadQueueItem() With {.FileName = PKGFileName, .GameID = PKGID, .DownloadURL = PKG, .DownloadState = "Downloaded", .PKGSize = PKGFileSize}
 
-            'Get the basename of this pkg
-            Dim BaseName As String = PKGFileName.Split(New String() {".pkg"}, StringSplitOptions.None)(0)
-            'Check if has been already merged
-            If BaseName.EndsWith("-merged") Then
-                NewQueueItem.MergeState = "Merged"
-            Else
-                NewQueueItem.MergeState = "Not merged"
+            If PKGFileName.Split("-"c).Length > 0 Then
+                If PKGFileName.Split("-"c)(1).Split("_"c).Length > 0 Then
+                    Dim PKGID As String = PKGFileName.Split("-"c)(1).Split("_"c)(0)
+                    Dim PKGFileSize As String = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB"
+                    Dim NewQueueItem As New DownloadQueueItem() With {.FileName = PKGFileName, .GameID = PKGID, .DownloadURL = PKG, .DownloadState = "Downloaded", .PKGSize = PKGFileSize}
+
+                    'Get the basename of this pkg
+                    Dim BaseName As String = PKGFileName.Split(New String() {".pkg"}, StringSplitOptions.None)(0)
+                    'Check if has been already merged
+                    If BaseName.EndsWith("-merged") Then
+                        NewQueueItem.MergeState = "Merged"
+                    Else
+                        NewQueueItem.MergeState = "Not merged"
+                    End If
+
+                    DownloadQueueItemCollection.Add(NewQueueItem)
+                End If
             End If
-
-            DownloadQueueItemCollection.Add(NewQueueItem)
         Next
     End Sub
 

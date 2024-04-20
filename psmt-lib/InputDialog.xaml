@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="Please enter a new value" Height="120" Width="340" Background="#FF252525" ResizeMode="NoResize">
+             Title="Please enter a new value" Height="125" Width="340" Background="#FF252525" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="NewValueTextBox" HorizontalAlignment="Left" Margin="8,34,0,0" VerticalAlignment="Top" Width="300"/>
         <TextBlock x:Name="InputDialogTitleTextBlock" HorizontalAlignment="Left" Margin="10,10,0,0" Text="Enter a new value :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>

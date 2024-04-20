@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PS_Multi_Tools"
+        xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
         Title="PS4 PUP.dec Extractor" Height="360" Width="615" Background="#FF252525" ResizeMode="CanMinimize">
     <Grid>

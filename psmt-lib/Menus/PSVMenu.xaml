@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="800">
+             d:DesignHeight="20" d:DesignWidth="300">
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
         <MenuItem Header="PKG Extractor" x:Name="OpenPKGExtractor"></MenuItem>
@@ -434,26 +434,4 @@
             </MenuItem>
         </MenuItem>
     </MenuItem>
-    <MenuItem Header="Games" >
-        <MenuItem Header="Reload" x:Name="LoadGamesListMenuItem"></MenuItem>
-        <MenuItem Header="Search by name">
-            <TextBox x:Name="NameSearchTextBox" Width="200"></TextBox>
-        </MenuItem>
-        <MenuItem Header="Search by title ID">
-            <TextBox x:Name="TIDSearchTextBox" Width="150"></TextBox>
-        </MenuItem>
-        <MenuItem Header="Search by content ID">
-            <TextBox x:Name="CIDSearchTextBox" Width="240"></TextBox>
-        </MenuItem>
-        <MenuItem Header="Region">
-            <CheckBox Content="EU" x:Name="EUCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="US" x:Name="USCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="JP" x:Name="JPCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-            <CheckBox Content="INT" x:Name="INTCheckbox" Checked="LanguageCheckBoxChanged" Unchecked="LanguageCheckBoxChanged"></CheckBox>
-        </MenuItem>
-    </MenuItem>
-    <MenuItem Header="Demos" x:Name="LoadDemosListMenuItem"></MenuItem>
-    <MenuItem Header="DLCs" x:Name="LoadDLCsListMenuItem"></MenuItem>
-    <MenuItem Header="Themes" x:Name="LoadThemesListMenuItem"></MenuItem>
-    <MenuItem Header="Updates" x:Name="LoadUpdatesListMenuItem"></MenuItem>
 </Menu>
