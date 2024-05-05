@@ -222,9 +222,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="DownloadPackageInfoWindow.xaml.vb">
-      <DependentUpon>DownloadPackageInfoWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Menus\PS1Menu.xaml.vb">
       <DependentUpon>PS1Menu.xaml</DependentUpon>
     </Compile>
@@ -306,14 +303,8 @@
     <Compile Include="Tools\PS4\PKGSender.xaml.vb">
       <DependentUpon>PKGSender.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS4\PS4PS1Classics.xaml.vb">
-      <DependentUpon>PS4PS1Classics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\PS4\PS4PS2Classics.xaml.vb">
-      <DependentUpon>PS4PS2Classics.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\PS4\PS4PSPClassics.xaml.vb">
-      <DependentUpon>PS4PSPClassics.xaml</DependentUpon>
+    <Compile Include="Tools\PS4\PPPwner.xaml.vb">
+      <DependentUpon>PPPwner.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS4\PSNInfo.xaml.vb">
       <DependentUpon>PSNInfo.xaml</DependentUpon>
@@ -440,10 +431,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DownloadPackageInfoWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Menus\PS1Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -552,15 +539,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Tools\PS4\PS4PS1Classics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\PS4\PS4PS2Classics.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\PS4\PS4PSPClassics.xaml">
+    <Page Include="Tools\PS4\PPPwner.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -154,6 +154,33 @@ Public Class PS4Menu
         End If
     End Sub
 
+    Private Sub DownloadGoldHEN505_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHEN505.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://raw.githubusercontent.com/GoldHEN/GoldHEN/master/goldhen_2.3_505.bin") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadGoldHEN672_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHEN672.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://raw.githubusercontent.com/GoldHEN/GoldHEN/master/goldhen_2.3_672.bin") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadGoldHEN900_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHEN900.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://raw.githubusercontent.com/GoldHEN/GoldHEN/master/goldhen_2.3_900.bin") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
     Private Sub DownloadGoldHENCM_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHENCM.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
@@ -329,6 +356,15 @@ Public Class PS4Menu
         End If
     End Sub
 
+    Private Sub DownloadRecFW1100_Click(sender As Object, e As RoutedEventArgs) Handles DownloadRecFW1100.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/recovery/11.00/PS4UPDATE.PUP") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
     Private Sub DownloadSysFW505_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSysFW505.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
@@ -351,6 +387,15 @@ Public Class PS4Menu
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
         If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/system/9.00/PS4UPDATE.PUP") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadSysFW1100_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSysFW1100.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps4/fw/system/11.00/PS4UPDATE.PUP") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -465,7 +510,6 @@ Public Class PS4Menu
 
 #End Region
 
-
 #End Region
 
 #Region "Tools"
@@ -498,6 +542,21 @@ Public Class PS4Menu
     Private Sub OpenPKGMergerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGMergerMenuItem.Click
         Dim NewPS4PKGMerger As New PS5PKGMerger() With {.ShowActivated = True}
         NewPS4PKGMerger.Show()
+    End Sub
+
+    Private Sub OpenPPPwnerMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPPPwnerMenuItem.Click
+        Dim NewPPPwner As New PPPwner() With {.ShowActivated = True}
+        NewPPPwner.Show()
+    End Sub
+
+    Private Sub CheckForUpdatesMenuItems_Click(sender As Object, e As RoutedEventArgs) Handles CheckForUpdatesMenuItems.Click
+        If Utils.IsPSMultiToolsUpdateAvailable() Then
+            If MsgBox("An update is available, do you want to download it now ?", MsgBoxStyle.YesNo, "PS Multi Tools Update found") = MsgBoxResult.Yes Then
+                Utils.DownloadAndExecuteUpdater()
+            End If
+        Else
+            MsgBox("PS Multi Tools is up to date!", MsgBoxStyle.Information, "No update found")
+        End If
     End Sub
 
 #End Region

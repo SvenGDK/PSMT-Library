@@ -1,4 +1,5 @@
-﻿Imports System.Globalization
+﻿Imports System.ComponentModel
+Imports System.Globalization
 Imports System.IO
 Imports System.Net
 Imports System.Net.NetworkInformation
@@ -6,6 +7,8 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
+Imports System.Windows
+Imports System.Windows.Media.Animation
 Imports System.Windows.Media.Imaging
 
 Public Class Utils
@@ -359,6 +362,38 @@ Public Class Utils
             Return Math.Round(myResponse.ContentLength / 1024 / 1024, 2)
         End If
     End Function
+
+    Public Shared Function IsPSMultiToolsUpdateAvailable() As Boolean
+        If IsURLValid("https://github.com/SvenGDK/PS-Multi-Tools/raw/main/LatestBuild.txt") Then
+            Dim PSMTInfo As FileVersionInfo = FileVersionInfo.GetVersionInfo(My.Computer.FileSystem.CurrentDirectory + "\PS Multi Tools.exe")
+            Dim CurrentOrbisProVersion As String = PSMTInfo.FileVersion
+
+            Dim VerCheckClient As New WebClient()
+            Dim NewOrbisProVersion As String = VerCheckClient.DownloadString("https://github.com/SvenGDK/PS-Multi-Tools/raw/main/LatestBuild.txt")
+
+            If CurrentOrbisProVersion < NewOrbisProVersion Then
+                Return True
+            Else
+                Return False
+            End If
+        Else
+            Return False
+        End If
+    End Function
+
+    Public Shared Sub DownloadAndExecuteUpdater()
+        Dim NewWebClient As New WebClient()
+        NewWebClient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/SvenGDK/PS-Multi-Tools/main/PSMT-Update.exe"), My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe", Stopwatch.StartNew)
+
+        AddHandler NewWebClient.DownloadFileCompleted, Sub(sender As Object, e As AsyncCompletedEventArgs)
+                                                           If Not e.Cancelled Then
+                                                               If MsgBox("Do you want to install the update now ?", MsgBoxStyle.YesNo, "Install Update") = MsgBoxResult.Yes Then
+                                                                   Process.Start(My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe")
+                                                                   Application.Current.Shutdown()
+                                                               End If
+                                                           End If
+                                                       End Sub
+    End Sub
 
 End Class
 

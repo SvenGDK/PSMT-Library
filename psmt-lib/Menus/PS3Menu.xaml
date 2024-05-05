@@ -10,6 +10,7 @@
     <wv2:WebView2 x:Name="WebMANWebView" HorizontalAlignment="Center" Height="0" Margin="0,0,0,0" VerticalAlignment="Top" Width="0" Source="https://google.com" Visibility="Hidden" AllowExternalDrop="False" Focusable="False"/>
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
+        <MenuItem Header="Check for PS Multi Tools updates" x:Name="CheckForUpdatesMenuItems"></MenuItem>
         <MenuItem Header="Core_OS Tools" x:Name="OpenCoreOSTools"></MenuItem>
         <MenuItem Header="Extract a PKG File" x:Name="OpenPKGExtractor"></MenuItem>
         <MenuItem Header="Fix Tar" x:Name="OpenFixTar"></MenuItem>

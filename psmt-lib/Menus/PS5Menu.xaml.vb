@@ -261,9 +261,19 @@ Public Class PS5Menu
         NewShortcutPKGCreator.Show()
     End Sub
 
+    Private Sub CheckForUpdatesMenuItems_Click(sender As Object, e As RoutedEventArgs) Handles CheckForUpdatesMenuItems.Click
+        If Utils.IsPSMultiToolsUpdateAvailable() Then
+            If MsgBox("An update is available, do you want to download it now ?", MsgBoxStyle.YesNo, "PS Multi Tools Update found") = MsgBoxResult.Yes Then
+                Utils.DownloadAndExecuteUpdater()
+            End If
+        Else
+            MsgBox("PS Multi Tools is up to date!", MsgBoxStyle.Information, "No update found")
+        End If
+    End Sub
+
 #End Region
 
-#Region "Menu Downloads"
+#Region "Downloads"
 
 #Region "Homebrew"
 

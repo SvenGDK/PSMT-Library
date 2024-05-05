@@ -8,6 +8,7 @@
              d:DesignHeight="20" d:DesignWidth="500">
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
+        <MenuItem Header="Check for PS Multi Tools updates" x:Name="CheckForUpdatesMenuItems"></MenuItem>
         <MenuItem Header="Blu Ray Disc Burner" x:Name="OpenBDBurnerMenuItem"/>
         <MenuItem Header="Fake sign SELF files" x:Name="OpenMakefSELFMenuItem"/>
         <MenuItem Header="Manifest Editor" x:Name="OpenManifestEditorMenuItem"/>
@@ -133,7 +134,7 @@
 
         <MenuItem Header="Homebrew">
             <MenuItem Header="etaHEN by LightningMods">
-                <MenuItem Header="Download v1.6B" x:Name="DownloadetaHEN">
+                <MenuItem Header="Download v1.7B" x:Name="DownloadetaHEN">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>

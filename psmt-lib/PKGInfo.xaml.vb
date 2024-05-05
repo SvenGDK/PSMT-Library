@@ -1,7 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
 Imports System.Windows
-Imports System.Windows.Forms
 Imports System.Windows.Media
 Imports System.Windows.Media.Imaging
 Imports System.Windows.Shapes
@@ -13,7 +12,6 @@ Public Class PKGInfo
     Public SelectedPKG As String = String.Empty
 
     Dim WithEvents PKGWorker As New BackgroundWorker()
-    Dim WithEvents NPSBrowser As New Forms.WebBrowser() With {.ScriptErrorsSuppressed = True}
 
     Dim PKGSoundBytes As Byte() = Nothing
     Dim IsSoundPlaying As Boolean = False
@@ -303,23 +301,16 @@ Public Class PKGInfo
                     End If
                 Next
 
-                PKGIconURL = "https://nopaystation.com/view/PSV/" + PKGTitleID + "/" + PKGContentID.Split("-"c)(2) + "/1"
+                If Utils.IsURLValid("https://raw.githubusercontent.com/SvenGDK/PSMT-Covers/main/PSVita/" + PKGTitleID + ".png") Then
+                    GameIcon.Source = New BitmapImage(New Uri("https://raw.githubusercontent.com/SvenGDK/PSMT-Covers/main/PSVita/" + PKGTitleID + ".png", UriKind.RelativeOrAbsolute))
+                End If
+
             End If
         End Using
 
         PKGStateTextBlock.Dispatcher.BeginInvoke(Sub() PKGStateTextBlock.Text = "Not available")
         PKGDataTypeTextBlock.Dispatcher.BeginInvoke(Sub() PKGDataTypeTextBlock.Text = "Not available")
         PKGAttributesTextBlock.Dispatcher.BeginInvoke(Sub() PKGAttributesTextBlock.Text = "Not available")
-
-        NPSBrowser.Navigate(PKGIconURL)
-    End Sub
-
-    Private Sub NPSBrowser_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles NPSBrowser.DocumentCompleted
-        If NPSBrowser.Document.GetElementById("itemArtwork") IsNot Nothing Then
-            If NPSBrowser.Document.GetElementById("itemArtwork").GetAttribute("src") IsNot Nothing Then
-                GameIcon.Source = New BitmapImage(New Uri(NPSBrowser.Document.GetElementById("itemArtwork").GetAttribute("src").Trim(), UriKind.RelativeOrAbsolute))
-            End If
-        End If
     End Sub
 
     Public Shared Function GetPS4Category(SFOCategory As String) As String

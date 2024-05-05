@@ -8,16 +8,14 @@
              d:DesignHeight="20" d:DesignWidth="800">
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
+        <MenuItem Header="Check for PS Multi Tools updates" x:Name="CheckForUpdatesMenuItems"></MenuItem>
         <MenuItem Header="Exploit USB Writer" x:Name="OpenUSBWriterMenuItem"></MenuItem>
         <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"></MenuItem>
         <MenuItem Header="PARAM.SFO Editor" x:Name="OpenParamSFOEditorMenuItem"></MenuItem>
         <MenuItem Header="Payload &amp; PKG Sender" x:Name="OpenPKGSenderMenuItem"></MenuItem>
         <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"></MenuItem>
+        <MenuItem Header="PPPwner" x:Name="OpenPPPwnerMenuItem"></MenuItem>
         <MenuItem Header="PUP Unpacker" x:Name="OpenPUPExtractorMenuItem"></MenuItem>
-        <Separator/>
-        <MenuItem Header="PS1 Classics" ></MenuItem>
-        <MenuItem Header="PS2 Classics" ></MenuItem>
-        <MenuItem Header="PSP Classics" ></MenuItem>
     </MenuItem>
     <MenuItem Header="Downloads">
         <MenuItem Header="Exploits" >
@@ -60,6 +58,9 @@
                     <MenuItem Header="5.05: es7in1.site"/>
                     <MenuItem Header="5.05: wolf2022.ir"/>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="5.50 - 5.53 - 5.55 - 5.56 - 6.00 - 6.02 - 6.20 - 6.50 - 6.70">
+                
             </MenuItem>
             <MenuItem Header="6.72" >
                 <MenuItem Header="Downloads" >
@@ -221,6 +222,17 @@
                     <Image Source="/Images/download.png"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator/>
+            <MenuItem Header="System Firmware 11.00" x:Name="DownloadSysFW1100">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Recovery Firmware 11.00" x:Name="DownloadRecFW1100">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="Homebrew" >
             <MenuItem Header="Apollo Save Tool" >
@@ -244,6 +256,23 @@
             </MenuItem>
             <MenuItem Header="FTP Client" >
                 <MenuItem Header="Download v1.0.8" x:Name="DownloadFTPClient">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="GoldHEN" >
+                <MenuItem Header="Download v2.3 for Firmware 5.05" x:Name="DownloadGoldHEN505">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download v2.3 for Firmware 6.72" x:Name="DownloadGoldHEN672">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download v2.3 for Firmware 9.00" x:Name="DownloadGoldHEN900">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
