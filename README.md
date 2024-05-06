@@ -117,7 +117,7 @@ Some tools are written by other developers and will be executed from an executab
 | `pfsshell & pfsfuse` | -> | [https://github.com/ps2homebrew/pfsshell](https://github.com/ps2homebrew/pfsshell)
 | `pkg2zip` | lusid1 | [https://github.com/lusid1/pkg2zip](https://github.com/lusid1/pkg2zip)
 | `pkg_merge` | aldo-o & Tustin | [https://github.com/aldo-o/pkg-merge](https://github.com/aldo-o/pkg-merge)
-| `pppwn` | TheOfficialFloW | [https://github.com/aldo-o/pkg-merge](https://github.com/TheOfficialFloW/PPPwn) | Python script -> Single .exe
+| `pppwn` | TheOfficialFloW | [https://github.com/TheOfficialFloW/PPPwn](https://github.com/TheOfficialFloW/PPPwn) | Python script -> Single .exe
 | `ps3iso-utils` | bucanero | [https://github.com/bucanero/ps3iso-utils](https://github.com/bucanero/ps3iso-utils)
 | `PS4_Tools Library` | xXxTheDarkprogramerxXx | [https://github.com/xXxTheDarkprogramerxXx/PS4_Tools](https://github.com/xXxTheDarkprogramerxXx/PS4_Tools)
 | `PSN_get_pkg_info` | windsurfer1122 | [https://github.com/windsurfer1122/PSN_get_pkg_info](https://github.com/windsurfer1122/PSN_get_pkg_info) | Python script -> Single .exe
