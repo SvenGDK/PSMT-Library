@@ -33,6 +33,7 @@ Some tools are written by other developers and will be executed from an executab
 - USB Writer
 - PARAM.SFO Editor
 - PKG Merger
+- PPPwn GUI
 
 ## PS5
 - General ELF & BIN Payload Sender
@@ -59,6 +60,7 @@ Some tools are written by other developers and will be executed from an executab
   - Based on EchoStretch's Make_FSELF_PY3.bat & LightningMods updated make_fself by Flatz
 - etaHEN Configurator
 - klog Viewer
+- Shortcut PKG Creator
 
 ## PSP
 - ISO to CSO Converter
@@ -73,7 +75,7 @@ Some tools are written by other developers and will be executed from an executab
 - RCO Data Table Extractor
 
 ## Developer Notes
-- Can be used on a .NET Framework 4.8.1 project
+- Can be used on a .NET Framework 4.8 project
 - Add a reference to "psmt-lib.dll", "HtmlAgilityPack.dll", NuGet Package "Newtonsoft.Json", "PARAM.SFO.dll and "PS4_Tools.dll"
 - For WPF windows: Add the namespace ```xmlns:psmt_lib="clr-namespace:psmt_lib;assembly=psmt-lib>"``` to your window xaml
 - Adding a menu: ```<psmt_lib:PSMENUNAME Height="20" VerticalAlignment="Top"></psmt_lib:PSMENUNAME>```
@@ -82,51 +84,52 @@ Some tools are written by other developers and will be executed from an executab
 ## The PSMT Library currently uses the following tools & libraries from other developers
 | Tool / Library | Created by | Repository | Info |
 | --- | --- | --- | --- |
-| `bchunk` | extramaster | https://github.com/extramaster/bchunk
-| `binmerge` | putnam | https://github.com/putnam/binmerge
+| `bchunk` | extramaster | [https://github.com/extramaster/bchunk](https://github.com/extramaster/bchunk)
+| `binmerge` | putnam | [https://github.com/putnam/binmerge](https://github.com/putnam/binmerge)
 | `CEX2DEX` |  | 
 | `costool` | naehrwert | 
-| `dd` | John Newbigin | http://www.chrysocome.net/dd
+| `dd` | John Newbigin | [http://www.chrysocome.net/dd](http://www.chrysocome.net/dd)
 | `dev_flash` | HSReina | 
-| `DiscUtils` | DiscUtils | https://github.com/DiscUtils/DiscUtils
+| `DiscUtils` | DiscUtils | [https://github.com/DiscUtils/DiscUtils](https://github.com/DiscUtils/DiscUtils)
 | `discore` |  | 
-| `DotNetZip` |  | https://www.nuget.org/packages/DotNetZip/
-| `elf2pbp` | loser | https://github.com/PSP-Archive/elf2pbp
-| `esrpatch` |  | 
-| `esrunpatch` |  | 
-| `ffplay` | FFmpeg | https://github.com/FFmpeg/FFmpeg
+| `DotNetZip` |  | [https://www.nuget.org/packages/DotNetZip/](https://www.nuget.org/packages/DotNetZip/)
+| `elf2pbp` | loser | [https://github.com/PSP-Archive/elf2pbp](https://github.com/PSP-Archive/elf2pbp)
+| `esrpatch` | ffgriever | [https://www.psx-place.com/threads/esr-by-ffgriever.19136/](https://www.psx-place.com/threads/esr-by-ffgriever.19136/)
+| `esrunpatch` | ffgriever | [https://www.psx-place.com/threads/esr-by-ffgriever.19136/](https://www.psx-place.com/threads/esr-by-ffgriever.19136/)
+| `ffplay` | FFmpeg | [https://github.com/FFmpeg/FFmpeg](https://github.com/FFmpeg/FFmpeg)
 | `fix_tar` | KaKaRoTo & cfwprpht | 
-| `fwpkg` | evilsperm | https://github.com/evilsperm/fwtool
-| `hdl_dump` |  | https://github.com/ps2homebrew/hdl-dump
-| `hexdump` | di-mgt | https://www.di-mgt.com.au/hexdump-for-windows.html
-| `HtmlAgilityPack` | ZZZ Projects | https://html-agility-pack.net/
+| `fwpkg` | evilsperm | [https://github.com/evilsperm/fwtool](https://github.com/evilsperm/fwtool)
+| `hdl_dump` |  | [https://github.com/ps2homebrew/hdl-dump](https://github.com/ps2homebrew/hdl-dump)
+| `hexdump` | di-mgt | [https://www.di-mgt.com.au/hexdump-for-windows.html](https://www.di-mgt.com.au/hexdump-for-windows.html)
+| `HtmlAgilityPack` | ZZZ Projects | [https://html-agility-pack.net/](https://html-agility-pack.net/)
 | `IsoPbpConverter` | LMAN | 
-| `kill_daemon` | illusion0001 | https://github.com/illusion0001/libhijacker | Python script -> single .exe
+| `kill_daemon` | illusion0001 | [https://github.com/illusion0001/libhijacker](https://github.com/illusion0001/libhijacker) | Python script -> single .exe
 | `klicencebruteforce` | MAGiC333X | 
-| `make_fself` | (PS3) ? | 
+| `make_fself` | (PS3) | 
 | `Make_FSELF_PY3` | EchoStretch |  | Batch script translated to VB
 | `make_fself_python3-1` | Flatz (updated by LightningMods) |  | Python script -> single .exe
-| `maxcso` | unknownbrackets | https://github.com/unknownbrackets/maxcso
-| `mCiso` | sindastra | https://github.com/sindastra/psp-mciso
-| `Newtonsoft.Json` | Newtonsoft | https://www.newtonsoft.com/json
-| `nQuant` | matt wrock | https://www.nuget.org/packages/nQuant
-| `PARAM.SFO Library` | xXxTheDarkprogramerxXx | https://github.com/xXxTheDarkprogramerxXx/PS4_Tools
+| `maxcso` | unknownbrackets | [https://github.com/unknownbrackets/maxcso](https://github.com/unknownbrackets/maxcso)
+| `mCiso` | sindastra | [https://github.com/sindastra/psp-mciso](https://github.com/sindastra/psp-mciso)
+| `Newtonsoft.Json` | Newtonsoft | [https://www.newtonsoft.com/json](https://www.newtonsoft.com/json)
+| `nQuant` | matt wrock | [https://www.nuget.org/packages/nQuant](https://www.nuget.org/packages/nQuant)
+| `PARAM.SFO Library` | xXxTheDarkprogramerxXx | [https://github.com/xXxTheDarkprogramerxXx/PS4_Tools](https://github.com/xXxTheDarkprogramerxXx/PS4_Tools)
 | `pbppacker` |  | 
-| `pfsshell & pfsfuse` |  | https://github.com/ps2homebrew/pfsshell
-| `pkg2zip` | lusid1 | https://github.com/lusid1/pkg2zip
-| `pkg_merge` | aldo-o & Tustin | https://github.com/aldo-o/pkg-merge
-| `ps3iso-utils` | bucanero | https://github.com/bucanero/ps3iso-utils
-| `PS4_Tools Library` | xXxTheDarkprogramerxXx | https://github.com/xXxTheDarkprogramerxXx/PS4_Tools
-| `PSN_get_pkg_info` | windsurfer1122 | https://github.com/windsurfer1122/PSN_get_pkg_info | Python script -> Single .exe
-| `psvpfstools` | motoharu-gosuto | https://github.com/motoharu-gosuto/psvpfstools
-| `psxtract` | Hykem | https://github.com/mrlucas84/psxtract
-| `pup_unpacker` | Zer0xFF | https://github.com/Zer0xFF/ps4-pup-unpacker
+| `pfsshell & pfsfuse` | -> | [https://github.com/ps2homebrew/pfsshell](https://github.com/ps2homebrew/pfsshell)
+| `pkg2zip` | lusid1 | [https://github.com/lusid1/pkg2zip](https://github.com/lusid1/pkg2zip)
+| `pkg_merge` | aldo-o & Tustin | [https://github.com/aldo-o/pkg-merge](https://github.com/aldo-o/pkg-merge)
+| `pppwn` | TheOfficialFloW | [https://github.com/aldo-o/pkg-merge](https://github.com/TheOfficialFloW/PPPwn) | Python script -> Single .exe
+| `ps3iso-utils` | bucanero | [https://github.com/bucanero/ps3iso-utils](https://github.com/bucanero/ps3iso-utils)
+| `PS4_Tools Library` | xXxTheDarkprogramerxXx | [https://github.com/xXxTheDarkprogramerxXx/PS4_Tools](https://github.com/xXxTheDarkprogramerxXx/PS4_Tools)
+| `PSN_get_pkg_info` | windsurfer1122 | [https://github.com/windsurfer1122/PSN_get_pkg_info](https://github.com/windsurfer1122/PSN_get_pkg_info) | Python script -> Single .exe
+| `psvpfstools` | motoharu-gosuto | [https://github.com/motoharu-gosuto/psvpfstools](https://github.com/motoharu-gosuto/psvpfstools)
+| `psxtract` | Hykem | [https://github.com/mrlucas84/psxtract](https://github.com/mrlucas84/psxtract)
+| `pup_unpacker` | Zer0xFF | [https://github.com/Zer0xFF/ps4-pup-unpacker](https://github.com/Zer0xFF/ps4-pup-unpacker)
 | `pupunpack` |  | 
 | `rcomage` | ZiNgA BuRgA | 
-| `readself` | Team fail0verflow | https://github.com/daryl317/fail0verflow-PS3-tools/tree/master
+| `readself` | Team fail0verflow | [https://github.com/daryl317/fail0verflow-PS3-tools/tree/master](https://github.com/daryl317/fail0verflow-PS3-tools/tree/master)
 | `SCEDoormat_NoME` | krHACKen | 
-| `scetool` | naehrwert | https://github.com/naehrwert/scetool | 
-| `send_elf` | illusion0001 | https://github.com/illusion0001/libhijacker | Python script -> Single .exe
-| `sfo` | hippie68 | https://github.com/hippie68/sfo
-| `sngre` | cfwprophet | https://github.com/cfwprpht/Simply_Vita_RCO_Extractor
-| `strings` | Mark Russinovich | https://learn.microsoft.com/en-us/sysinternals/downloads/strings
+| `scetool` | naehrwert | [https://github.com/naehrwert/scetool](https://github.com/naehrwert/scetool) | 
+| `send_elf` | illusion0001 | [https://github.com/illusion0001/libhijacker](https://github.com/illusion0001/libhijacker) | Python script -> Single .exe
+| `sfo` | hippie68 | [https://github.com/hippie68/sfo](https://github.com/hippie68/sfo)
+| `sngre` | cfwprophet | [https://github.com/cfwprpht/Simply_Vita_RCO_Extractor](https://github.com/cfwprpht/Simply_Vita_RCO_Extractor)
+| `strings` | Mark Russinovich | [https://learn.microsoft.com/en-us/sysinternals/downloads/strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings)
