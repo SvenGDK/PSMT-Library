@@ -226,7 +226,6 @@ Public Class PPPwner
         Dim FBD As New FolderBrowserDialog() With {.Description = "Select an USB drive"}
         If FBD.ShowDialog() = Forms.DialogResult.OK Then
             If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\goldhen.bin") Then
-                MsgBox(FBD.SelectedPath)
                 Try
                     File.Copy(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\goldhen.bin", FBD.SelectedPath + "goldhen.bin", True)
                     MsgBox("Copy done!", MsgBoxStyle.Information)
