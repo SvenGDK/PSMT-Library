@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Net.NetworkInformation
 Imports System.Windows
+Imports System.Windows.Forms
 Imports Microsoft.Win32
 
 Public Class PPPwner
@@ -81,14 +83,14 @@ Public Class PPPwner
                 'Set the files for stage1 & stage2
                 Dim Stage1File As String = ""
                 Dim Stage2File As String = ""
-                If UseLMStageFilesCheckBox.IsChecked Then
+                If UseSiSStageFilesCheckBox.IsChecked Then
                     Select Case SelectedFirmware
                         Case "900"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\LM-stage1-900.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\LM-stage2-900.bin"
+                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
+                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
                         Case "1100"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\LM-stage1-1100.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\LM-stage2-1100.bin"
+                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
+                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
                     End Select
                 ElseIf UseCustomStageFilesCheckBox.IsChecked Then
                     Stage1File = CustomStage1PayloadTextBox.Text
@@ -150,27 +152,27 @@ Public Class PPPwner
         End If
     End Sub
 
-    Private Sub UseLMStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseLMStageFilesCheckBox.Checked
+    Private Sub UseSiSStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseSiSStageFilesCheckBox.Checked
         Select Case FirmwaresComboBox.Text
             Case "9.00", "11.00"
                 UseCustomStageFilesCheckBox.IsEnabled = False
             Case Else
                 MsgBox("Not compatible with selected Firmware.", MsgBoxStyle.Exclamation, "Only for 9.00 & 11.00")
-                UseLMStageFilesCheckBox.IsChecked = False
+                UseSiSStageFilesCheckBox.IsChecked = False
                 e.Handled = True
         End Select
     End Sub
 
     Private Sub UseCustomStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseCustomStageFilesCheckBox.Checked
-        UseLMStageFilesCheckBox.IsEnabled = False
+        UseSiSStageFilesCheckBox.IsEnabled = False
     End Sub
 
-    Private Sub UseLMStageFilesCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles UseLMStageFilesCheckBox.Unchecked
+    Private Sub UseSiSStageFilesCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles UseSiSStageFilesCheckBox.Unchecked
         UseCustomStageFilesCheckBox.IsEnabled = True
     End Sub
 
     Private Sub UseCustomStageFilesCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles UseCustomStageFilesCheckBox.Unchecked
-        UseLMStageFilesCheckBox.IsEnabled = True
+        UseSiSStageFilesCheckBox.IsEnabled = True
     End Sub
 
     Private Sub BrowseStage1PayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseStage1PayloadButton.Click
@@ -202,7 +204,7 @@ Public Class PPPwner
         PPPwn.EnableRaisingEvents = True
 
         AddHandler PPPwn.OutputDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
-                                                 If Not String.IsNullOrEmpty(dataArgs.Data) Then
+                                                 If Not String.IsNullOrEmpty(DataArgs.Data) Then
                                                      Console.WriteLine(DataArgs.Data)
                                                      'Append log from PPPWn
                                                      If Dispatcher.CheckAccess() = False Then
@@ -219,4 +221,24 @@ Public Class PPPwner
         PPPwn.Start()
         'PPPwn.BeginOutputReadLine()
     End Sub
+
+    Private Sub CopyGoldHENButton_Click(sender As Object, e As RoutedEventArgs) Handles CopyGoldHENButton.Click
+        Dim FBD As New FolderBrowserDialog() With {.Description = "Select an USB drive"}
+        If FBD.ShowDialog() = Forms.DialogResult.OK Then
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\goldhen.bin") Then
+                MsgBox(FBD.SelectedPath)
+                Try
+                    File.Copy(My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\goldhen.bin", FBD.SelectedPath + "goldhen.bin", True)
+                    MsgBox("Copy done!", MsgBoxStyle.Information)
+                Catch ex As Exception
+                    MsgBox("Could not copy GoldHEN to selected USB drive.", MsgBoxStyle.Exclamation, "Error")
+                End Try
+            Else
+                MsgBox("Could not find goldhen.bin at " + My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\goldhen.bin", MsgBoxStyle.Exclamation, "Error")
+            End If
+        Else
+            MsgBox("No USB drive selected.", MsgBoxStyle.Exclamation, "Error")
+        End If
+    End Sub
+
 End Class
