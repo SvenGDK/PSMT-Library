@@ -10,16 +10,65 @@ Public Class PPPwner
     Dim WithEvents PPPwnWoker As New BackgroundWorker()
     Dim WithEvents PPPwn As New Process()
 
+    Private Structure ComboBoxEthernetDevice
+        Private _AdapterDescription As String
+        Private _AdapterID As String
+        Private _AdapterName As String
+        Private _DisplayValue As String
+
+        Public Property AdapterDescription As String
+            Get
+                Return _AdapterDescription
+            End Get
+            Set
+                _AdapterDescription = Value
+            End Set
+        End Property
+
+        Public Property AdapterID As String
+            Get
+                Return _AdapterID
+            End Get
+            Set
+                _AdapterID = Value
+            End Set
+        End Property
+
+        Public Property AdapterName As String
+            Get
+                Return _AdapterName
+            End Get
+            Set
+                _AdapterName = Value
+            End Set
+        End Property
+
+        Public Property DisplayValue As String
+            Get
+                Return _DisplayValue
+            End Get
+            Set
+                _DisplayValue = Value
+            End Set
+        End Property
+    End Structure
+
     Private Sub PPPwner_ContentRendered(sender As Object, e As EventArgs) Handles Me.ContentRendered
         'List Ethernet Adapters
+        Dim NewListOfEthernetAdapter As New List(Of ComboBoxEthernetDevice)()
         For Each AvailableNetworkInterface As NetworkInterface In NetworkInterface.GetAllNetworkInterfaces()
             Select Case AvailableNetworkInterface.NetworkInterfaceType
                 'Show only Ethernet Interfaces
-                Case NetworkInterfaceType.Ethernet, NetworkInterfaceType.FastEthernetT, NetworkInterfaceType.GigabitEthernet, NetworkInterfaceType.Ppp
-                    'Dim AvailableNetworkInterfaceProperties As IPInterfaceProperties = AvailableNetworkInterface.GetIPProperties()
-                    EthernetInterfacesComboBox.Items.Add(AvailableNetworkInterface.Description)
+                Case NetworkInterfaceType.Ethernet, NetworkInterfaceType.FastEthernetT, NetworkInterfaceType.GigabitEthernet
+                    Dim NewComboBoxEhternetDevice As New ComboBoxEthernetDevice() With {.AdapterDescription = AvailableNetworkInterface.Description, .AdapterID = AvailableNetworkInterface.Id, .AdapterName = AvailableNetworkInterface.Name,
+                    .DisplayValue = "Name: " + AvailableNetworkInterface.Name + vbCrLf + "Description: " + AvailableNetworkInterface.Description + vbCrLf + "ID: " + AvailableNetworkInterface.Id}
+                    NewListOfEthernetAdapter.Add(NewComboBoxEhternetDevice)
             End Select
         Next
+
+        'Set EthernetInterfacesComboBox properties
+        EthernetInterfacesComboBox.ItemsSource = NewListOfEthernetAdapter
+        EthernetInterfacesComboBox.DisplayMemberPath = "DisplayValue"
 
         'Check if Npcap is installed
         If Registry.LocalMachine.OpenSubKey("SOFTWARE\Npcap", False) Is Nothing AndAlso Registry.LocalMachine.OpenSubKey("SOFTWARE\WOW6432Node\Npcap", False) Is Nothing Then
@@ -50,32 +99,28 @@ Public Class PPPwner
             If EthernetInterfacesComboBox.SelectedItem IsNot Nothing AndAlso FirmwaresComboBox.SelectedItem IsNot Nothing Then
 
                 'Get selected Ethernet interface
-                Dim SelectedEthernetInterface As String = EthernetInterfacesComboBox.Text
+                Dim SelectedEthernetInterfaceInComboBox As ComboBoxEthernetDevice = CType(EthernetInterfacesComboBox.SelectedItem, ComboBoxEthernetDevice)
+                Dim SelectedEthernetInterface As String = "\Device\NPF_" + SelectedEthernetInterfaceInComboBox.AdapterID
+
                 'Set firmware
                 Dim SelectedFirmware As String = ""
                 Select Case FirmwaresComboBox.Text
-                    Case "8.50"
+                    Case "7.50 / 7.51 / 7.55"
+                        SelectedFirmware = "750"
+                    Case "8.00 / 8.01 / 8.03"
+                        SelectedFirmware = "800"
+                    Case "8.50 / 8.52"
                         SelectedFirmware = "850"
                     Case "9.00"
                         SelectedFirmware = "900"
-                    Case "9.03"
+                    Case "9.03 / 9.04"
                         SelectedFirmware = "903"
-                    Case "9.04"
-                        SelectedFirmware = "904"
-                    Case "9.50"
+                    Case "9.50 / 9.51 / 9.60"
                         SelectedFirmware = "950"
-                    Case "9.60"
-                        SelectedFirmware = "960"
-                    Case "10.00"
+                    Case "10.00 / 10.01"
                         SelectedFirmware = "1000"
-                    Case "10.01"
-                        SelectedFirmware = "1001"
-                    Case "10.50"
+                    Case "10.50 / 10.70 / 10.71"
                         SelectedFirmware = "1050"
-                    Case "10.70"
-                        SelectedFirmware = "1070"
-                    Case "10.71"
-                        SelectedFirmware = "1071"
                     Case "11.00"
                         SelectedFirmware = "1100"
                 End Select
@@ -97,22 +142,28 @@ Public Class PPPwner
                     Stage2File = CustomStage2PayloadTextBox.Text
                 Else
                     Select Case SelectedFirmware
+                        Case "750"
+                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-750.bin"
+                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-750.bin"
+                        Case "800"
+                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-800.bin"
+                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-800.bin"
                         Case "850"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-850.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-850.bin"
                         Case "900"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-900.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-900.bin"
-                        Case "903", "904"
+                        Case "903"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-903.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-903.bin"
-                        Case "950", "960"
+                        Case "950"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-950.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-950.bin"
-                        Case "1000", "1001"
+                        Case "1000"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1000.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1000.bin"
-                        Case "1050", "1070", "1071"
+                        Case "1050"
                             Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1050.bin"
                             Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1050.bin"
                         Case "1100"
@@ -121,16 +172,27 @@ Public Class PPPwner
                     End Select
                 End If
 
+                'Run PPPwn
+                If AutoRetryCheckBox.IsChecked Then
+                    PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """ -a")
+                Else
+                    PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
+                End If
+
                 'Update button
                 If Dispatcher.CheckAccess() = False Then
                     Dispatcher.BeginInvoke(Sub()
+                                               EthernetInterfacesComboBox.IsEnabled = False
+                                               FirmwaresComboBox.IsEnabled = False
+                                               AutoRetryCheckBox.IsEnabled = False
                                                StartPPPwnButton.Content = "Stop PPPWn"
                                            End Sub)
                 Else
+                    EthernetInterfacesComboBox.IsEnabled = False
+                    FirmwaresComboBox.IsEnabled = False
+                    AutoRetryCheckBox.IsEnabled = False
                     StartPPPwnButton.Content = "Stop PPPWn"
                 End If
-
-                PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
             Else
                 MsgBox("Please select your Ethernet interface, PS4 firmware and Payload.", MsgBoxStyle.Exclamation, "Error")
             End If
@@ -143,11 +205,15 @@ Public Class PPPwner
         'Update button on exit
         If Dispatcher.CheckAccess() = False Then
             Dispatcher.BeginInvoke(Sub()
-                                       StartPPPwnButton.IsEnabled = True
+                                       EthernetInterfacesComboBox.IsEnabled = True
+                                       FirmwaresComboBox.IsEnabled = True
+                                       AutoRetryCheckBox.IsEnabled = True
                                        StartPPPwnButton.Content = "Start PPPWn"
                                    End Sub)
         Else
-            StartPPPwnButton.IsEnabled = True
+            EthernetInterfacesComboBox.IsEnabled = True
+            FirmwaresComboBox.IsEnabled = True
+            AutoRetryCheckBox.IsEnabled = True
             StartPPPwnButton.Content = "Start PPPWn"
         End If
     End Sub
@@ -176,8 +242,8 @@ Public Class PPPwner
     End Sub
 
     Private Sub BrowseStage1PayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseStage1PayloadButton.Click
-        Dim OFD As New Windows.Forms.OpenFileDialog() With {.Title = "Select a stage1 payload", .Filter = "BIN files (*.bin)|*.bin"}
-        If OFD.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        Dim OFD As New Forms.OpenFileDialog() With {.Title = "Select a stage1 payload", .Filter = "BIN files (*.bin)|*.bin"}
+        If OFD.ShowDialog() = Forms.DialogResult.OK Then
             CustomStage1PayloadTextBox.Text = OFD.FileName
         Else
             MsgBox("No file selected.", MsgBoxStyle.Exclamation)
@@ -185,8 +251,8 @@ Public Class PPPwner
     End Sub
 
     Private Sub BrowseStage2PayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseStage2PayloadButton.Click
-        Dim OFD As New Windows.Forms.OpenFileDialog() With {.Title = "Select a stage2 payload", .Filter = "BIN files (*.bin)|*.bin"}
-        If OFD.ShowDialog() = Windows.Forms.DialogResult.OK Then
+        Dim OFD As New Forms.OpenFileDialog() With {.Title = "Select a stage2 payload", .Filter = "BIN files (*.bin)|*.bin"}
+        If OFD.ShowDialog() = Forms.DialogResult.OK Then
             CustomStage2PayloadTextBox.Text = OFD.FileName
         Else
             MsgBox("No file selected.", MsgBoxStyle.Exclamation)
@@ -198,28 +264,46 @@ Public Class PPPwner
         PPPwn = New Process()
         PPPwn.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\pppwn.exe"
         PPPwn.StartInfo.Arguments = e.Argument.ToString()
-        PPPwn.StartInfo.RedirectStandardOutput = False
+        PPPwn.StartInfo.RedirectStandardOutput = True
+        PPPwn.StartInfo.RedirectStandardError = True
         PPPwn.StartInfo.UseShellExecute = False
-        PPPwn.StartInfo.CreateNoWindow = False
+        PPPwn.StartInfo.CreateNoWindow = True
         PPPwn.EnableRaisingEvents = True
 
         AddHandler PPPwn.OutputDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
                                                  If Not String.IsNullOrEmpty(DataArgs.Data) Then
-                                                     Console.WriteLine(DataArgs.Data)
-                                                     'Append log from PPPWn
+                                                     'Append output log from PPPWn
                                                      If Dispatcher.CheckAccess() = False Then
                                                          Dispatcher.BeginInvoke(Sub()
-                                                                                    '... did not work
+                                                                                    LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                    LogTextBox.ScrollToEnd()
                                                                                 End Sub)
                                                      Else
-                                                         '... did not work
+                                                         LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                         LogTextBox.ScrollToEnd()
                                                      End If
                                                  End If
                                              End Sub
 
+        AddHandler PPPwn.ErrorDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
+                                                If Not String.IsNullOrEmpty(DataArgs.Data) Then
+                                                    'Append error log from PPPWn
+                                                    If Dispatcher.CheckAccess() = False Then
+                                                        Dispatcher.BeginInvoke(Sub()
+                                                                                   LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                   LogTextBox.ScrollToEnd()
+                                                                               End Sub)
+                                                    Else
+                                                        LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                        LogTextBox.ScrollToEnd()
+                                                    End If
+                                                End If
+                                            End Sub
+
         'Start PPPwn & read process output data
         PPPwn.Start()
-        'PPPwn.BeginOutputReadLine()
+        PPPwn.BeginOutputReadLine()
+        PPPwn.BeginErrorReadLine()
     End Sub
 
     Private Sub CopyGoldHENButton_Click(sender As Object, e As RoutedEventArgs) Handles CopyGoldHENButton.Click

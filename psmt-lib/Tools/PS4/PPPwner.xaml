@@ -5,38 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS4 PPPwner" Height="235" Width="625" Background="#FF252525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+             Title="PS4 PPPwner" Height="500" Width="655" Background="#FF252525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="PPPwn Settings" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
-        <ComboBox x:Name="FirmwaresComboBox" HorizontalAlignment="Left" Margin="10,105,0,0" VerticalAlignment="Top" Width="306">
-            <ComboBoxItem Content="8.50"/>
+        <ComboBox x:Name="FirmwaresComboBox" HorizontalAlignment="Left" Margin="10,147,0,0" VerticalAlignment="Top" Width="325">
+            <ComboBoxItem Content="7.50 / 7.51 / 7.55"/>
+            <ComboBoxItem Content="8.00 / 8.01 / 8.03"/>
+            <ComboBoxItem Content="8.50 / 8.52"/>
             <ComboBoxItem Content="9.00"/>
-            <ComboBoxItem Content="9.03"/>
-            <ComboBoxItem Content="9.04"/>
-            <ComboBoxItem Content="9.50"/>
-            <ComboBoxItem Content="9.60"/>
-            <ComboBoxItem Content="10.00"/>
-            <ComboBoxItem Content="10.01"/>
-            <ComboBoxItem Content="10.50"/>
-            <ComboBoxItem Content="10.70"/>
-            <ComboBoxItem Content="10.71"/>
+            <ComboBoxItem Content="9.03 / 9.04"/>
+            <ComboBoxItem Content="9.50 / 9.51 / 9.60"/>
+            <ComboBoxItem Content="10.00 / 10.01"/>
+            <ComboBoxItem Content="10.50 / 10.70 / 10.71"/>
             <ComboBoxItem Content="11.00"/>
         </ComboBox>
-        <ComboBox x:Name="EthernetInterfacesComboBox" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="306"/>
+        <ComboBox x:Name="EthernetInterfacesComboBox" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Width="325"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select your Ethernet Adapter :"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select your PS4 Firmware :"/>
-        <Button x:Name="StartPPPwnButton" Content="Start PPPwn" HorizontalAlignment="Left" Margin="341,166,0,0" VerticalAlignment="Top" Width="250" Height="22"/>
-        <TextBlock HorizontalAlignment="Left" Margin="341,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select a custom stage1 payload :"/>
-        <TextBox x:Name="CustomStage1PayloadTextBox" HorizontalAlignment="Left" Margin="341,59,0,0" VerticalAlignment="Top" Width="220"/>
-        <Button x:Name="BrowseStage1PayloadButton" Content="..." HorizontalAlignment="Left" Margin="566,59,0,0" VerticalAlignment="Top" Width="25" Height="18"/>
-        <CheckBox x:Name="UseSiSStageFilesCheckBox" Content="Use SiSTR0 GoldHEN stage files (9.00 &amp; 11.00 only)" HorizontalAlignment="Left" Margin="10,153,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock HorizontalAlignment="Left" Margin="341,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select a custom stage2 payload :"/>
-        <TextBox x:Name="CustomStage2PayloadTextBox" HorizontalAlignment="Left" Margin="341,107,0,0" VerticalAlignment="Top" Width="220"/>
-        <Button x:Name="BrowseStage2PayloadButton" Content="..." HorizontalAlignment="Left" Margin="566,107,0,0" VerticalAlignment="Top" Width="25" Height="18"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,132,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Options :"/>
-        <TextBlock Text="Customize (advanced)" VerticalAlignment="Top" TextWrapping="Wrap" Margin="341,10,0,0" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White"/>
-        <CheckBox x:Name="UseCustomStageFilesCheckBox" Content="Use custom stage files" HorizontalAlignment="Left" Margin="10,173,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button x:Name="CopyGoldHENButton" Content="Copy goldhen.bin to an USB drive" HorizontalAlignment="Left" Margin="341,139,0,0" VerticalAlignment="Top" Width="250" Height="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select your PS4 Firmware :"/>
+        <Button x:Name="StartPPPwnButton" Content="Start PPPwn" HorizontalAlignment="Left" Margin="352,238,0,0" VerticalAlignment="Top" Width="280" Height="22" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="352,38,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select a custom stage1 payload :"/>
+        <TextBox x:Name="CustomStage1PayloadTextBox" HorizontalAlignment="Left" Margin="352,59,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="BrowseStage1PayloadButton" Content="..." HorizontalAlignment="Left" Margin="607,59,0,0" VerticalAlignment="Top" Width="25" Height="18"/>
+        <CheckBox x:Name="UseSiSStageFilesCheckBox" Content="Use SiSTR0 GoldHEN stage files (9.00 &amp; 11.00 only)" HorizontalAlignment="Left" Margin="10,205,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock HorizontalAlignment="Left" Margin="352,82,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Select a custom stage2 payload :"/>
+        <TextBox x:Name="CustomStage2PayloadTextBox" HorizontalAlignment="Left" Margin="352,103,0,0" VerticalAlignment="Top" Width="250"/>
+        <Button x:Name="BrowseStage2PayloadButton" Content="..." HorizontalAlignment="Left" Margin="607,103,0,0" VerticalAlignment="Top" Width="25" Height="18"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,184,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="White" Text="Options :"/>
+        <TextBlock Text="Customize (advanced)" VerticalAlignment="Top" TextWrapping="Wrap" Margin="352,10,0,0" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <CheckBox x:Name="UseCustomStageFilesCheckBox" Content="Use custom stage files" HorizontalAlignment="Left" Margin="10,225,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="CopyGoldHENButton" Content="Copy goldhen.bin to an USB drive" HorizontalAlignment="Left" Margin="352,211,0,0" VerticalAlignment="Top" Width="280" Height="22"/>
+        <CheckBox x:Name="AutoRetryCheckBox" Content="Enable Auto-Retry" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock VerticalAlignment="Top" Text="Log" TextWrapping="Wrap" Margin="10,274,0,0" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="LogTextBox" Width="622" VerticalAlignment="Top" TextWrapping="Wrap" Margin="10,300,0,0" Height="155" HorizontalAlignment="Left"/>
     </Grid>
 
 </Window>
