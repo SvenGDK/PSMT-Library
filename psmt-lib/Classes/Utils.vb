@@ -8,7 +8,6 @@ Imports System.Text
 Imports System.Text.RegularExpressions
 Imports System.Threading
 Imports System.Windows
-Imports System.Windows.Media.Animation
 Imports System.Windows.Media.Imaging
 
 Public Class Utils
@@ -382,17 +381,22 @@ Public Class Utils
     End Function
 
     Public Shared Sub DownloadAndExecuteUpdater()
-        Dim NewWebClient As New WebClient()
-        NewWebClient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/SvenGDK/PS-Multi-Tools/main/PSMT-Update.exe"), My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe", Stopwatch.StartNew)
+        If Not File.Exists(My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe") Then
+            Dim NewWebClient As New WebClient()
+            NewWebClient.DownloadFileAsync(New Uri("https://raw.githubusercontent.com/SvenGDK/PS-Multi-Tools/main/PSMT-Update.exe"), My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe", Stopwatch.StartNew)
 
-        AddHandler NewWebClient.DownloadFileCompleted, Sub(sender As Object, e As AsyncCompletedEventArgs)
-                                                           If Not e.Cancelled Then
-                                                               If MsgBox("Do you want to install the update now ?", MsgBoxStyle.YesNo, "Install Update") = MsgBoxResult.Yes Then
-                                                                   Process.Start(My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe")
-                                                                   Application.Current.Shutdown()
+            AddHandler NewWebClient.DownloadFileCompleted, Sub(sender As Object, e As AsyncCompletedEventArgs)
+                                                               If Not e.Cancelled Then
+                                                                   If MsgBox("Do you want to install the update now ?", MsgBoxStyle.YesNo, "Install Update") = MsgBoxResult.Yes Then
+                                                                       Process.Start(My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe")
+                                                                       Application.Current.Shutdown()
+                                                                   End If
                                                                End If
-                                                           End If
-                                                       End Sub
+                                                           End Sub
+        Else
+            Process.Start(My.Computer.FileSystem.CurrentDirectory + "\PSMT-Update.exe")
+            Application.Current.Shutdown()
+        End If
     End Sub
 
 End Class

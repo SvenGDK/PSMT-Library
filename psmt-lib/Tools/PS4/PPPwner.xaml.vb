@@ -97,104 +97,107 @@ Public Class PPPwner
             End If
         Else
             If EthernetInterfacesComboBox.SelectedItem IsNot Nothing AndAlso FirmwaresComboBox.SelectedItem IsNot Nothing Then
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\pppwn.exe") Then
+                    'Get selected Ethernet interface
+                    Dim SelectedEthernetInterfaceInComboBox As ComboBoxEthernetDevice = CType(EthernetInterfacesComboBox.SelectedItem, ComboBoxEthernetDevice)
+                    Dim SelectedEthernetInterface As String = "\Device\NPF_" + SelectedEthernetInterfaceInComboBox.AdapterID
 
-                'Get selected Ethernet interface
-                Dim SelectedEthernetInterfaceInComboBox As ComboBoxEthernetDevice = CType(EthernetInterfacesComboBox.SelectedItem, ComboBoxEthernetDevice)
-                Dim SelectedEthernetInterface As String = "\Device\NPF_" + SelectedEthernetInterfaceInComboBox.AdapterID
-
-                'Set firmware
-                Dim SelectedFirmware As String = ""
-                Select Case FirmwaresComboBox.Text
-                    Case "7.50 / 7.51 / 7.55"
-                        SelectedFirmware = "750"
-                    Case "8.00 / 8.01 / 8.03"
-                        SelectedFirmware = "800"
-                    Case "8.50 / 8.52"
-                        SelectedFirmware = "850"
-                    Case "9.00"
-                        SelectedFirmware = "900"
-                    Case "9.03 / 9.04"
-                        SelectedFirmware = "903"
-                    Case "9.50 / 9.51 / 9.60"
-                        SelectedFirmware = "950"
-                    Case "10.00 / 10.01"
-                        SelectedFirmware = "1000"
-                    Case "10.50 / 10.70 / 10.71"
-                        SelectedFirmware = "1050"
-                    Case "11.00"
-                        SelectedFirmware = "1100"
-                End Select
-
-                'Set the files for stage1 & stage2
-                Dim Stage1File As String = ""
-                Dim Stage2File As String = ""
-                If UseSiSStageFilesCheckBox.IsChecked Then
-                    Select Case SelectedFirmware
-                        Case "900"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
-                        Case "1100"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
+                    'Set firmware
+                    Dim SelectedFirmware As String = ""
+                    Select Case FirmwaresComboBox.Text
+                        Case "7.50 / 7.51 / 7.55"
+                            SelectedFirmware = "750"
+                        Case "8.00 / 8.01 / 8.03"
+                            SelectedFirmware = "800"
+                        Case "8.50 / 8.52"
+                            SelectedFirmware = "850"
+                        Case "9.00"
+                            SelectedFirmware = "900"
+                        Case "9.03 / 9.04"
+                            SelectedFirmware = "903"
+                        Case "9.50 / 9.51 / 9.60"
+                            SelectedFirmware = "950"
+                        Case "10.00 / 10.01"
+                            SelectedFirmware = "1000"
+                        Case "10.50 / 10.70 / 10.71"
+                            SelectedFirmware = "1050"
+                        Case "11.00"
+                            SelectedFirmware = "1100"
                     End Select
-                ElseIf UseCustomStageFilesCheckBox.IsChecked Then
-                    Stage1File = CustomStage1PayloadTextBox.Text
-                    Stage2File = CustomStage2PayloadTextBox.Text
-                Else
-                    Select Case SelectedFirmware
-                        Case "750"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-750.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-750.bin"
-                        Case "800"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-800.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-800.bin"
-                        Case "850"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-850.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-850.bin"
-                        Case "900"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-900.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-900.bin"
-                        Case "903"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-903.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-903.bin"
-                        Case "950"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-950.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-950.bin"
-                        Case "1000"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1000.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1000.bin"
-                        Case "1050"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1050.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1050.bin"
-                        Case "1100"
-                            Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1100.bin"
-                            Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1100.bin"
-                    End Select
-                End If
 
-                'Run PPPwn
-                If AutoRetryCheckBox.IsChecked Then
-                    PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """ -a")
-                Else
-                    PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
-                End If
+                    'Set the files for stage1 & stage2
+                    Dim Stage1File As String = ""
+                    Dim Stage2File As String = ""
+                    If UseSiSStageFilesCheckBox.IsChecked Then
+                        Select Case SelectedFirmware
+                            Case "900"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
+                            Case "1100"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
+                        End Select
+                    ElseIf UseCustomStageFilesCheckBox.IsChecked Then
+                        Stage1File = CustomStage1PayloadTextBox.Text
+                        Stage2File = CustomStage2PayloadTextBox.Text
+                    Else
+                        Select Case SelectedFirmware
+                            Case "750"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-750.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-750.bin"
+                            Case "800"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-800.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-800.bin"
+                            Case "850"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-850.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-850.bin"
+                            Case "900"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-900.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-900.bin"
+                            Case "903"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-903.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-903.bin"
+                            Case "950"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-950.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-950.bin"
+                            Case "1000"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1000.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1000.bin"
+                            Case "1050"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1050.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1050.bin"
+                            Case "1100"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1100.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1100.bin"
+                        End Select
+                    End If
 
-                'Update button
-                If Dispatcher.CheckAccess() = False Then
-                    Dispatcher.BeginInvoke(Sub()
-                                               EthernetInterfacesComboBox.IsEnabled = False
-                                               FirmwaresComboBox.IsEnabled = False
-                                               AutoRetryCheckBox.IsEnabled = False
-                                               StartPPPwnButton.Content = "Stop PPPWn"
-                                           End Sub)
+                    'Run PPPwn
+                    If AutoRetryCheckBox.IsChecked Then
+                        PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """ -a")
+                    Else
+                        PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
+                    End If
+
+                    'Update button
+                    If Dispatcher.CheckAccess() = False Then
+                        Dispatcher.BeginInvoke(Sub()
+                                                   EthernetInterfacesComboBox.IsEnabled = False
+                                                   FirmwaresComboBox.IsEnabled = False
+                                                   AutoRetryCheckBox.IsEnabled = False
+                                                   StartPPPwnButton.Content = "Stop PPPWn"
+                                               End Sub)
+                    Else
+                        EthernetInterfacesComboBox.IsEnabled = False
+                        FirmwaresComboBox.IsEnabled = False
+                        AutoRetryCheckBox.IsEnabled = False
+                        StartPPPwnButton.Content = "Stop PPPWn"
+                    End If
                 Else
-                    EthernetInterfacesComboBox.IsEnabled = False
-                    FirmwaresComboBox.IsEnabled = False
-                    AutoRetryCheckBox.IsEnabled = False
-                    StartPPPwnButton.Content = "Stop PPPWn"
+                    MsgBox("Could not find PPPwn at " + My.Computer.FileSystem.CurrentDirectory + "\Tools\pppwn.exe", MsgBoxStyle.Critical, "Error")
                 End If
             Else
-                MsgBox("Please select your Ethernet interface, PS4 firmware and Payload.", MsgBoxStyle.Exclamation, "Error")
+                MsgBox("Please select your Ethernet interface, PS4 firmware and Payload.", MsgBoxStyle.Critical, "Error")
             End If
         End If
     End Sub
