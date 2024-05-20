@@ -28,29 +28,31 @@ Public Class PS5GamePatches
         DownloadQueueListView.ContextMenu = DownloadsContextMenu
 
         'Add already downloaded patch pkgs
-        For Each PKG In Directory.GetFiles(My.Computer.FileSystem.CurrentDirectory + "\Downloads", "*.pkg", SearchOption.AllDirectories)
-            Dim PKGFileInfo As New FileInfo(PKG)
-            Dim PKGFileName As String = PKGFileInfo.Name
+        If Directory.Exists(My.Computer.FileSystem.CurrentDirectory + "\Downloads") Then
+            For Each PKG In Directory.GetFiles(My.Computer.FileSystem.CurrentDirectory + "\Downloads", "*.pkg", SearchOption.AllDirectories)
+                Dim PKGFileInfo As New FileInfo(PKG)
+                Dim PKGFileName As String = PKGFileInfo.Name
 
-            If PKGFileName.Split("-"c).Length > 0 Then
-                If PKGFileName.Split("-"c)(1).Split("_"c).Length > 0 Then
-                    Dim PKGID As String = PKGFileName.Split("-"c)(1).Split("_"c)(0)
-                    Dim PKGFileSize As String = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB"
-                    Dim NewQueueItem As New DownloadQueueItem() With {.FileName = PKGFileName, .GameID = PKGID, .DownloadURL = PKG, .DownloadState = "Downloaded", .PKGSize = PKGFileSize}
+                If PKGFileName.Split("-"c).Length > 0 Then
+                    If PKGFileName.Split("-"c)(1).Split("_"c).Length > 0 Then
+                        Dim PKGID As String = PKGFileName.Split("-"c)(1).Split("_"c)(0)
+                        Dim PKGFileSize As String = FormatNumber(PKGFileInfo.Length / 1073741824, 2) + " GB"
+                        Dim NewQueueItem As New DownloadQueueItem() With {.FileName = PKGFileName, .GameID = PKGID, .DownloadURL = PKG, .DownloadState = "Downloaded", .PKGSize = PKGFileSize}
 
-                    'Get the basename of this pkg
-                    Dim BaseName As String = PKGFileName.Split(New String() {".pkg"}, StringSplitOptions.None)(0)
-                    'Check if has been already merged
-                    If BaseName.EndsWith("-merged") Then
-                        NewQueueItem.MergeState = "Merged"
-                    Else
-                        NewQueueItem.MergeState = "Not merged"
+                        'Get the basename of this pkg
+                        Dim BaseName As String = PKGFileName.Split(New String() {".pkg"}, StringSplitOptions.None)(0)
+                        'Check if has been already merged
+                        If BaseName.EndsWith("-merged") Then
+                            NewQueueItem.MergeState = "Merged"
+                        Else
+                            NewQueueItem.MergeState = "Not merged"
+                        End If
+
+                        DownloadQueueItemCollection.Add(NewQueueItem)
                     End If
-
-                    DownloadQueueItemCollection.Add(NewQueueItem)
                 End If
-            End If
-        Next
+            Next
+        End If
     End Sub
 
     Private Sub SearchButton_Click(sender As Object, e As RoutedEventArgs) Handles SearchButton.Click

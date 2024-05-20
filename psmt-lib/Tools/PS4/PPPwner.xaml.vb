@@ -133,6 +133,9 @@ Public Class PPPwner
                             Case "900"
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
+                            Case "1000"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1000.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1000.bin"
                             Case "1100"
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
@@ -223,10 +226,10 @@ Public Class PPPwner
 
     Private Sub UseSiSStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseSiSStageFilesCheckBox.Checked
         Select Case FirmwaresComboBox.Text
-            Case "9.00", "11.00"
+            Case "9.00", "10.00", "10.01", "11.00"
                 UseCustomStageFilesCheckBox.IsEnabled = False
             Case Else
-                MsgBox("Not compatible with selected Firmware.", MsgBoxStyle.Exclamation, "Only for 9.00 & 11.00")
+                MsgBox("Not compatible with selected Firmware.", MsgBoxStyle.Exclamation, "Only for 9.00, 10.00, 10.01 & 11.00")
                 UseSiSStageFilesCheckBox.IsChecked = False
                 e.Handled = True
         End Select
