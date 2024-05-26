@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.IO
+Imports System.Net
 Imports System.Net.NetworkInformation
+Imports System.Text
 Imports System.Windows
 Imports System.Windows.Forms
 Imports Microsoft.Win32
@@ -73,7 +75,11 @@ Public Class PPPwner
         'Check if Npcap is installed
         If Registry.LocalMachine.OpenSubKey("SOFTWARE\Npcap", False) Is Nothing AndAlso Registry.LocalMachine.OpenSubKey("SOFTWARE\WOW6432Node\Npcap", False) Is Nothing Then
             If MsgBox("Npcap is not installed." + vbCrLf + "Do you want to install it now ? (Required)", MsgBoxStyle.YesNo, "Npcap Required") = MsgBoxResult.Yes Then
-                Process.Start(My.Computer.FileSystem.CurrentDirectory + "\Tools\npcap-1.79.exe")
+                If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Tools\npcap-1.79.exe") Then
+                    Process.Start(My.Computer.FileSystem.CurrentDirectory + "\Tools\npcap-1.79.exe")
+                Else
+                    MsgBox(My.Computer.FileSystem.CurrentDirectory + "\Tools\npcap-1.79.exe NOT FOUND, please install manually from : https://npcap.com/#download", MsgBoxStyle.Critical, "Error")
+                End If
             End If
         End If
     End Sub
@@ -128,19 +134,7 @@ Public Class PPPwner
                     'Set the files for stage1 & stage2
                     Dim Stage1File As String = ""
                     Dim Stage2File As String = ""
-                    If UseSiSStageFilesCheckBox.IsChecked Then
-                        Select Case SelectedFirmware
-                            Case "900"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
-                            Case "1000"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1000.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1000.bin"
-                            Case "1100"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
-                        End Select
-                    ElseIf UseCustomStageFilesCheckBox.IsChecked Then
+                    If UseCustomStageFilesCheckBox.IsChecked Then
                         Stage1File = CustomStage1PayloadTextBox.Text
                         Stage2File = CustomStage2PayloadTextBox.Text
                     Else
@@ -155,8 +149,8 @@ Public Class PPPwner
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-850.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-850.bin"
                             Case "900"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-900.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-900.bin"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-900.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-900.bin"
                             Case "903"
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-903.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-903.bin"
@@ -164,23 +158,55 @@ Public Class PPPwner
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-950.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-950.bin"
                             Case "1000"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1000.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1000.bin"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1000.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1000.bin"
                             Case "1050"
                                 Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1050.bin"
                                 Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1050.bin"
                             Case "1100"
-                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\ToF-stage1-1100.bin"
-                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\ToF-stage2-1100.bin"
+                                Stage1File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage1\SiS-stage1-1100.bin"
+                                Stage2File = My.Computer.FileSystem.CurrentDirectory + "\Tools\PS4\stage2\SiS-stage2-1100.bin"
                         End Select
                     End If
 
-                    'Run PPPwn
-                    If AutoRetryCheckBox.IsChecked Then
-                        PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """ -a")
-                    Else
-                        PPPwnWoker.RunWorkerAsync("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
+                    'Build the arguments string
+                    Dim NewStringBuilder As New StringBuilder()
+                    NewStringBuilder.Append("--interface """ + SelectedEthernetInterface + """ --fw " + SelectedFirmware + " --stage1 """ + Stage1File + """ --stage2 """ + Stage2File + """")
+
+                    If UseResponseTimeoutCheckBox.IsChecked Then
+                        If Not String.IsNullOrEmpty(ResponseTimeoutValueTextBox.Text) AndAlso Utils.IsInt(ResponseTimeoutValueTextBox.Text) Then
+                            NewStringBuilder.Append(" --timeout " + ResponseTimeoutValueTextBox.Text)
+                        End If
                     End If
+                    If UsePinningWaitingTimeCheckBox.IsChecked Then
+                        If Not String.IsNullOrEmpty(PinningWaitingTimeValueTextBox.Text) AndAlso Utils.IsInt(PinningWaitingTimeValueTextBox.Text) Then
+                            NewStringBuilder.Append(" --wait-after-pin " + PinningWaitingTimeValueTextBox.Text)
+                        End If
+                    End If
+                    If UseGroomDelayCheckBox.IsChecked Then
+                        If Not String.IsNullOrEmpty(GroomDelayValueTextBox.Text) AndAlso Utils.IsInt(GroomDelayValueTextBox.Text) Then
+                            NewStringBuilder.Append(" --groom-delay " + GroomDelayValueTextBox.Text)
+                        End If
+
+                    End If
+                    If SpecifyPCAPBufferSizeCheckBox.IsChecked Then
+                        If Not String.IsNullOrEmpty(PCAPBufferSizeValueTextBox.Text) AndAlso Utils.IsInt(PCAPBufferSizeValueTextBox.Text) Then
+                            NewStringBuilder.Append(" --buffer-size " + PCAPBufferSizeValueTextBox.Text)
+                        End If
+                    End If
+
+                    If AutoRetryCheckBox.IsChecked Then
+                        NewStringBuilder.Append(" --auto-retry")
+                    End If
+                    If DontWaitPADICheckBox.IsChecked Then
+                        NewStringBuilder.Append(" --no-wait-padi")
+                    End If
+                    If UseCPUCheckBox.IsChecked Then
+                        NewStringBuilder.Append(" --real-sleep")
+                    End If
+
+                    'Run PPPwn
+                    PPPwnWoker.RunWorkerAsync(NewStringBuilder.ToString())
 
                     'Update button
                     If Dispatcher.CheckAccess() = False Then
@@ -188,12 +214,34 @@ Public Class PPPwner
                                                    EthernetInterfacesComboBox.IsEnabled = False
                                                    FirmwaresComboBox.IsEnabled = False
                                                    AutoRetryCheckBox.IsEnabled = False
+                                                   UseResponseTimeoutCheckBox.IsEnabled = False
+                                                   UsePinningWaitingTimeCheckBox.IsEnabled = False
+                                                   UseGroomDelayCheckBox.IsEnabled = False
+                                                   SpecifyPCAPBufferSizeCheckBox.IsEnabled = False
+                                                   DontWaitPADICheckBox.IsEnabled = False
+                                                   UseCPUCheckBox.IsEnabled = False
+                                                   ResponseTimeoutValueTextBox.IsEnabled = False
+                                                   PinningWaitingTimeValueTextBox.IsEnabled = False
+                                                   GroomDelayValueTextBox.IsEnabled = False
+                                                   PCAPBufferSizeValueTextBox.IsEnabled = False
+
                                                    StartPPPwnButton.Content = "Stop PPPWn"
                                                End Sub)
                     Else
                         EthernetInterfacesComboBox.IsEnabled = False
                         FirmwaresComboBox.IsEnabled = False
                         AutoRetryCheckBox.IsEnabled = False
+                        UseResponseTimeoutCheckBox.IsEnabled = False
+                        UsePinningWaitingTimeCheckBox.IsEnabled = False
+                        UseGroomDelayCheckBox.IsEnabled = False
+                        SpecifyPCAPBufferSizeCheckBox.IsEnabled = False
+                        DontWaitPADICheckBox.IsEnabled = False
+                        UseCPUCheckBox.IsEnabled = False
+                        ResponseTimeoutValueTextBox.IsEnabled = False
+                        PinningWaitingTimeValueTextBox.IsEnabled = False
+                        GroomDelayValueTextBox.IsEnabled = False
+                        PCAPBufferSizeValueTextBox.IsEnabled = False
+
                         StartPPPwnButton.Content = "Stop PPPWn"
                     End If
                 Else
@@ -214,37 +262,36 @@ Public Class PPPwner
                                        EthernetInterfacesComboBox.IsEnabled = True
                                        FirmwaresComboBox.IsEnabled = True
                                        AutoRetryCheckBox.IsEnabled = True
+                                       UseResponseTimeoutCheckBox.IsEnabled = True
+                                       UsePinningWaitingTimeCheckBox.IsEnabled = True
+                                       UseGroomDelayCheckBox.IsEnabled = True
+                                       SpecifyPCAPBufferSizeCheckBox.IsEnabled = True
+                                       DontWaitPADICheckBox.IsEnabled = True
+                                       UseCPUCheckBox.IsEnabled = True
+                                       ResponseTimeoutValueTextBox.IsEnabled = True
+                                       PinningWaitingTimeValueTextBox.IsEnabled = True
+                                       GroomDelayValueTextBox.IsEnabled = True
+                                       PCAPBufferSizeValueTextBox.IsEnabled = True
+
                                        StartPPPwnButton.Content = "Start PPPWn"
                                    End Sub)
         Else
             EthernetInterfacesComboBox.IsEnabled = True
             FirmwaresComboBox.IsEnabled = True
             AutoRetryCheckBox.IsEnabled = True
+            UseResponseTimeoutCheckBox.IsEnabled = True
+            UsePinningWaitingTimeCheckBox.IsEnabled = True
+            UseGroomDelayCheckBox.IsEnabled = True
+            SpecifyPCAPBufferSizeCheckBox.IsEnabled = True
+            DontWaitPADICheckBox.IsEnabled = True
+            UseCPUCheckBox.IsEnabled = True
+            ResponseTimeoutValueTextBox.IsEnabled = True
+            PinningWaitingTimeValueTextBox.IsEnabled = True
+            GroomDelayValueTextBox.IsEnabled = True
+            PCAPBufferSizeValueTextBox.IsEnabled = True
+
             StartPPPwnButton.Content = "Start PPPWn"
         End If
-    End Sub
-
-    Private Sub UseSiSStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseSiSStageFilesCheckBox.Checked
-        Select Case FirmwaresComboBox.Text
-            Case "9.00", "10.00", "10.01", "11.00"
-                UseCustomStageFilesCheckBox.IsEnabled = False
-            Case Else
-                MsgBox("Not compatible with selected Firmware.", MsgBoxStyle.Exclamation, "Only for 9.00, 10.00, 10.01 & 11.00")
-                UseSiSStageFilesCheckBox.IsChecked = False
-                e.Handled = True
-        End Select
-    End Sub
-
-    Private Sub UseCustomStageFilesCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles UseCustomStageFilesCheckBox.Checked
-        UseSiSStageFilesCheckBox.IsEnabled = False
-    End Sub
-
-    Private Sub UseSiSStageFilesCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles UseSiSStageFilesCheckBox.Unchecked
-        UseCustomStageFilesCheckBox.IsEnabled = True
-    End Sub
-
-    Private Sub UseCustomStageFilesCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles UseCustomStageFilesCheckBox.Unchecked
-        UseSiSStageFilesCheckBox.IsEnabled = True
     End Sub
 
     Private Sub BrowseStage1PayloadButton_Click(sender As Object, e As RoutedEventArgs) Handles BrowseStage1PayloadButton.Click
@@ -327,6 +374,23 @@ Public Class PPPwner
             End If
         Else
             MsgBox("No USB drive selected.", MsgBoxStyle.Exclamation, "Error")
+        End If
+    End Sub
+
+    Private Sub DownloadGoldHENButton_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGoldHENButton.Click
+        Dim FBD As New FolderBrowserDialog() With {.Description = "Select an USB drive"}
+        If FBD.ShowDialog() = Forms.DialogResult.OK Then
+            Try
+                If Utils.IsURLValid("https://github.com/GoldHEN/GoldHEN/blob/beta/goldhen.bin") Then
+                    Dim DownloadClient As New WebClient()
+                    DownloadClient.DownloadFile(New Uri("https://github.com/GoldHEN/GoldHEN/blob/beta/goldhen.bin"), FBD.SelectedPath + "goldhen.bin")
+                    MsgBox("GoldHEN downloaded to : " + FBD.SelectedPath + "goldhen.bin", MsgBoxStyle.Information, "Success")
+                Else
+                    MsgBox("Could not download GoldHEN to : " + FBD.SelectedPath + "goldhen.bin" + vbCrLf + "File is not available.", MsgBoxStyle.Information, "Error")
+                End If
+            Catch ex As Exception
+                MsgBox("Could not copy GoldHEN to selected USB drive.", MsgBoxStyle.Exclamation, "Error")
+            End Try
         End If
     End Sub
 
