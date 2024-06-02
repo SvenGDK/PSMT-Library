@@ -15,6 +15,7 @@
         <MenuItem Header="Param Editor" x:Name="OpenParamEditorMenuItem"/>
         <MenuItem Header="Payload &amp; Mast1c0re PS2 Game Sender" x:Name="SenderMenuItem"/>
         <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"/>
+        <MenuItem Header="PKG Sender" x:Name="OpenPKGSenderMenuItem"/>
         <MenuItem Header="Build / Create">
             <MenuItem Header="GP5 Project Creator" x:Name="OpenGP5ManagerMenuItem"/>
             <MenuItem Header="GP5 PKG Builder" x:Name="OpenPKGBuilderMenuItem"/>
@@ -218,7 +219,7 @@
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="PS5-Xplorer">
-                <MenuItem Header="Download v1.01" x:Name="DownloadPS5Xplorer">
+                <MenuItem Header="Download v1.02" x:Name="DownloadPS5Xplorer">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>

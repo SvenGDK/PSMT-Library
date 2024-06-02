@@ -9,7 +9,7 @@
     <Grid>
         <Button x:Name="BrowsePKGButton" Content="Browse" HorizontalAlignment="Left" Margin="315,33,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="SelectedPKGFileTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Selected a .pkg file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select a .pkg file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <Image x:Name="PKGICONImage" HorizontalAlignment="Left" Height="176" Margin="100,70,0,0" VerticalAlignment="Top" Width="320"/>
         <TextBlock x:Name="ExtractProgressTextBlock" HorizontalAlignment="Left" Margin="10,255,0,0" TextWrapping="Wrap" Text="Progress :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <ProgressBar x:Name="ExtractProgressBar" HorizontalAlignment="Left" Height="20" Margin="10,279,0,0" VerticalAlignment="Top" Width="458"/>

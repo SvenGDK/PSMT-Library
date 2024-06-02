@@ -271,6 +271,16 @@ Public Class PS5Menu
         End If
     End Sub
 
+    Private Sub OpenPKGSenderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGSenderMenuItem.Click
+        'Set values if SharedConsoleAddress is set
+        If Not String.IsNullOrEmpty(SharedConsoleAddress) Then
+            Dim NewPKGSender As New PS5PKGSender With {.ShowActivated = True, .ConsoleIP = SharedConsoleAddress.Split(":"c)(0)}
+            NewPKGSender.Show()
+        Else
+            MsgBox("Please set your IP:Port in the settings first.", MsgBoxStyle.Information, "Cannot connect to the PS5")
+        End If
+    End Sub
+
 #End Region
 
 #Region "Downloads"
@@ -370,7 +380,7 @@ Public Class PS5Menu
     Private Sub DownloadHomebrewStore_Click(sender As Object, e As RoutedEventArgs) Handles DownloadHomebrewStore.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/pkg/Store-R2-PS5.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/Store-R2-PS5.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -379,7 +389,7 @@ Public Class PS5Menu
     Private Sub DownloadItemzflow_Click(sender As Object, e As RoutedEventArgs) Handles DownloadItemzflow.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/ITEM00001/PS5_IV0002-ITEM00001_00-STOREUPD00000000.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/ItemzflowGameManager_v1.06.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -388,7 +398,7 @@ Public Class PS5Menu
     Private Sub DownloadPS5Xplorer_Click(sender As Object, e As RoutedEventArgs) Handles DownloadPS5Xplorer.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True, .PackageConsole = "PS5"}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://api.pkg-zone.com/attachments/LAPY20011/PS5_PS5-Xplorer%20(LAPY20011)%20-%201.01.pkg") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/ps5/hb/PS5-Xplorer_v1.02.pkg") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If

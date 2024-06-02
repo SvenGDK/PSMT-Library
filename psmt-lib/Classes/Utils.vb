@@ -399,6 +399,62 @@ Public Class Utils
         End If
     End Sub
 
+    Public Shared Function GetzRIF(PKGContentID As String) As String
+        Dim DownloadsList As New List(Of Structures.Package)()
+        If MsgBox("Load zRIF from the latest database ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Using NewWebClient As New WebClient
+                Dim GamesList As String = NewWebClient.DownloadString(New Uri("https://nopaystation.com/tsv/PSV_GAMES.tsv"))
+                Dim GamesListLines As String() = GamesList.Split(CChar(vbCrLf))
+                For Each GameLine As String In GamesListLines.Skip(1)
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
+                    Dim AdditionalInfo As Structures.PackageInfo = GetFileSizeAndDate(SplittedValues(8).Trim(), SplittedValues(6).Trim())
+                    Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2).Trim(),
+                        .PackageURL = SplittedValues(3).Trim(),
+                        .PackageTitleID = SplittedValues(0).Trim(),
+                        .PackageContentID = SplittedValues(5).Trim(),
+                        .PackagezRIF = SplittedValues(4).Trim(),
+                        .PackageDate = AdditionalInfo.FileDate,
+                        .PackageSize = AdditionalInfo.FileSize,
+                        .PackageRegion = SplittedValues(1).Trim()}
+                    If Not SplittedValues(3).Trim() = "MISSING" Then 'Only add available PKGs
+                        DownloadsList.Add(NewPackage)
+                    End If
+                Next
+            End Using
+        Else 'Use local .tsv file
+            If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Databases\PSV_GAMES.tsv") Then
+                Dim FileReader As String() = File.ReadAllLines(My.Computer.FileSystem.CurrentDirectory + "\Databases\PSV_GAMES.tsv", Text.Encoding.UTF8)
+                For Each GameLine As String In FileReader.Skip(1) 'Skip 1st line in TSV
+                    Dim SplittedValues As String() = GameLine.Split(CChar(vbTab))
+                    Dim AdditionalInfo As Structures.PackageInfo = GetFileSizeAndDate(SplittedValues(8), SplittedValues(6))
+                    Dim NewPackage As New Structures.Package() With {.PackageName = SplittedValues(2),
+                        .PackageURL = SplittedValues(3),
+                        .PackageTitleID = SplittedValues(0),
+                        .PackageContentID = SplittedValues(5),
+                        .PackagezRIF = SplittedValues(4),
+                        .PackageDate = AdditionalInfo.FileDate,
+                        .PackageSize = AdditionalInfo.FileSize,
+                        .PackageRegion = SplittedValues(1)}
+                    If Not SplittedValues(3) = "MISSING" Then 'Only add available PKGs
+                        DownloadsList.Add(NewPackage)
+                    End If
+                Next
+            Else
+                MsgBox("Nothing available. Please add TSV files to the 'Databases' directory.", MsgBoxStyle.Exclamation, "Could not load list")
+            End If
+        End If
+
+        'Check if we have a zRIF for the selected .pkg
+        For Each AvailablePKG As Structures.Package In DownloadsList
+            If AvailablePKG.PackageContentID = PKGContentID Then
+                If AvailablePKG.PackagezRIF IsNot Nothing Then
+                    Return AvailablePKG.PackagezRIF
+                    Exit For
+                End If
+            End If
+        Next
+    End Function
+
 End Class
 
 Namespace INI

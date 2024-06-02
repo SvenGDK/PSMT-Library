@@ -57,13 +57,6 @@ Public Class PS5etaHENConfigurator
                             FTPCheckBox.IsChecked = True
                         End If
                     End If
-                    If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "launch_itemzflow")) Then
-                        If etaHENConfig.IniReadValue("Settings", "launch_itemzflow") = "0" Then
-                            LaunchItemzflowCheckBox.IsChecked = False
-                        Else
-                            LaunchItemzflowCheckBox.IsChecked = True
-                        End If
-                    End If
                     If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "discord_rpc")) Then
                         If etaHENConfig.IniReadValue("Settings", "discord_rpc") = "0" Then
                             DiscordCheckBox.IsChecked = False
@@ -71,6 +64,28 @@ Public Class PS5etaHENConfigurator
                             DiscordCheckBox.IsChecked = True
                         End If
                     End If
+                    If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "testkit")) Then
+                        If etaHENConfig.IniReadValue("Settings", "testkit") = "0" Then
+                            TestkitCheckBox.IsChecked = False
+                        Else
+                            TestkitCheckBox.IsChecked = True
+                        End If
+                    End If
+                    If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "Allow_data_in_sandbox")) Then
+                        If etaHENConfig.IniReadValue("Settings", "Allow_data_in_sandbox") = "0" Then
+                            AllowDataInSandboxCheckBox.IsChecked = False
+                        Else
+                            AllowDataInSandboxCheckBox.IsChecked = True
+                        End If
+                    End If
+                    If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "DPI")) Then
+                        If etaHENConfig.IniReadValue("Settings", "DPI") = "0" Then
+                            DPIServiceCheckBox.IsChecked = False
+                        Else
+                            DPIServiceCheckBox.IsChecked = True
+                        End If
+                    End If
+
                 End If
 
                 MsgBox("Config file retrieved!" + vbCrLf + "You can change the checkboxes now and reupload the config.ini", MsgBoxStyle.Information)
@@ -137,18 +152,32 @@ Public Class PS5etaHENConfigurator
                     FTPCheckBox.IsChecked = True
                 End If
             End If
-            If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "launch_itemzflow")) Then
-                If etaHENConfig.IniReadValue("Settings", "launch_itemzflow") = "0" Then
-                    LaunchItemzflowCheckBox.IsChecked = False
-                Else
-                    LaunchItemzflowCheckBox.IsChecked = True
-                End If
-            End If
             If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "discord_rpc")) Then
                 If etaHENConfig.IniReadValue("Settings", "discord_rpc") = "0" Then
                     DiscordCheckBox.IsChecked = False
                 Else
                     DiscordCheckBox.IsChecked = True
+                End If
+            End If
+            If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "testkit")) Then
+                If etaHENConfig.IniReadValue("Settings", "testkit") = "0" Then
+                    TestkitCheckBox.IsChecked = False
+                Else
+                    TestkitCheckBox.IsChecked = True
+                End If
+            End If
+            If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "Allow_data_in_sandbox")) Then
+                If etaHENConfig.IniReadValue("Settings", "Allow_data_in_sandbox") = "0" Then
+                    AllowDataInSandboxCheckBox.IsChecked = False
+                Else
+                    AllowDataInSandboxCheckBox.IsChecked = True
+                End If
+            End If
+            If Not String.IsNullOrEmpty(etaHENConfig.IniReadValue("Settings", "DPI")) Then
+                If etaHENConfig.IniReadValue("Settings", "DPI") = "0" Then
+                    DPIServiceCheckBox.IsChecked = False
+                Else
+                    DPIServiceCheckBox.IsChecked = True
                 End If
             End If
         End If
@@ -184,17 +213,17 @@ Public Class PS5etaHENConfigurator
         End If
     End Sub
 
-    Private Sub LaunchItemzflowCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles LaunchItemzflowCheckBox.Checked
+    Private Sub TestkitCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles TestkitCheckBox.Checked
         If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
             Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
-            etaHENConfig.IniWriteValue("Settings", "launch_itemzflow", "1")
+            etaHENConfig.IniWriteValue("Settings", "testkit", "1")
         End If
     End Sub
 
-    Private Sub LaunchItemzflowCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles LaunchItemzflowCheckBox.Unchecked
+    Private Sub TestkitCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles TestkitCheckBox.Unchecked
         If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
             Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
-            etaHENConfig.IniWriteValue("Settings", "launch_itemzflow", "0")
+            etaHENConfig.IniWriteValue("Settings", "testkit", "0")
         End If
     End Sub
 
@@ -223,6 +252,34 @@ Public Class PS5etaHENConfigurator
         If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
             Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
             etaHENConfig.IniWriteValue("Settings", "libhijacker_cheats", "0")
+        End If
+    End Sub
+
+    Private Sub AllowDataInSandboxCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles AllowDataInSandboxCheckBox.Checked
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
+            Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
+            etaHENConfig.IniWriteValue("Settings", "Allow_data_in_sandbox", "1")
+        End If
+    End Sub
+
+    Private Sub AllowDataInSandboxCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles AllowDataInSandboxCheckBox.Unchecked
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
+            Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
+            etaHENConfig.IniWriteValue("Settings", "Allow_data_in_sandbox", "0")
+        End If
+    End Sub
+
+    Private Sub DPIServiceCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles DPIServiceCheckBox.Checked
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
+            Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
+            etaHENConfig.IniWriteValue("Settings", "DPI", "1")
+        End If
+    End Sub
+
+    Private Sub DPIServiceCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles DPIServiceCheckBox.Unchecked
+        If File.Exists(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini") Then
+            Dim etaHENConfig As New IniFile(My.Computer.FileSystem.CurrentDirectory + "\Cache\config.ini")
+            etaHENConfig.IniWriteValue("Settings", "DPI", "0")
         End If
     End Sub
 

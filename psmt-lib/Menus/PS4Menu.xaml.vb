@@ -524,8 +524,8 @@ Public Class PS4Menu
         NewUSBWriter.Show()
     End Sub
 
-    Private Sub OpenPKGSenderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGSenderMenuItem.Click
-        Dim NewPKGSender As New PKGSender() With {.ShowActivated = True}
+    Private Sub OpenPayloadSenderMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPayloadSenderMenuItem.Click
+        Dim NewPKGSender As New PS5Sender() With {.ShowActivated = True}
         NewPKGSender.Show()
     End Sub
 
@@ -557,6 +557,11 @@ Public Class PS4Menu
         Else
             MsgBox("PS Multi Tools is up to date!", MsgBoxStyle.Information, "No update found")
         End If
+    End Sub
+
+    Private Sub OpenPKGExtractorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPKGExtractorMenuItem.Click
+        Dim NewPKGExtractor As New PS4PKGExtractor() With {.ShowActivated = True}
+        NewPKGExtractor.Show()
     End Sub
 
 #End Region

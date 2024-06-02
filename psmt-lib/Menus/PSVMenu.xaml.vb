@@ -129,7 +129,7 @@ Public Class PSVMenu
     Private Sub DownloadFontInstallerGitHub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFontInstallerGitHub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/cxziaho/fontInstaller/releases/download/latest/fontInstaller.vpk") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/cxziaho/fontInstaller/releases/latest/download/fontInstaller.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -156,7 +156,7 @@ Public Class PSVMenu
     Private Sub DownloadFTPClientGitHub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadFTPClientGitHub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-ftp-client/releases/download/latest/ftpclient.vpk") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-ftp-client/releases/latest/download/ftpclient.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -300,7 +300,7 @@ Public Class PSVMenu
     Private Sub Downloadpkgj_Click(sender As Object, e As RoutedEventArgs) Handles Downloadpkgj.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/pkgj-0.55.vpk") = False Then
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/pkgj-0.57.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -390,7 +390,7 @@ Public Class PSVMenu
     Private Sub DownloadSMBClientGitHub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSMBClientGitHub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-smb-client/releases/download/latest/smbclient.vpk") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-smb-client/releases/latest/download/smbclient.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -498,7 +498,7 @@ Public Class PSVMenu
     Private Sub DownloadWebDAVClientGitHub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadWebDAVClientGitHub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-webdav-client/releases/download/latest/webdavclient.vpk") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/cy33hc/vita-webdav-client/releases/latest/download/webdavclient.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -516,7 +516,79 @@ Public Class PSVMenu
     Private Sub DownloaTrophiesFixerGitHub_Click(sender As Object, e As RoutedEventArgs) Handles DownloaTrophiesFixerGitHub.Click
         Dim NewDownloader As New Downloader() With {.ShowActivated = True}
         NewDownloader.Show()
-        If NewDownloader.CreateNewDownload("https://github.com/Yoti/psv_trophfix/releases/download/latest/trophies_fixer.vpk") = False Then
+        If NewDownloader.CreateNewDownload("https://github.com/Yoti/psv_trophfix/releases/latest/download/trophies_fixer.vpk") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadBlasphemousPort_Click(sender As Object, e As RoutedEventArgs) Handles DownloadBlasphemousPort.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/BlasphemousVita.vpk") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadCupheadPort_Click(sender As Object, e As RoutedEventArgs) Handles DownloadCupheadPort.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/Cuphead.vpk") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadGTACTWPort_Click(sender As Object, e As RoutedEventArgs) Handles DownloadGTACTWPort.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/GTACTW.vpk") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadNoNpDrm_Click(sender As Object, e As RoutedEventArgs) Handles DownloadNoNpDrm.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/nonpdrm.skprx") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadNoNpDrmGithub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadNoNpDrmGithub.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://github.com/TheOfficialFloW/NoNpDrm/releases/latest/download/nonpdrm.skprx") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadreF00D_Click(sender As Object, e As RoutedEventArgs) Handles DownloadreF00D.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/reF00D.skprx") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadreF00DGithub_Click(sender As Object, e As RoutedEventArgs) Handles DownloadreF00DGithub.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("https://github.com/dots-tb/reF00D/releases/latest/download/reF00D.skprx") = False Then
+            MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
+            NewDownloader.Close()
+        End If
+    End Sub
+
+    Private Sub DownloadSonicManiaPort_Click(sender As Object, e As RoutedEventArgs) Handles DownloadSonicManiaPort.Click
+        Dim NewDownloader As New Downloader() With {.ShowActivated = True}
+        NewDownloader.Show()
+        If NewDownloader.CreateNewDownload("http://X.X.X.X/vita/hb/SonicMania.vpk") = False Then
             MsgBox("Could not download the selected file.", MsgBoxStyle.Critical)
             NewDownloader.Close()
         End If
@@ -632,8 +704,8 @@ Public Class PSVMenu
     End Sub
 
     Private Sub OpenRCOExtractor_Click(sender As Object, e As RoutedEventArgs) Handles OpenRCOExtractor.Click
-        Dim NewVitaRCOMage As New VitaRCOMage() With {.ShowActivated = True}
-        NewVitaRCOMage.Show()
+        Dim NewPS5RcoExtractor As New PS5RcoExtractor() With {.ShowActivated = True}
+        NewPS5RcoExtractor.Show()
     End Sub
 
     Private Sub OpenIMGTools_Click(sender As Object, e As RoutedEventArgs) Handles OpenIMGTools.Click
@@ -645,6 +717,11 @@ Public Class PSVMenu
     Private Sub OpenParamSFOEditorMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenParamSFOEditorMenuItem.Click
         Dim NewSFOEditor As New SFOEditor() With {.ShowActivated = True}
         NewSFOEditor.Show()
+    End Sub
+
+    Private Sub OpenPFSToolsMenuItem_Click(sender As Object, e As RoutedEventArgs) Handles OpenPFSToolsMenuItem.Click
+        Dim NewPSVPFSTools As New PSVPFSTools() With {.ShowActivated = True}
+        NewPSVPFSTools.Show()
     End Sub
 
 #End Region

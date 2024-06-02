@@ -12,7 +12,8 @@
         <MenuItem Header="Exploit USB Writer" x:Name="OpenUSBWriterMenuItem"></MenuItem>
         <MenuItem Header="FTP Browser" x:Name="OpenFTPBrowserMenuItem"></MenuItem>
         <MenuItem Header="PARAM.SFO Editor" x:Name="OpenParamSFOEditorMenuItem"></MenuItem>
-        <MenuItem Header="Payload &amp; PKG Sender" x:Name="OpenPKGSenderMenuItem"></MenuItem>
+        <MenuItem Header="Payload Sender" x:Name="OpenPayloadSenderMenuItem"></MenuItem>
+        <MenuItem Header="PKG Extractor" x:Name="OpenPKGExtractorMenuItem"></MenuItem>
         <MenuItem Header="PKG Merger" x:Name="OpenPKGMergerMenuItem"></MenuItem>
         <MenuItem Header="PPPwner" x:Name="OpenPPPwnerMenuItem"></MenuItem>
         <MenuItem Header="PUP Unpacker" x:Name="OpenPUPExtractorMenuItem"></MenuItem>

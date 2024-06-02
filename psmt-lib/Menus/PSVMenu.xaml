@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             d:DesignHeight="20" d:DesignWidth="300">
+             d:DesignHeight="20" d:DesignWidth="320">
     <MenuItem Header="Library"/>
     <MenuItem Header="Tools">
-        <MenuItem Header="PKG Extractor" x:Name="OpenPKGExtractor"></MenuItem>
+        <MenuItem Header="Decrypt PFS content" x:Name="OpenPFSToolsMenuItem"></MenuItem>
         <MenuItem Header="PARAM.SFO Editor" x:Name="OpenParamSFOEditorMenuItem"></MenuItem>
+        <MenuItem Header="PKG Extractor" x:Name="OpenPKGExtractor"></MenuItem>
         <MenuItem Header="RCO DataTable Extractor" x:Name="OpenRCOExtractor"></MenuItem>
         <MenuItem Header="Vita CMA Backup Image Tools" x:Name="OpenIMGTools"></MenuItem>
     </MenuItem>
@@ -82,7 +83,7 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="SUPRX">
+        <MenuItem Header="Plugins - SUPRX">
             <MenuItem Header="Download Enabler">
                 <MenuItem Header="Download" x:Name="DownloadDownloadEnabler">
                     <MenuItem.Icon>
@@ -114,6 +115,18 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="NoNpDrm">
+                <MenuItem Header="Download v1.2" x:Name="DownloadNoNpDrm">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download latest version from GitHub" x:Name="DownloadNoNpDrmGithub">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/github-mark.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="PNGShot">
                 <MenuItem Header="Download" x:Name="DownloadPNGShot">
                     <MenuItem.Icon>
@@ -126,8 +139,20 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="reF00D">
+                <MenuItem Header="Download v1.1" x:Name="DownloadreF00D">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/download.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Download latest version from GitHub" x:Name="DownloadreF00DGithub">
+                    <MenuItem.Icon>
+                        <Image Source="/Images/github-mark.png"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="USBDisable">
-                <MenuItem Header="Download" x:Name="DownloadUSBDisable">
+                <MenuItem Header="Download v3.03" x:Name="DownloadUSBDisable">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
@@ -151,7 +176,7 @@
                 </MenuItem>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="VPK">
+        <MenuItem Header="Apps - VPK">
             <MenuItem Header="Adrenaline">
                 <MenuItem Header="Download v7" x:Name="DownloadAdrenaline">
                     <MenuItem.Icon>
@@ -317,8 +342,8 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
-            <MenuItem Header="pkgj">
-                <MenuItem Header="Download v0.55" x:Name="Downloadpkgj">
+            <MenuItem Header="PKGj">
+                <MenuItem Header="Download v0.57" x:Name="Downloadpkgj">
                     <MenuItem.Icon>
                         <Image Source="/Images/download.png"/>
                     </MenuItem.Icon>
@@ -432,6 +457,35 @@
                     </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
+        </MenuItem>
+        <MenuItem Header="Game Ports - VPK">
+            <MenuItem Header="Download Blasphemous" x:Name="DownloadBlasphemousPort">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Download Cuphead" x:Name="DownloadCupheadPort">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Download Sonic Mania" x:Name="DownloadSonicManiaPort">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Download GTA Chinatown Wars" x:Name="DownloadGTACTWPort">
+                <MenuItem.Icon>
+                    <Image Source="/Images/download.png"/>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+    </MenuItem>
+    <MenuItem Header="Other">
+        <MenuItem Header="keys.bin (NoNpDrm/reF00D)" x:Name="DownloadKeys">
+            <MenuItem.Icon>
+                <Image Source="/Images/download.png"/>
+            </MenuItem.Icon>
         </MenuItem>
     </MenuItem>
 </Menu>

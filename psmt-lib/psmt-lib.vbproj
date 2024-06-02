@@ -76,14 +76,14 @@
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\..\..\Desktop\Debug\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2478.35, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2478.35\lib\net45\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2478.35, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2478.35\lib\net45\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2478.35, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2478.35\lib\net45\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -163,7 +163,9 @@
     <Compile Include="Classes\BytesConverter.vb" />
     <Compile Include="Classes\DownloadQueueItem.vb" />
     <Compile Include="Classes\MD5Hash.vb" />
+    <Compile Include="Classes\NPSPKG.vb" />
     <Compile Include="Classes\PKGDecryptor.vb" />
+    <Compile Include="Classes\PKGDownloadListViewItem.vb" />
     <Compile Include="Classes\PS5Notification.vb" />
     <Compile Include="Classes\SFONew.vb" />
     <Compile Include="Classes\SmartUtils.vb" />
@@ -215,6 +217,9 @@
     </Compile>
     <Compile Include="Menus\PSVMenu.xaml.vb">
       <DependentUpon>PSVMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PKGBrowser.xaml.vb">
+      <DependentUpon>PKGBrowser.xaml</DependentUpon>
     </Compile>
     <Compile Include="PKGInfo.xaml.vb">
       <DependentUpon>PKGInfo.xaml</DependentUpon>
@@ -273,11 +278,11 @@
     <Compile Include="Tools\PS3\PS3webMANBrowser.xaml.vb">
       <DependentUpon>PS3webMANBrowser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS4\PKGSender.xaml.vb">
-      <DependentUpon>PKGSender.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Tools\PS4\PPPwner.xaml.vb">
       <DependentUpon>PPPwner.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PS4\PS4PKGExtractor.xaml.vb">
+      <DependentUpon>PS4PKGExtractor.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS4\PSNInfo.xaml.vb">
       <DependentUpon>PSNInfo.xaml</DependentUpon>
@@ -339,6 +344,9 @@
     <Compile Include="Tools\PS5\PS5PKGMerger.xaml.vb">
       <DependentUpon>PS5PKGMerger.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PS5\PS5PKGSender.xaml.vb">
+      <DependentUpon>PS5PKGSender.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Tools\PS5\PS5RcoDumper.xaml.vb">
       <DependentUpon>PS5RcoDumper.xaml</DependentUpon>
     </Compile>
@@ -366,8 +374,8 @@
     <Compile Include="Tools\PSV\PSVIMGTools.xaml.vb">
       <DependentUpon>PSVIMGTools.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PSV\VitaRCOMage.xaml.vb">
-      <DependentUpon>VitaRCOMage.xaml</DependentUpon>
+    <Compile Include="Tools\PSV\PSVPFSTools.xaml.vb">
+      <DependentUpon>PSVPFSTools.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -429,6 +437,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Menus\PSVMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PKGBrowser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -508,11 +520,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS4\PKGSender.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Tools\PS4\PPPwner.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Tools\PS4\PS4PKGExtractor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -596,6 +608,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\PS5\PS5PKGSender.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Tools\PS5\PS5RcoDumper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -632,7 +648,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PSV\VitaRCOMage.xaml">
+    <Page Include="Tools\PSV\PSVPFSTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -685,10 +701,10 @@
     <Error Condition="!Exists('..\packages\WinSCP.6.3.3\build\WinSCP.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WinSCP.6.3.3\build\WinSCP.targets'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets'))" />
   </Target>
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
   <Import Project="..\packages\WinSCP.6.3.3\build\WinSCP.targets" Condition="Exists('..\packages\WinSCP.6.3.3\build\WinSCP.targets')" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2478.35\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets')" />
 </Project>
