@@ -3,17 +3,32 @@ Imports System.Windows.Forms
 
 Public Class MergeBinTool
 
+    Dim WithEvents BinMerge As New Process()
+
+    Private Structure CueListViewItem
+        Private _FileName As String
+
+        Public Property FileName As String
+            Get
+                Return _FileName
+            End Get
+            Set
+                _FileName = Value
+            End Set
+        End Property
+    End Structure
+
     Private Sub BrowseCUEFilesButton_Click(sender As Object, e As Windows.RoutedEventArgs) Handles BrowseCUEFilesButton.Click
         Dim OFD As New OpenFileDialog() With {.CheckFileExists = True, .Multiselect = True, .Filter = "cue files (*.cue)|*.cue"}
         If OFD.ShowDialog() = Windows.Forms.DialogResult.OK Then
 
             If OFD.FileNames.Count > 1 Then
                 For Each SelectedCUE In OFD.FileNames
-                    Dim NewCUELVItem As New ListViewItem() With {.Text = SelectedCUE}
+                    Dim NewCUELVItem As New CueListViewItem() With {.FileName = SelectedCUE}
                     CUEsListView.Items.Add(NewCUELVItem)
                 Next
             Else
-                Dim NewCUELVItem As New ListViewItem() With {.Text = OFD.FileName}
+                Dim NewCUELVItem As New CueListViewItem() With {.FileName = OFD.FileName}
                 CUEsListView.Items.Add(NewCUELVItem)
             End If
 
@@ -24,17 +39,60 @@ Public Class MergeBinTool
         If CUEsListView.SelectedItem IsNot Nothing Then
             Cursor = Windows.Input.Cursors.Wait
 
-            Dim SelectedCUEFile As ListViewItem = CType(CUEsListView.SelectedItem, ListViewItem)
-            Dim NewBaseNameTitle As String = Path.GetFileNameWithoutExtension(SelectedCUEFile.Text) + "_merged"
-            Dim OutputPath As String = Path.GetDirectoryName(SelectedCUEFile.Text)
-
-            If MergeBINs(SelectedCUEFile.Text, NewBaseNameTitle) = True Then
-                If MsgBox("The .bin files have been merged for the selected .cue file." + vbCrLf + "Open the folder ?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    Process.Start("explorer", OutputPath)
-                End If
+            If Dispatcher.CheckAccess() = False Then
+                Dispatcher.BeginInvoke(Sub() LogTextBox.Clear())
             Else
-                MsgBox("Could not merge the .bin files for the selected game.", MsgBoxStyle.Critical)
+                LogTextBox.Clear()
             End If
+
+            Dim SelectedCUEFile As CueListViewItem = CType(CUEsListView.SelectedItem, CueListViewItem)
+            Dim NewBaseNameTitle As String = Path.GetFileNameWithoutExtension(SelectedCUEFile.FileName) + "_merged"
+            Dim OutputPath As String = Path.GetDirectoryName(SelectedCUEFile.FileName)
+
+            'Set BinMerge process properties
+            BinMerge = New Process()
+            BinMerge.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\binmerge.exe"
+            BinMerge.StartInfo.Arguments = """" + SelectedCUEFile.FileName + """ " + """" + NewBaseNameTitle + """"
+            BinMerge.StartInfo.RedirectStandardOutput = True
+            BinMerge.StartInfo.RedirectStandardError = True
+            BinMerge.StartInfo.UseShellExecute = False
+            BinMerge.StartInfo.CreateNoWindow = True
+            BinMerge.EnableRaisingEvents = True
+
+            AddHandler BinMerge.OutputDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
+                                                        If Not String.IsNullOrEmpty(DataArgs.Data) Then
+                                                            'Append output log from BinMerge
+                                                            If Dispatcher.CheckAccess() = False Then
+                                                                Dispatcher.BeginInvoke(Sub()
+                                                                                           LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                           LogTextBox.ScrollToEnd()
+                                                                                       End Sub)
+                                                            Else
+                                                                LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                LogTextBox.ScrollToEnd()
+                                                            End If
+                                                        End If
+                                                    End Sub
+
+            AddHandler BinMerge.ErrorDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
+                                                       If Not String.IsNullOrEmpty(DataArgs.Data) Then
+                                                           'Append error log from BinMerge
+                                                           If Dispatcher.CheckAccess() = False Then
+                                                               Dispatcher.BeginInvoke(Sub()
+                                                                                          LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                          LogTextBox.ScrollToEnd()
+                                                                                      End Sub)
+                                                           Else
+                                                               LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                               LogTextBox.ScrollToEnd()
+                                                           End If
+                                                       End If
+                                                   End Sub
+
+            'Start BinMerge & read process output data
+            BinMerge.Start()
+            BinMerge.BeginOutputReadLine()
+            BinMerge.BeginErrorReadLine()
 
             Cursor = Windows.Input.Cursors.Arrow
         End If
@@ -46,41 +104,68 @@ Public Class MergeBinTool
         If Not CUEsListView.Items.Count = 0 Then
             Cursor = Windows.Input.Cursors.Wait
 
-            For Each CUE As ListViewItem In CUEsListView.Items
-                Dim NewBaseNameTitle As String = Path.GetFileNameWithoutExtension(CUE.Text) + "_merged"
-                If MergeBINs(CUE.Text, NewBaseNameTitle) = False Then
-                    FailCount += 1
-                End If
+            If Dispatcher.CheckAccess() = False Then
+                Dispatcher.BeginInvoke(Sub() LogTextBox.Clear())
+            Else
+                LogTextBox.Clear()
+            End If
+
+            For Each CUE As CueListViewItem In CUEsListView.Items
+                Dim NewBaseNameTitle As String = Path.GetFileNameWithoutExtension(CUE.FileName) + "_merged"
+
+                'Set BinMerge process properties
+                BinMerge = New Process()
+                BinMerge.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\binmerge.exe"
+                BinMerge.StartInfo.Arguments = """" + CUE.FileName + """ " + """" + NewBaseNameTitle + """"
+                BinMerge.StartInfo.RedirectStandardOutput = True
+                BinMerge.StartInfo.RedirectStandardError = True
+                BinMerge.StartInfo.UseShellExecute = False
+                BinMerge.StartInfo.CreateNoWindow = True
+                BinMerge.EnableRaisingEvents = True
+
+                AddHandler BinMerge.OutputDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
+                                                            If Not String.IsNullOrEmpty(DataArgs.Data) Then
+                                                                'Append output log from BinMerge
+                                                                If Dispatcher.CheckAccess() = False Then
+                                                                    Dispatcher.BeginInvoke(Sub()
+                                                                                               LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                               LogTextBox.ScrollToEnd()
+                                                                                           End Sub)
+                                                                Else
+                                                                    LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                    LogTextBox.ScrollToEnd()
+                                                                End If
+                                                            End If
+                                                        End Sub
+
+                AddHandler BinMerge.ErrorDataReceived, Sub(SenderProcess As Object, DataArgs As DataReceivedEventArgs)
+                                                           If Not String.IsNullOrEmpty(DataArgs.Data) Then
+                                                               'Append error log from BinMerge
+                                                               If Dispatcher.CheckAccess() = False Then
+                                                                   Dispatcher.BeginInvoke(Sub()
+                                                                                              LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                                              LogTextBox.ScrollToEnd()
+                                                                                          End Sub)
+                                                               Else
+                                                                   LogTextBox.AppendText(DataArgs.Data & vbCrLf)
+                                                                   LogTextBox.ScrollToEnd()
+                                                               End If
+                                                           End If
+                                                       End Sub
+
+                'Start BinMerge & read process output data
+                BinMerge.Start()
+                BinMerge.BeginOutputReadLine()
+                BinMerge.BeginErrorReadLine()
+                BinMerge.WaitForExit()
             Next
 
             Cursor = Windows.Input.Cursors.Arrow
-
-            If Not FailCount = 0 Then
-                MsgBox("Could not merge some .bin files. Please check all games.", MsgBoxStyle.Critical)
-            End If
         End If
     End Sub
 
-    Public Function MergeBINs(CueFile As String, NewBaseName As String) As Boolean
-        Using BINMerge As New Process()
-            BINMerge.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\binmerge.exe"
-            BINMerge.StartInfo.Arguments = """" + CueFile + """ " + """" + NewBaseName + """"
-            BINMerge.StartInfo.RedirectStandardOutput = True
-            BINMerge.StartInfo.RedirectStandardError = True
-            BINMerge.StartInfo.UseShellExecute = False
-            BINMerge.StartInfo.CreateNoWindow = True
-            BINMerge.Start()
-
-            'Read the output
-            Dim OutputReader As StreamReader = BINMerge.StandardOutput
-            Dim ProcessOutput As String = OutputReader.ReadToEnd()
-
-            If ProcessOutput.Contains("Wrote new cue:") Then
-                Return True
-            Else
-                Return False
-            End If
-        End Using
-    End Function
+    Private Sub BinMerge_Exited(sender As Object, e As EventArgs) Handles BinMerge.Exited
+        BinMerge.Dispose()
+    End Sub
 
 End Class

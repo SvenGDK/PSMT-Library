@@ -5,18 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PARAM.SFO Editor" Height="675" Width="1100" ResizeMode="CanMinimize" Background="#FF252525" WindowStartupLocation="CenterScreen">
+        Title="PARAM.SFO Editor" Height="685" Width="1115" ResizeMode="CanMinimize" Background="#FF252525" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Label Content="Game ID / Game Code" HorizontalAlignment="Left" Margin="23,141,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="23,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <Label Content="Title" HorizontalAlignment="Left" Margin="23,261,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="TitleTextBox" HorizontalAlignment="Left" Margin="23,295,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <Label Content="Version" HorizontalAlignment="Left" Margin="23,321,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="VerTextBox" HorizontalAlignment="Left" Margin="23,355,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <Label Content="Application Version" HorizontalAlignment="Left" Margin="23,381,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="AppVerTextBox" HorizontalAlignment="Left" Margin="23,415,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <Label Content="Parental Level" HorizontalAlignment="Left" Margin="23,441,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <ComboBox x:Name="ParentalComboBox" HorizontalAlignment="Left" Margin="23,475,0,0" VerticalAlignment="Top" Width="200" FontSize="14">
+        <TextBlock Text="Game ID / Game Code" HorizontalAlignment="Left" Margin="23,193,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="23,217,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <TextBlock Text="Title" HorizontalAlignment="Left" Margin="23,293,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="TitleTextBox" HorizontalAlignment="Left" Margin="23,317,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <TextBlock Text="Version" HorizontalAlignment="Left" Margin="23,343,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="VerTextBox" HorizontalAlignment="Left" Margin="23,367,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <TextBlock Text="Application Version" HorizontalAlignment="Left" Margin="23,393,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="AppVerTextBox" HorizontalAlignment="Left" Margin="23,417,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <TextBlock Text="Parental Level" HorizontalAlignment="Left" Margin="23,443,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <ComboBox x:Name="ParentalComboBox" HorizontalAlignment="Left" Margin="23,467,0,0" VerticalAlignment="Top" Width="275" FontSize="14">
             <ComboBoxItem Content="0"/>
             <ComboBoxItem Content="1"/>
             <ComboBoxItem Content="2"/>
@@ -30,58 +30,78 @@
             <ComboBoxItem Content="10"/>
             <ComboBoxItem Content="11"/>
         </ComboBox>
-        <Button x:Name="SaveSFOButton" Content="Save PARAM.SFO" HorizontalAlignment="Left" Margin="63,98,0,0" VerticalAlignment="Top" FontSize="14" Width="120" Height="25"/>
-        <Button x:Name="LoadSFOButton" Content="Load PARAM.SFO" HorizontalAlignment="Left" Margin="63,68,0,0" VerticalAlignment="Top" FontSize="14" Width="120" Height="25"/>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="23,505,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Left" Margin="23,539,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <TabControl x:Name="ConsolesTabControl" Margin="248,10,0,0" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Width="700" Height="627" VerticalAlignment="Top" HorizontalAlignment="Left">
+        <Button x:Name="SaveSFOButton" Content="Save PARAM.SFO" HorizontalAlignment="Left" Margin="163,49,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
+        <Button x:Name="LoadSFOButton" Content="Load PARAM.SFO" HorizontalAlignment="Left" Margin="23,49,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
+        <TextBlock Text="Category" HorizontalAlignment="Left" Margin="23,497,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Left" Margin="23,521,0,0" VerticalAlignment="Top" Width="275" FontSize="14" TextWrapping="NoWrap" Height="20"/>
+        <TabControl x:Name="ConsolesTabControl" Margin="320,10,0,0" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Width="765" Height="627" VerticalAlignment="Top" HorizontalAlignment="Left">
             <TabItem Header="PS3 Parameters" BorderBrush="{x:Null}" x:Name="PS3TabItem">
                 <Grid Background="#FF252525">
-                    <ListBox x:Name="AudioFormatsListBox" Margin="10,44,0,405" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Height="150"/>
-                    <Label Content="Supported Audio Formats" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <ListBox x:Name="VideoFormatsListBox" Margin="11,256,0,193" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" Height="150" d:ItemsSource="{d:SampleData ItemCount=5}"/>
-                    <Label Content="Supported Video Resolutions" HorizontalAlignment="Left" Margin="10,222,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <Label Content="PSP Remote Play" HorizontalAlignment="Left" Margin="11,411,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <CheckBox x:Name="RemoteEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="21,445,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton x:Name="AVCRadioButton" Content="MP4/ATRAC" HorizontalAlignment="Left" Margin="42,471,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-                    <RadioButton x:Name="SPRadioButton" Content="ACV/AAC" HorizontalAlignment="Left" Margin="42,494,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy1" Content="Background music in game" HorizontalAlignment="Left" Margin="11,199,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton x:Name="SPRadioButton_Copy" Content="480p+AVC" HorizontalAlignment="Left" Margin="42,517,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
-                    <Label Content="Warning Screens" HorizontalAlignment="Left" Margin="179,411,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy2" Content="Move Support" HorizontalAlignment="Left" Margin="192,445,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy3" Content="Move Controller" HorizontalAlignment="Left" Margin="210,468,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy4" Content="Navigation Controller" HorizontalAlignment="Left" Margin="210,491,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy5" Content="Eye" HorizontalAlignment="Left" Margin="210,514,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy6" Content="Callibration" HorizontalAlignment="Left" Margin="210,537,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy7" Content="Stereoscopic 3D Warning" HorizontalAlignment="Left" Margin="192,560,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="PS3BootableCheckBox" Content="Bootable" HorizontalAlignment="Left" Margin="415,445,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy9" Content="Install Package / PS3_EXTRA" HorizontalAlignment="Left" Margin="415,471,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="RemoteEnabled_Copy10" Content="Support Game Purchase" HorizontalAlignment="Left" Margin="415,494,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <ListBox x:Name="AudioFormatsListBox" Margin="10,34,0,417" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Height="150"/>
+                    <TextBlock Text="Supported Audio Formats" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <ListBox x:Name="VideoFormatsListBox" Margin="321,34,0,417" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" Height="150" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                    <TextBlock Text="Supported Video Resolutions" HorizontalAlignment="Left" Margin="320,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock Text="PSP Remote Play" HorizontalAlignment="Left" Margin="10,230,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <CheckBox x:Name="PS3RemoteEnabled" Content="Enabled" HorizontalAlignment="Left" Margin="20,264,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton x:Name="MP4ATRACRadioButton" Content="MP4/ATRAC" HorizontalAlignment="Left" Margin="41,290,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+                    <RadioButton x:Name="ACVAACRadioButton" Content="ACV/AAC" HorizontalAlignment="Left" Margin="41,313,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+                    <CheckBox x:Name="PS3BackgroundMusicCheckBox" Content="Background music in game" HorizontalAlignment="Left" Margin="414,336,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton x:Name="AVCRadioButton" Content="480p+AVC" HorizontalAlignment="Left" Margin="41,336,0,0" VerticalAlignment="Top" FontSize="14" Foreground="White"/>
+                    <TextBlock Text="Warning Screens" HorizontalAlignment="Left" Margin="178,230,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <CheckBox x:Name="PS3MoveSupportCheckBox" Content="Move Support" HorizontalAlignment="Left" Margin="191,264,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3MoveControllerCheckBox" Content="Move Controller" HorizontalAlignment="Left" Margin="209,287,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3NavigationControllerCheckBox" Content="Navigation Controller" HorizontalAlignment="Left" Margin="209,310,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3EyeCheckBox" Content="Eye" HorizontalAlignment="Left" Margin="209,333,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3CalibrationCheckBox" Content="Callibration" HorizontalAlignment="Left" Margin="209,356,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS33DWarningCheckBox" Content="Stereoscopic 3D Warning" HorizontalAlignment="Left" Margin="191,379,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3BootableCheckBox" Content="Bootable" HorizontalAlignment="Left" Margin="414,264,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3InstallPKGExtraCheckBox" Content="Install Package / PS3_EXTRA" HorizontalAlignment="Left" Margin="414,290,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS3SupportGamePurchaseCheckBox" Content="Support Game Purchase" HorizontalAlignment="Left" Margin="414,313,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock Text="Info: Parameters shown here are read-only in this version." HorizontalAlignment="Left" Margin="10,572,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="PS4 Parameters" BorderBrush="{x:Null}" x:Name="PS4TabItem">
                 <Grid Background="#FF252525">
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Application Type" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <ComboBox x:Name="PS4AppTypeComboBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="225"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="11,61,0,0" TextWrapping="Wrap" Text="Pub Tool Info" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <TextBox x:Name="PS4PubToolInfoTextBox" HorizontalAlignment="Left" Margin="11,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="224" Height="75"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="11,165,0,0" TextWrapping="Wrap" Text="Pub Tool Version" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <ComboBox x:Name="PS4PubToolVersionComboBox" HorizontalAlignment="Left" Margin="10,189,0,0" VerticalAlignment="Top" Width="225">
+                    <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="Application Type" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+
+                    <ComboBox x:Name="PS4AppTypeComboBox" HorizontalAlignment="Left" Margin="11,34,0,0" VerticalAlignment="Top" Width="375">
                         <ComboBoxItem Content="Not Specified"></ComboBoxItem>
                         <ComboBoxItem Content="Paid Standalone Full App"></ComboBoxItem>
                         <ComboBoxItem Content="Upgradable App"></ComboBoxItem>
                         <ComboBoxItem Content="Demo App"></ComboBoxItem>
-                        <ComboBoxItem Content="Free App"></ComboBoxItem>
+                        <ComboBoxItem Content="Freemium App"></ComboBoxItem>
                     </ComboBox>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,258,0,0" TextWrapping="Wrap" Text="App Settings" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <CheckBox x:Name="PS4InitLogoutCheckBox" Content="This app does not support the intial user's logout." HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,305,0,0" TextWrapping="Wrap" Text="Download Data Size" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <RadioButton Content="0 MB (The app does not use Download Data)" HorizontalAlignment="Left" Margin="11,329,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="64 MB (For SDK 4000 or older)" HorizontalAlignment="Left" Margin="10,352,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="128 MB (For SDK 4000 or older)" HorizontalAlignment="Left" Margin="10,375,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="256 MB" HorizontalAlignment="Left" Margin="11,398,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="512 MB" HorizontalAlignment="Left" Margin="10,421,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <RadioButton Content="1 GB" HorizontalAlignment="Left" Margin="10,444,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="11,71,0,0" TextWrapping="Wrap" Text="Pub Tool Info" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <TextBox x:Name="PS4PubToolInfoTextBox" HorizontalAlignment="Left" Margin="11,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="375" Height="100"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="397,71,0,0" TextWrapping="Wrap" Text="Pub Tool Version" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+
+                    <TextBlock HorizontalAlignment="Left" Margin="11,212,0,0" TextWrapping="Wrap" Text="App Settings (Read-only)" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <CheckBox x:Name="PS4InitLogoutCheckBox" Content="This app does not support the intial user's logout." HorizontalAlignment="Left" Margin="11,236,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="11,498,0,0" TextWrapping="Wrap" Text="Download Data Size" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <RadioButton Content="0 MB (The app does not use Download Data)" HorizontalAlignment="Left" Margin="12,522,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton Content="64 MB (For SDK 4000 or older)" HorizontalAlignment="Left" Margin="11,545,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton Content="128 MB (For SDK 4000 or older)" HorizontalAlignment="Left" Margin="11,568,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton Content="256 MB" HorizontalAlignment="Left" Margin="319,522,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton Content="512 MB" HorizontalAlignment="Left" Margin="319,545,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <RadioButton Content="1 GB" HorizontalAlignment="Left" Margin="319,568,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBox x:Name="PS4PubToolVersionTextBox" HorizontalAlignment="Left" Margin="397,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="320"/>
+                    <CheckBox x:Name="PS4ButtonAssignmentCrossButtonCheckBox" Content="Enter Button Assignment for the common dialog: Cross button" HorizontalAlignment="Left" Margin="10,259,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4PSMoveWarningDialogCheckBox" Content="Menu for Warning Dialog for PS Move is displayed in the option menu." HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS43DSupportCheckBox" Content="The application supports Stereoscopic 3D." HorizontalAlignment="Left" Margin="10,305,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4SuspendOnPSButtonCheckBox" Content="The application is suspended when PS button is pressed." HorizontalAlignment="Left" Margin="10,328,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4ButtonAssigmentSystemSoftwareCheckBox" Content="Enter Button Assignment for the common dialog: Assigned by the System Software." HorizontalAlignment="Left" Margin="10,351,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4AppOverwritesShareMenuCheckBox" Content="The application overwrites the default behavior of the Share Menu." HorizontalAlignment="Left" Margin="10,374,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4SuspendAppOnSpecResAndPSButtonCheckBox" Content="The application is suspended when the special output resolution is set and PS button is pressed." HorizontalAlignment="Left" Margin="11,397,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4HDCPEnabledCheckBox" Content="HDCP is enabled" HorizontalAlignment="Left" Margin="482,236,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4HDCPDisabledForNonGamesAppCheckBox" Content="HDCP is disabled for non games app" HorizontalAlignment="Left" Margin="482,259,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4AppSupportsVRCheckBox" Content="This Application supports PlayStation VR" HorizontalAlignment="Left" Margin="482,282,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4CPUMode6CheckBox" Content="CPU mode (6 CPU)" HorizontalAlignment="Left" Margin="482,305,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4CPUMode7CheckBox" Content="CPU mode (7 CPU)" HorizontalAlignment="Left" Margin="482,328,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4SupportsNEOModeCheckBox" Content="The application supports NEO mode (PS4 Pro)" HorizontalAlignment="Left" Margin="11,420,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4AppRequiresVRCheckBox" Content="The Application Requires PlayStation VR" HorizontalAlignment="Left" Margin="11,443,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="PS4AppSupportsHDRCheckBox" Content="This Application Supports HDR" HorizontalAlignment="Left" Margin="11,466,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock Text="Info: Parameters shown here are read-only in this version." HorizontalAlignment="Left" Margin="317,465,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="PSP Parameters" BorderBrush="{x:Null}" x:Name="PSPTabItem">
@@ -91,39 +111,43 @@
             </TabItem>
             <TabItem Header="PSV Parameters" BorderBrush="{x:Null}" x:Name="PSVTabItem">
                 <Grid Background="#FF252525">
-                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="App Shot Title" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <TextBox x:Name="AppShotTitleTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
-                    <CheckBox x:Name="VitaAddtionalContentCheckBox" Content="Enable Additional Content" HorizontalAlignment="Left" Margin="10,57,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="Title ID of share app" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <TextBox x:Name="ShareAppTitleTextBox" HorizontalAlignment="Left" Margin="10,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="App Settings" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <CheckBox x:Name="VitaUseLibLocationCheckBox" Content="Use liblocation in order to get Location" HorizontalAlignment="Left" Margin="22,171,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="VitaAppIsUpgradedableCheckBox" Content="This app is upgradable" HorizontalAlignment="Left" Margin="22,194,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="VitaDisplayInfoBarCheckBox" Content="Information bar displayed show at startup" HorizontalAlignment="Left" Margin="22,217,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="VitaColorInfoBarCheckBox" Content="Information Color Bar (White ON Black OFF)" HorizontalAlignment="Left" Margin="22,240,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="VitaAddHealthInfoCheckBox" Content="Add health warning message to software manual" HorizontalAlignment="Left" Margin="22,263,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <CheckBox x:Name="VitaUseTWDialogCheckBox" Content="Use Tw Dialog" HorizontalAlignment="Left" Margin="22,286,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,322,0,0" TextWrapping="Wrap" Text="Save Data Settings" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="22,346,0,0" TextWrapping="Wrap" Text="Save data qouta in KB :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBox x:Name="VitaSaveDataQuotaTextBox" HorizontalAlignment="Left" Margin="22,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238"/>
-                    <CheckBox x:Name="VitaEnableShareSaveCheckBox" Content="Enable share save data" HorizontalAlignment="Left" Margin="22,393,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="22,416,0,0" TextWrapping="Wrap" Text="Title ID of share app :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBox x:Name="VitaShareSaveDataTextBox" HorizontalAlignment="Left" Margin="22,440,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238"/>
-                    <CheckBox Content="Enable save data transfer" HorizontalAlignment="Left" Margin="318,351,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="318,374,0,0" TextWrapping="Wrap" Text="Title IDs of importable apps (up to 7)" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="318,398,133,143" Width="245" Height="60"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,476,0,0" TextWrapping="Wrap" Text="Game Boot Message" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
-                    <CheckBox x:Name="VitaSupportGameBootMsgCheckBox" Content="Support game boot message and/or game joining presence" HorizontalAlignment="Left" Margin="22,500,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="22,523,0,0" TextWrapping="Wrap" Text="NP Comunications ID :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-                    <TextBox x:Name="VitaNPComIDTextBox" HorizontalAlignment="Left" Margin="22,547,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="238"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="App Short Title" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <TextBox x:Name="AppShotTitleTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="250"/>
+                    <CheckBox x:Name="VitaAddtionalContentCheckBox" Content="Enable Additional Content" HorizontalAlignment="Left" Margin="265,95,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,71,0,0" TextWrapping="NoWrap" Text="Title ID of share app" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <TextBox x:Name="ShareAppTitleTextBox" HorizontalAlignment="Left" Margin="10,95,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="250"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,134,0,0" TextWrapping="NoWrap" Text="App Settings" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <CheckBox x:Name="VitaUseLibLocationCheckBox" Content="Use liblocation in order to get Location" HorizontalAlignment="Left" Margin="22,158,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="VitaAppIsUpgradedableCheckBox" Content="This app is upgradable" HorizontalAlignment="Left" Margin="22,181,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="VitaDisplayInfoBarCheckBox" Content="Information bar displayed show at startup" HorizontalAlignment="Left" Margin="22,204,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="VitaColorInfoBarCheckBox" Content="Information Color Bar (White ON Black OFF)" HorizontalAlignment="Left" Margin="22,227,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="VitaAddHealthInfoCheckBox" Content="Add health warning message to software manual" HorizontalAlignment="Left" Margin="22,250,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <CheckBox x:Name="VitaUseTWDialogCheckBox" Content="Use Tw Dialog" HorizontalAlignment="Left" Margin="22,273,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,309,0,0" TextWrapping="NoWrap" Text="Save Data Settings" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="22,333,0,0" TextWrapping="NoWrap" Text="Save data quoata in KB :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBox x:Name="VitaSaveDataQuotaTextBox" HorizontalAlignment="Left" Margin="22,357,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="238"/>
+                    <CheckBox x:Name="VitaEnableShareSaveCheckBox" Content="Enable share save data" HorizontalAlignment="Left" Margin="265,404,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="22,380,0,0" TextWrapping="NoWrap" Text="Title ID of share app :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBox x:Name="VitaShareSaveDataTextBox" HorizontalAlignment="Left" Margin="22,404,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="238"/>
+                    <CheckBox x:Name="VitaEnableSaveDataTransferCheckBox" Content="Enable save data transfer" HorizontalAlignment="Left" Margin="22,435,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="447,309,0,0" TextWrapping="NoWrap" Text="Title IDs of importable apps (up to 7)" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="463,333,43,208" Width="245" Height="60"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,463,0,0" TextWrapping="NoWrap" Text="Game Boot Message" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
+                    <CheckBox x:Name="VitaSupportGameBootMsgCheckBox" Content="Support game boot message and/or game joining presence" HorizontalAlignment="Left" Margin="22,487,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="22,510,0,0" TextWrapping="NoWrap" Text="NP Comunications ID :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+                    <TextBox x:Name="VitaNPComIDTextBox" HorizontalAlignment="Left" Margin="22,534,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="238"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="NewSFOButton" Content="New PARAM.SFO" HorizontalAlignment="Left" Margin="63,38,0,0" VerticalAlignment="Top" FontSize="14" Width="120" Height="25"/>
-        <Label Content="System Version" HorizontalAlignment="Left" Margin="23,565,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="SystemVersionTextBox" HorizontalAlignment="Left" Margin="23,599,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
-        <Label Content="Content ID" HorizontalAlignment="Left" Margin="23,201,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <TextBox x:Name="ContentIDTextBox" HorizontalAlignment="Left" Margin="23,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" FontSize="14"/>
+        <Button x:Name="NewSFOButton" Content="Create a new PARAM.SFO file" HorizontalAlignment="Left" Margin="23,19,0,0" VerticalAlignment="Top" Width="275" Height="25" FontWeight="Bold" IsEnabled="False"/>
+        <TextBlock Text="System Version (Hex Value for PS4 &amp; Vita)" HorizontalAlignment="Left" Margin="23,546,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="SystemVersionTextBox" HorizontalAlignment="Left" Margin="23,570,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <TextBlock Text="Content ID" HorizontalAlignment="Left" Margin="23,243,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <TextBox x:Name="ContentIDTextBox" HorizontalAlignment="Left" Margin="23,267,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
+        <Button x:Name="PS3ParamHelpButton" Content="PS3 PARAM Help" HorizontalAlignment="Left" Margin="23,104,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
+        <Button x:Name="PS4ParamHelpButton" Content="PS4 PARAM Help" HorizontalAlignment="Left" Margin="163,134,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
+        <Button x:Name="PSVParamHelpButton" Content="PS Vita PARAM Help" HorizontalAlignment="Left" Margin="23,134,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
+        <Button x:Name="PSPParamHelpButton" Content="PSP PARAM Help" HorizontalAlignment="Left" Margin="163,104,0,0" VerticalAlignment="Top" Width="135" Height="25" FontWeight="Bold"/>
 
     </Grid>
 </Window>

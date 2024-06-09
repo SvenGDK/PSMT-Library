@@ -5,14 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Height="200" Width="425" Background="#FF252525" ResizeMode="CanMinimize" Title="BIN/CUE to ISO Converter">
+             Height="355" Width="420" Background="#FF252525" ResizeMode="CanMinimize" Title="BIN/CUE to ISO Converter">
     <Grid>
-        <TextBox x:Name="SelectedCueOrBinTextBox" HorizontalAlignment="Left" Margin="8,34,0,0" VerticalAlignment="Top" Width="300"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="Select a .bin or .cue file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
-        <Button x:Name="BrowseButton" Content="Browse" HorizontalAlignment="Left" Margin="313,33,0,0" VerticalAlignment="Top" Width="75"/>
-        <CheckBox x:Name="IsForPSXCheckBox" Content="Convert for PS1" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" Margin="233,57,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="ConvertStatusTextBlock" HorizontalAlignment="Left" Margin="10,90,0,0" VerticalAlignment="Top" Foreground="White" FontSize="12" Width="378" Height="60"/>
+        <TextBox x:Name="SelectedCueTextBox" HorizontalAlignment="Left" Margin="8,34,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="Select a .cue file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Button x:Name="BrowseCueButton" Content="Browse" HorizontalAlignment="Left" Margin="313,33,0,0" VerticalAlignment="Top" Width="75"/>
+        <CheckBox x:Name="IsForPSXCheckBox" Content="Convert for PS1" HorizontalAlignment="Left" Margin="8,104,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="ConvertButton" Content="Convert" HorizontalAlignment="Left" Margin="233,104,0,0" VerticalAlignment="Top" Width="75" FontWeight="Bold"/>
+        <TextBox x:Name="SelectedBinTextBox" HorizontalAlignment="Left" Margin="8,81,0,0" VerticalAlignment="Top" Width="300"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,57,0,0" Text="Select the corresponding .bin file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
+        <Button x:Name="BrowseBINButton" Content="Browse" HorizontalAlignment="Left" Margin="313,80,0,0" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="LogTextBox" HorizontalAlignment="Left" Margin="10,148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="378" Height="160"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,124,0,0" TextWrapping="Wrap" Text="Log :" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
 
     </Grid>
 </Window>

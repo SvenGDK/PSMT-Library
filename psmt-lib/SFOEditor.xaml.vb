@@ -1,5 +1,5 @@
 ﻿Imports System.Windows
-Imports System.Text
+Imports System.Windows.Controls
 Imports System.Windows.Forms
 
 Public Class SFOEditor
@@ -65,104 +65,104 @@ Public Class SFOEditor
         AddVideoFormats()
     End Sub
 
-    Public Sub OpenPARAMSFO(NewParamSFO As Param_SFO.PARAM_SFO, Optional SFOFile As String = "")
-        'Clear tabs
-        ConsolesTabControl.Items.Clear()
+#Region "Help Buttons"
 
-        'Load selected PARAM.SFO
-        CurrentSFOFilePath = SFOFile
-        Dim CurrentSFOFile As Param_SFO.PARAM_SFO
-        If NewParamSFO IsNot Nothing And SFOFile = "" Then
-            CurrentSFOFile = NewParamSFO
-        ElseIf NewParamSFO Is Nothing And Not SFOFile = "" Then
-            CurrentSFOFile = New Param_SFO.PARAM_SFO(SFOFile)
-        Else
-            MsgBox("Could not open the selected PARAM.SFO file.", MsgBoxStyle.Exclamation)
-            Exit Sub
+    Private Sub PS3ParamHelpButton_Click(sender As Object, e As RoutedEventArgs) Handles PS3ParamHelpButton.Click
+        Process.Start("https://www.psdevwiki.com/ps3/PARAM.SFO")
+    End Sub
+
+    Private Sub PSPParamHelpButton_Click(sender As Object, e As RoutedEventArgs) Handles PSPParamHelpButton.Click
+        Process.Start("https://www.psdevwiki.com/psp/Param.sfo")
+    End Sub
+
+    Private Sub PSVParamHelpButton_Click(sender As Object, e As RoutedEventArgs) Handles PSVParamHelpButton.Click
+        Process.Start("https://www.psdevwiki.com/vita/System_File_Object_(SFO)_(PSF)")
+    End Sub
+
+    Private Sub PS4ParamHelpButton_Click(sender As Object, e As RoutedEventArgs) Handles PS4ParamHelpButton.Click
+        Process.Start("https://www.psdevwiki.com/ps4/Param.sfo")
+    End Sub
+
+#End Region
+
+    Private Sub LoadSFOButton_Click(sender As Object, e As RoutedEventArgs) Handles LoadSFOButton.Click
+        Dim NewOpenFileDialog As New Forms.OpenFileDialog() With {.Title = "Select a PARAM.SFO file", .Filter = "PARAM.SFO files (*.SFO)|*.SFO"}
+        If NewOpenFileDialog.ShowDialog() = Forms.DialogResult.OK Then
+            CurrentSFO = New Param_SFO.PARAM_SFO(NewOpenFileDialog.FileName)
+            CurrentSFOFilePath = NewOpenFileDialog.FileName
+
+            OpenPARAMSFO(NewOpenFileDialog.FileName)
         End If
+    End Sub
 
-        Dim SFOVer = CurrentSFOFile.PlaystationVersion
+    Public Sub OpenPARAMSFO(SFOFile As String)
+
         'Display the correct tab
+        Dim SFOVer As Param_SFO.PARAM_SFO.Playstation = CurrentSFO.PlaystationVersion
         If SFOVer = Param_SFO.PARAM_SFO.Playstation.ps3 Then
-            ConsolesTabControl.Items.Add(PS3TabItem)
             ConsolesTabControl.SelectedItem = PS3TabItem
         ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.ps4 Then
-            ConsolesTabControl.Items.Add(PS4TabItem)
             ConsolesTabControl.SelectedItem = PS4TabItem
         ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.psp Then
-            ConsolesTabControl.Items.Add(PSPTabItem)
             ConsolesTabControl.SelectedItem = PSPTabItem
         ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.psvita Then
-            ConsolesTabControl.Items.Add(PSVTabItem)
             ConsolesTabControl.SelectedItem = PSVTabItem
         End If
 
         Dim AddedParameters As New List(Of String)()
 
-        For Each TableEntry As Param_SFO.PARAM_SFO.Table In CurrentSFOFile.Tables.ToList()
-
-            If TableEntry.Name = "PUBTOOLINFO" Then
-                PS4PubToolInfoTextBox.Text = TableEntry.Value.Trim()
-                PS4PubToolInfoTextBox.Tag = TableEntry.Name
-                PS4PubToolInfoTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
-
-                AddedParameters.Add(TableEntry.Name)
-            End If
-            If TableEntry.Name = "PUBTOOLVER" Then
-                Dim value As Integer = Convert.ToInt32(TableEntry.Value)
-                Dim hexOutput As String = String.Format("{0:X}", value)
-
-                PS4PubToolVersionComboBox.Items.Add(hexOutput)
-                PS4PubToolVersionComboBox.Tag = TableEntry.Name
-                PS4PubToolVersionComboBox.SelectedIndex = 0
-
-                AddedParameters.Add(TableEntry.Name)
-            End If
+        For Each TableEntry As Param_SFO.PARAM_SFO.Table In CurrentSFO.Tables.ToList()
 
 #Region "PSV"
             If TableEntry.Name = "PSP2_SYSTEM_VER" Then
                 Dim Value As Integer = Convert.ToInt32(TableEntry.Value)
-                Dim hexOutput As String = String.Format("{0:X}", Value)
+                Dim HexOutput As String = String.Format("{0:X}", Value)
 
-                SystemVersionTextBox.Text = hexOutput
-                SystemVersionTextBox.Tag = TableEntry.Name
+                SystemVersionTextBox.Text = HexOutput
+                SystemVersionTextBox.Tag = "PSP2_SYSTEM_VER"
                 SystemVersionTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("PSP2_SYSTEM_VER")
             End If
             If TableEntry.Name = "NP_COMMUNICATION_ID" Then
                 VitaSupportGameBootMsgCheckBox.IsChecked = True
                 VitaNPComIDTextBox.Text = TableEntry.Value
+                VitaNPComIDTextBox.Tag = "NP_COMMUNICATION_ID"
                 VitaNPComIDTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("NP_COMMUNICATION_ID")
             End If
             If TableEntry.Name = "INSTALL_DIR_ADDCONT" Then
                 VitaAddtionalContentCheckBox.IsChecked = True
+
                 ShareAppTitleTextBox.Text = TableEntry.Value
+                ShareAppTitleTextBox.Tag = "INSTALL_DIR_ADDCONT"
                 ShareAppTitleTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("INSTALL_DIR_ADDCONT")
             End If
             If TableEntry.Name = "INSTALL_DIR_SAVEDATA" Then
                 VitaEnableShareSaveCheckBox.IsChecked = True
+
                 VitaShareSaveDataTextBox.Text = TableEntry.Value
+                VitaShareSaveDataTextBox.Tag = "INSTALL_DIR_SAVEDATA"
                 VitaShareSaveDataTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("INSTALL_DIR_SAVEDATA")
             End If
             If TableEntry.Name = "SAVEDATA_MAX_SIZE" Then
                 VitaSaveDataQuotaTextBox.Text = TableEntry.Value
+                VitaSaveDataQuotaTextBox.Tag = "SAVEDATA_MAX_SIZE"
                 VitaSaveDataQuotaTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("SAVEDATA_MAX_SIZE")
             End If
             If TableEntry.Name = "STITLE" Then
                 AppShotTitleTextBox.Text = TableEntry.Value
-                AppShotTitleTextBox.Tag = TableEntry.Name
+                AppShotTitleTextBox.Tag = "STITLE"
                 AppShotTitleTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("STITLE")
             End If
 #End Region
 
@@ -210,7 +210,7 @@ Public Class SFOEditor
                         DTS.IsChecked = True
                 End Select
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("SOUND_FORMAT")
             End If
             If TableEntry.Name = "RESOLUTION" Then
                 Dim Value As Integer = Convert.ToInt32(TableEntry.Value)
@@ -474,36 +474,108 @@ Public Class SFOEditor
                     Case Else
                 End Select
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("RESOLUTION")
             End If
             If TableEntry.Name = "PS3_SYSTEM_VER" Then
-                SystemVersionTextBox.Tag = TableEntry.Name
+                SystemVersionTextBox.Tag = "PS3_SYSTEM_VER"
                 SystemVersionTextBox.Text = TableEntry.Value
                 SystemVersionTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("PS3_SYSTEM_VER")
             End If
 #End Region
 
 #Region "General parameters"
             If TableEntry.Name = "TITLE_ID" Then
                 IDTextBox.Text = TableEntry.Value.Trim()
-                IDTextBox.Tag = TableEntry.Name
+                IDTextBox.Tag = "TITLE_ID"
                 IDTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("TITLE_ID")
             End If
             If TableEntry.Name = "ATTRIBUTE" Then
-                Dim Value As Integer = 0
-                Integer.TryParse(TableEntry.Value.Trim(), Value)
+                Dim Value As Integer = Convert.ToInt32(TableEntry.Value)
+                Dim HexOutput As String = String.Format("{0:X}", Value)
 
                 If SFOVer = Param_SFO.PARAM_SFO.Playstation.ps4 Then
-                    Select Case Value
-                        Case 0
-                            PS4InitLogoutCheckBox.IsChecked = True
-                        Case 1
-                            PS4InitLogoutCheckBox.IsChecked = False
-                    End Select
+                    Dim SplittedHex As IEnumerable(Of String) = Enumerable.Range(0, HexOutput.Length \ 2).[Select](Function(i) HexOutput.Substring(i * 2, 2))
+                    'Not sure about this, cannot determine how the Attribute parameter is setup on PS4
+                    If SplittedHex.Count <= 3 Then
+                        Select Case SplittedHex(0)
+                            Case "01"
+
+                            Case "02"
+
+                            Case "04"
+                                PS4AppRequiresVRCheckBox.IsChecked = True
+                            Case "08"
+
+                            Case "10"
+
+                            Case "20"
+                                PS4AppSupportsHDRCheckBox.IsChecked = True
+                            Case "40"
+
+                            Case "80"
+                                'Display location
+                        End Select
+
+                        Select Case SplittedHex(1)
+                            Case "01"
+                                PS4CPUMode7CheckBox.IsChecked = True
+                            Case "02"
+
+                            Case "04"
+
+                            Case "08"
+
+                            Case "10"
+
+                            Case "20"
+
+                            Case "40"
+
+                            Case "80"
+                                PS4SupportsNEOModeCheckBox.IsChecked = True
+                        End Select
+
+                        Select Case SplittedHex(2)
+                            Case "01"
+                                PS4SuspendAppOnSpecResAndPSButtonCheckBox.IsChecked = True
+                            Case "02"
+                                PS4HDCPEnabledCheckBox.IsChecked = True
+                            Case "04"
+                                PS4HDCPDisabledForNonGamesAppCheckBox.IsChecked = True
+                            Case "08"
+
+                            Case "10"
+
+                            Case "20"
+
+                            Case "40"
+                                PS4AppSupportsVRCheckBox.IsChecked = True
+                            Case "80"
+                                PS4CPUMode6CheckBox.IsChecked = True
+                        End Select
+
+                        Select Case SplittedHex(3)
+                            Case "01"
+                                PS4InitLogoutCheckBox.IsChecked = True
+                            Case "02"
+                                PS4ButtonAssignmentCrossButtonCheckBox.IsChecked = True
+                            Case "04"
+                                PS4PSMoveWarningDialogCheckBox.IsChecked = True
+                            Case "08"
+                                PS43DSupportCheckBox.IsChecked = True
+                            Case "10"
+                                PS4SuspendOnPSButtonCheckBox.IsChecked = True
+                            Case "20"
+                                PS4ButtonAssigmentSystemSoftwareCheckBox.IsChecked = True
+                            Case "40"
+                                PS4AppOverwritesShareMenuCheckBox.IsChecked = True
+                            Case "80"
+                        End Select
+                    End If
                 ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.psvita Then
                     Select Case Value
                         Case 2
@@ -547,7 +619,11 @@ Public Class SFOEditor
                             VitaAddHealthInfoCheckBox.IsChecked = True
                             VitaUseTWDialogCheckBox.IsChecked = True
                     End Select
+                ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.ps3 Then
+
                 End If
+
+                AddedParameters.Add("ATTRIBUTE")
             End If
             If TableEntry.Name = "BOOTABLE" Then
                 If SFOVer = Param_SFO.PARAM_SFO.Playstation.ps3 Then
@@ -578,207 +654,150 @@ Public Class SFOEditor
             End If
             If TableEntry.Name = "CONTENT_ID" Then
                 ContentIDTextBox.Text = TableEntry.Value.Trim()
-                ContentIDTextBox.Tag = TableEntry.Name
+                ContentIDTextBox.Tag = "CONTENT_ID"
                 ContentIDTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("CONTENT_ID")
             End If
             If TableEntry.Name = "TITLE" Then
                 TitleTextBox.Text = TableEntry.Value.Trim()
-                TitleTextBox.Tag = TableEntry.Name
+                TitleTextBox.Tag = "TITLE"
                 TitleTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("TITLE")
             End If
             If TableEntry.Name = "CATEGORY" Then
-                If SFOVer = Param_SFO.PARAM_SFO.Playstation.ps4 Or SFOVer = Param_SFO.PARAM_SFO.Playstation.psvita Then
-                    Dim hex As String = BitConverter.ToString(TableEntry.ValueBuffer, 0, Convert.ToInt32(TableEntry.Indextable.param_data_max_len)).ToString().Replace("-", String.Empty)
-                    Dim temp As String = Convert.ToInt32(hex).ToString("X4")
-                    Dim stringtemp = Encoding.ASCII.GetString(TableEntry.ValueBuffer).Replace("\0", "")
-
-                    CategoryTextBox.Text = CType(Convert.ToInt32(hex), Param_SFO.PARAM_SFO.DataTypes).ToString()
-                ElseIf SFOVer = Param_SFO.PARAM_SFO.Playstation.ps3 Then
-                    CategoryTextBox.Text = CType(BitConverter.ToUInt16(Encoding.UTF8.GetBytes(TableEntry.Value), 0).ToString(), Param_SFO.PARAM_SFO.DataTypes).ToString
-                Else
-                    CategoryTextBox.Text = TableEntry.Value.ToString()
-                End If
-
-                CategoryTextBox.Tag = TableEntry.Name
+                CategoryTextBox.Text = TableEntry.Value.Trim()
+                CategoryTextBox.Tag = "CATEGORY"
                 CategoryTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("CATEGORY")
             End If
             If TableEntry.Name = "APP_VER" Then
                 AppVerTextBox.Text = TableEntry.Value.Trim()
-                AppVerTextBox.Tag = TableEntry.Name
+                AppVerTextBox.Tag = "APP_VER"
                 AppVerTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
-            End If
-            If TableEntry.Name = "APP_TYPE" Then
-                PS4AppTypeComboBox.Tag = TableEntry.Name
-                PS4AppTypeComboBox.SelectedIndex = Convert.ToInt32(TableEntry.Value)
-
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("APP_VER")
             End If
             If TableEntry.Name = "VERSION" Then
                 VerTextBox.Text = TableEntry.Value.Trim()
-                VerTextBox.Tag = TableEntry.Name
+                VerTextBox.Tag = "VERSION"
                 VerTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("VERSION")
             End If
             If TableEntry.Name = "PARENTAL_LEVEL" Then
-                If TableEntry.Value = "" Then
-                    ParentalComboBox.SelectedIndex = 0
-                Else
-                    ParentalComboBox.Tag = TableEntry.Name
-                    ParentalComboBox.SelectedIndex = Convert.ToInt32(TableEntry.Value)
+                If Not String.IsNullOrEmpty(TableEntry.Value) Then
+                    ParentalComboBox.Tag = "PARENTAL_LEVEL"
 
-                    AddedParameters.Add(TableEntry.Name)
+                    Select Case TableEntry.Value
+                        Case "0"
+                            ParentalComboBox.SelectedIndex = 0
+                        Case "1"
+                            ParentalComboBox.SelectedIndex = 1
+                        Case "2"
+                            ParentalComboBox.SelectedIndex = 2
+                        Case "3"
+                            ParentalComboBox.SelectedIndex = 3
+                        Case "4"
+                            ParentalComboBox.SelectedIndex = 4
+                        Case "5"
+                            ParentalComboBox.SelectedIndex = 5
+                        Case "6"
+                            ParentalComboBox.SelectedIndex = 6
+                        Case "7"
+                            ParentalComboBox.SelectedIndex = 7
+                        Case "8"
+                            ParentalComboBox.SelectedIndex = 8
+                        Case "9"
+                            ParentalComboBox.SelectedIndex = 9
+                        Case "10"
+                            ParentalComboBox.SelectedIndex = 10
+                        Case "11"
+                            ParentalComboBox.SelectedIndex = 11
+                        Case Else
+                            ParentalComboBox.SelectedIndex = 0
+                    End Select
+
+                    AddedParameters.Add("PARENTAL_LEVEL")
+                Else
+                    ParentalComboBox.SelectedIndex = 0
                 End If
             End If
 #End Region
 
 #Region "PS4"
+            If TableEntry.Name = "APP_TYPE" Then
+                PS4AppTypeComboBox.Tag = "APP_TYPE"
+
+                Select Case TableEntry.Value
+                    Case "0"
+                        PS4AppTypeComboBox.SelectedIndex = 0
+                    Case "1"
+                        PS4AppTypeComboBox.SelectedIndex = 1
+                    Case "2"
+                        PS4AppTypeComboBox.SelectedIndex = 2
+                    Case "3"
+                        PS4AppTypeComboBox.SelectedIndex = 3
+                    Case "4"
+                        PS4AppTypeComboBox.SelectedIndex = 4
+                End Select
+
+                AddedParameters.Add("APP_TYPE")
+            End If
+            If TableEntry.Name = "PUBTOOLINFO" Then
+                PS4PubToolInfoTextBox.Text = TableEntry.Value
+                PS4PubToolInfoTextBox.Tag = "PUBTOOLINFO"
+
+                AddedParameters.Add("PUBTOOLINFO")
+            End If
+            If TableEntry.Name = "PUBTOOLVER" Then
+                Dim value As Integer = Convert.ToInt32(TableEntry.Value)
+                Dim hexOutput As String = String.Format("{0:X}", value)
+
+                PS4PubToolVersionTextBox.Text = hexOutput
+                PS4PubToolVersionTextBox.Tag = "PUBTOOLVER"
+
+                AddedParameters.Add("PUBTOOLVER")
+            End If
             If TableEntry.Name = "SYSTEM_VER" Then
                 Dim Value As Integer = Convert.ToInt32(TableEntry.Value)
-                Dim hexOutput As String = String.Format("{0:X}", Value)
+                Dim HexOutput As String = String.Format("{0:X}", Value)
 
-                SystemVersionTextBox.Text = TableEntry.Value
-                SystemVersionTextBox.Tag = TableEntry.Name
-                SystemVersionTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
+                SystemVersionTextBox.Text = HexOutput
+                SystemVersionTextBox.Tag = "SYSTEM_VER"
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("SYSTEM_VER")
             End If
 #End Region
 
 #Region "PSP"
             If TableEntry.Name = "PSP_SYSTEM_VER" Then
-                SystemVersionTextBox.Tag = TableEntry.Name
+                SystemVersionTextBox.Tag = "PSP_SYSTEM_VER"
                 SystemVersionTextBox.Text = TableEntry.Value
                 SystemVersionTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("PSP_SYSTEM_VER")
             End If
             If TableEntry.Name = "DISC_VERSION" Then
                 VerTextBox.Text = TableEntry.Value.Trim()
-                VerTextBox.Tag = TableEntry.Name
+                VerTextBox.Tag = "DISC_VERSION"
                 VerTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("DISC_VERSION")
             End If
             If TableEntry.Name = "DISC_ID" Then
                 IDTextBox.Text = TableEntry.Value.Trim()
-                IDTextBox.Tag = TableEntry.Name
+                IDTextBox.Tag = "DISC_ID"
                 IDTextBox.MaxLength = Convert.ToInt32(TableEntry.Indextable.param_data_max_len)
 
-                AddedParameters.Add(TableEntry.Name)
+                AddedParameters.Add("DISC_ID")
             End If
 #End Region
 
-
         Next
 
-    End Sub
-
-    Private Sub LoadSFOButton_Click(sender As Object, e As RoutedEventArgs) Handles LoadSFOButton.Click
-        Dim NewOpenFileDialog As New Forms.OpenFileDialog() With {.Title = "Select a PARAM.SFO file", .Filter = "PARAM.SFO files (*.SFO)|*.SFO"}
-        If NewOpenFileDialog.ShowDialog() = Forms.DialogResult.OK Then
-            OpenPARAMSFO(Nothing, NewOpenFileDialog.FileName)
-            CurrentSFO = New Param_SFO.PARAM_SFO(NewOpenFileDialog.FileName)
-            CurrentSFOFilePath = NewOpenFileDialog.FileName
-        End If
-    End Sub
-
-    Private Sub IDTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles IDTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = "TITLE_ID" Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = IDTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub ContentIDTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles ContentIDTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = "CONTENT_ID" Then
-                Dim tempitem = CurrentSFO.Tables(i)
-                tempitem.Value = ContentIDTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = tempitem
-            End If
-        Next
-    End Sub
-
-    Private Sub TitleTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles TitleTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = "TITLE" Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = TitleTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub VerTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles VerTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = VerTextBox.Tag.ToString() Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = VerTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub AppVerTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles AppVerTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = AppVerTextBox.Tag.ToString() Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = AppVerTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub ParentalComboBox_SelectionChanged(sender As Object, e As Controls.SelectionChangedEventArgs) Handles ParentalComboBox.SelectionChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = ParentalComboBox.Tag.ToString() Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = ParentalComboBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub CategoryTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles CategoryTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = "CATEGORY" Then
-                Dim tempitem = CurrentSFO.Tables(i)
-                tempitem.Value = CategoryTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = tempitem
-            End If
-        Next
-    End Sub
-
-    Private Sub SystemVersionTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles SystemVersionTextBox.TextChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = "SYSTEM_VER" OrElse CurrentSFO.Tables(i).Name = "PS3_SYSTEM_VER" Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = SystemVersionTextBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
-    End Sub
-
-    Private Sub PS4AppTypeComboBox_SelectionChanged(sender As Object, e As Controls.SelectionChangedEventArgs) Handles PS4AppTypeComboBox.SelectionChanged
-        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-            If CurrentSFO.Tables(i).Name = PS4AppTypeComboBox.Tag.ToString() Then
-                Dim TempItem = CurrentSFO.Tables(i)
-                TempItem.Value = PS4AppTypeComboBox.Text.Trim()
-                CurrentSFO.Tables(i) = TempItem
-            End If
-        Next
     End Sub
 
     Public Function AddNewParam(Index As Integer, Name As String, Value As String, Format As Param_SFO.PARAM_SFO.FMT, Lenght As Integer, MaxLength As Integer, ParamTable As List(Of Param_SFO.PARAM_SFO.Table)) As List(Of Param_SFO.PARAM_SFO.Table)
@@ -789,10 +808,9 @@ Public Class SFOEditor
     End Function
 
     Private Sub NewSFOButton_Click(sender As Object, e As RoutedEventArgs) Handles NewSFOButton.Click
-
         Dim NewSFOType As String = ""
 
-        If NewSFOType = "PS4" Or NewSFOType = "PSV" Then
+        If NewSFOType = "PS4" Then
             Dim ParamTables As New List(Of Param_SFO.PARAM_SFO.Table)()
             Dim NewItemIndex As Integer = 0
 
@@ -832,50 +850,981 @@ Public Class SFOEditor
             CurrentSFO.Tables = ParamTables
         End If
 
-        OpenPARAMSFO(CurrentSFO)
-
+        'OpenPARAMSFO(CurrentSFO)
     End Sub
 
     Private Sub SaveSFOButton_Click(sender As Object, e As RoutedEventArgs) Handles SaveSFOButton.Click
         Dim SFD As New SaveFileDialog With {.Filter = "PARAM.SFO (PARAM.SFO)|PARAM.SFO", .DefaultExt = "SFO", .AddExtension = True}
         If SFD.ShowDialog() = Forms.DialogResult.OK Then
 
-            If CurrentSFO.PlaystationVersion = Param_SFO.PARAM_SFO.Playstation.ps4 Then
-                Dim PubInfo As Boolean = False
-                Dim PubVer As Boolean = False
-                Dim NewItemIndex As Integer = 0
-
-                For i As Integer = 0 To CurrentSFO.Tables.Count - 1
-                    If CurrentSFO.Tables(i).Name = "PUBTOOLINFO" Then
-                        PubInfo = True
-                    End If
-                    If CurrentSFO.Tables(i).Name = "PUBTOOLVER" Then
-                        PubVer = True
-                    End If
-                Next
-
-                NewItemIndex = CurrentSFO.Tables.Count
-
-                If PubInfo = False Then
-                    NewItemIndex += 1
-                    AddNewParam(NewItemIndex, "PUBTOOLINFO", "c_date=20180504,sdk_ver=04008000,st_type=digital50,snd0_loud=-25.56,img0_l0_size=1032,img0_l1_size=0,img0_sc_ksize=4608,img0_pc_ksize=1344", Param_SFO.PARAM_SFO.FMT.Utf8Null, 139, 512, CurrentSFO.Tables)
-                End If
-                If PubVer = False Then
-                    NewItemIndex += 1
-                    AddNewParam(NewItemIndex, "PUBTOOLVER", "2890000", Param_SFO.PARAM_SFO.FMT.UINT32, 4, 4, CurrentSFO.Tables)
-                End If
-            End If
-
-            Dim SortedList = CurrentSFO.Tables.OrderBy(Function(o) o.Name).ToList()
-            For i As Integer = 0 To SortedList.Count - 1
-                Dim temp = SortedList(i)
-                temp.index = i
-                SortedList(i) = temp
+            'Debug
+            For Each tableval As Param_SFO.PARAM_SFO.Table In CurrentSFO.Tables()
+                MsgBox("Table Name: " + tableval.Name + vbCrLf +
+                       "Value: " + tableval.Value + vbCrLf +
+                       "Param Lenght: " + tableval.Indextable.param_data_len.ToString() + vbCrLf +
+                       "Param Max Lenght: " + tableval.Indextable.param_data_max_len.ToString())
             Next
-            CurrentSFO.Tables = SortedList
 
             CurrentSFO.SaveSFO(CurrentSFO, SFD.FileName)
         End If
     End Sub
+
+#Region "General Value Changes"
+
+    Private Sub IDTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles IDTextBox.TextChanged
+        If Not String.IsNullOrEmpty(IDTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "TITLE_ID" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(IDTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = IDTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(IDTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub ContentIDTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles ContentIDTextBox.TextChanged
+        If Not String.IsNullOrEmpty(ContentIDTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "CONTENT_ID" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(ContentIDTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Content ID is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = ContentIDTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(ContentIDTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub TitleTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles TitleTextBox.TextChanged
+        If Not String.IsNullOrEmpty(TitleTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "TITLE" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(TitleTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = TitleTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(TitleTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VerTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles VerTextBox.TextChanged
+        If Not String.IsNullOrEmpty(VerTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "VERSION" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VerTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Version value is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VerTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VerTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub AppVerTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles AppVerTextBox.TextChanged
+        If Not String.IsNullOrEmpty(AppVerTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "APP_VER" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(AppVerTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("App Version value is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = AppVerTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(AppVerTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub ParentalComboBox_SelectionChanged(sender As Object, e As Controls.SelectionChangedEventArgs) Handles ParentalComboBox.SelectionChanged
+        If ParentalComboBox.SelectedItem IsNot Nothing Then
+            'Double check selected value
+            Dim SelectedCBItem As Controls.ComboBoxItem = CType(ParentalComboBox.SelectedItem, Controls.ComboBoxItem)
+
+            If Not String.IsNullOrEmpty(SelectedCBItem.Content.ToString()) Then
+                Dim SelectedValue As String = SelectedCBItem.Content.ToString()
+
+                For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                    If CurrentSFO.Tables(i).Name = "PARENTAL_LEVEL" Then
+                        Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                        If CUInt(SelectedValue.Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                            MsgBox("Parental Level value is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                            Exit For
+                        Else
+                            TempTableItem.Value = SelectedValue
+                            TempTableItem.Indextable.param_data_len = CUInt(SelectedValue.Length)
+                            TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                            CurrentSFO.Tables(i) = TempTableItem
+                            Exit For
+                        End If
+
+                    End If
+                Next
+
+            Else
+                MsgBox("Could not determine the Parental Level value, please re-select it and try again.", MsgBoxStyle.Exclamation, "Error")
+            End If
+        End If
+    End Sub
+
+    Private Sub CategoryTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles CategoryTextBox.TextChanged
+        If Not String.IsNullOrEmpty(CategoryTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "CATEGORY" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(CategoryTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Category value is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = CategoryTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(CategoryTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub SystemVersionTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles SystemVersionTextBox.TextChanged
+        If Not String.IsNullOrEmpty(SystemVersionTextBox.Text) Then
+
+            Dim SystemVersionParam As String = ""
+            Select Case CurrentSFO.PlaystationVersion
+                Case Param_SFO.PARAM_SFO.Playstation.psp
+                    SystemVersionParam = "PSP_SYSTEM_VER"
+                Case Param_SFO.PARAM_SFO.Playstation.ps3
+                    SystemVersionParam = "PS3_SYSTEM_VER"
+                Case Param_SFO.PARAM_SFO.Playstation.psvita
+                    SystemVersionParam = "PSP2_SYSTEM_VER"
+                Case Param_SFO.PARAM_SFO.Playstation.ps4
+                    SystemVersionParam = "SYSTEM_VER"
+            End Select
+
+            If Not String.IsNullOrEmpty(SystemVersionParam) Then
+                For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+
+                    If CurrentSFO.Tables(i).Name = SystemVersionParam Then
+                        Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                        Select Case CurrentSFO.PlaystationVersion
+                            Case Param_SFO.PARAM_SFO.Playstation.psp, Param_SFO.PARAM_SFO.Playstation.ps3
+                                TempTableItem.Value = SystemVersionTextBox.Text.Trim()
+                                TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                                TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                                CurrentSFO.Tables(i) = TempTableItem
+                                Exit For
+                            Case Param_SFO.PARAM_SFO.Playstation.psvita, Param_SFO.PARAM_SFO.Playstation.ps4
+                                'Convert given hex string back (Vita & PS4)
+                                Dim NewSystemVersionValue As String = CInt("&H" + SystemVersionTextBox.Text).ToString()
+
+                                TempTableItem.Value = NewSystemVersionValue.Trim()
+                                TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                                TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                                CurrentSFO.Tables(i) = TempTableItem
+                                Exit For
+                        End Select
+
+                    End If
+                Next
+            End If
+
+        End If
+    End Sub
+
+#End Region
+
+#Region "PSP Value Changes"
+
+    Private Sub PSPBootableCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles PSPBootableCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "BOOTABLE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                TempTableItem.Value = "1"
+                TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                CurrentSFO.Tables(i) = TempTableItem
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub PSPBootableCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles PSPBootableCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "BOOTABLE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                TempTableItem.Value = "0"
+                TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                CurrentSFO.Tables(i) = TempTableItem
+                Exit For
+            End If
+        Next
+    End Sub
+
+#End Region
+
+#Region "PS3 Value Changes"
+
+    Private Function GetPS3AttributeValue() As String
+        Return "0"
+    End Function
+
+    Private Sub PS3BackgroundMusicCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles PS3BackgroundMusicCheckBox.Checked
+
+    End Sub
+
+    Private Sub PS3BackgroundMusicCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles PS3BackgroundMusicCheckBox.Unchecked
+
+    End Sub
+
+    Private Sub PS3RemoteEnabled_Checked(sender As Object, e As RoutedEventArgs) Handles PS3RemoteEnabled.Checked
+
+    End Sub
+
+    Private Sub PS3RemoteEnabled_Unchecked(sender As Object, e As RoutedEventArgs) Handles PS3RemoteEnabled.Unchecked
+
+    End Sub
+
+#End Region
+
+#Region "PS4 Value Changes"
+
+    Private Function GetPS4AttributeValue() As String
+        Return "0"
+    End Function
+
+    Private Sub PS4AppTypeComboBox_SelectionChanged(sender As Object, e As SelectionChangedEventArgs) Handles PS4AppTypeComboBox.SelectionChanged
+        If ParentalComboBox.SelectedItem IsNot Nothing Then
+            'Double check selected value
+            Dim SelectedCBItem As Controls.ComboBoxItem = CType(PS4AppTypeComboBox.SelectedItem, Controls.ComboBoxItem)
+
+            If Not String.IsNullOrEmpty(SelectedCBItem.Content.ToString()) Then
+                Dim SelectedValue As String = SelectedCBItem.Content.ToString()
+                Dim NewAppTypeValue As String = ""
+                Select Case SelectedValue
+                    Case "Not Specified"
+                        NewAppTypeValue = "0"
+                    Case "Paid Standalone Full App"
+                        NewAppTypeValue = "1"
+                    Case "Upgradable App"
+                        NewAppTypeValue = "2"
+                    Case "Demo App"
+                        NewAppTypeValue = "3"
+                    Case "Freemium App"
+                        NewAppTypeValue = "4"
+                End Select
+
+                If Not String.IsNullOrEmpty(NewAppTypeValue) Then
+                    For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                        If CurrentSFO.Tables(i).Name = "APP_TYPE" Then
+                            Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                            TempTableItem.Value = NewAppTypeValue
+                            TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                            TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                            CurrentSFO.Tables(i) = TempTableItem
+                            Exit For
+
+                        End If
+                    Next
+                End If
+
+            End If
+        End If
+    End Sub
+
+    Private Sub PS4PubToolInfoTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles PS4PubToolInfoTextBox.TextChanged
+        If Not String.IsNullOrEmpty(PS4PubToolInfoTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "PUBTOOLINFO" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    TempTableItem.Value = PS4PubToolInfoTextBox.Text
+                    TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                    TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                    CurrentSFO.Tables(i) = TempTableItem
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub PS4PubToolVersionTextBox_TextChanged(sender As Object, e As Controls.TextChangedEventArgs) Handles PS4PubToolVersionTextBox.TextChanged
+        If Not String.IsNullOrEmpty(PS4PubToolVersionTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "PUBTOOLVER" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                    Dim NewPubToolVersionValue As String = CInt("&H" + PS4PubToolVersionTextBox.Text).ToString()
+
+                    TempTableItem.Value = NewPubToolVersionValue.Trim()
+                    TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                    TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                    CurrentSFO.Tables(i) = TempTableItem
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+#End Region
+
+#Region "PS Vita Value Changes"
+
+    Private Sub AppShotTitleTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles AppShotTitleTextBox.TextChanged
+        If Not String.IsNullOrEmpty(AppShotTitleTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "STITLE" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(AppShotTitleTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Short Title is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = AppShotTitleTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(AppShotTitleTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaAddtionalContentCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaAddtionalContentCheckBox.Checked
+        If Not String.IsNullOrEmpty(ShareAppTitleTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_ADDCONT" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(ShareAppTitleTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID of share app is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = ShareAppTitleTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(ShareAppTitleTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaAddtionalContentCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaAddtionalContentCheckBox.Unchecked
+        If Not String.IsNullOrEmpty(ShareAppTitleTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_ADDCONT" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    TempTableItem.Value = ""
+                    TempTableItem.Indextable.param_data_len = 0
+                    TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                    CurrentSFO.Tables(i) = TempTableItem
+                    Exit For
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub ShareAppTitleTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles ShareAppTitleTextBox.TextChanged
+        If Not String.IsNullOrEmpty(ShareAppTitleTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_ADDCONT" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(ShareAppTitleTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID of share app is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = ShareAppTitleTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(ShareAppTitleTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Function GetVitaAttributeValue() As String
+        If VitaUseLibLocationCheckBox.IsChecked AndAlso VitaDisplayInfoBarCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked AndAlso VitaAddHealthInfoCheckBox.IsChecked AndAlso VitaUseTWDialogCheckBox.IsChecked Then
+            Return "35652994"
+            Exit Function
+        ElseIf VitaUseLibLocationCheckBox.IsChecked AndAlso VitaDisplayInfoBarCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked AndAlso VitaAddHealthInfoCheckBox.IsChecked AndAlso VitaUseTWDialogCheckBox.IsChecked Then
+            Return "35652992"
+            Exit Function
+        ElseIf VitaUseLibLocationCheckBox.IsChecked AndAlso VitaDisplayInfoBarCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked Then
+            Return "386"
+            Exit Function
+        ElseIf VitaUseLibLocationCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked Then
+            Return "1026"
+            Exit Function
+        ElseIf VitaDisplayInfoBarCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked Then
+            Return "384"
+            Exit Function
+        ElseIf VitaUseLibLocationCheckBox.IsChecked AndAlso VitaColorInfoBarCheckBox.IsChecked Then
+            Return "258"
+            Exit Function
+        ElseIf VitaUseLibLocationCheckBox.IsChecked AndAlso VitaDisplayInfoBarCheckBox.IsChecked Then
+            Return "130"
+            Exit Function
+        ElseIf VitaUseTWDialogCheckBox.IsChecked Then
+            Return "33554432"
+            Exit Function
+        ElseIf VitaAddHealthInfoCheckBox.IsChecked Then
+            Return "2097152"
+            Exit Function
+        ElseIf VitaAppIsUpgradedableCheckBox.IsChecked Then
+            Return "1024"
+            Exit Function
+        ElseIf VitaColorInfoBarCheckBox.IsChecked Then
+            Return "256"
+            Exit Function
+        ElseIf VitaDisplayInfoBarCheckBox.IsChecked Then
+            Return "128"
+            Exit Function
+        Else
+            Return "0"
+            Exit Function
+        End If
+    End Function
+
+    Private Sub VitaUseLibLocationCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaUseLibLocationCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    If NewAttributeValue.Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaUseLibLocationCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaUseLibLocationCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaAppIsUpgradedableCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaAppIsUpgradedableCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaAppIsUpgradedableCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaAppIsUpgradedableCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaDisplayInfoBarCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaDisplayInfoBarCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaDisplayInfoBarCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaDisplayInfoBarCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaColorInfoBarCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaColorInfoBarCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaColorInfoBarCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaColorInfoBarCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaAddHealthInfoCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaAddHealthInfoCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaAddHealthInfoCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaAddHealthInfoCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaUseTWDialogCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaUseTWDialogCheckBox.Checked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    MsgBox(NewAttributeValue)
+                    If NewAttributeValue.Trim().Length > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CurrentSFO.Tables(i).Indextable.param_data_len
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaUseTWDialogCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaUseTWDialogCheckBox.Unchecked
+        For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+            If CurrentSFO.Tables(i).Name = "ATTRIBUTE" Then
+                Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+                Dim NewAttributeValue As String = GetVitaAttributeValue()
+
+                If Not String.IsNullOrEmpty(NewAttributeValue) Then
+                    If CUInt(NewAttributeValue.Trim().Length) > "2147483648".Length Then
+                        MsgBox("Attribute value is too high." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = NewAttributeValue.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(NewAttributeValue.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+                End If
+
+            End If
+        Next
+    End Sub
+
+    Private Sub VitaSaveDataQuotaTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles VitaSaveDataQuotaTextBox.TextChanged
+        If Not String.IsNullOrEmpty(VitaSaveDataQuotaTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "SAVEDATA_MAX_SIZE" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaSaveDataQuotaTextBox.Text.Trim().Length) > Convert.ToInt32(CurrentSFO.Tables(i).Indextable.param_data_max_len) Then
+                        MsgBox("Save Data Quota is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VitaSaveDataQuotaTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VitaSaveDataQuotaTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaEnableShareSaveCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaEnableShareSaveCheckBox.Checked
+        If Not String.IsNullOrEmpty(VitaShareSaveDataTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_SAVEDATA" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaShareSaveDataTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID of share app is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VitaShareSaveDataTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VitaShareSaveDataTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaEnableShareSaveCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaEnableShareSaveCheckBox.Unchecked
+        If Not String.IsNullOrEmpty(VitaShareSaveDataTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_SAVEDATA" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaShareSaveDataTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID of share app is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = ""
+                        TempTableItem.Indextable.param_data_len = 0
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaShareSaveDataTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles VitaShareSaveDataTextBox.TextChanged
+        If Not String.IsNullOrEmpty(VitaShareSaveDataTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "INSTALL_DIR_SAVEDATA" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaShareSaveDataTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("Title ID of share app is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VitaShareSaveDataTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VitaShareSaveDataTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaSupportGameBootMsgCheckBox_Checked(sender As Object, e As RoutedEventArgs) Handles VitaSupportGameBootMsgCheckBox.Checked
+        If Not String.IsNullOrEmpty(VitaNPComIDTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "NP_COMMUNICATION_ID" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaNPComIDTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("NP Comunications ID is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VitaNPComIDTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VitaNPComIDTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaSupportGameBootMsgCheckBox_Unchecked(sender As Object, e As RoutedEventArgs) Handles VitaSupportGameBootMsgCheckBox.Unchecked
+        If Not String.IsNullOrEmpty(VitaNPComIDTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "NP_COMMUNICATION_ID" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaNPComIDTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("NP Comunications ID is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = ""
+                        TempTableItem.Indextable.param_data_len = 0
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub VitaNPComIDTextBox_TextChanged(sender As Object, e As TextChangedEventArgs) Handles VitaNPComIDTextBox.TextChanged
+        If Not String.IsNullOrEmpty(VitaNPComIDTextBox.Text) Then
+            For i As Integer = 0 To CurrentSFO.Tables.Count - 1
+                If CurrentSFO.Tables(i).Name = "NP_COMMUNICATION_ID" Then
+                    Dim TempTableItem As Param_SFO.PARAM_SFO.Table = CurrentSFO.Tables(i)
+
+                    If CUInt(VitaNPComIDTextBox.Text.Trim().Length) > CurrentSFO.Tables(i).Indextable.param_data_max_len Then
+                        MsgBox("NP Comunications ID is too long." + vbCrLf + "Max lenght: " + CurrentSFO.Tables(i).Indextable.param_data_max_len.ToString(), MsgBoxStyle.Critical, "Error")
+                        Exit For
+                    Else
+                        TempTableItem.Value = VitaNPComIDTextBox.Text.Trim()
+                        TempTableItem.Indextable.param_data_len = CUInt(VitaNPComIDTextBox.Text.Trim().Length)
+                        TempTableItem.Indextable.param_data_max_len = CurrentSFO.Tables(i).Indextable.param_data_max_len
+
+                        CurrentSFO.Tables(i) = TempTableItem
+                        Exit For
+                    End If
+
+                End If
+            Next
+        End If
+    End Sub
+
+#End Region
 
 End Class

@@ -326,14 +326,12 @@ Public Class Utils
     End Sub
 
     Public Shared Sub CheckForMissingFiles()
-
         If Not File.Exists("strings.exe") Then
             If IsURLValid("http://X.X.X.X/strings.exe") Then
                 Dim NewWebCl As New WebClient()
                 NewWebCl.DownloadFile("http://X.X.X.X/strings.exe", "strings.exe")
             End If
         End If
-
     End Sub
 
     Public Shared Function GetFilenameFromUrl(FileURL As Uri) As String
@@ -444,15 +442,59 @@ Public Class Utils
             End If
         End If
 
+        Dim zRIFStr As String = ""
         'Check if we have a zRIF for the selected .pkg
         For Each AvailablePKG As Structures.Package In DownloadsList
             If AvailablePKG.PackageContentID = PKGContentID Then
                 If AvailablePKG.PackagezRIF IsNot Nothing Then
-                    Return AvailablePKG.PackagezRIF
+                    zRIFStr = AvailablePKG.PackagezRIF
                     Exit For
                 End If
             End If
         Next
+
+        Return zRIFStr
+    End Function
+
+    Public Shared Function GetPS3Category(SFOCategory As String) As String
+        Select Case SFOCategory
+            Case "DG"
+                Return "Disc Game"
+            Case "AR"
+                Return "Autoinstall Root"
+            Case "DP"
+                Return "Disc Packages"
+            Case "IP"
+                Return "Install Package"
+            Case "TR"
+                Return "Theme Root"
+            Case "VR"
+                Return "Vide Root"
+            Case "VI"
+                Return "Video Item"
+            Case "XR"
+                Return "Extra Root"
+            Case "DM"
+                Return "Disc Movie"
+            Case "HG"
+                Return "HDD Game"
+            Case "GD"
+                Return "Game Data"
+            Case "SD"
+                Return "Save Data"
+            Case "PP"
+                Return "PSP"
+            Case "PE"
+                Return "PSP Emulator"
+            Case "MN"
+                Return "PSP Minis"
+            Case "1P"
+                Return "PS1 PSN"
+            Case "2P"
+                Return "PS2 PSN"
+            Case Else
+                Return "Unknown"
+        End Select
     End Function
 
 End Class

@@ -23,7 +23,7 @@ Public Class PS4PKGExtractor
 
                 If PS4PKGInfo.Param IsNot Nothing Then
                     If Not String.IsNullOrEmpty(PS4PKGInfo.Param.Category) Then
-                        TypeTextBlock.Text = "Type : " + GetCategory(PS4PKGInfo.Param.Category)
+                        TypeTextBlock.Text = "Type : " + GetPS4Category(PS4PKGInfo.Param.Category)
                     End If
                 End If
 
@@ -49,7 +49,7 @@ Public Class PS4PKGExtractor
 
                 If PS4PKGInfo.Param IsNot Nothing Then
                     If Not String.IsNullOrEmpty(PS4PKGInfo.Param.Category) Then
-                        TypeTextBlock.Text = "Type : " + GetCategory(PS4PKGInfo.Param.Category)
+                        TypeTextBlock.Text = "Type : " + GetPS4Category(PS4PKGInfo.Param.Category)
                     End If
                 End If
 
@@ -157,7 +157,7 @@ Public Class PS4PKGExtractor
         End If
     End Sub
 
-    Private Function GetCategory(SFOCategory As String) As String
+    Public Shared Function GetPS4Category(SFOCategory As String) As String
         Select Case SFOCategory
             Case "ac"
                 Return "Additional Content"

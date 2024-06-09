@@ -117,8 +117,6 @@ Public Class PSVPFSTools
 
                         Cursor = Windows.Input.Cursors.Wait
 
-                        MsgBox("-i """ + InputPath + """ -o """ + OutputPath + """ -z " + zRIFKey + " -f cma.henkaku.xyz")
-
                         'Set PSVPFSParser process properties
                         PSVPFSParser = New Process()
                         PSVPFSParser.StartInfo.FileName = My.Computer.FileSystem.CurrentDirectory + "\Tools\psvpfsparser.exe"

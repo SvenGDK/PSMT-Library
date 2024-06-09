@@ -20,4 +20,14 @@
         Return buffer
     End Function
 
+    Public Shared Function ToLittleEndian(Value As String) As Byte()
+        Dim buffer As Byte() = Text.Encoding.Unicode.GetBytes(Value)
+
+        If Not BitConverter.IsLittleEndian Then
+            Array.Reverse(buffer)
+        End If
+
+        Return buffer
+    End Function
+
 End Class
