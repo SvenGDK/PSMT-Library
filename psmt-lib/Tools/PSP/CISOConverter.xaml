@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="ISO ~ CSO Converter" Height="385" Width="420" Background="#FF252525">
+             Title="ISO ~ CSO Converter" Height="385" Width="420" Background="#2D2D30">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="175" Margin="10,10,0,0" Stroke="White" VerticalAlignment="Top" Width="384"/>
         <TextBlock HorizontalAlignment="Left" Margin="23,43,0,0" TextWrapping="Wrap" Text="Select an .iso file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>

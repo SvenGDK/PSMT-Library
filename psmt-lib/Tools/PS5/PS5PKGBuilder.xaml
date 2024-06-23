@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PKG Builder" Height="400" Width="760" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PKG Builder" Height="400" Width="760" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="BuildLogTextBox" HorizontalAlignment="Center" Margin="0,109,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="720" Height="218"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,85,0,0" TextWrapping="NoWrap" Text="Build Log:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="720"/>

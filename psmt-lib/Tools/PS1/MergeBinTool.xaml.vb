@@ -93,8 +93,6 @@ Public Class MergeBinTool
             BinMerge.Start()
             BinMerge.BeginOutputReadLine()
             BinMerge.BeginErrorReadLine()
-
-            Cursor = Windows.Input.Cursors.Arrow
         End If
     End Sub
 
@@ -166,6 +164,7 @@ Public Class MergeBinTool
 
     Private Sub BinMerge_Exited(sender As Object, e As EventArgs) Handles BinMerge.Exited
         BinMerge.Dispose()
+        Cursor = Windows.Input.Cursors.Arrow
     End Sub
 
 End Class

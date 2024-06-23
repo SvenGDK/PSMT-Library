@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS5 Param Editor" Height="540" Width="960" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS5 Param Editor" Height="540" Width="960" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Menu VerticalAlignment="Top" Height="20">
             <MenuItem Header="File">

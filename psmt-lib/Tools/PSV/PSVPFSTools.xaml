@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Height="455" Width="610" Background="#FF252525" ResizeMode="CanMinimize" Title="PSV PFS Tools" WindowStartupLocation="CenterScreen">
+             Height="455" Width="610" Background="#2D2D30" ResizeMode="CanMinimize" Title="PSV PFS Tools" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select an encrypted game/app folder :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <TextBox x:Name="SelectedFolderTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="500"/>

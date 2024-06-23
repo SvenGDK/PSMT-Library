@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PS3 ISO Tools" Height="660" Width="795" Background="#FF252525" ResizeMode="CanMinimize">
+        Title="PS3 ISO Tools" Height="660" Width="795" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="155" Margin="10,455,0,0" Stroke="White" VerticalAlignment="Top" Width="375"/>
         <Rectangle HorizontalAlignment="Left" Height="120" Margin="10,330,0,0" Stroke="White" VerticalAlignment="Top" Width="375"/>

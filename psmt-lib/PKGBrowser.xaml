@@ -6,7 +6,7 @@
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PKG Browser" Height="680" Width="1325" Background="#FF252525" ResizeMode="CanMinimize">
+        Title="PKG Browser" Height="680" Width="1325" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <wv2:WebView2 x:Name="ContentWebView" HorizontalAlignment="Center" Height="326" Margin="0,87,0,0" VerticalAlignment="Top" Width="830" Source="https://google.com" Visibility="Hidden"/>
         <TabControl x:Name="MainTabControl" Background="{x:Null}" FontSize="18" Margin="0,0,0,400" BorderThickness="0,1,0,0">

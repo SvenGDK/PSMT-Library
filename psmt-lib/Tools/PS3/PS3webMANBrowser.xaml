@@ -6,7 +6,7 @@
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="webMAN MOD Web Interface" Height="720" Width="1280" Background="#FF252525">
+             Title="webMAN MOD Web Interface" Height="720" Width="1280" Background="#2D2D30">
     <Grid>
         <wv2:WebView2 x:Name="WebMANWebView" Margin="0,0,0,0" Source="https://google.com"/>
     </Grid>

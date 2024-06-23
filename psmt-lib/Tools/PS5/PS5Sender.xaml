@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PS4/PS5 Payload and Mast1c0re Sender" Height="410" Width="505" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="PS4/PS5 Payload and Mast1c0re Sender" Height="410" Width="505" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="IPTextBox" HorizontalAlignment="Left" Margin="10,63,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" Height="20"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" TextWrapping="Wrap" Text="Enter your PS4 / PS5 IP:" VerticalAlignment="Top" FontSize="14" Foreground="White"/>

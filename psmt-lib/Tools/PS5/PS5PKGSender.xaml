@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS5 PKG Sender" Height="410" Width="610" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS5 PKG Sender" Height="410" Width="610" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="PKGFileURLTextBox" HorizontalAlignment="Left" Margin="10,68,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="500"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,44,0,0" TextWrapping="Wrap" Text="Enter the .pkg URL file link to install :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>

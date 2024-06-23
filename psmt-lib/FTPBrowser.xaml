@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="FTP Browser" Height="620" Width="1100" Background="#FF252525">
+        Title="FTP Browser" Height="620" Width="1100" Background="#2D2D30">
     <Grid>
         <Button x:Name="ConnectButton" Content="Connect and list content" HorizontalAlignment="Left" Margin="370,33,0,0" VerticalAlignment="Top" Width="170"/>
         <TextBox x:Name="ConsoleIPTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250"/>

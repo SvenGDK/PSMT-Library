@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PBP ~ ISO Converter" Height="300" Width="810" Background="#FF252525">
+             Title="PBP ~ ISO Converter" Height="300" Width="810" Background="#2D2D30">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="250" Margin="399,10,0,0" Stroke="White" VerticalAlignment="Top" Width="384"/>
         <Rectangle HorizontalAlignment="Left" Height="250" Margin="10,10,0,0" Stroke="White" VerticalAlignment="Top" Width="384"/>

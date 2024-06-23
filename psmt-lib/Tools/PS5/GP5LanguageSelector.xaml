@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="Language Selector" Height="530" Width="500" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="Language Selector" Height="530" Width="500" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
 
         <Grid x:Name="ProjectLanguagesGrid">

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="CoreOS Tools" Height="555" Width="785" Background="#FF252525" ResizeMode="CanMinimize">
+             Title="CoreOS Tools" Height="555" Width="785" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <Rectangle HorizontalAlignment="Left" Height="120" Margin="10,10,0,0" Stroke="White" VerticalAlignment="Top" Width="743"/>
         <Button x:Name="BrowseCoreOSPKGButton" Content="Browse" HorizontalAlignment="Left" Margin="252,92,0,0" VerticalAlignment="Top" Width="74"/>

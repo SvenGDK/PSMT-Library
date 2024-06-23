@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="Downloader" Height="400" Width="700" ResizeMode="CanMinimize" Background="#FF252525" WindowStartupLocation="CenterScreen">
+        Title="Downloader" Height="400" Width="700" ResizeMode="CanMinimize" Background="#2D2D30" WindowStartupLocation="CenterScreen">
     <Grid>
         <ProgressBar x:Name="DownloadProgressBar" HorizontalAlignment="Center" Height="25" Margin="0,248,0,0" VerticalAlignment="Top" Width="520"/>
         <TextBlock x:Name="FileToDownloadTB" HorizontalAlignment="Center" Margin="0,224,0,0" TextWrapping="Wrap" Text="Downloading ..." VerticalAlignment="Top" Foreground="White" FontSize="14" Width="520"/>

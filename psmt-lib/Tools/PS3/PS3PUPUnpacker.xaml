@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS3 PUP Unpacker" Height="195" Width="420" Background="#FF252525" ResizeMode="CanMinimize">
+             Title="PS3 PUP Unpacker" Height="195" Width="420" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <Button x:Name="BrowsePUPButton" Content="Browse" HorizontalAlignment="Left" Margin="315,32,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="SelectedPUPTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="300"/>

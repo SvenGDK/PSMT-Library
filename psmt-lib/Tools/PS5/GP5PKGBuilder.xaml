@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:psmt_lib"
              x:Class="GP5PKGBuilder"
              mc:Ignorable="d" 
-             Title="Shortcut PKG Creator" Height="735" Width="755" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="Shortcut PKG Creator" Height="735" Width="755" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid x:Name="MainGrid">
         <Image x:Name="BackgroundImage" HorizontalAlignment="Left" Height="406" Margin="10,283,0,0" VerticalAlignment="Top" Width="720" Cursor="Hand" IsEnabled="False"/>
         <TextBlock x:Name="GamesTextBlock" HorizontalAlignment="Left" Margin="55,305,0,0" TextWrapping="Wrap" Text="Games" VerticalAlignment="Top" Foreground="White" FontSize="20" FontWeight="Bold" Cursor="Hand" IsEnabled="False"/>

@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="etaHEN Configurator" Height="275" Width="400" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="etaHEN Configurator" Height="275" Width="400" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="GetConfigButton" Content="Get config file from PS5" HorizontalAlignment="Left" Margin="10,32,0,0" VerticalAlignment="Top" Width="175" FontWeight="Bold"/>
         <CheckBox x:Name="UseCheatsCheckBox" Content="Illusions cheats (libhijacker)" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Calibri" FontSize="14"/>

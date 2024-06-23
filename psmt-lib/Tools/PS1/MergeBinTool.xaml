@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
-             mc:Ignorable="d" Title="MergeBIN Tool" Height="555" Width="700" Background="#FF252525" ResizeMode="CanMinimize">
+             mc:Ignorable="d" Title="MergeBIN Tool" Height="555" Width="700" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <ListView x:Name="CUEsListView" d:ItemsSource="{d:SampleData ItemCount=5}" Width="665" Height="200" Margin="10,92,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ListView.View>

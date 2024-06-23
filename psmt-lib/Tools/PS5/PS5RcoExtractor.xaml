@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="RCO Extractor" Height="140" Width="380" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="RCO Extractor" Height="140" Width="380" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" Text="Select a .rco file or a folder containing .rco files:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="320"/>
         <TextBox x:Name="SelectedRCOPathTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="320"/>

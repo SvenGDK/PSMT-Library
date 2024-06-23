@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PPPwner GUI" Height="635" Width="855" Background="#FF252525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
+             Title="PPPwner GUI" Height="650" Width="855" Background="#2D2D30" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="PPPwn Options" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold"/>
         <ComboBox x:Name="FirmwaresComboBox" HorizontalAlignment="Left" Margin="12,141,0,0" VerticalAlignment="Top" Width="400">
@@ -30,10 +30,10 @@
         <TextBox x:Name="CustomStage2PayloadTextBox" HorizontalAlignment="Right" Margin="0,141,50,0" VerticalAlignment="Top" Width="317" Height="22"/>
         <Button x:Name="BrowseStage2PayloadButton" Content="..." HorizontalAlignment="Right" Margin="0,141,15,0" VerticalAlignment="Top" Width="30" Height="22"/>
         <TextBlock Text="Customize (advanced)" VerticalAlignment="Top" TextWrapping="Wrap" Margin="0,10,201,0" HorizontalAlignment="Right" FontSize="16" FontWeight="Bold" Foreground="White"/>
-        <Button x:Name="CopyGoldHENButton" Content="Copy cached goldhen.bin (v2.4b17.2) to an USB drive" HorizontalAlignment="Right" Margin="0,232,15,0" VerticalAlignment="Top" Width="352" Height="22" FontWeight="Bold"/>
+        <Button x:Name="CopyGoldHENButton" Content="Copy cached goldhen.bin (v2.4b17.3) to an USB drive" HorizontalAlignment="Right" Margin="0,232,15,0" VerticalAlignment="Top" Width="352" Height="22" FontWeight="Bold"/>
         <CheckBox x:Name="AutoRetryCheckBox" Content="Enable Auto-Retry" HorizontalAlignment="Left" Margin="12,205,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <TextBlock VerticalAlignment="Bottom" Text="PPPwn Log" TextWrapping="Wrap" Margin="12,0,0,220" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White"/>
-        <TextBox x:Name="LogTextBox" Width="830" VerticalAlignment="Bottom" TextWrapping="Wrap" Margin="10,0,10,15" Height="200"/>
+        <TextBlock VerticalAlignment="Bottom" Text="PPPwn Log" TextWrapping="Wrap" Margin="12,0,0,252" HorizontalAlignment="Left" FontSize="16" FontWeight="Bold" Foreground="White"/>
+        <TextBox x:Name="LogTextBox" Width="830" VerticalAlignment="Top" TextWrapping="Wrap" Margin="12,387,13,0" Height="232"/>
         <Button x:Name="DownloadGoldHENButton" Content="Download latest GoldHEN to an USB drive" HorizontalAlignment="Right" Margin="0,205,15,0" VerticalAlignment="Top" Width="352" Height="22" FontWeight="Bold"/>
         <TextBox x:Name="ResponseTimeoutValueTextBox" HorizontalAlignment="Left" Margin="256,224,0,0" VerticalAlignment="Top" Width="30" Text="0" TextAlignment="Center"/>
         <CheckBox x:Name="UseWaitingTimeCheckBox" Content="Specify waiting time in seconds after first round CPU pinning :" HorizontalAlignment="Left" Margin="12,245,0,0" VerticalAlignment="Top" Foreground="White"/>

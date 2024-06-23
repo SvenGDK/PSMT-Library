@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:psmt_lib"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d" 
-        Title="PS5 Game Patche Selector" Height="650" Width="800" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="PS5 Game Patche Selector" Height="650" Width="800" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid x:Name="BrowserGrid" Visibility="Hidden">
             <wv2:WebView2 x:Name="GamePatchesWebView" Source="https://google.com" AllowExternalDrop="False" />

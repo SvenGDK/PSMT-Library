@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS4/PS5 PKG Merger" Height="410" Width="605" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS4/PS5 PKG Merger" Height="410" Width="605" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="Merge PKG files into a single one" VerticalAlignment="Top" Foreground="White" Width="558" FontSize="18" Margin="0,10,0,0" FontFamily="Calibri" TextAlignment="Center" FontWeight="Bold"/>
         <TextBox x:Name="SelectedDirectoryTextBox" HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="491" Height="20"/>

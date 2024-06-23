@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="Notification Manager" Height="560" Width="830" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="Notification Manager" Height="560" Width="830" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Center" Margin="0,20,0,0" TextWrapping="Wrap" Text="The Notification Manager allows editing your notifications on the PS5 console, enabling more features." VerticalAlignment="Top" Foreground="White" FontSize="16" TextAlignment="Center" Width="731"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Connect to the PS5 via FTP" VerticalAlignment="Top" FontSize="14" Width="400" Foreground="White" FontWeight="Bold"/>

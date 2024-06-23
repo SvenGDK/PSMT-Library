@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Height="440" Width="460" Background="#FF252525" ResizeMode="CanMinimize" Title="PS Vita PKG Extractor">
+             Height="440" Width="460" Background="#2D2D30" ResizeMode="CanMinimize" Title="PS Vita PKG Extractor">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Select a PS Vita .pkg file :" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <TextBox x:Name="SelectedPKGTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="350"/>

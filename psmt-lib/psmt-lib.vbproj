@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -65,25 +65,28 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FluentFTP, Version=50.0.1.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
-      <HintPath>..\packages\FluentFTP.50.0.1\lib\net472\FluentFTP.dll</HintPath>
+    <Reference Include="FluentFTP, Version=50.1.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.50.1.0\lib\net472\FluentFTP.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\..\..\..\Desktop\Debug\HtmlAgilityPack.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=6.3.0.90, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.6.3.0.90\lib\net462\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.Core, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2535.41, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2535.41\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
+    <Reference Include="Microsoft.Web.WebView2.WinForms, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebView2.Wpf, Version=1.0.2592.51, Culture=neutral, PublicKeyToken=2a8ab48044d2601e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.WebView2.1.0.2592.51\lib\net462\Microsoft.Web.WebView2.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -143,8 +146,23 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
     <Reference Include="WindowsBase" />
-    <Reference Include="WinSCPnet, Version=1.15.0.14916, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
-      <HintPath>..\packages\WinSCP.6.3.3\lib\net40\WinSCPnet.dll</HintPath>
+    <Reference Include="WinSCPnet, Version=1.15.0.14955, Culture=neutral, PublicKeyToken=2271ec4a3c56d0bf, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinSCP.6.3.4\lib\net40\WinSCPnet.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.6.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.6.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=4.6.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.4.6.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -161,15 +179,20 @@
   <ItemGroup>
     <Compile Include="Classes\AESEngine.vb" />
     <Compile Include="Classes\BytesConverter.vb" />
+    <Compile Include="Classes\ComboBoxProjectItem.vb" />
     <Compile Include="Classes\DownloadQueueItem.vb" />
+    <Compile Include="Classes\ImageUtils.vb" />
     <Compile Include="Classes\MD5Hash.vb" />
     <Compile Include="Classes\NPSPKG.vb" />
     <Compile Include="Classes\PKGDecryptor.vb" />
     <Compile Include="Classes\PKGDownloadListViewItem.vb" />
+    <Compile Include="Classes\PS1Game.vb" />
+    <Compile Include="Classes\PS2Game.vb" />
     <Compile Include="Classes\PS5Notification.vb" />
     <Compile Include="Classes\SFONew.vb" />
     <Compile Include="Classes\SmartUtils.vb" />
     <Compile Include="Classes\Structures.vb" />
+    <Compile Include="Classes\Translations.vb" />
     <Compile Include="Classes\Utils.vb" />
     <Compile Include="Classes\XOREngine.vb" />
     <Compile Include="Downloader.xaml.vb">
@@ -233,20 +256,11 @@
     <Compile Include="Tools\PS2\BINCUEConverter.xaml.vb">
       <DependentUpon>BINCUEConverter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS2\XMBAppEditor.xaml.vb">
-      <DependentUpon>XMBAppEditor.xaml</DependentUpon>
+    <Compile Include="Tools\PS2\CUE2POPSConverter.xaml.vb">
+      <DependentUpon>CUE2POPSConverter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Tools\PS2\XMBAppProject.xaml.vb">
-      <DependentUpon>XMBAppProject.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\PS2\XMBGameEditor.xaml.vb">
-      <DependentUpon>XMBGameEditor.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\PS2\XMBGameProject.xaml.vb">
-      <DependentUpon>XMBGameProject.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Tools\PS2\XMBInstaller.xaml.vb">
-      <DependentUpon>XMBInstaller.xaml</DependentUpon>
+    <Compile Include="Tools\PS2\ELFWrapper.xaml.vb">
+      <DependentUpon>ELFWrapper.xaml</DependentUpon>
     </Compile>
     <Compile Include="Tools\PS3\PS3CoreOSTools.xaml.vb">
       <DependentUpon>PS3CoreOSTools.xaml</DependentUpon>
@@ -377,6 +391,51 @@
     <Compile Include="Tools\PSV\PSVPFSTools.xaml.vb">
       <DependentUpon>PSVPFSTools.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXPS2GameEditor.xaml.vb">
+      <DependentUpon>PSXPS2GameEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXNewPS2GameProject.xaml.vb">
+      <DependentUpon>PSXNewPS2GameProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXNewPS1GameProject.xaml.vb">
+      <DependentUpon>PSXNewPS1GameProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXAppEditor.xaml.vb">
+      <DependentUpon>PSXAppEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\InstallWindow.xaml.vb">
+      <DependentUpon>InstallWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXNewAppProject.xaml.vb">
+      <DependentUpon>PSXNewAppProject.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\PartitionManager\PSXNewPartition.xaml.vb">
+      <DependentUpon>PSXNewPartition.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\PartitionManager\PSXPartitionManager.xaml.vb">
+      <DependentUpon>PSXPartitionManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\Projects\PSXPS1GameEditor.xaml.vb">
+      <DependentUpon>PSXPS1GameEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\PSXMainWindow.xaml.vb">
+      <DependentUpon>PSXMainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\PSXSyncWindow.xaml.vb">
+      <DependentUpon>PSXSyncWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\XMB\PSXAdvancedEditor.xaml.vb">
+      <DependentUpon>PSXAdvancedEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\XMB\PSXAssetsBrowser.xaml.vb">
+      <DependentUpon>PSXAssetsBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\XMB\PSXColorSelection.xaml.vb">
+      <DependentUpon>PSXColorSelection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PSX\XMB\PSXSimpleGraphicsEditor.xaml.vb">
+      <DependentUpon>PSXSimpleGraphicsEditor.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -388,6 +447,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <EmbeddedResource Include="DIC.xshd" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -460,23 +520,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS2\XMBAppEditor.xaml">
+    <Page Include="Tools\PS2\CUE2POPSConverter.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Tools\PS2\XMBAppProject.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\PS2\XMBGameEditor.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\PS2\XMBGameProject.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Tools\PS2\XMBInstaller.xaml">
+    <Page Include="Tools\PS2\ELFWrapper.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -652,6 +700,66 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Tools\PSX\Projects\PSXPS2GameEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\Projects\PSXNewPS2GameProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\Projects\PSXNewPS1GameProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\Projects\PSXAppEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\InstallWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\Projects\PSXNewAppProject.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\PartitionManager\PSXNewPartition.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\PartitionManager\PSXPartitionManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\Projects\PSXPS1GameEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\PSXMainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\PSXSyncWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\XMB\PSXAdvancedEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\XMB\PSXAssetsBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\XMB\PSXColorSelection.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Tools\PSX\XMB\PSXSimpleGraphicsEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Icons\" />
@@ -692,19 +800,35 @@
     <Resource Include="Images\gallery.png" />
     <Resource Include="Images\nothing.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\blankcover.png" />
+    <Resource Include="Images\BlankPS1Cover.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\color-picker.cur" />
+    <Resource Include="Images\DIC-File.png" />
+    <Resource Include="Images\Folder-Open.png" />
+    <Resource Include="Images\Font-File.png" />
+    <Resource Include="Images\Image-Edit.png" />
+    <Resource Include="Images\Image-File.png" />
+    <Resource Include="Images\Movie-File.png" />
+    <Resource Include="Images\Music-File.png" />
+    <Resource Include="Images\Replace-File.png" />
+    <Resource Include="Images\XML-File.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\WinSCP.6.3.3\build\WinSCP.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WinSCP.6.3.3\build\WinSCP.targets'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets'))" />
+    <Error Condition="!Exists('..\packages\WinSCP.6.3.4\build\WinSCP.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\WinSCP.6.3.4\build\WinSCP.targets'))" />
   </Target>
   <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.118.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
-  <Import Project="..\packages\WinSCP.6.3.3\build\WinSCP.targets" Condition="Exists('..\packages\WinSCP.6.3.3\build\WinSCP.targets')" />
-  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
-  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2535.41\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets" Condition="Exists('..\packages\Microsoft.Web.WebView2.1.0.2592.51\build\Microsoft.Web.WebView2.targets')" />
+  <Import Project="..\packages\WinSCP.6.3.4\build\WinSCP.targets" Condition="Exists('..\packages\WinSCP.6.3.4\build\WinSCP.targets')" />
 </Project>

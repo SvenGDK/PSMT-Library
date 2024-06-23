@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="RCO Dumper" Height="180" Width="325" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="RCO Dumper" Height="180" Width="325" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="LoadFilesButton" Content="Get files" HorizontalAlignment="Center" Margin="0,106,0,0" VerticalAlignment="Top" Width="254"/>
         <TextBlock HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap" Text="This will dump .rco files using FTP." VerticalAlignment="Top" Foreground="White" FontSize="14" Width="305" TextAlignment="Center"/>

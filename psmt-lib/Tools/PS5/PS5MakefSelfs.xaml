@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="Make fakeSELFs" Height="400" Width="700" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="Make fakeSELFs" Height="400" Width="700" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBox x:Name="SelectedDirectoryTextBox" HorizontalAlignment="Left" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="585" Height="20"/>
         <Button x:Name="BrowseFolderButton" Content="Browse" HorizontalAlignment="Left" Margin="600,35,0,0" VerticalAlignment="Top" Width="75"/>

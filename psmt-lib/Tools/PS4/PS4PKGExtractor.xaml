@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS4 PKG Extractor" Height="555" Width="650" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS4 PKG Extractor" Height="555" Width="650" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Button x:Name="BrowsePKGButton" Content="Browse" HorizontalAlignment="Left" Margin="551,33,0,0" VerticalAlignment="Top" Width="74"/>
         <TextBox x:Name="SelectedPKGFileTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" Width="536" IsReadOnly="True"/>

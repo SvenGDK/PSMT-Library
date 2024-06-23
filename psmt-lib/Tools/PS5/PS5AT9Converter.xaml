@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="AT9 Converter" Height="320" Width="490" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="AT9 Converter" Height="320" Width="490" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Encode .wav to .at9" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="435" FontStyle="Italic" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="NoWrap" Text="Input .wav file:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="100"/>

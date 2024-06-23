@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PKG Info" Height="525" Width="1000" ResizeMode="CanMinimize" Background="#FF252525" WindowStartupLocation="CenterScreen">
+        Title="PKG Info" Height="525" Width="1000" ResizeMode="CanMinimize" Background="#2D2D30" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,273,0,0" TextWrapping="Wrap" Text="Package for :" VerticalAlignment="Top" Foreground="White" FontSize="16" FontWeight="Bold">
             <TextBlock.Effect>

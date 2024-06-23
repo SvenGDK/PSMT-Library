@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="GP5 Creator" Height="610" Width="965" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="GP5 Creator" Height="610" Width="965" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <StatusBar VerticalAlignment="Bottom" Height="25" Background="White" AlternationCount="-3">
             <TextBlock Text="Pub Tools :"></TextBlock>

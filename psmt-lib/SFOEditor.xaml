@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:psmt_lib"
         mc:Ignorable="d"
-        Title="PARAM.SFO Editor" Height="685" Width="1115" ResizeMode="CanMinimize" Background="#FF252525" WindowStartupLocation="CenterScreen">
+        Title="PARAM.SFO Editor" Height="685" Width="1115" ResizeMode="CanMinimize" Background="#2D2D30" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock Text="Game ID / Game Code" HorizontalAlignment="Left" Margin="23,193,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
         <TextBox x:Name="IDTextBox" HorizontalAlignment="Left" Margin="23,217,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="275" FontSize="14"/>
@@ -36,7 +36,7 @@
         <TextBox x:Name="CategoryTextBox" HorizontalAlignment="Left" Margin="23,521,0,0" VerticalAlignment="Top" Width="275" FontSize="14" TextWrapping="NoWrap" Height="20"/>
         <TabControl x:Name="ConsolesTabControl" Margin="320,10,0,0" BorderBrush="{x:Null}" BorderThickness="0,0,0,0" Width="765" Height="627" VerticalAlignment="Top" HorizontalAlignment="Left">
             <TabItem Header="PS3 Parameters" BorderBrush="{x:Null}" x:Name="PS3TabItem">
-                <Grid Background="#FF252525">
+                <Grid Background="#2D2D30">
                     <ListBox x:Name="AudioFormatsListBox" Margin="10,34,0,417" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" d:ItemsSource="{d:SampleData ItemCount=5}" Height="150"/>
                     <TextBlock Text="Supported Audio Formats" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
                     <ListBox x:Name="VideoFormatsListBox" Margin="321,34,0,417" SelectionMode="Extended" Width="300" HorizontalAlignment="Left" Height="150" d:ItemsSource="{d:SampleData ItemCount=5}"/>
@@ -61,7 +61,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="PS4 Parameters" BorderBrush="{x:Null}" x:Name="PS4TabItem">
-                <Grid Background="#FF252525">
+                <Grid Background="#2D2D30">
                     <TextBlock HorizontalAlignment="Left" Margin="11,10,0,0" TextWrapping="Wrap" Text="Application Type" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
 
                     <ComboBox x:Name="PS4AppTypeComboBox" HorizontalAlignment="Left" Margin="11,34,0,0" VerticalAlignment="Top" Width="375">
@@ -105,12 +105,12 @@
                 </Grid>
             </TabItem>
             <TabItem Header="PSP Parameters" BorderBrush="{x:Null}" x:Name="PSPTabItem">
-                <Grid Background="#FF252525">
+                <Grid Background="#2D2D30">
                     <CheckBox x:Name="PSPBootableCheckBox" Content="Bootable" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>
                 </Grid>
             </TabItem>
             <TabItem Header="PSV Parameters" BorderBrush="{x:Null}" x:Name="PSVTabItem">
-                <Grid Background="#FF252525">
+                <Grid Background="#2D2D30">
                     <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="App Short Title" VerticalAlignment="Top" Foreground="White" FontSize="14" FontWeight="Bold"/>
                     <TextBox x:Name="AppShotTitleTextBox" HorizontalAlignment="Left" Margin="10,34,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="250"/>
                     <CheckBox x:Name="VitaAddtionalContentCheckBox" Content="Enable Additional Content" HorizontalAlignment="Left" Margin="265,95,0,0" VerticalAlignment="Top" Foreground="White" FontSize="14"/>

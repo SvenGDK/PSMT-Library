@@ -438,11 +438,6 @@ Public Class PS2Menu
         NewBINCUEConverter.Show()
     End Sub
 
-    Private Sub OpenPSXXMBInstaller_Click(sender As Object, e As RoutedEventArgs) Handles OpenPSXXMBInstaller.Click
-        Dim NewXMBInstaller As New XMBInstaller() With {.ShowActivated = True}
-        NewXMBInstaller.Show()
-    End Sub
-
 #End Region
 
 End Class

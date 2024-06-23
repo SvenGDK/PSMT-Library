@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="webMAN MOD Virtual Folder Manager" Height="500" Width="1010" Background="#FF252525" ResizeMode="CanMinimize">
+             Title="webMAN MOD Virtual Folder Manager" Height="500" Width="1010" Background="#2D2D30" ResizeMode="CanMinimize">
     <Grid>
         <ListView x:Name="VirtualContentListView" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="10,174,0,0" VerticalAlignment="Top" Height="250" HorizontalAlignment="Left" Width="975" FontSize="14">
             <ListView.View>

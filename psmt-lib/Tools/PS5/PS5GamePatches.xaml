@@ -6,7 +6,7 @@
              xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
              xmlns:local="clr-namespace:psmt_lib"
              mc:Ignorable="d" 
-             Title="PS5 Game Patches" Height="600" Width="1105" Background="#FF252525" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+             Title="PS5 Game Patches" Height="600" Width="1105" Background="#2D2D30" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="NoWrap" Text="Search for available Game Patches" VerticalAlignment="Top" Foreground="White" FontSize="16" Width="336" FontWeight="Bold"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,37,0,0" TextWrapping="NoWrap" Text="Enter Game ID:" VerticalAlignment="Top" Foreground="White" FontSize="14" Width="100"/>
